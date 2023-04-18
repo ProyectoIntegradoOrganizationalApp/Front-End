@@ -1,39 +1,64 @@
 // React
 import React from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Pages
 import Home from "./pages/home/Home";
 import Dashboard from "./pages/dashboard/Dashboard";
+import AboutUs from "./pages/aboutus/AboutUs";
 import Profile from "./pages/profile/Profile";
 
-// Componentes
-import Nav from './components/Nav';
+// Components
+import Nav from './shared/components/Nav';
+import Footer from './shared/components/Footer';
 
 // CSS
 import './index.css';
 
-// Rutas
-const router = createBrowserRouter([
-  {
-    path: "/home",
-    element: <Home/>
+// Routes
+const router = createBrowserRouter(
+  [
+    {
+      path: "/home",
+      element: <Home/>
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard/> 
+    },
+    {
+      path: "/aboutus",
+      element: <AboutUs/>
+    }
+  ]
+);
+const routes = {
+  home: {
+    link: "/home",
+    name: "Home"
   },
-  {
-    path: "/dashboard",
-    element: <Dashboard/> 
+  dashboard: {
+    link: "/dashboard",
+    name: "Dashboard"
   },
-  {
-    path: "/profile",
-    element: <Profile/>
+  aboutus: {
+    link: "/aboutus",
+    name: "About Us"
   }
-]);
+};
+
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Nav/>
+    <Nav 
+      home={ routes.home }
+      dashboard={ routes.dashboard }
+      aboutus={ routes.aboutus }
+    />
     <RouterProvider router={router} />
-    <Footer />
+    {/* <Footer /> */}
   </React.StrictMode>,
 );
