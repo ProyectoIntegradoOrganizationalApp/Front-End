@@ -1,7 +1,15 @@
-import { RouterProps } from "react-router-dom";
+// Tipo de la prop children
+import { ReactNode } from "react";
+
+// Tipado de las rutas
 import { Route } from "../../domain/Route.interfaces";
 
-export function Nav({ children }: any, routes: Route[]) {
+/**
+ *  
+ *  @param props Contiene las props que le pasa el elemento superior 
+ *  @returns 
+ */
+export function Nav( props: { children: ReactNode, routes: Route[]}) {
     return (
         <>
             <div className="drawer">
@@ -14,7 +22,9 @@ export function Nav({ children }: any, routes: Route[]) {
                             </label>
                         </div>
                         <div className="flex-1 px-2 mx-2 justify-end">
-                            {/* {routes.map(route => <a href={route.link}>{route.name}</a>)} */}
+                            <ul className="menu menu-horizontal">
+                                {props.routes.map( route => <li><a className="nav-item" href={route.link}>{route.name}</a></li>)}
+                            </ul>
                         </div>
                         <div className="flex-none hidden lg:block">
                             <ul className="menu menu-horizontal">
@@ -23,7 +33,7 @@ export function Nav({ children }: any, routes: Route[]) {
                             </ul>
                         </div>
                     </div>
-                    {children}
+                    {props.children}
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
@@ -38,4 +48,6 @@ export function Nav({ children }: any, routes: Route[]) {
         </>
     )
 }
+
+
 
