@@ -5,6 +5,9 @@ import { ReactNode } from "react";
 import { Route } from "../../domain/Route.interfaces";
 
 /**
+ *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
+ *  dentro del nav, le entra una prop "children" que es de tipo ReactNode, el cual trae el 
+ *  contenido proveído por el Router.
  *  
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
