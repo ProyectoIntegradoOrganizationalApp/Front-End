@@ -2,12 +2,15 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Modelo de las rutas
-import { Route } from './domain/Route.interfaces';
+import { Route } from './domain/Route.interface';
 
 // Vistas
+import { Nav } from './adapters/components/Nav';
 import { Home } from './adapters/pages/Home';
 import { Dashboard } from './adapters/pages/Dashboard';
-import { Nav } from './adapters/components/Nav';
+import { Login } from './adapters/pages/Login';
+import { Register } from './adapters/pages/Register';
+import { Error } from './adapters/pages/Error';
 
 /** Rutas de la aplicación */
 const routes: Route[] = [
@@ -16,6 +19,9 @@ const routes: Route[] = [
     },
     {
         name: "Dashboard", link: "/dashboard"
+    },
+    {
+        name: "Login", link: "/login"
     }
 ]
 
@@ -30,6 +36,20 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Dashboard />
+    },
+    // Autenticación
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/register",
+        element: <Register />
+    },
+    // Error
+    {
+        path: "*",
+        element: <Error />
     }
 ])
 
@@ -42,9 +62,7 @@ const router = createBrowserRouter([
 export function App() {
     return (
         <>
-            <Nav
-                routes={routes}
-            >
+            <Nav routes={routes}>
                 <RouterProvider router={router} />
             </Nav>
         </>

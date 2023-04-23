@@ -4,3 +4,97 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    font-family: Mulish, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 600;
+
+    color: #475569;
+    background-color: white;
+}
+
+/* APPLIES */
+.separator {
+    @apply my-14;
+}
+
+h1 {
+    @apply text-5xl;
+}
+
+.btn {
+    @apply capitalize px-16 text-white rounded-none py-5 h-auto;
+    font-size: 16px;
+}
+
+.input-light {
+    @apply input w-full max-w-xs w-full max-w-full py-7 rounded-none;
+    box-shadow: 0px 0px 50px 1px rgba(0, 0, 0, .15);
+    font-size: 18px;
+}
+
+.input-dark {
+    @apply input w-full max-w-xs;
+    font-size: 18px;
+}
+
+b {
+    font-weight: 700;
+}
+
+/* IMPORTANTS */
+.menu {
+    color: white;
+}
+
+.nav-active {
+    font-weight: 800;
+}
+
+.caja:hover {
+    box-shadow: 6px 2px 10px black;
+}
+
+.bolder {
+    font-weight: 800;
+}
+
+.h-100-vh {
+    height: calc(100vh - 4rem);
+}
+
+.fs-xl {
+    font-size: 45px;
+}
+
+.fs-l {
+    font-size: 35px;
+}
+
+.fs-m {
+    font-size: 18px;
+}
+
+.fs-s {
+    font-size: 16px;
+}
+
+/* LOGIN */
+.btn-login-others {
+    border: none;
+    box-shadow: 0px 0px 50px 1px rgba(0, 0, 0, .15);
+}
+
+.btn-login-others:hover {
+    background-color: currentColor;
+    outline: 2px solid hsla(var(--bc) / 0.2);
+    outline-offset: 2px;
+}
+
+.btn-login-github {
+    background-color: #1B1F23;
+}
+
+.btn-login-github:hover {
+    background-color: #1B1F23;
+}
