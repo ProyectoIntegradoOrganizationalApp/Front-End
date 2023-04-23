@@ -2,6 +2,7 @@ import login from "../../assets/svg/login/login.svg";
 import triangle from "../../assets/svg/login/triangle.svg";
 import google from "../../assets/svg/login/google.svg";
 import github from "../../assets/svg/login/github.svg";
+import { Link } from "react-router-dom";
 
 export function Register() {
     return (
@@ -30,7 +31,7 @@ export function Register() {
                         <div className="login-message">
                             <h1 className="pb-5 font-extrabold">Have An Account?</h1>
                             <p className="pb-5 fs-m">If you already have an account, just sign in. We've missed you!</p>
-                            <a href="/login" className="btn btn-primary w-full">Log In</a>
+                            <Link to="/login" className="btn btn-primary w-full">Log In</Link>
                         </div>
                         <img src={triangle} className="absolute top-0 -left-5 select-none"/>
                         <img src={triangle} className="absolute bottom-0 -left-5 rotate-180 select-none"/>

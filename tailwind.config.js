@@ -17,7 +17,8 @@ export default {
           accent: "#475569",
           neutral: "#64748B"
         }
-      }
+      },
+      "dark"
     ]
   }
 }

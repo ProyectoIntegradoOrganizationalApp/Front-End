@@ -1,57 +1,32 @@
+// React
+import React from 'react';
+
 // Imports para el Router
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Modelo de las rutas
-import { Route } from './domain/Route.interface';
+import { Route as IRoute } from './domain/Route.interface';
 
 // Vistas
 import { Nav } from './adapters/components/Nav';
 import { Home } from './adapters/pages/Home';
-import { Dashboard } from './adapters/pages/Dashboard';
 import { Login } from './adapters/pages/Login';
 import { Register } from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
+import { Profile } from './adapters/pages/Profile';
+
 
 /** Rutas de la aplicación */
-const routes: Route[] = [
+const routes: IRoute[] = [
     {
         name: "Home", link: "/"
     },
     {
-        name: "Dashboard", link: "/dashboard"
+        name: "Profile", link: "/profile"
     },
-    {
-        name: "Login", link: "/login"
-    }
 ]
 
-/**
- *  Router de la aplicación
- */
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Home />
-    },
-    {
-        path: "/dashboard",
-        element: <Dashboard />
-    },
-    // Autenticación
-    {
-        path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/register",
-        element: <Register />
-    },
-    // Error
-    {
-        path: "*",
-        element: <Error />
-    }
-])
+import { UsersContextProvider } from './context/users';
 
 /**
  *  Aplicación principal.
@@ -62,9 +37,24 @@ const router = createBrowserRouter([
 export function App() {
     return (
         <>
-            <Nav routes={routes}>
-                <RouterProvider router={router} />
-            </Nav>
+            <UsersContextProvider>
+                <BrowserRouter basename='/'>
+                    <Nav 
+                        routes={routes}
+                    />
+                    <Routes>
+                        <Route path="/" element={<Home/>} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="*" element={<Error />} />
+                    </Routes>
+                </BrowserRouter>
+            </UsersContextProvider>
         </>
     )
 }
+
+
+
+

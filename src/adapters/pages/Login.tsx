@@ -1,9 +1,14 @@
+import React from "react";
+
+import { Link } from "react-router-dom";
+
 import login from "../../assets/svg/login/login.svg";
 import triangle from "../../assets/svg/login/triangle.svg";
 import google from "../../assets/svg/login/google.svg";
 import github from "../../assets/svg/login/github.svg";
 
 export function Login() {
+
     return (
         <>
             <div className="h-100-vh">
@@ -13,7 +18,7 @@ export function Login() {
                         <div className="login-message">
                             <h1 className="pb-5 font-extrabold">New Here?</h1>
                             <p className="pb-5 fs-m">Sign up and discover a great amount of new opportunities!</p>
-                            <a href="/register" className="btn btn-primary w-full">Sign Up</a>
+                            <Link to="/register" className="btn btn-primary w-full">Sign Up</Link>
                         </div>
                         <img src={triangle} className="absolute top-0 -right-5 select-none"/>
                         <img src={triangle} className="absolute bottom-0 -right-5 rotate-180 select-none"/>
