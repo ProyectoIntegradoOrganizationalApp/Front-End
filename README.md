@@ -64,3 +64,12 @@ gitGraph
     merge develop tag: "Release 0.1"
        
 ``` 
+
+# Manejo del Estado en react
+
+Para manejar el estado hemos utilizado la API Context de React, esto nos permite definir un contexto alrededor de nuestra app que contiene las variables más importantes y como se manejan y cambia conforme el usuario interactúa con ellas.
+
+Hemos creado custom hooks con los que reutilizar la lógica detrás de todas las operaciones con el contexto, por lo que nos va que dar el código lo más limpio y reducido posible.
+
+### Esquema con la estructura de hooks
+![Esquema](AuthContext.png)

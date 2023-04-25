@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // Imports para el Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { Route as IRoute } from './domain/Route.interface';
 // Vistas
 import { Nav } from './adapters/components/Nav';
 import { Home } from './adapters/pages/Home';
-import { Login } from './adapters/pages/Login';
+import Login from './adapters/pages/Login';
 import { Register } from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
@@ -26,7 +26,9 @@ const routes: IRoute[] = [
     },
 ]
 
-import { UsersContextProvider } from './context/users';
+import { AuthContext } from './context/AuthContext';
+import { useAuth } from './application/customHooks/useAuth';
+import { User } from './domain/User.interface';
 
 /**
  *  Aplicación principal.
@@ -35,9 +37,16 @@ import { UsersContextProvider } from './context/users';
  *  @returns 
  */
 export function App() {
+    const [user, setUserState] = useState<User>();
+
+    const setUser = (params: any) => {
+        console.log(params)
+        setUserState(params);
+    }
+
     return (
         <>
-            <UsersContextProvider>
+            <AuthContext.Provider value={{ user, setUser }}>
                 <BrowserRouter basename='/'>
                     <Nav 
                         routes={routes}
@@ -50,7 +59,7 @@ export function App() {
                         <Route path="*" element={<Error />} />
                     </Routes>
                 </BrowserRouter>
-            </UsersContextProvider>
+            </AuthContext.Provider>
         </>
     )
 }

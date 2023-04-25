@@ -7,7 +7,11 @@ import { Link, NavLink } from "react-router-dom";
 // Tipado de las rutas
 import { Route as IRoute } from "../../domain/Route.interface";
 
+import { useAuth } from "../../application/customHooks/useAuth";
+
 import foto from "../../assets/foto.png";
+
+
 
 /**
  *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
@@ -19,6 +23,7 @@ import foto from "../../assets/foto.png";
  */
 export function Nav( props: { routes: IRoute[] } ) {
 
+    const { user, logout } = useAuth();
 
     return (
         <>
@@ -49,7 +54,7 @@ export function Nav( props: { routes: IRoute[] } ) {
                         </div>
                     </button>
 
-                    {/* {props.token && ( */}
+                    { user && (
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
@@ -66,14 +71,12 @@ export function Nav( props: { routes: IRoute[] } ) {
                                 </li>
                                 <li><a>Settings</a></li>
                                 <li>
-                                    
-                                        <a >Logout</a>
-                                    
+                                    <button onClick={logout}>Logout</button>
                                 </li>
                             </ul>
                             
                         </div>
-                    {/* )} */}
+                    )}
 
                     {/* {!props.token && ( */}
                         <button className="btn btn-primary">
