@@ -47,7 +47,7 @@ const Login = () => {
                             <input type="email" minLength={3} maxLength={80} placeholder="Enter email" className="input-light mb-6" required/>
                             <input type="password" minLength={2} placeholder="Enter password" className="input-light" required/>
                             <p className="my-6 cursor-pointer select-none fs-m">Recovery password</p>
-                            <button onClick={handleLogin} className="btn btn-primary w-full">{user?.token}</button>
+                            <button onClick={handleLogin} className="btn btn-primary w-full">Login</button>
                             <div className="my-6 flex w-full items-center gap-2">
                                 <hr className="flex-1 border-black translate-y-0.5"/>
                                 <p className="m-0">or</p>

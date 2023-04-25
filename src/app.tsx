@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 // Imports para el Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Modelo de las rutas
+import { AuthContext } from './context/AuthContext';
+
+// Modelos
 import { Route as IRoute } from './domain/Route.interface';
+import { User } from './domain/User.interface';
 
 // Vistas
 import { Nav } from './adapters/components/Nav';
@@ -26,10 +29,6 @@ const routes: IRoute[] = [
     },
 ]
 
-import { AuthContext } from './context/AuthContext';
-import { useAuth } from './application/customHooks/useAuth';
-import { User } from './domain/User.interface';
-
 /**
  *  Aplicación principal.
  *  Al nav se le pasa el Router provider ya que así es como funciona la librería de 
@@ -37,7 +36,7 @@ import { User } from './domain/User.interface';
  *  @returns 
  */
 export function App() {
-    const [user, setUserState] = useState<User>();
+    const [user, setUserState] = useState<User | null>(null);
 
     const setUser = (params: any) => {
         console.log(params)

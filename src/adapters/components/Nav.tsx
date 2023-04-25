@@ -78,11 +78,11 @@ export function Nav( props: { routes: IRoute[] } ) {
                         </div>
                     )}
 
-                    {/* {!props.token && ( */}
+                    { !user && (
                         <button className="btn btn-primary">
                             <Link to="/login">Login</Link>
                         </button>
-                    {/* )} */}
+                    )} 
 
                 </div>
             </div>
