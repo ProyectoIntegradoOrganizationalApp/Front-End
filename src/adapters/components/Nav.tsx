@@ -11,7 +11,7 @@ import { useAuth } from "../../application/customHooks/useAuth";
 
 import foto from "../../assets/foto.png";
 
-
+import logo from "../../assets/svg/logo.svg";
 
 /**
  *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
@@ -31,7 +31,10 @@ export function Nav( props: { routes: IRoute[] } ) {
             <div className="navbar bg-base-100">
 
                 <div className="navbar-start">
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                    <Link to="/" className="btn btn-ghost normal-case text-xl">
+                        <img className="mr-3" src={logo}></img>
+                        Teamer    
+                    </Link>
                 </div>
 
                 <div className="navbar-center">
@@ -69,7 +72,11 @@ export function Nav( props: { routes: IRoute[] } ) {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
+                                <li>
+                                    <NavLink to="/{id}/settings">
+                                        Settings
+                                    </NavLink>
+                                </li>
                                 <li>
                                     <button onClick={logout}>Logout</button>
                                 </li>
@@ -79,9 +86,10 @@ export function Nav( props: { routes: IRoute[] } ) {
                     )}
 
                     { !user && (
-                        <button className="btn btn-primary">
-                            <Link to="/login">Login</Link>
-                        </button>
+                        
+                            <Link to="/login">
+                                <button className="btn btn-primary">Login</button>
+                            </Link>
                     )} 
 
                 </div>
