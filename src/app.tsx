@@ -17,6 +17,7 @@ import Login from './adapters/pages/Login';
 import { Register } from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
+import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 
 
 /** Rutas de la aplicación */
@@ -51,8 +52,14 @@ export function App() {
                         routes={routes}
                     />
                     <Routes>
-                        <Route path="/" element={<Home/>} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/" element={<Home />} />
+                        <Route path="/profile" 
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Profile />
+                                </ProtectedRoute>
+                            } 
+                        />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="*" element={<Error />} />

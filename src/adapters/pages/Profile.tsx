@@ -1,18 +1,15 @@
 import { Sidebar } from "../components/Sidebar";
-
-import { useContext } from "react";
+import { useAuth } from "../../application/customHooks/useAuth";
 
 export function Profile() {
 
-    function xd(){
-
-    }
+    const { user } = useAuth();
 
     return (
         <>
             <Sidebar>
-                <h1>Dashboard</h1>
-                <button className="btn" onClick={xd}>Add User</button>
+                <h1>Welcome <small>{user?.name}</small></h1>
+                
             </Sidebar>
         </>
     )
