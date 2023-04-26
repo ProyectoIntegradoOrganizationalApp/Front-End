@@ -7,7 +7,7 @@ export function Home() {
             <div className="separator"></div>
 
             {/* Hero */}
-            <div className="flex items-center flex-col lg:flex-row-reverse mx-52 gap-32">
+            <div className="flex items-center flex-col lg:flex-row-reverse w-3/4 m-auto gap-32 h-100-vh">
                 <div className="flex-1">
                     <img src={hero} className="select-none" />
                 </div>
@@ -22,8 +22,8 @@ export function Home() {
             <div className="separator"></div>
 
             {/* Information */}
-            <div className="flex mx-52 gap-16">
-                <div className="flex-1 w-40 bg-slate-500 aspect-video"></div>
+            <div className="flex w-3/4 mx-auto gap-10 flex-col lg:flex-row">
+                <div className="flex-1 bg-slate-500 aspect-video"></div>
                 <div className="flex-1">
                     <div className="mb-12 flex gap-5">
                         <button className="btn btn-primary">Our Apps</button>
@@ -31,7 +31,7 @@ export function Home() {
                     </div>
                     <h1 className="fs-l flex gap-4"><img src={logoApps} className="ourApps select-none" /><p>Our Apps</p></h1>
                     <p className="py-7 fs-m">Teamer Software will provide you with all the <b>necessary tools</b> and applications to be able to work on your project in the <b>easiest</b> and most comfortable way between you and your team</p>
-                    <svg className="mt-4" width="602" height="148" viewBox="0 0 602 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="mt-4"  viewBox="0 0 602 148" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M61.6506 36.3917C61.6506 36.9439 62.0983 37.3917 62.6506 37.3917H102.355C102.908 37.3917 103.355 36.9439 103.355 36.3917V32.9188C103.355 29.8812 100.893 27.4188 97.8554 27.4188H62.6506C62.0983 27.4188 61.6506 27.8665 61.6506 28.4188V36.3917Z" fill="#E2E8F0" />
                         <path d="M497.738 37.3916H541.256V27.4187H503.238C500.2 27.4187 497.738 29.8811 497.738 32.9187V37.3916Z" fill="#E2E8F0" />
                         <path d="M363.557 116.208C363.557 119.245 366.02 121.708 369.057 121.708H502.211C505.248 121.708 507.711 119.245 507.711 116.208V111.735H363.557V116.208Z" fill="#E2E8F0" />

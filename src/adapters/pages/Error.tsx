@@ -4,8 +4,10 @@ export function Error() {
     return (
         <>
             <div className="h-100-vh">
-                <div className="hero-content flex-col lg:flex-row m-auto gap-20 min-h-full">
-                    <img src={error} className="w-2/5"/>
+                <div className="hero-content flex-col lg:flex-row m-auto gap-20 min-h-full items-center justify-center">
+                    <div className="flex flex-1 items-center justify-center">
+                        <img src={error} className=""/>
+                    </div>
                     <div className="flex-1 min-w-fit max-w-fit">
                         <h1 className="text-5xl font-bold">404</h1>
                         <h1 className="py-2">Page not found...</h1>
