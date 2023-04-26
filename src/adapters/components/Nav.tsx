@@ -25,10 +25,11 @@ export function Nav( props: { routes: IRoute[] } ) {
 
     const { user, logout } = useAuth();
 
+
     return (
         <>
             
-            <div className="navbar bg-base-100">
+            <div className="navbar">
 
                 <div className="navbar-start">
                     <Link to="/" className="btn btn-ghost normal-case text-xl">
@@ -37,17 +38,7 @@ export function Nav( props: { routes: IRoute[] } ) {
                     </Link>
                 </div>
 
-                <div className="navbar-center">
-                    <ul tabIndex={0} className="flex">
-                        {props.routes.map( route => 
-                            <li key={route.name}>
-                                <NavLink className={({isActive}) => isActive ? 'px-5 nav-active' : "px-5"} to={route.link}>
-                                    {route.name}
-                                </NavLink>
-                            </li>
-                        )}
-                    </ul>
-                </div>
+                
                 
                 <div className="navbar-end">
                     <button className="btn btn-ghost btn-circle">
@@ -67,13 +58,13 @@ export function Nav( props: { routes: IRoute[] } ) {
                             
                             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                 <li>
-                                    <a className="justify-between">
+                                    <NavLink to="/profile" className="justify-between">
                                         Profile
                                         <span className="badge">New</span>
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/{id}/settings">
+                                    <NavLink to="/settings">
                                         Settings
                                     </NavLink>
                                 </li>

@@ -9,18 +9,24 @@ import github from "../../assets/svg/login/github.svg";
 
 import { useAuth } from "../../application/customHooks/useAuth";
 import { AuthContext } from "../../context/AuthContext";
+import { useApi } from "../../application/api/useApi";
+import { User } from "../../domain/User.interface";
 
 const Login = () => {
+    // Contexto de la app
     const { user } = useContext(AuthContext);
+
+    // Hook de la API ( aún no funciona )
+    const { data, error, loading } = useApi<User>("http://localhost:8000/login");
     
+    // Hook de la Autenticación
     const { login } = useAuth();
     
+    /**
+     * Event handler de login que usa el Hook useAuth que usa useUser para crear un usuario 
+     * en el contexto.
+     */
     const handleLogin = async () => {
-
-        // const data = await fetch("http://localhost:8000/login")
-        //     .then(data => data.json())
-        //     .catch(err => console.error("xd"));
-
         login({
             id: 1,
             name: 'John Doe',

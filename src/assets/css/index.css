@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 /* APPLIES */
 .separator {
     @apply my-14;
