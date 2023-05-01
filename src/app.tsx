@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 
 // Modelos
-import { Route as IRoute } from './domain/Route.interface';
 import { EmptyUser, User } from './domain/User.interface';
 
 // Vistas

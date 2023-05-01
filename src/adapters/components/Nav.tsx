@@ -7,9 +7,8 @@ import { Link, NavLink } from "react-router-dom";
 // Tipado de las rutas
 import { useAuth } from "../../application/customHooks/useAuth";
 
-import foto from "../../assets/foto.png";
-
 import logo from "../../assets/svg/logo.svg";
+import { ProfileBadge } from "./ProfileBadge";
 
 /**
  *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
@@ -34,8 +33,6 @@ export function Nav() {
                         Teamer    
                     </Link>
                 </div>
-
-                
                 
                 <div className="navbar-end">
                     <button className="btn btn-ghost btn-circle">
@@ -45,35 +42,15 @@ export function Nav() {
                         </div>
                     </button>
 
-                    { user.islogged && (
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src={foto} />
-                                </div>
-                            </label>
-                            
-                            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                                <li>
-                                    <NavLink to="/profile" className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/settings">
-                                        Settings
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <button onClick={logout}>Logout</button>
-                                </li>
-                            </ul>
-                            
-                        </div>
+                    { user.token != '' && (
+                        <ProfileBadge
+                            user={user}
+                            logout={logout}
+                            position={"dropdown dropdown-end"}
+                        />
                     )}
 
-                    { !user.isLogged && (
+                    { user.token == '' && (
                         
                             <Link to="/login">
                                 <button className="btn btn-primary">Login</button>
