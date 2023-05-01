@@ -1,29 +1,34 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-export const useApi = <T>( url: string ) => {
+export const useApi = <T> () => {
 
     const [data, setData] = useState<T>();
-    const [error, setError] = useState<Error>();
+    const [error, setError] = useState<{error: boolean, message: string}>();
     const [loading, setLoading] = useState<boolean>(false);
 
-    useEffect( () => {
-        (
-            async function(){
-                setLoading(true);
+    const fetchData = async ( url: string, content: any ) => {
+        setLoading(true);
 
-                const data = await fetch(url)
-                    .then(res => res.json())
-                    .then(data => setData(data))
-                    .catch(err => setError(err))
-                    .finally(() => setLoading(false))
+        const response = await fetch( url, {
+            method: content.method,
+            headers: content.headers,
+            body: JSON.stringify(content.body)
+        })
 
-                
-            }
-        )
-    }, [url]);
+        const data = await response.json();
+            
+        if( data.error ) {
+            setError({error: true, message: data.message});
+        }
 
-    console.log(data, error, loading)
+        if( !data.error && data.token != '' ) {
+            setData(data);
+            setError({error: false, message: ''})
+        }
+
+        setLoading(false);
+    }
     
-    return { data, error, loading};
+    return { data, error, loading, fetchData };
 
 }

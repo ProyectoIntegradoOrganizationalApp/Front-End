@@ -18,6 +18,8 @@ export const useAuth = () => {
     }, [])
 
     const login = (user: User) => {
+        if( user === undefined) return;
+        
         addUser(user);
     }
 

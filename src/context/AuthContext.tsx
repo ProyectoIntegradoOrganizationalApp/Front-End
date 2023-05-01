@@ -1,13 +1,13 @@
 import { createContext } from 'react';
 
-import { User } from '../domain/User.interface';
+import { EmptyUser, User } from '../domain/User.interface';
 
 interface AuthContext {
-    user: User | null,
-    setUser: (user: User | null) => void
+    user: User,
+    setUser: (user: User) => void
 }
 
 export const AuthContext = createContext<AuthContext>({
-    user: null,
+    user: EmptyUser,
     setUser: () => {}
 });

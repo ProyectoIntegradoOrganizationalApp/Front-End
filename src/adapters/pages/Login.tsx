@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import log from "../../assets/svg/login/login.svg";
 import triangle from "../../assets/svg/login/triangle.svg";
@@ -11,28 +11,46 @@ import { useAuth } from "../../application/customHooks/useAuth";
 import { AuthContext } from "../../context/AuthContext";
 import { useApi } from "../../application/api/useApi";
 import { User } from "../../domain/User.interface";
+import { ErrorMsg } from "../components/ErrorMsg";
 
 const Login = () => {
     // Contexto de la app
     const { user } = useContext(AuthContext);
 
     // Hook de la API ( aún no funciona )
-    const { data, error, loading } = useApi<User>("http://localhost:8000/login");
+    const { data, error, loading, fetchData } = useApi<User>();
     
     // Hook de la Autenticación
     const { login } = useAuth();
-    
+
+    // Datos del Formulario
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
     /**
      * Event handler de login que usa el Hook useAuth que usa useUser para crear un usuario 
      * en el contexto.
      */
     const handleLogin = async () => {
-        login({
-            id: 1,
-            name: 'John Doe',
-            token: 'lasdkjasdj'
+        await fetchData("http://localhost:8000/login", { 
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: {
+                email: email,
+                password: password,
+            }
         });
+
+        if( !error?.error ) {
+            login(data!);
+        }
     };
+
+    if( user.token != '' ) {
+        return <Navigate to="/profile" />
+    }
 
     return (
         <>
@@ -50,19 +68,46 @@ const Login = () => {
                     </div>
                     <div className="login-form flex-auto w-full h-full flex items-center">
                         <div className="flex flex-col justify-center items-center min-w-auto w-5/12 m-auto">
-                            <input type="email" minLength={3} maxLength={80} placeholder="Enter email" className="input-light mb-6" required/>
-                            <input type="password" minLength={2} placeholder="Enter password" className="input-light" required/>
+                            <input 
+                                type="email" 
+                                minLength={3} 
+                                maxLength={80} 
+                                placeholder="Enter email" 
+                                value={email} 
+                                onChange={event => {
+                                    setEmail(event.target.value)
+                                }}
+                                className="input-light mb-6" required
+                            />
+                            <input 
+                                type="password" 
+                                minLength={2} 
+                                placeholder="Enter password" 
+                                className="input-light" 
+                                value={password}
+                                onChange={ event => {
+                                    setPassword(event.target.value)
+                                }} 
+                                required
+                            />
                             <p className="my-6 cursor-pointer select-none fs-m">Recovery password</p>
                             <button onClick={handleLogin} className="btn btn-primary w-full">Login</button>
-                            <div className="my-6 flex w-full items-center gap-2">
-                                <hr className="flex-1 border-black translate-y-0.5"/>
-                                <p className="m-0">or</p>
-                                <hr className="flex-1 border-black translate-y-0.5"/>
+
+                            <div className="flex flex-col w-full border-opacity-50">
+                                <div className="divider">OR</div>
                             </div>
+
                             <div className="flex justify-between w-full gap-8">
                                 <button className="btn btn-login-others bg-white flex-1"><img src={google}/></button>
                                 <button className="btn btn-login-others btn-login-github flex-1"><img src={github}/></button>
                             </div>
+
+                            { error?.error == true && (
+                                <ErrorMsg 
+                                    message={error.message}
+                                />
+                            )}
+
                         </div>
                     </div>
                 </div>
