@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useLocalStorage } from './useLocalStorage';
 
-import { User } from '../../domain/User.interface';
+import { EmptyUser, User } from '../../domain/User.interface';
 
 export const useUser = () => {
     const { user, setUser } = useContext(AuthContext);
@@ -14,7 +14,7 @@ export const useUser = () => {
     }
 
     const removeUser = () => {
-        setUser(null);
+        setUser(EmptyUser);
         setItem('user', '');
     }
 
