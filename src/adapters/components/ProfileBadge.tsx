@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import foto from "../../assets/foto.png";
 import { User } from "../../domain/User.interface";
 
-export const ProfileBadge = ( props: { user: User, logout: () => void, position: string } ) => {
+export const ProfileBadge = ( props: { user: User | null, logout: () => void, position: string } ) => {
 
     return (
         <div className={props.position}>
@@ -13,7 +13,7 @@ export const ProfileBadge = ( props: { user: User, logout: () => void, position:
                         <img src={foto} />
                     </div>
                 </label>
-                <span>Mike</span>
+                <span>{props.user?.full_name}</span>
             </button>
             
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">

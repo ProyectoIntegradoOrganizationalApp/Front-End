@@ -8,9 +8,3 @@ export interface User {
     token: string,
 }
 
-export const EmptyUser: User = Object.freeze({
-    id: 0,
-    email: '',
-    full_name: '',
-    token: '',
-});

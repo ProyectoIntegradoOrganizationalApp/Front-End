@@ -12,14 +12,13 @@ export const useAuth = () => {
     useEffect( () => {
         const user = getItem('user');
 
+ 
         if( user ) {
             addUser(JSON.parse(user));
         }
     }, [])
 
-    const login = (user: User) => {
-        if( user === undefined) return;
-        
+    const login = (user: User) => {        
         addUser(user);
     }
 

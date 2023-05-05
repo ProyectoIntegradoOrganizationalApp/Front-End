@@ -43,12 +43,14 @@ const Login = () => {
             }
         });
 
+        console.log(undefined)
+
         if( !error?.error ) {
             login(data!);
         }
     };
 
-    if( user.token != '' ) {
+    if( user ) {
         return <Navigate to="/profile" />
     }
 
