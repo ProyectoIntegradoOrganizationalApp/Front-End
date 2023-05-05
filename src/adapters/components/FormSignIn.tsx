@@ -87,6 +87,7 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
     }
 
     const sendForm = (event: any) => {
+        event.preventDefault();
         // El form no se debería de enviar
         if( props.type === "register" && valid ) {
             handleRegister();
