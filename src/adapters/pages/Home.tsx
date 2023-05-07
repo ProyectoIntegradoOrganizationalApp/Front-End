@@ -1,8 +1,17 @@
 import logoApps from '../../assets/svg/home/logoApps.svg';
 import hero from '../../assets/svg/home/hero.svg';
 import { Nav } from '../components/Nav';
+import { useUser } from '../../application/customHooks/useUser';
+import { Navigate } from 'react-router-dom';
 
 export function Home() {
+
+    const { user } = useUser();
+
+    if( user ) {
+        return <Navigate to="/profile" />
+    }
+
     return (
         <>
             <Nav />

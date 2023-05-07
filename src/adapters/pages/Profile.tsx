@@ -1,10 +1,10 @@
+import { useUser } from "../../application/customHooks/useUser";
 import { Sidebar } from "../components/Sidebar";
-import { useAuth } from "../../application/customHooks/useAuth";
 import { Navigate } from "react-router-dom";
 
 export function Profile() {
 
-    const { user } = useAuth();
+    const { user } = useUser();
 
     if( !user ) {
         return <Navigate to="/" />

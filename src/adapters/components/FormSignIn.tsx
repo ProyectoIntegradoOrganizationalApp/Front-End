@@ -19,6 +19,7 @@ import { User } from "../../domain/User.interface";
 // Fotos o SVGs
 import google from "../../assets/svg/login/google.svg";
 import github from "../../assets/svg/login/github.svg";
+import { Loading } from "./Loading";
 
 
 /**
@@ -55,11 +56,16 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
      * en el contexto.
     */
     const { data, error, loading, fetchUser, registerUser } = useApi();
-    const handleLogin = async () => {
-        await fetchUser({email, password});
-        
-        if( !error?.error && data && "_token" in data ) {
+
+    /**
+     * Ciclo de vida, solo ejecuta este useEffect cuando la data halla cambiado, lo que 
+     * significaría que el usuario está logueado por lo que procede a hacer las comprobaciones
+     * necesarias y loguea al usuario haciendo uso del hook de login.
+     */
+    useEffect(() => {
+        if( !error?.error && data && "_token" in data && !user ) {
             
+            /* TODO => Cambiar esto por los mappers de entidades */
             const UserDTO: User = {
                 id: data?.id,
                 email: data?.email,
@@ -69,8 +75,18 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
             
             login(UserDTO);
         }
+    }, [data?.id]);
+
+    /**
+     * Función que maneja el login del usuario, ejecuta la función fetchUser del Hook de la API
+     */
+    const handleLogin = async () => {
+        await fetchUser({email, password});
     };
 
+    /**
+     * Función que maneja el registro de usuarios, y que si no recoje errores, ejecuta el login con los datos del usuario de manera automática.
+     */
     const handleRegister = async () => {
         await registerUser({name, last_name, email, password});
 
@@ -106,6 +122,9 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
     return (
         <>
             <article className="flex-1 flex items-center justify-center">
+                <Loading
+                    state={loading}
+                />
                 <div className="flex flex-col justify-center items-center">
                     <form>
                         {props.type === "register" && (
@@ -176,8 +195,6 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
                         <p className="my-6 cursor-pointer select-none fs-m">Recovery password</p>
                         <button type="submit" onClick={sendForm} className="btn btn-primary w-full">{props.type}</button>
                     </form>
-                    
-                    
 
                     <div className="flex flex-col w-full border-opacity-50">
                         <div className="divider">OR</div>
