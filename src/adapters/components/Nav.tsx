@@ -42,7 +42,7 @@ export function Nav() {
                         </div>
                     </button>
 
-                    { user.token != '' && (
+                    { user && (
                         <ProfileBadge
                             user={user}
                             logout={logout}
@@ -50,11 +50,11 @@ export function Nav() {
                         />
                     )}
 
-                    { user.token == '' && (
+                    { !user && (
                         
-                            <Link to="/login">
-                                <button className="btn btn-primary">Login</button>
-                            </Link>
+                        <Link to="/login">
+                            <button className="btn btn-primary">Login</button>
+                        </Link>
                     )} 
 
                 </div>

@@ -17,9 +17,7 @@ export const useAuth = () => {
         }
     }, [])
 
-    const login = (user: User) => {
-        if( user === undefined) return;
-        
+    const login = (user: User) => {        
         addUser(user);
     }
 

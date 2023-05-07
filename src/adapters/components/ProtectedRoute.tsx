@@ -1,23 +1,26 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
-import { Navigate } from "react-router-dom";
+import { Navigate, redirect } from "react-router-dom";
 
 import { User } from "../../domain/User.interface";
+import { useAuth } from "../../application/customHooks/useAuth";
 
 interface Props {
     user: User | null,
     children: ReactNode
 }
 
-export function ProtectedRoute({ user, children }: Props): JSX.Element  {
+export function ProtectedRoute( props: { children: ReactNode }) {
 
-    if( !user ) {
-        return <Navigate to="/" replace />
-    }
+    const { user } = useAuth();
+
+    useEffect( () => {
+        console.log("re-render", user)
+    }, [])
 
     return (
         <>
-            {children}
+            {props.children}
         </>
     );
 }
