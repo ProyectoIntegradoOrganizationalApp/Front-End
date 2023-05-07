@@ -1,5 +1,5 @@
 // React
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 // Contexto
@@ -16,7 +16,6 @@ import { ErrorMsg } from "./ErrorMsg";
 // Interfaces
 import { User } from "../../domain/User.interface";
 
-
 // Fotos o SVGs
 import google from "../../assets/svg/login/google.svg";
 import github from "../../assets/svg/login/github.svg";
@@ -31,7 +30,7 @@ import github from "../../assets/svg/login/github.svg";
  * @returns 
  */
 export const FormSignIn = ( props: { type: "login" | "register" }) => {
-    
+
     // Contexto de la app
     const { user } = useContext(AuthContext);
 
@@ -45,6 +44,8 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
 
     // Datos del Formulario
     const [email, setEmail] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [last_name, setLastName] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [valid, setValid] = useState<boolean>(false);
     const [input, setInput] = useState<string>('input-light mt-6');
@@ -53,25 +54,29 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
      * Event handler de login que usa el Hook useAuth que usa useUser para crear un usuario 
      * en el contexto.
     */
-    const { data, error, loading, fetchData } = useApi<User>();
+    const { data, error, loading, fetchUser, registerUser } = useApi();
     const handleLogin = async () => {
-        await fetchData("http://localhost:8000/login", { 
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: {
-                email: email,
-                password: password,
+        await fetchUser({email, password});
+        
+        if( !error?.error && data && "_token" in data ) {
+            
+            const UserDTO: User = {
+                id: data?.id,
+                email: data?.email,
+                full_name: data.full_name,
+                _token: data._token
             }
-        });
-
-        if( !error?.error ) {
-            login(data!);
+            
+            login(UserDTO);
         }
     };
 
     const handleRegister = async () => {
+        await registerUser({name, last_name, email, password});
+
+        if( !error?.error ) {
+            handleLogin();
+        }
 
     }
 
@@ -96,11 +101,42 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
         }
     }
 
+    
+
     return (
         <>
-            <article className="login-form flex-auto w-full h-full flex items-center">
-                <div className="flex flex-col justify-center items-center min-w-auto w-5/12 m-auto">
+            <article className="flex-1 flex items-center justify-center">
+                <div className="flex flex-col justify-center items-center">
                     <form>
+                        {props.type === "register" && (
+                            <>
+                                <input 
+                                    type="text" 
+                                    minLength={10} 
+                                    maxLength={80} 
+                                    placeholder="Enter First Name" 
+                                    value={name} 
+                                    onChange={event => {
+                                        setName(event.target.value)
+                                    }}
+                                    className="input-light mb-6"
+                                    required
+                                />
+                                <input 
+                                    type="text" 
+                                    minLength={10} 
+                                    maxLength={80} 
+                                    placeholder="Enter Last Name" 
+                                    value={last_name} 
+                                    onChange={event => {
+                                        setLastName(event.target.value)
+                                    }}
+                                    className="input-light mb-6"
+                                    required
+                                />
+                            </>
+                        )}
+                        
                         <input 
                             type="email" 
                             minLength={10} 

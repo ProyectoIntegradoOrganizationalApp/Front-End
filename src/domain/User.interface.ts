@@ -1,10 +1,10 @@
 /**
- *  Interfaz de Usuario
+ *  Interfaz de Usuario que define el usuario que nos viene del login.
  */
 export interface User {
-    id: number,
+    id: string,
     email: string,
     full_name: string,
-    token: string,
+    _token: string,
 }
 

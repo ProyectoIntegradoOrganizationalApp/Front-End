@@ -14,7 +14,7 @@ interface Props {
 export const AsideSignIn = function ( props: Props) {
     return (
         <>
-            <aside className="flex-auto h-full w-full flex flex-col justify-center items-center gap-16">
+            <aside className="flex-1 h-full w-full flex flex-col justify-center items-center gap-16">
                 <img src={log} className="select-none"/>
                 <div className="login-message">
                     <h1 className="pb-5 font-extrabold">{props.title}</h1>

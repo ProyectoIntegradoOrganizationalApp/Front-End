@@ -12,7 +12,7 @@ import { User } from './domain/User.interface';
 // Vistas
 import { Home } from './adapters/pages/Home';
 import Login from './adapters/pages/Login';
-import { Register } from './adapters/pages/Register';
+import Register from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';

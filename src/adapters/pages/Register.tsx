@@ -1,7 +1,7 @@
 import { AsideSignIn } from "../components/AsideSignIn";
 import { FormSignIn } from "../components/FormSignIn";
 
-export function Register() {
+const Register = () => {
 
     const loginInfo = {
         route: "/login",
@@ -10,7 +10,7 @@ export function Register() {
 
     return (
         <>
-            <div className="h-100-vh flex items-center flex-col lg:flex-row h-full">
+            <main className="min-h-screen flex items-center gap-16 flex-col lg:flex-row lg:mx-4">
                 <FormSignIn 
                     type={"register"}
                 />
@@ -19,7 +19,9 @@ export function Register() {
                     message={"If you already have an account, just sign in. We've missed you!"}
                     link={loginInfo}
                 />
-            </div>
+            </main>
         </>
     )
 }
+
+export default Register;

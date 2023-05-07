@@ -10,7 +10,7 @@ const Login = () => {
 
     return (
         <>
-            <main className="h-100-vh flex items-center flex-col lg:flex-row lg:mx-4">
+            <main className="min-h-screen flex items-center gap-16 flex-col lg:flex-row lg:mx-4">
                 <AsideSignIn 
                     title={"New Here?"}
                     message={"Sign up and discover a great amount of new opportunities!"}
