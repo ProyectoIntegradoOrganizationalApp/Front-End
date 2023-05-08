@@ -4,9 +4,22 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+  theme: {},
+  plugins: [
+    require("daisyui")
+  ],
+  daisyui: {
+    themes: [
+      {
+        light_theme: {
+          primary: "#1E293B",
+          secondary: "#334155",
+          accent: "#475569",
+          neutral: "#64748B"
+        }
+      },
+      "dark"
+    ]
+  }
 }
 
