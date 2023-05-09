@@ -1,4 +1,5 @@
 export interface Route {
     name: string,
-    link: string
+    url: string,
+    children?: Array<Route>
 }

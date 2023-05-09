@@ -1,4 +1,6 @@
 export interface UserDTO {
+    id: string,
     email: string,
-    token: string
+    _token: string,
+    full_name: string,
 }
