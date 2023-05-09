@@ -6,17 +6,19 @@ export class UserMapper extends Mapper<User, UserDTO> {
 
     mapFrom( user: User ): UserDTO {
         return {
+            id: user.id,
             email: user.email,
-            token: user.token
+            full_name: user.full_name,
+            _token: user._token,   
         }
     }
 
     mapTo( user: UserDTO ): User {
         return {
-            id: 0,
+            id: user.id,
             email: user.email,
-            full_name: '',
-            token: user.token,            
+            full_name: user.full_name,
+            _token: user._token,            
         }
     }
 }

@@ -12,14 +12,11 @@ import { useAuth } from "../../application/customHooks/useAuth";
 // Mensaje de error
 import { ErrorMsg } from "./ErrorMsg";
 
-
-// Interfaces
-import { User } from "../../domain/User.interface";
-
 // Fotos o SVGs
 import google from "../../assets/svg/login/google.svg";
 import github from "../../assets/svg/login/github.svg";
 import { Loading } from "./Loading";
+import { UserMapper } from "../../domain/mappers/UserMapper";
 
 
 /**
@@ -64,16 +61,13 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
      */
     useEffect(() => {
         if( !error?.error && data && "_token" in data && !user ) {
-            
-            /* TODO => Cambiar esto por los mappers de entidades */
-            const UserDTO: User = {
-                id: data?.id,
-                email: data?.email,
-                full_name: data.full_name,
-                _token: data._token
-            }
+            const UserDTO = UserMapper.prototype.mapFrom(data);            
             
             login(UserDTO);
+        }
+
+        if( !error?.error && data && "_token" ! in data && !user) {
+            handleLogin();
         }
     }, [data?.id]);
 
@@ -89,13 +83,12 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
      */
     const handleRegister = async () => {
         await registerUser({name, last_name, email, password});
-
-        if( !error?.error ) {
-            handleLogin();
-        }
-
     }
 
+    /**
+     * Valida las contraseñas para comprobar que son iguales.
+     * @param valor 
+     */
     const validate = (valor: string) => {
         if( valor != password ) {
             setValid(false);
@@ -107,6 +100,10 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
         }
     }
 
+    /**
+     * Se encarga de enviar el formulario.
+     * @param event 
+     */
     const sendForm = (event: any) => {
         event.preventDefault();
         // El form no se debería de enviar
@@ -116,8 +113,6 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
             handleLogin();
         }
     }
-
-    
 
     return (
         <>
