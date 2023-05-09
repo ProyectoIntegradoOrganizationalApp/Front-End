@@ -20,6 +20,7 @@ import { User } from "../../domain/User.interface";
 import google from "../../assets/svg/login/google.svg";
 import github from "../../assets/svg/login/github.svg";
 import { Loading } from "./Loading";
+import { UserMapper } from "../../domain/mappers/UserMapper";
 
 
 /**
@@ -64,14 +65,7 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
      */
     useEffect(() => {
         if( !error?.error && data && "_token" in data && !user ) {
-            
-            /* TODO => Cambiar esto por los mappers de entidades */
-            const UserDTO: User = {
-                id: data?.id,
-                email: data?.email,
-                full_name: data.full_name,
-                _token: data._token
-            }
+            const UserDTO = UserMapper.prototype.mapFrom(data);            
             
             login(UserDTO);
         }
