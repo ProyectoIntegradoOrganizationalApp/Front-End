@@ -25,10 +25,10 @@ export function Nav() {
     return (
         <>
             
-            <div className="navbar">
+            <div className="navbar px-12 bg-slate-800 dark:bg-transparent">
 
                 <div className="navbar-start">
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">
+                    <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-white">
                         <img className="mr-3" src={logo}></img>
                         Teamer    
                     </Link>
@@ -47,7 +47,7 @@ export function Nav() {
                     { !user && (
                         
                         <Link to="/login">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">Log In</button>
                         </Link>
                     )} 
 

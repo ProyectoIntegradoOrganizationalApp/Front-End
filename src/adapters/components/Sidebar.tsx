@@ -14,7 +14,7 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route> } ) 
     return (
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col">
+            <div className="drawer-content flex flex-col bg-slate-600">
                 <label htmlFor="my-drawer-2" className="btn btn-primary w-12 absolute top-1/2 -left-5 rounded-full swap swap-rotate">
                     <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
                     <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/></svg>
@@ -23,31 +23,43 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route> } ) 
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 bg-base-100 text-base-content flex flex-col justify-around">
+                <ul className="menu w-64 bg-slate-800 text-base-content flex flex-col justify-around">
                     <div className="headerSidebar">
-                        <Link to="/" className="btn btn-ghost normal-case text-xl">
+                        <Link to="/" className="block flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
                             <img className="mr-3" src={logo}></img>
                             Teamer    
                         </Link>
                     </div>
                     
-                    <div className="middleSidebar flex-1 mt-24">
+                    <div className="middleSidebar flex-1 mt-8">
                         <ul className="menu dropdown-content">
                             { props.routes && props.routes.map( link => 
                                 <li key={link.name}>
                                     { link.children ? (
-                                        <div className="dropdown dropdown-end">
-                                            <label tabIndex={0}>{link.name}</label>
-                                            <ul className="menu dropdown-content  p-2 shadow bg-base-100 rounded-box w-52 mt-4" tabIndex={0}>
-                                                { link.children && link.children.map( child => 
-                                                    <li key={link.name}>
-                                                        <Link to={child.url}>{child.name}</Link>
-                                                    </li>
-                                                )}
-                                            </ul>
+                                        <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${location.pathname == link.url ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
+                                            <div className="flex items-center gap-4 p-4 pl-8 w-full">
+                                                <i className={link.icon + ` text-slate-400 ${location.pathname == link.url ? "!text-white" : ""}`}></i>
+                                                <label tabIndex={0} className={`text-base ${location.pathname == link.url ? "text-base text-white" : ""}`}>{link.name}</label>
+                                            </div>
+                                            {
+                                                location.pathname == link.url &&
+                                                <>
+                                                    <hr className="w-full border-slate-600 border-2 bg-slate-600"/>
+                                                    <ul className="menu shadow hover:bg-transparent w-fit p-2 px-8" tabIndex={0}>
+                                                        { link.children && link.children.map( child => 
+                                                            <li key={link.name}>
+                                                                <Link to={child.url} className={`text-sm py-1 px-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white ${location.pathname == child.url ? "hover:bg-transparent text-white" : ""}`}>{child.name}</Link>
+                                                            </li>
+                                                        )}
+                                                    </ul>
+                                                </>
+                                            }
                                         </div>
                                     ): (
-                                        <Link to={link.url}>{link.name}</Link>
+                                        <div className="flex items-center gap-4">
+                                            <i className={link.icon}></i>
+                                            <Link to={link.url} className="text-base">{link.name}</Link>
+                                        </div>
                                     )}
                                     
                                 </li>
@@ -57,7 +69,7 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route> } ) 
                     </div>
                     
                     <div className="flex-1 flex flex-col justify-end">
-                        <div className="flex justify-around items-center">
+                        <div className="flex justify-between items-center px-6 py-3">
                             <ProfileBadge 
                                 user={user}
                                 logout={logout}

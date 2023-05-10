@@ -6,11 +6,11 @@ import { User } from "../../domain/User.interface";
 export const ProfileBadge = ( props: { user: User | null, logout: () => void, position: string } ) => {
 
     return (
-        <div className={props.position}>
-            <button className="btn flex gap-6 justify-around">
+        <div className={props.position + ' h-fit'}>
+            <button className="flex gap-6 justify-around">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
-                        <img src={foto} />
+                        <img src={foto} className="!w-9 !h-fit translate-y-1"/>
                     </div>
                 </label>
                 <span>{props.user?.full_name}</span>
@@ -32,7 +32,6 @@ export const ProfileBadge = ( props: { user: User | null, logout: () => void, po
                     <button onClick={props.logout}>Logout</button>
                 </li>
             </ul>
-            
         </div>
     )
 }

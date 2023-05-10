@@ -14,7 +14,7 @@ import { ErrorMsg } from "./ErrorMsg";
 
 // Fotos o SVGs
 import google from "../../assets/svg/login/google.svg";
-import github from "../../assets/svg/login/github.svg";
+import github from "../../assets/svg/login/github.png";
 import { Loading } from "./Loading";
 import { UserMapper } from "../../domain/mappers/UserMapper";
 
@@ -27,7 +27,7 @@ import { UserMapper } from "../../domain/mappers/UserMapper";
  * @param props 
  * @returns 
  */
-export const FormSignIn = ( props: { type: "login" | "register" }) => {
+export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
 
     // Contexto de la app
     const { user } = useContext(AuthContext);
@@ -46,7 +46,7 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
     const [last_name, setLastName] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [valid, setValid] = useState<boolean>(false);
-    const [input, setInput] = useState<string>('input-light mt-6');
+    const [input, setInput] = useState<string>('input input-light mt-6 input-bordered w-full mt-6');
 
     /**
      * Event handler de login que usa el Hook useAuth que usa useUser para crear un usuario 
@@ -92,11 +92,11 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
     const validate = (valor: string) => {
         if( valor != password ) {
             setValid(false);
-            setInput('input input-bordered input-error w-full max-w-xs mt-6');
+            setInput('input input-bordered input-error w-full mt-6');
             
         } else {
             setValid(true);
-            setInput('input-light mt-6');
+            setInput('input input-light mt-6 input-bordered w-full mt-6');
         }
     }
 
@@ -107,45 +107,45 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
     const sendForm = (event: any) => {
         event.preventDefault();
         // El form no se debería de enviar
-        if( props.type === "register" && valid ) {
+        if( props.type === "sign up" && valid ) {
             handleRegister();
-        } else if( props.type === "login" && email.length > 10 && password.length > 5 ) {
+        } else if( props.type === "log in" && email.length > 10 && password.length > 5 ) {
             handleLogin();
         }
     }
 
     return (
         <>
-            <article className="flex-1 flex items-center justify-center">
+            <article className="!w-full flex-1 flex items-center justify-center">
                 <Loading
                     state={loading}
                 />
-                <div className="flex flex-col justify-center items-center">
-                    <form>
-                        {props.type === "register" && (
+                <div className="w-full flex flex-col justify-center items-center">
+                    <form className="w-full flex flex-col">
+                        {props.type === "sign up" && (
                             <>
                                 <input 
                                     type="text" 
                                     minLength={10} 
                                     maxLength={80} 
-                                    placeholder="Enter First Name" 
+                                    placeholder="Enter first name" 
                                     value={name} 
                                     onChange={event => {
                                         setName(event.target.value)
                                     }}
-                                    className="input-light mb-6"
+                                    className="input input-bordered w-full mt-6"
                                     required
                                 />
                                 <input 
                                     type="text" 
                                     minLength={10} 
                                     maxLength={80} 
-                                    placeholder="Enter Last Name" 
+                                    placeholder="Enter last name" 
                                     value={last_name} 
                                     onChange={event => {
                                         setLastName(event.target.value)
                                     }}
-                                    className="input-light mb-6"
+                                    className="input input-bordered w-full mt-6"
                                     required
                                 />
                             </>
@@ -160,21 +160,21 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
                             onChange={event => {
                                 setEmail(event.target.value)
                             }}
-                            className="input-light mb-6"
+                            className="input input-bordered w-full mt-6"
                             required
                         />
                         <input 
                             type="password" 
                             minLength={5} 
                             placeholder="Enter password" 
-                            className="input-light" 
+                            className="input input-bordered w-full mt-6" 
                             value={password}
                             onChange={ event => {
                                 setPassword(event.target.value)
                             }} 
                             required
                         />
-                        { props.type === "register" && (
+                        { props.type === "sign up" && (
                             <input
                                 type="password" 
                                 minLength={2} 
@@ -187,17 +187,17 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
                             />
                         )}
 
-                        <p className="my-6 cursor-pointer select-none fs-m">Recovery password</p>
-                        <button type="submit" onClick={sendForm} className="btn btn-primary w-full">{props.type}</button>
+                        <p className="mt-6 cursor-pointer select-none mx-auto text-base w-fit">Recovery password</p>
+                        <button type="submit" onClick={sendForm} className="mt-6 btn btn-primary w-full">{props.type}</button>
                     </form>
 
                     <div className="flex flex-col w-full border-opacity-50">
-                        <div className="divider">OR</div>
+                        <div className="divider text-base">or</div>
                     </div>
 
                     <div className="flex justify-between w-full gap-8">
-                        <button className="btn btn-login-others bg-white flex-1"><img src={google}/></button>
-                        <button className="btn btn-login-others btn-login-github flex-1"><img src={github}/></button>
+                        <button className="btn bg-white hover:bg-gray-300 flex-1 rounded-none"><img src={google} className="w-5"/></button>
+                        <button className="btn flex-1 rounded-none"><img src={github} className="w-5"/></button>
                     </div>
 
                     { error?.error == true && (
