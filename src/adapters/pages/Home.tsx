@@ -17,15 +17,15 @@ export function Home() {
             <Nav />
             
             {/* Hero Section */}
-            <div className="hero flex flex-col lg:h-screen justify-center">
+            <div className="hero flex flex-col justify-center">
                 <div className="flex items-center flex-col lg:flex-row-reverse w-3/4 mx-auto gap-16 ">
                     <div className="flex-1">
                         <img src={hero} className="select-none" />
                     </div>
                     <div className="flex-1">
-                        <h1 className="fs-l">The <span className="bolder">open source platform</span> for <span className="bolder">developers to work</span> & communicate cohesively and organized in the best way thanks to the wide variety of apps that we have</h1>
-                        <p className="py-7 fs-m">Teamer Software will help you <b>organize with your team</b> or alone those tasks that need it. With all the functionality that we include you will be satisfied</p>
-                        <a href='https://github.com/orgs/ProyectoIntegradoOrganizationalApp/repositories' target="_blank" className="btn btn-primary">Our Repository</a>
+                        <h1 className="text-2xl">The <b className='text-black dark:text-white'>open source platform</b> for cohesive and <b className='text-black dark:text-white'>organized development</b></h1>
+                        <p className="py-7 text-base">Teamer Software will help you <b className='text-black dark:text-white'>organize with your team</b> or alone those tasks that need it. With all the functionality that we include you will be satisfied</p>
+                        <a href='https://github.com/orgs/ProyectoIntegradoOrganizationalApp/repositories' target="_blank" className="btn myBtn">Our Repository</a>
                     </div>
                 </div>
 
