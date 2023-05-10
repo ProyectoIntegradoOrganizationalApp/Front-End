@@ -1,3 +1,4 @@
+[![publish](https://github.com/ProyectoIntegradoOrganizationalApp/Front-End/actions/workflows/DesktopApp.yml/badge.svg?branch=main)](https://github.com/ProyectoIntegradoOrganizationalApp/Front-End/actions/workflows/DesktopApp.yml)
 # Front-End
 
 Aquí estará la documentación del proyecto de Front-End del proyecto integrado en formato `Markdown`.
