@@ -1,6 +1,6 @@
 import { Nav } from '../components/Nav';
-import { AsideSignIn } from "../components/AsideSignIn";
-import { FormSignIn } from "../components/FormSignIn";
+import { AsideSignIn } from "../components/auth/AsideSignIn";
+import { FormSignIn } from "../components/auth/FormSignIn";
 
 const Login = () => {
     

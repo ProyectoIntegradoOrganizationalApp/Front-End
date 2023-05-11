@@ -3,20 +3,20 @@ import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 // Contexto
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 
 // Hooks propios
-import { useApi } from "../../application/api/useApi";
-import { useAuth } from "../../application/customHooks/useAuth";
+import { useApi } from "../../../application/api/useApi";
+import { useAuth } from "../../../application/customHooks/useAuth";
 
 // Mensaje de error
-import { ErrorMsg } from "./ErrorMsg";
+import { ErrorMsg } from "../ErrorMsg";
 
 // Fotos o SVGs
-import google from "../../assets/svg/login/google.svg";
-import github from "../../assets/svg/login/github.png";
-import { Loading } from "./Loading";
-import { UserMapper } from "../../domain/mappers/UserMapper";
+import google from "../../../assets/svg/login/google.svg";
+import github from "../../../assets/svg/login/github.png";
+import { Loading } from "../Loading";
+import { UserMapper } from "../../../domain/mappers/UserMapper";
 
 
 /**

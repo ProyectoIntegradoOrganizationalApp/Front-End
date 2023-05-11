@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../application/customHooks/useAuth";
 
 import logo from "../../assets/svg/logo.svg";
-import { ProfileBadge } from "./ProfileBadge";
+import { ProfileBadge } from "./dashboard/ProfileBadge";
 
 /**
  *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
@@ -57,6 +57,3 @@ export function Nav() {
         </>
     )
 }
-
-
-

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 
-import foto from "../../assets/foto.png";
-import { User } from "../../domain/User.interface";
+import foto from "../../../assets/foto.png";
+import { User } from "../../../domain/User.interface";
 
 export const ProfileBadge = ( props: { user: User | null, logout: () => void, position: string } ) => {
 

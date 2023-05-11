@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     fontSize: {
+      ssm: ['.7rem', {
+        fontWeight: '500'
+      }],
       sm: ['.8rem', {
         fontWeight: '500'
       }],
@@ -18,7 +21,7 @@ export default {
         lineHeight: '3rem',
         fontWeight: '500'
       }],
-      '3xl': '45px',
+      '3xl': '2.3rem',
       '4xl': '2.441rem',
       '5xl': '3.052rem'
     },

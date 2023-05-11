@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import log from "../../assets/svg/login/login.svg";
+import log from "../../../assets/svg/login/login.svg";
 
 interface Props {
     title: string,
