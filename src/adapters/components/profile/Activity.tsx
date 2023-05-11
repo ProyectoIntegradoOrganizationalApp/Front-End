@@ -16,7 +16,7 @@ export function Activity(props: { title: string, activity: object }) {
                     <div className="absolute top-3 left-4">
                         <InfoTooltip title="Commits done per day"/>
                     </div>
-                    <p className="w-full flex justify-center text-white leading-none">{props.title}</p>
+                    <p className="w-full flex justify-center text-white leading-none text-base">{props.title}</p>
                 </div>
                 <div className="charttt"></div>
             </div>

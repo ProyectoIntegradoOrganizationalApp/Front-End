@@ -42,7 +42,7 @@ export function Calendar(props: { monthYear: string, calendar: MyCalendar }) {
                 <div className="relative border-b-4 border-slate-600 py-4">
                     <p className="w-full flex justify-center text-white leading-none">{props.monthYear}</p>
                 </div>
-                <div className="p-4 justify-end grid grid-cols-7">
+                <div className="p-4 justify-end grid grid-cols-7 justify-items-center">
                     {pastDays}
                     <div className="text-red-600 flex flex-wrap gap-2 text-ssm p-1"><b className="text-red-600">{props.calendar.currentDay}</b></div>
                     {futureDays}

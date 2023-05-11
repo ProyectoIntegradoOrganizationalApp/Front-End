@@ -11,6 +11,9 @@ import { DashboardBox } from '../components/dashboard/DashboardBox';
 import { Statistics } from '../components/profile/Statistics';
 import { Activity } from '../components/profile/Activity';
 import { Calendar } from '../components/profile/Calendar';
+import { InfoTooltip } from '../components/InfoTooltip';
+import { AchievementsInfo } from '../components/achievements/AchievementsInfo';
+import { Item } from '../components/Item';
 
 const date = new Date();
 function GenerateMonthYear(): string {
@@ -20,7 +23,7 @@ function GenerateMonthYear(): string {
     return month + " - " + year;
 }
 
-function daysInMonth (month: number, year: number) {
+function daysInMonth(month: number, year: number) {
     return new Date(year, month, 0).getDate();
 }
 
@@ -33,7 +36,7 @@ function GenerateCalendar(): MyCalendar {
     const pastDays = [];
     const futureDays = [];
     const daysMonth = daysInMonth(date.getMonth() + 1, date.getFullYear());
-    
+
     // Past days
     let pastDay = 1;
     while (pastDay < currentDay) {
@@ -76,18 +79,51 @@ export function Profile() {
         <>
             <Sidebar routes={routes} parent="dashboard">
                 <DashboardBox>
-                    <div className="bg-slate-800 w-1/4 rounded-xl"></div>
-                    <div className="w-3/4 rounded-xl">
+                    <AchievementsInfo level={100} rank="Noobie"/>
+                    <div className="w-3/4 rounded-xl flex flex-col gap-6">
                         <div className="flex gap-6">
                             <div className="flex flex-col gap-6 w-4/12">
-                                <Statistics title="Weekly Tasks" amount={13}/>
-                                <Statistics title="Daily Tasks" amount={5}/>
+                                <Statistics title="Weekly Tasks" amount={13} />
+                                <Statistics title="Daily Tasks" amount={5} />
                             </div>
                             <div className="bg-slate-800 rounded-xl w-5/12 p-4">
-                                <Activity title="Daily Activity" activity={activity}/>
+                                <Activity title="Daily Activity" activity={activity} />
                             </div>
                             <div className="bg-slate-800 rounded-xl w-3/12 p-4">
-                                <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()}/>
+                                <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
+                            </div>
+                        </div>
+                        <div className="bg-slate-700 rounded-xl w-full h-full">
+                            <div className="bg-slate-800 flex items-center justify-center w-full h-16 rounded-t-xl relative text-white text-base">
+                                <div className="absolute top-5 left-4">
+                                    <InfoTooltip title="All your projects" />
+                                </div>
+                                Your Projects
+                                <div className="absolute top-5 right-4">
+                                    {/* <SettingsIcon/> */}
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-3 p-4">
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[ 
+                                    { 
+                                        action: "view",
+                                        icon: "fa-solid fa-eye",
+                                        color: "bg-slate-600",
+                                        target: "view/idProyect"
+                                    },
+                                    {
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-blue-600",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-600",
+                                        target: "remove/idProyect"
+                                    },
+                                ]}/>
                             </div>
                         </div>
                     </div>

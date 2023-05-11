@@ -29,8 +29,12 @@ b {
 }
 
 /* Tooltip */
+.tooltip {
+    z-index: 999999999999;
+}
 .tooltip::before {
     @apply text-white bg-black p-2 px-4;
+    z-index: 999999999999;
 }
 
 /* Buttons */
@@ -81,4 +85,17 @@ b {
 }
 .col-start-7 {
     grid-column-start: 7;
+}
+.tooltip-right:before {
+    transform: translateY(-50%);
+    top: 50%;
+    left: var(--tooltip-offset);
+    right: auto;
+    bottom: auto;
+}
+
+/* Achievements */
+.achievementsLevel {
+    @apply flex flex-col justify-center items-center gap-2 rounded-full w-full aspect-square;
+    border-width: .9em;
 }

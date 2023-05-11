@@ -17,6 +17,7 @@ import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
 import { Projects } from './adapters/pages/Projects';
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
+import { Achievements } from './adapters/pages/Achievements';
 
 /**
  *  Aplicación principal.
@@ -43,7 +44,7 @@ export function App() {
                         <Route path="/dashboard/achievements" 
                             element={
                                 <ProtectedRoute>
-                                    <Profile />
+                                    <Achievements />
                                 </ProtectedRoute>
                             } 
                         />
