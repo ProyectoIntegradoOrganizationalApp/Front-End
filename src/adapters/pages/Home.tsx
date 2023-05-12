@@ -10,7 +10,7 @@ export function Home() {
     const { user } = useUser();
 
     if (user) {
-        return <Navigate to="/profile" />
+        //return <Navigate to="/dashboard/profile" />
     }
 
     return (
@@ -67,7 +67,7 @@ export function Home() {
                         <rect x="167" y="92.0001" width="5" height="14" rx="2.5" fill="black" />
                         <rect x="159" y="92.0001" width="5" height="14" rx="2.5" fill="black" />
                         {/* Taskman */}
-                        <rect x="272.205" y="3.5" width="57.5572" height="57.5572" rx="8.5" fill="#FFD771" stroke="#C4AA68" stroke-width="5" />
+                        <rect x="272.205" y="3.5" width="57.5572" height="57.5572" rx="8.5" fill="#FFD771" stroke="#C4AA68" strokeWidth="5" />
                         <rect opacity="0.1" x="290.243" y="19.1325" width="29.012" height="5.43976" fill="#B18C2C" />
                         <rect opacity="0.1" x="290.243" y="30.012" width="29.012" height="4.53313" fill="#B18C2C" />
                         <rect opacity="0.1" x="290.243" y="40.8915" width="29.012" height="4.53313" fill="#B18C2C" />
@@ -92,13 +92,13 @@ export function Home() {
                         <path d="M575 24L575 21L590.3 21C591.239 21 592 21.7611 592 22.7L592 24L575 24Z" fill="white" />
                         <defs>
                             <linearGradient id="paint0_linear_402_195" x1="286.576" y1="43.2605" x2="288.413" y2="45.8019" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="white" />
-                                <stop offset="0.9999" stop-color="white" stop-opacity="0.171875" />
-                                <stop offset="1" stop-color="white" stop-opacity="0" />
+                                <stop stopColor="white" />
+                                <stop offset="0.9999" stopColor="white" stopOpacity="0.171875" />
+                                <stop offset="1" stopColor="white" stopOpacity="0" />
                             </linearGradient>
                             <linearGradient id="paint1_linear_402_195" x1="280.642" y1="46.4685" x2="282.483" y2="50.0865" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="white" />
-                                <stop offset="1" stop-color="white" stop-opacity="0" />
+                                <stop stopColor="white" />
+                                <stop offset="1" stopColor="white" stopOpacity="0" />
                             </linearGradient>
                         </defs>
                     </svg>

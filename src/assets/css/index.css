@@ -99,3 +99,7 @@ b {
     @apply flex flex-col justify-center items-center gap-2 rounded-full w-full aspect-square;
     border-width: .9em;
 }
+
+progress {
+    left: calc(50% - 112px);
+}
