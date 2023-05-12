@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 // Hooks propios
-import { useApi } from "../../application/api/useApi";
+import { useUserApi } from "../../application/api/useUserApi";
 import { useAuth } from "../../application/customHooks/useAuth";
 
 // Mensaje de error
@@ -52,7 +52,7 @@ export const FormSignIn = ( props: { type: "login" | "register" }) => {
      * Event handler de login que usa el Hook useAuth que usa useUser para crear un usuario 
      * en el contexto.
     */
-    const { data, error, loading, fetchUser, registerUser } = useApi();
+    const { data, error, loading, fetchUser, registerUser } = useUserApi();
 
     /**
      * Ciclo de vida, solo ejecuta este useEffect cuando la data halla cambiado, lo que 

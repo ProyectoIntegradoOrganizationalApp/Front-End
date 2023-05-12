@@ -1,7 +1,6 @@
 import { useState } from "react"
 
-import { User } from "../../domain/User.interface";
-import { ApiError } from "./ApiError.interface";
+import { ApiError } from "../../domain/ApiError.interface";
 import { Login } from "./Login.interface";
 import { Register } from "./Register.interface";
 
@@ -21,18 +20,20 @@ type JSONResponse = {
     error?: ApiError | undefined
 }
 
-export const useApi = () => {
+export const useUserApi = () => {
 
     const [data, setData] = useState<Login | Register>();
-    const [error, setError] = useState<{error: boolean, message: string}>();
+    const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
+
+    const API = import.meta.env.VITE_API_URL;
 
     const fetchUser = async ( props: FormProps ) => {
         setLoading(true);
 
         const body = JSON.stringify({email: props.email, password: props.password});
 
-        const response = await fetch("http://localhost:8000/login", {
+        const response = await fetch(`${API}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json" 
@@ -56,7 +57,7 @@ export const useApi = () => {
 
         const body = JSON.stringify({email: props.email, first_name: props.name, last_name: props.last_name, password: props.password});
 
-        const response = await fetch("http://localhost:8000/register", {
+        const response = await fetch(`${API}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
