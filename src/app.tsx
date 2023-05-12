@@ -15,7 +15,9 @@ import Login from './adapters/pages/Login';
 import Register from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
+import { Projects } from './adapters/pages/Projects';
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
+import { Achievements } from './adapters/pages/Achievements';
 
 /**
  *  Aplicación principal.
@@ -32,10 +34,24 @@ export function App() {
                 <BrowserRouter basename='/'>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/profile" 
+                        <Route path="/dashboard/profile" 
                             element={
                                 <ProtectedRoute>
                                     <Profile />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route path="/dashboard/achievements" 
+                            element={
+                                <ProtectedRoute>
+                                    <Achievements />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route path="/projects" 
+                            element={
+                                <ProtectedRoute>
+                                    <Projects />
                                 </ProtectedRoute>
                             } 
                         />
