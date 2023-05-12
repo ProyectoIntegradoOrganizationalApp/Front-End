@@ -8,13 +8,13 @@ import { AchievementPercentage } from "../../../domain/AchievementPercentage.int
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-export function AchievementItem(props: { icon: string, title: string, description: string, percentage: AchievementPercentage }) {
+export function AchievementItem(props: { tab?: string, orderBy?: string, icon: string, title: string, description: string, percentage: AchievementPercentage }) {
     return (
         <>
             {
                 props.percentage.type == "basic" &&
                 <div className="bg-slate-700 w-full py-3 px-4 rounded-xl relative">
-                    <div className={"absolute top-0 left-0 h-full rounded-l-xl z-1 bg-slate-600 w-5/12 " + {/* width (w-6/12 == 50%) */ }}></div>
+                    <div className={"absolute top-0 left-0 h-full rounded-l-xl z-1 bg-slate-600 w-5/12 " + {/* width (w-6/12 == 50%) (si llega al final, rounded-xl) */ }}></div>
                     <div className="relative z-2 flex flex-wrap justify-between items-center">
                         <div className="flex items-center gap-4">
                             {/* Achievement Icon */}
@@ -41,7 +41,7 @@ export function AchievementItem(props: { icon: string, title: string, descriptio
                                 <p className="text-white/50 text-sm leading-none">{props.description}</p>
                             </div>
                         </div>
-                        <div className={"text-white leading-none flex items-end flex-col gap-2 w-5/12 " + {/* width (w-6/12 == 50%) */ }}>
+                        <div className={"text-white leading-none flex items-end flex-col gap-2 w-5/12 " + {/* width (w-6/12 == 50%) (si llega al final, rounded-xl) */ }}>
                             <p className="text-base">{props.percentage.number + "%"}</p>
                             <div className="bg-slate-700 w-full h-3 rounded-xl">
                                 <div className="bg-slate-600 w-5/12 h-full rounded-l-xl"></div>
