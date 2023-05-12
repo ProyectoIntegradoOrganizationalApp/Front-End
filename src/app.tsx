@@ -4,10 +4,13 @@ import React, { useEffect, useState } from 'react';
 // Imports para el Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+// Contextos
 import { AuthContext } from './context/AuthContext';
+import { ProfileContext } from './context/ProfileContext';
 
 // Modelos
 import { User } from './domain/User.interface';
+import { Profile as ProfileData } from './domain/Profile.interface';
 
 // Vistas
 import { Home } from './adapters/pages/Home';
@@ -16,8 +19,11 @@ import Register from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
 import { Projects } from './adapters/pages/Projects';
-import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 import { Achievements } from './adapters/pages/Achievements';
+
+
+// Componentes
+import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 
 /**
  *  Aplicación principal.
@@ -27,6 +33,7 @@ import { Achievements } from './adapters/pages/Achievements';
  */
 export function App() {
     const [user, setUser] = useState<User | null>(null);
+    const [profileData, setProfileData] = useState<ProfileData | null>(null);
 
     return (
         <>
@@ -34,13 +41,16 @@ export function App() {
                 <BrowserRouter basename='/'>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/dashboard/profile" 
-                            element={
-                                <ProtectedRoute>
-                                    <Profile />
-                                </ProtectedRoute>
-                            } 
-                        />
+                            <Route path="/dashboard/profile" 
+                                element={
+                                    <ProtectedRoute>
+                                        <ProfileContext.Provider value={{ profileData, setProfileData }}>
+                                            <Profile />
+                                        </ProfileContext.Provider>
+                                    </ProtectedRoute>
+                                } 
+                            />
+                        
                         <Route path="/dashboard/achievements" 
                             element={
                                 <ProtectedRoute>

@@ -22,11 +22,11 @@ export const Routes: Array<Route> = [
         url: "/projects",
         children: [
             {
-                name: "Projects",
+                name: "Your Projects",
                 url: "/projects"
             },
             {
-                name: "Settings",
+                name: "Project Settings",
                 url: "/projects/settings"
             }
         ]
@@ -37,7 +37,7 @@ export const Routes: Array<Route> = [
         url: "/friends",
         children: [
             {
-                name: "Friends",
+                name: "Your Friends",
                 url: "/friends"
             },
             {
@@ -45,7 +45,7 @@ export const Routes: Array<Route> = [
                 url: "/users"
             },
             {
-                name: "Settings",
+                name: "Friends Settings",
                 url: "/friends/settings"
             }
         ]

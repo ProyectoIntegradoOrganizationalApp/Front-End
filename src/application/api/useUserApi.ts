@@ -74,9 +74,7 @@ export const useUserApi = () => {
 
     const handleData = ( data: any ) => {
 
-        console.log(data)
-
-        /**
+         /**
          *  Hay Error
          */
         if( data && data.error ) {
