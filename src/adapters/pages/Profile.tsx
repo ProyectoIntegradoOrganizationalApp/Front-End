@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-import { Route } from '../../domain/Route.interface';
 import { MyCalendar } from '../../domain/Calendar.interface';
 
 import { useUser } from "../../application/customHooks/useUser";
@@ -65,9 +64,9 @@ export function Profile() {
 
     const { user } = useUser();
 
-    // if( !user ) {
-    //     return <Navigate to="/login" />
-    // }
+    if( !user ) {
+        return <Navigate to="/login" />
+    }
 
     const routes = Routes;
 

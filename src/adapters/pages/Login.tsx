@@ -11,7 +11,9 @@ const Login = () => {
 
     return (
         <>
+            
             <Nav />
+            
             <main className="w-4/5 my-10 mx-auto flex items-center gap-24 flex-col lg:flex-row">
                 <AsideSignIn 
                     title={"New Here?"}
