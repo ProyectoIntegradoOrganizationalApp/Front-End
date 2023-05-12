@@ -15,13 +15,13 @@ export function Calendar(props: { monthYear: string, calendar: MyCalendar }) {
     props.calendar.pastDays.forEach((day, index) => {
         if (index == 0) {
             pastDays.push(
-                <div className={"text-white/50 flex flex-wrap gap-2 text-ssm p-1 col-start-" + props.calendar.firstDay}>
+                <div key={day} className={"text-white/50 flex flex-wrap gap-2 text-ssm p-1 col-start-" + props.calendar.firstDay}>
                     {day}
                 </div>
             )
         } else {
             pastDays.push(
-                <div className="text-white/50 flex flex-wrap gap-2 text-ssm p-1">
+                <div key={day} className="text-white/50 flex flex-wrap gap-2 text-ssm p-1">
                     {day}
                 </div>
             )
@@ -30,7 +30,7 @@ export function Calendar(props: { monthYear: string, calendar: MyCalendar }) {
     
     props.calendar.futureDays.forEach((day, index) => {
         futureDays.push(
-            <div className="text-white flex flex-wrap gap-2 text-ssm p-1">
+            <div key={day} className="text-white flex flex-wrap gap-2 text-ssm p-1">
                 {day}
             </div>
         )

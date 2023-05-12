@@ -34,7 +34,7 @@ export function Item(props: { icon?: string, title: string, description: string,
                 <div className="flex gap-2">
                     {
                         props.tools.map((tool) => 
-                            <div onClick={(event: React.MouseEvent<HTMLElement>) => { doAction(tool.action, tool.target)}} 
+                            <div key={tool.target} onClick={(event: React.MouseEvent<HTMLElement>) => { doAction(tool.action, tool.target)}} 
                             className={"btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none " + tool.color + " hover:" + tool.color + "/50"}><i className={tool.icon + " text-white"}></i></div>
                         )
                     }

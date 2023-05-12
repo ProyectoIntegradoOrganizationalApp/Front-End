@@ -3,7 +3,6 @@ import { Navigate } from 'react-router-dom';
 import { MyCalendar } from '../../domain/Calendar.interface';
 
 import { useUser } from "../../application/customHooks/useUser";
-import { Routes } from '../../application/customHooks/routes';
 
 import { Sidebar } from "../components/dashboard/Sidebar";
 import { DashboardBox } from '../components/dashboard/DashboardBox';
@@ -68,15 +67,13 @@ export function Profile() {
         return <Navigate to="/login" />
     }
 
-    const routes = Routes;
-
     const activity = {
 
     };
 
     return (
         <>
-            <Sidebar routes={routes} parent="dashboard">
+            <Sidebar parent="dashboard">
                 <DashboardBox>
                     <AchievementsInfo level={100} rank="Noobie"/>
                     <div className="w-3/4 rounded-xl flex flex-col gap-6">
