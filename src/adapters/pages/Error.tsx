@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import error from "../../assets/error.gif";
 
 export function Error() {
@@ -12,7 +13,7 @@ export function Error() {
                         <h1 className="text-5xl font-bold">404</h1>
                         <h1 className="py-2">Page not found...</h1>
                         <p className="pt-4 pb-6 max-w-md">Sorry, the page you are looking for cannot be found. Please check the URL or try again later.</p>
-                        <a href="/" className="btn btn-primary">Go Home</a>
+                        <Link to="/" className="btn btn-primary">Go Home</Link>
                     </div>
                 </div>
             </div>
