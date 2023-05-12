@@ -4,21 +4,21 @@ import { UserDTO } from "../DTO/UserDTO";
 
 export class UserMapper extends Mapper<User, UserDTO> {
 
-    mapFrom( user: User ): UserDTO {
+    mapFrom( data: User ): UserDTO {
         return {
-            id: user.id,
-            email: user.email,
-            full_name: user.full_name,
-            _token: user._token,   
+            id: data.id,
+            email: data.email,
+            full_name: data.full_name,
+            _token: data._token,   
         }
     }
 
-    mapTo( user: UserDTO ): User {
+    mapTo( data: UserDTO ): User {
         return {
-            id: user.id,
-            email: user.email,
-            full_name: user.full_name,
-            _token: user._token,            
+            id: data.id,
+            email: data.email,
+            full_name: data.full_name,
+            _token: data._token,            
         }
     }
 }
