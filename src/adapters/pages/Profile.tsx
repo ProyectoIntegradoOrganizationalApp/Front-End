@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-import { Route } from '../../domain/Route.interface';
 import { MyCalendar } from '../../domain/Calendar.interface';
 
 import { useUser } from "../../application/customHooks/useUser";
@@ -65,9 +64,9 @@ export function Profile() {
 
     const { user } = useUser();
 
-    // if( !user ) {
-    //     return <Navigate to="/login" />
-    // }
+    if( !user ) {
+        return <Navigate to="/login" />
+    }
 
     const routes = Routes;
 
@@ -108,19 +107,19 @@ export function Profile() {
                                     { 
                                         action: "view",
                                         icon: "fa-solid fa-eye",
-                                        color: "bg-slate-600",
+                                        color: "bg-blue-700",
                                         target: "view/idProyect"
                                     },
                                     {
                                         action: "edit",
                                         icon: "fa-solid fa-pen-to-square",
-                                        color: "bg-blue-600",
+                                        color: "bg-green-700",
                                         target: "edit/idProyect"
                                     },
                                     {
                                         action: "remove",
                                         icon: "fa-solid fa-trash",
-                                        color: "bg-red-600",
+                                        color: "bg-red-700",
                                         target: "remove/idProyect"
                                     },
                                 ]}/>
