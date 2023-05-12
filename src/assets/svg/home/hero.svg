@@ -1,5 +1,5 @@
 <svg width="726" height="517" viewBox="0 0 726 517" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="299.768" height="319.696" transform="matrix(1 0 0 -1 426.232 517)" fill="#E2E8F0"/>
+<rect width="299.768" height="319.696" transform="matrix(1 0 0 -1 426.232 517)" fill="#64748b"/>
 <rect width="182.111" height="106.565" transform="matrix(1 0 0 -1 444.648 380.833)" fill="white"/>
 <rect width="66.5014" height="106.565" transform="matrix(1 0 0 -1 444.648 500.226)" fill="white"/>
 <rect width="182.111" height="106.565" transform="matrix(1 0 0 -1 524.45 500.226)" fill="white"/>
@@ -25,14 +25,14 @@
 <ellipse cx="567.42" cy="411.421" rx="9.20788" ry="8.88046" fill="#ACFFAA"/>
 <ellipse cx="618.208" cy="411.88" rx="9.20788" ry="8.88046" fill="#FF8F8F"/>
 <ellipse cx="592.997" cy="411.421" rx="9.20788" ry="8.88046" fill="#FFDB59"/>
-<rect x="307.541" y="17.7211" width="391.858" height="208.197" fill="#64748B"/>
+<rect x="307.541" y="17.7211" width="391.858" height="208.197" fill="#475569"/>
 <ellipse cx="351.798" cy="64.0968" rx="21.4851" ry="20.7211" fill="#48C8FF"/>
 <rect x="390.088" y="57.1898" width="185.967" height="17.7609" fill="#D9D9D9"/>
 <rect x="330.313" y="177.569" width="166.042" height="13.814" fill="#D9D9D9"/>
 <rect x="330.313" y="110.472" width="330.186" height="13.814" fill="#D9D9D9"/>
 <rect x="330.313" y="133.167" width="262.82" height="13.814" fill="#D9D9D9"/>
 <rect x="330.313" y="155.861" width="292.233" height="12.8273" fill="#D9D9D9"/>
-<rect x="49.4651" y="0.946869" width="223.919" height="265.427" fill="#E2E8F0"/>
+<rect x="49.4651" y="0.946869" width="223.919" height="265.427" fill="#64748b"/>
 <rect x="68.4413" y="210.131" width="186.915" height="51.3093" fill="white"/>
 <rect x="68.4413" y="17.7211" width="186.915" height="51.3093" fill="white"/>
 <rect x="68.4413" y="81.8577" width="186.915" height="51.3093" fill="white"/>
@@ -47,7 +47,7 @@
 <rect x="77.356" y="171.649" width="165.742" height="7.89374" fill="#E2E8F0"/>
 <rect x="77.356" y="184.476" width="85.9402" height="7.89374" fill="#E2E8F0"/>
 <ellipse cx="84.5177" cy="221.972" rx="7.16168" ry="6.90702" fill="#ACFFAA"/>
-<rect x="0.127075" y="235.786" width="391.858" height="208.197" fill="#64748B"/>
+<rect x="0.127075" y="235.786" width="391.858" height="208.197" fill="#475569"/>
 <ellipse cx="44.3836" cy="282.161" rx="21.4851" ry="20.7211" fill="#FFDB59"/>
 <rect x="82.6735" y="275.254" width="185.967" height="17.7609" fill="#D9D9D9"/>
 <rect x="22.8985" y="395.634" width="166.042" height="13.814" fill="#D9D9D9"/>

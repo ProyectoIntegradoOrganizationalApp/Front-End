@@ -7,16 +7,21 @@ export default {
   ],
   theme: {
     fontSize: {
-      sm: '14px',
-      base: ['16px', {
+      ssm: ['.7rem', {
+        fontWeight: '500'
+      }],
+      sm: ['.8rem', {
+        fontWeight: '500'
+      }],
+      base: ['1rem', {
         fontWeight: '500'
       }],
       xl: '18px',
-      '2xl': ['26.316px', {
-        lineHeight: '2.2rem',
+      '2xl': ['2.1rem', {
+        lineHeight: '3rem',
         fontWeight: '500'
       }],
-      '3xl': '45px',
+      '3xl': '2.3rem',
       '4xl': '2.441rem',
       '5xl': '3.052rem'
     },

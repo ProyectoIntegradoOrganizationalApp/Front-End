@@ -1,18 +1,20 @@
-import { AsideSignIn } from "../components/AsideSignIn";
-import { FormSignIn } from "../components/FormSignIn";
+import { Nav } from '../components/Nav';
+import { AsideSignIn } from "../components/auth/AsideSignIn";
+import { FormSignIn } from "../components/auth/FormSignIn";
 
 const Register = () => {
 
     const loginInfo = {
         route: "/login",
-        message: "login"
+        message: "log in"
     }
 
     return (
         <>
-            <main className="min-h-screen flex items-center gap-16 flex-col lg:flex-row lg:mx-4">
+            <Nav />
+            <main className="w-4/5 mx-auto min-h-[calc(100vh-64px)] flex items-center gap-24 flex-col lg:flex-row">
                 <FormSignIn 
-                    type={"register"}
+                    type={"sign up"}
                 />
                 <AsideSignIn 
                     title={"Have An Account?"}
