@@ -63,9 +63,9 @@ export function Profile() {
 
     const { user } = useUser();
 
-    if( !user ) {
-        return <Navigate to="/login" />
-    }
+    // if( !user ) {
+    //     return <Navigate to="/login" />
+    // }
 
     const activity = {
 
