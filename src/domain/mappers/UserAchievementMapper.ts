@@ -7,8 +7,10 @@ export class UserAchievementMapper extends Mapper<UserAchievement, UserAchieveme
 
     mapFrom( data: UserAchievement ): UserAchievementDTO {
         return {
-            idachievement: data.idAchievement,
-            iduser: data.idUser,
+            id: data.id,
+            title: data.title,
+            description: data.description,
+            icon: data.icon,
             progress: data.progress,
             completed: data.completed
         }
@@ -16,8 +18,10 @@ export class UserAchievementMapper extends Mapper<UserAchievement, UserAchieveme
 
     mapTo( data: UserAchievementDTO ): UserAchievement {
         return {
-            idAchievement: data.idachievement,
-            idUser: data.iduser,
+            id: data.id,
+            title: data.title,
+            description: data.description,
+            icon: data.icon,
             progress: data.progress,
             completed: data.completed
         }

@@ -1,6 +1,14 @@
+import { NotificationDTO } from "./NotificationDTO.interface"
+
 export interface UserDTO {
     id: string,
-    email: string,
+    email: string
+    name: string,
+    lastname: string,
+    phone: string,
+    created_at: Date,
+    updated_at: Date,
+    level: number,
     _token: string,
-    full_name: string,
+    notifications: Array<NotificationDTO>
 }

@@ -3,8 +3,10 @@
  * llega del back-end sobre los logros del usuario.
  */
 export interface UserAchievement {
-    idAchievement: string,
-    idUser: string,
+    id: string,
+    title: string,
+    description: string,
+    icon: string,
     progress: number,
     completed: boolean
 }

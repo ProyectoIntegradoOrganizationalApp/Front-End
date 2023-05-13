@@ -17,6 +17,7 @@ import google from "../../../assets/svg/login/google.svg";
 import github from "../../../assets/svg/login/github.png";
 import { Loading } from "../Loading";
 import { UserMapper } from "../../../domain/mappers/UserMapper";
+import { User } from "../../../domain/User.interface";
 
 
 /**
@@ -59,17 +60,14 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
      * significaría que el usuario está logueado por lo que procede a hacer las comprobaciones
      * necesarias y loguea al usuario haciendo uso del hook de login.
      */
+
     useEffect(() => {
         if( !error?.error && data && "_token" in data && !user ) {
-            const UserDTO = UserMapper.prototype.mapFrom(data);            
-            
-            login(UserDTO);
+            const user: User = UserMapper.prototype.mapTo(data);            
+            login(user);
         }
-
-        if( !error?.error && data && "_token" ! in data && !user) {
-            handleLogin();
-        }
-    }, [data?.id]);
+    }, [data?.id])
+    
 
     /**
      * Función que maneja el login del usuario, ejecuta la función fetchUser del Hook de la API
@@ -165,7 +163,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
                         />
                         <input 
                             type="password" 
-                            minLength={5} 
+                            minLength={4} 
                             placeholder="Enter password" 
                             className="input input-bordered w-full mt-6" 
                             value={password}

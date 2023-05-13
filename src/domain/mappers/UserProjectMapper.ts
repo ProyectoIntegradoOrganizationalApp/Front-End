@@ -7,16 +7,14 @@ export class UserProjectMapper extends Mapper<UserProject, UserProjectDTO> {
     mapFrom( data: UserProject ): UserProjectDTO {
         return {
             id: data.id,
-            iduser: data.userId,
-            name: data.name  
+             name: data.name  
         }
     }
 
     mapTo( data: UserProjectDTO ): UserProject {
         return {
             id: data.id,
-            userId: data.id,
-            name: data.name     
+             name: data.name     
         }
     }
 }

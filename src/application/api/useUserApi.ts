@@ -1,8 +1,12 @@
-import { useState } from "react"
+import { useState } from "react";
+
+import axios from 'axios';
 
 import { ApiError } from "../../domain/ApiError.interface";
 import { Login } from "./Login.interface";
 import { Register } from "./Register.interface";
+import { useErrorHandler } from "../customHooks/useErrorHandler";
+import { UserDTO } from "../../domain/DTO/UserDTO";
 
 /**
  *  Interfaz de props del formulario de la UI, tiene los campos opcionales
@@ -15,37 +19,33 @@ interface FormProps {
     password: string
 }
 
-type JSONResponse = {
-    data?: Login | Register | undefined
-    error?: ApiError | undefined
-}
-
 export const useUserApi = () => {
 
-    const [data, setData] = useState<Login | Register>();
+    const [data, setData] = useState<UserDTO>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
     const API = import.meta.env.VITE_API_URL;
+
+    const { setInternalError } = useErrorHandler();
 
     const fetchUser = async ( props: FormProps ) => {
         setLoading(true);
 
         const body = JSON.stringify({email: props.email, password: props.password});
 
-        const response = await fetch(`${API}/login`, {
-            method: "POST",
+        axios.post<UserDTO | ApiError>(`${API}/login`, body, {
             headers: {
                 "Content-Type": "application/json" 
-            },
-            body: body
-        });
+            }
+        }).then( data => {
+            if( data.status == 200 ) {
+                handleData(data.data);
+            }
 
-        const data: JSONResponse = await response.json();
-            
-        handleData(data);
+            setLoading(false);
+        })
 
-        setLoading(false);
     }
 
     const registerUser = async ( props: FormProps ) => {
@@ -57,44 +57,49 @@ export const useUserApi = () => {
 
         const body = JSON.stringify({email: props.email, first_name: props.name, last_name: props.last_name, password: props.password});
 
-        const response = await fetch(`${API}/register`, {
-            method: "POST",
+        axios.post<Register | ApiError>(`${API}/register`, body, {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: body
-        });
+        }).then( data => {
+            if( data.status == 200 ) {
+                handleData(data.data, props);
+            }
 
-        const data: JSONResponse = await response.json();
+        })
 
-        handleData(data);
-
-        setLoading(false);
+        return () => {
+            setLoading(false);
+        }
     }
 
-    const handleData = ( data: any ) => {
+    const handleData = ( data: UserDTO | Register | ApiError, props?: FormProps ) => {
+        
+        // Limpiamos errores
+        setError({error: false, message: ''});
 
-         /**
-         *  Hay Error
+        /**
+         *  Register & Error
          */
-        if( data && data.error ) {
-            setError({ error: true, message: data.message }); 
+        if( data && "error" in data ) {
+            // Error
+            if( data.error ) {
+                setError(data);
+            }
+
+            // Register
+            if( !data.error ) {
+                fetchUser({email: props!.email, password: props!.password});
+            }
         }
 
         /**
          *  Login
          */
-        if( data && "_token" in data ) {
+        if( data && "id" in data ) {
             setData(data);
-            setError({ error: false, message: '' });
         }
-
-        /**
-         *  Register
-         */
-        if( data && !data.error ) {
-            setError({ error: false, message: '' }); 
-        }
+        
 
     }
     

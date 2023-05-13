@@ -6,11 +6,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Contextos
 import { AuthContext } from './context/AuthContext';
-import { ProfileContext } from './context/ProfileContext';
 
 // Modelos
 import { User } from './domain/User.interface';
-import { Profile as ProfileData } from './domain/Profile.interface';
 
 // Vistas
 import { Home } from './adapters/pages/Home';
@@ -20,7 +18,6 @@ import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
 import { Projects } from './adapters/pages/Projects';
 import { Achievements } from './adapters/pages/Achievements';
-
 
 // Componentes
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
@@ -33,8 +30,7 @@ import { ProtectedRoute } from './adapters/components/ProtectedRoute';
  */
 export function App() {
     const [user, setUser] = useState<User | null>(null);
-    const [profileData, setProfileData] = useState<ProfileData | null>(null);
-
+    
     return (
         <>
             <AuthContext.Provider value={{ user, setUser }}>
@@ -44,9 +40,7 @@ export function App() {
                             <Route path="/dashboard/profile" 
                                 element={
                                     <ProtectedRoute>
-                                        <ProfileContext.Provider value={{ profileData, setProfileData }}>
-                                            <Profile />
-                                        </ProfileContext.Provider>
+                                        <Profile />
                                     </ProtectedRoute>
                                 } 
                             />
