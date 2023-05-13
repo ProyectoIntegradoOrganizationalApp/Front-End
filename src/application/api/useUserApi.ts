@@ -6,6 +6,7 @@ import { ApiError } from "../../domain/ApiError.interface";
 import { Login } from "./Login.interface";
 import { Register } from "./Register.interface";
 import { useErrorHandler } from "../customHooks/useErrorHandler";
+import { UserDTO } from "../../domain/DTO/UserDTO";
 
 /**
  *  Interfaz de props del formulario de la UI, tiene los campos opcionales
@@ -20,7 +21,7 @@ interface FormProps {
 
 export const useUserApi = () => {
 
-    const [data, setData] = useState<Login>();
+    const [data, setData] = useState<UserDTO>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -33,7 +34,7 @@ export const useUserApi = () => {
 
         const body = JSON.stringify({email: props.email, password: props.password});
 
-        axios.post<Login | ApiError>(`${API}/login`, body, {
+        axios.post<UserDTO | ApiError>(`${API}/login`, body, {
             headers: {
                 "Content-Type": "application/json" 
             }
@@ -72,7 +73,7 @@ export const useUserApi = () => {
         }
     }
 
-    const handleData = ( data: Login | Register | ApiError, props?: FormProps ) => {
+    const handleData = ( data: UserDTO | Register | ApiError, props?: FormProps ) => {
         
         // Limpiamos errores
         setError({error: false, message: ''});
