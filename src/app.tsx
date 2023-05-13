@@ -21,6 +21,7 @@ import { Achievements } from './adapters/pages/Achievements';
 
 // Componentes
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
+import { Dashboard } from './adapters/pages/Dashboard';
 
 /**
  *  Aplicación principal.
@@ -36,25 +37,27 @@ export function App() {
             <AuthContext.Provider value={{ user, setUser }}>
                 <BrowserRouter basename='/'>
                     <Routes>
+
                         <Route path="/" element={<Home />} />
-                            <Route path="/dashboard/profile" 
+
+                        <Route path="dashboard" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
+                            <Route path="profile" 
                                 element={
-                                    <ProtectedRoute>
-                                        <Profile />
-                                    </ProtectedRoute>
+                                    <Profile />
+                                }
+                            />
+
+                            <Route path="achievements" 
+                                element={
+                                    <Achievements />
                                 } 
                             />
+                        </Route>
                         
-                        <Route path="/dashboard/achievements" 
-                            element={
-                                <ProtectedRoute>
-                                    <Achievements />
-                                </ProtectedRoute>
-                            } 
-                        />
+                        
                         <Route path="/projects" 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute user={user}>
                                     <Projects />
                                 </ProtectedRoute>
                             } 

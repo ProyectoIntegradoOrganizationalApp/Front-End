@@ -17,7 +17,7 @@ export function Projects() {
 
     return (
         <>
-            <Sidebar routes={routes} parent="projects">
+            <Sidebar parent="projects">
                 <DashboardBox>
                     <div className="bg-slate-800 w-1/4 rounded-xl"></div>
                     <div className="bg-slate-800 w-3/4 rounded-xl"></div>

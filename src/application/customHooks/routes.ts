@@ -4,7 +4,7 @@ export const Routes: Array<Route> = [
     {
         icon: "fa-solid fa-house",
         name: "Dashboard",
-        url: "/dashboard/profile",
+        url: "/dashboard",
         children: [
             {
                 name: "Profile",

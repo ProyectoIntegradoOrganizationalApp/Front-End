@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,8 @@ export function Sidebar( props: { children: ReactNode, parent: string } ) {
 
     const location = useNavigate();
 
+    const btnStyles = `text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white`;
+
     return (
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -30,7 +32,7 @@ export function Sidebar( props: { children: ReactNode, parent: string } ) {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu w-52 bg-slate-800 text-base-content flex flex-col justify-around">
                     <div className="headerSidebar">
-                        <Link to="/" className="block flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
+                        <Link to="/" className="flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
                             <img className="mr-3" src={logo}></img>
                             Teamer    
                         </Link>
@@ -40,12 +42,12 @@ export function Sidebar( props: { children: ReactNode, parent: string } ) {
                         <ul className="menu dropdown-content">
                             { Routes && Routes.map( link => 
                                 <li key={link.name}>
-                                    <button onClick={e =>  location(link.url) } className="p-0 w-full block cursor-pointer active:bg-transparent">
+                                    <div className="p-0 w-full block cursor-pointer active:bg-transparent">
                                         { link.children ? (
                                             <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${link.url.includes(props.parent) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
                                                 <div className="flex items-center gap-4 p-4 pl-8 w-full">
                                                     <i className={link.icon + ` text-slate-400 ${link.url.includes(props.parent) ? "!text-white" : ""}`}></i>
-                                                    <label tabIndex={0} className={`cursor-pointer text-base ${link.url.includes(props.parent) ? "text-base text-white" : ""}`}>{link.name}</label>
+                                                    <NavLink to={link.url} className="text-base">{link.name}</NavLink>
                                                 </div>
                                                 {
                                                     link.url.includes(props.parent) &&
@@ -54,7 +56,7 @@ export function Sidebar( props: { children: ReactNode, parent: string } ) {
                                                         <ul className="menu shadow hover:bg-transparent w-fit py-3 px-8 flex flex-col gap-2" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
                                                                 <li key={child.name}>
-                                                                    <Link to={child.url} className={`text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white ${window.location.pathname == child.url ? "hover:bg-transparent text-white" : ""}`}>{child.name}</Link>
+                                                                    <NavLink to={child.url} className={({isActive, isPending}) => isActive ? "hover:bg-transparent text-white" + btnStyles : btnStyles}>{child.name}</NavLink>
                                                                 </li>
                                                             )}
                                                         </ul>
@@ -64,10 +66,10 @@ export function Sidebar( props: { children: ReactNode, parent: string } ) {
                                         ): (
                                             <div className="flex items-center gap-4">
                                                 <i className={link.icon}></i>
-                                                <Link to={link.url} className="text-base">{link.name}</Link>
+                                                <NavLink to={link.url} className="text-base">{link.name}</NavLink>
                                             </div>
                                         )}
-                                    </button>
+                                    </div>
                                 </li>
                             )}
                         </ul>
