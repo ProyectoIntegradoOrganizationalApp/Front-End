@@ -13,6 +13,5 @@ export interface Profile {
     user: UserProfile
     achievements: Array<UserAchievement>
     projects: Array<UserProject>,
-    notifications: Array<Notification>,
     activity: Array<UserActivity>
 }

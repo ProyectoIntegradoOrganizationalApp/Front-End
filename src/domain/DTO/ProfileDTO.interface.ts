@@ -8,6 +8,5 @@ export interface ProfileDTO {
     user: UserProfileDTO,
     achievements: Array<UserAchievementDTO>
     projects: Array<UserProjectDTO>,
-    notifications: Array<NotificationDTO>,
     activity: Array<UserActivityDTO>
 }

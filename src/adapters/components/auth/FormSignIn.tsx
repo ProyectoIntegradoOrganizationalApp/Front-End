@@ -17,6 +17,7 @@ import google from "../../../assets/svg/login/google.svg";
 import github from "../../../assets/svg/login/github.png";
 import { Loading } from "../Loading";
 import { UserMapper } from "../../../domain/mappers/UserMapper";
+import { User } from "../../../domain/User.interface";
 
 
 /**
@@ -62,9 +63,8 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
 
     useEffect(() => {
         if( !error?.error && data && "_token" in data && !user ) {
-            const UserDTO = UserMapper.prototype.mapFrom(data);            
-            
-            login(UserDTO);
+            const user: User = UserMapper.prototype.mapTo(data);            
+            login(user);
         }
     }, [data?.id])
     

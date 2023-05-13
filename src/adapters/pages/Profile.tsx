@@ -150,7 +150,7 @@ export function Profile() {
 
                                 { data?.projects.map( project => {
                                     return (
-                                        <Item title={project.name} description="nada más que comentar" tools={[ 
+                                        <Item key={project.id} title={project.name} description="nada más que comentar" tools={[ 
                                             { 
                                                 action: "view",
                                                 icon: "fa-solid fa-eye",

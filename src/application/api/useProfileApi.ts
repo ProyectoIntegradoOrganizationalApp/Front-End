@@ -10,12 +10,6 @@ import { Profile } from "../../domain/Profile.interface";
 import { ProfileMapper } from "../../domain/mappers/ProfileMapper";
 import { ProfileDTO } from "../../domain/DTO/ProfileDTO.interface";
 
-
-type ProfileApiResponse = {
-    data?: ProfileDTO,
-    error?: ApiError
-}
-
 /**
  * Hook de conexión con la Base de datos para la vista de Profile.
  * @returns 
@@ -90,7 +84,10 @@ export const useProfileApi = () => {
          * Si no hay error
          */
         if( info && "user" in info ) {
-            //TODO => Mapear ProfileDTO a Profile y hacer un setState
+            // Quitamos los errores en caso de que los halla
+            setError(undefined);
+
+            // Transformamos el objecto que nos llega con los mappers a algo que nuestra app entiende
             let userData: Profile = ProfileMapper.prototype.mapTo(info);
             setData(userData);
         }
