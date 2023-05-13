@@ -73,6 +73,36 @@ export function Profile() {
     const [update, setUpdate] = useState<boolean>();
     const { data, error, loading } = useProfileApi();
 
+    const [daily, setDaily] = useState<number>(0);
+    const [weekly, setWeekly] = useState<number>(0);
+
+    useEffect(() => {
+        if( data ) {
+
+            data.activity.map( act => {
+                let fechaActual = new Date();
+    
+                let primerDiaSemana = new Date(fechaActual);
+                primerDiaSemana.setDate(fechaActual.getDate() - fechaActual.getDay());
+    
+                let ultimoDiaSemana = new Date(fechaActual);
+                ultimoDiaSemana.setDate(fechaActual.getDate() + (6 - fechaActual.getDay()));
+    
+                let aVerificar = new Date(act.date);
+    
+                if( aVerificar.getDate() == fechaActual.getDate() ) {
+                    //setDaily(act.commits);
+                }
+    
+                if( aVerificar >= primerDiaSemana && aVerificar <= ultimoDiaSemana ) {
+                    setWeekly(act.commits);
+                }
+                
+            })
+        
+        }
+    }, [data?.user.id])
+
     const activity = {
 
     };
@@ -81,15 +111,26 @@ export function Profile() {
         <>
             <Sidebar parent="dashboard">
                 <DashboardBox>
-                    <AchievementsInfo level={100} rank="Noobie"/>
+                    <AchievementsInfo
+                        data={data}   
+                    />
                     <div className="w-3/4 rounded-xl flex flex-col gap-6">
                         <div className="flex gap-6">
                             <div className="flex flex-col gap-6 w-4/12">
-                                <Statistics title="Weekly Tasks" amount={13} />
-                                <Statistics title="Daily Tasks" amount={5} />
+                                <Statistics 
+                                    title="Weekly Tasks" 
+                                    amount={weekly} 
+                                />
+                                <Statistics 
+                                    title="Daily Tasks" 
+                                    amount={daily} 
+                                />
                             </div>
                             <div className="bg-slate-800 rounded-xl w-5/12 p-4">
-                                <Activity title="Daily Activity" activity={activity} />
+                                <Activity 
+                                    title="Daily Activity" 
+                                    activity={activity} 
+                                />
                             </div>
                             <div className="bg-slate-800 rounded-xl w-3/12 p-4">
                                 <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
@@ -106,26 +147,32 @@ export function Profile() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-3 p-4">
-                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[ 
-                                    { 
-                                        action: "view",
-                                        icon: "fa-solid fa-eye",
-                                        color: "bg-blue-700",
-                                        target: "view/idProyect"
-                                    },
-                                    {
-                                        action: "edit",
-                                        icon: "fa-solid fa-pen-to-square",
-                                        color: "bg-green-700",
-                                        target: "edit/idProyect"
-                                    },
-                                    {
-                                        action: "remove",
-                                        icon: "fa-solid fa-trash",
-                                        color: "bg-red-700",
-                                        target: "remove/idProyect"
-                                    },
-                                ]}/>
+
+                                { data?.projects.map( project => {
+                                    return (
+                                        <Item title={project.name} description="nada más que comentar" tools={[ 
+                                            { 
+                                                action: "view",
+                                                icon: "fa-solid fa-eye",
+                                                color: "bg-blue-700",
+                                                target: "view/idProyect"
+                                            },
+                                            {
+                                                action: "edit",
+                                                icon: "fa-solid fa-pen-to-square",
+                                                color: "bg-green-700",
+                                                target: "edit/idProyect"
+                                            },
+                                            {
+                                                action: "remove",
+                                                icon: "fa-solid fa-trash",
+                                                color: "bg-red-700",
+                                                target: "remove/idProyect"
+                                            },
+                                        ]}/>
+                                    )
+                                })}
+                                
                             </div>
                         </div>
                     </div>

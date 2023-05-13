@@ -163,7 +163,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
                         />
                         <input 
                             type="password" 
-                            minLength={5} 
+                            minLength={4} 
                             placeholder="Enter password" 
                             className="input input-bordered w-full mt-6" 
                             value={password}

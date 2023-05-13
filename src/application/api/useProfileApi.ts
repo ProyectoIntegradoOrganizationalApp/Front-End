@@ -92,7 +92,7 @@ export const useProfileApi = () => {
         if( info && "user" in info ) {
             //TODO => Mapear ProfileDTO a Profile y hacer un setState
             let userData: Profile = ProfileMapper.prototype.mapTo(info);
-            console.log(userData)
+            setData(userData);
         }
     }
 

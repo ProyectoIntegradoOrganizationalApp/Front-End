@@ -13,7 +13,7 @@ function doAction(action: string, target: string) {
     console.log(action + " " + target);
 }
 
-export function Item(props: { icon?: string, title: string, description: string, tools: Array<Tool> }) {
+export function Item(props: { title: string, description: string, tools: Array<Tool> }) {
     return (
         <>
             <div className="bg-slate-800 w-full h-fit px-4 py-3 flex justify-between items-center rounded-xl">
