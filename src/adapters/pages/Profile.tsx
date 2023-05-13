@@ -1,9 +1,15 @@
-import { Navigate } from 'react-router-dom';
+// React
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { MyCalendar } from '../../domain/Calendar.interface';
-
+// Hooks
+import { useProfileApi } from '../../application/api/useProfileApi';
 import { useUser } from "../../application/customHooks/useUser";
 
+// Interfaces
+import { MyCalendar } from '../../domain/Calendar.interface';
+
+// Componentes
 import { Sidebar } from "../components/dashboard/Sidebar";
 import { DashboardBox } from '../components/dashboard/DashboardBox';
 import { Statistics } from '../components/profile/Statistics';
@@ -12,6 +18,8 @@ import { Calendar } from '../components/profile/Calendar';
 import { InfoTooltip } from '../components/InfoTooltip';
 import { AchievementsInfo } from '../components/achievements/AchievementsInfo';
 import { Item } from '../components/Item';
+import { useAuth } from '../../application/customHooks/useAuth';
+
 
 const date = new Date();
 function GenerateMonthYear(): string {
@@ -49,7 +57,6 @@ function GenerateCalendar(): MyCalendar {
         futureDay++;
     }
 
-    console.log(getFirstDayName(new Date(date.getFullYear(), date.getMonth(), 1)))
 
     return {
         firstDay: getFirstDayName(new Date(date.getFullYear(), date.getMonth(), 1)) + 1,
@@ -61,11 +68,10 @@ function GenerateCalendar(): MyCalendar {
 
 export function Profile() {
 
-    const { user } = useUser();
+    const { user } = useAuth();
 
-    // if( !user ) {
-    //     return <Navigate to="/login" />
-    // }
+    const [update, setUpdate] = useState<boolean>();
+    const { data, error, loading } = useProfileApi();
 
     const activity = {
 

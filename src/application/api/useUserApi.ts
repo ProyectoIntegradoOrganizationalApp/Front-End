@@ -3,6 +3,15 @@ import { useState } from "react"
 import { ApiError } from "../../domain/ApiError.interface";
 import { Login } from "./Login.interface";
 import { Register } from "./Register.interface";
+import { useErrorHandler } from "../customHooks/useErrorHandler";
+
+/**
+ * Interfaz de respues del JSON que nos viene de la base de datos
+ */
+type UserApiResponse = {
+    data?: Login | Register | undefined
+    error?: ApiError | undefined
+}
 
 /**
  *  Interfaz de props del formulario de la UI, tiene los campos opcionales
@@ -15,11 +24,6 @@ interface FormProps {
     password: string
 }
 
-type JSONResponse = {
-    data?: Login | Register | undefined
-    error?: ApiError | undefined
-}
-
 export const useUserApi = () => {
 
     const [data, setData] = useState<Login | Register>();
@@ -27,6 +31,8 @@ export const useUserApi = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const API = import.meta.env.VITE_API_URL;
+
+    const { setInternalError } = useErrorHandler();
 
     const fetchUser = async ( props: FormProps ) => {
         setLoading(true);
@@ -41,7 +47,7 @@ export const useUserApi = () => {
             body: body
         });
 
-        const data: JSONResponse = await response.json();
+        const data: UserApiResponse = await response.json();
             
         handleData(data);
 
@@ -65,7 +71,7 @@ export const useUserApi = () => {
             body: body
         });
 
-        const data: JSONResponse = await response.json();
+        const data: UserApiResponse = await response.json();
 
         handleData(data);
 
@@ -74,11 +80,14 @@ export const useUserApi = () => {
 
     const handleData = ( data: any ) => {
 
+        console.log(data)
+
          /**
          *  Hay Error
          */
         if( data && data.error ) {
-            setError({ error: true, message: data.message }); 
+            setError({ error: data.error, message: data.message });
+            setInternalError(data);
         }
 
         /**

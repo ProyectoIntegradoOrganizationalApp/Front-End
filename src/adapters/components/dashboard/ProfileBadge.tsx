@@ -18,7 +18,7 @@ export const ProfileBadge = ( props: { user: User | null, logout: () => void, po
             
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                    <NavLink to="/profile" className="justify-between">
+                    <NavLink to="/dashboard/profile" className="justify-between">
                         Profile
                         <span className="badge">New</span>
                     </NavLink>

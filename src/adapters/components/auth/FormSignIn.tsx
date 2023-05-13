@@ -59,17 +59,15 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
      * significaría que el usuario está logueado por lo que procede a hacer las comprobaciones
      * necesarias y loguea al usuario haciendo uso del hook de login.
      */
+
     useEffect(() => {
         if( !error?.error && data && "_token" in data && !user ) {
             const UserDTO = UserMapper.prototype.mapFrom(data);            
             
             login(UserDTO);
         }
-
-        if( !error?.error && data && "_token" ! in data && !user) {
-            handleLogin();
-        }
-    }, [data?.id]);
+    }, [data?.id])
+    
 
     /**
      * Función que maneja el login del usuario, ejecuta la función fetchUser del Hook de la API
