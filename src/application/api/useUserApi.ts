@@ -3,7 +3,6 @@ import { useState } from "react";
 import axios from 'axios';
 
 import { ApiError } from "../../domain/ApiError.interface";
-import { Login } from "./Login.interface";
 import { Register } from "./Register.interface";
 import { useErrorHandler } from "../customHooks/useErrorHandler";
 import { UserDTO } from "../../domain/DTO/UserDTO";
@@ -15,6 +14,7 @@ import { UserDTO } from "../../domain/DTO/UserDTO";
 interface FormProps {
     name?: string
     last_name?:string
+    phone_number?: string
     email: string
     password: string
 }
@@ -55,7 +55,7 @@ export const useUserApi = () => {
             return;
         }
 
-        const body = JSON.stringify({email: props.email, first_name: props.name, last_name: props.last_name, password: props.password});
+        const body = JSON.stringify({email: props.email, phone: props.phone_number, first_name: props.name, last_name: props.last_name, password: props.password});
 
         axios.post<Register | ApiError>(`${API}/register`, body, {
             headers: {

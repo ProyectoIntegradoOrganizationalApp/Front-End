@@ -1,5 +1,4 @@
 import { UserAchievement } from "./UserAchievement.interface";
-import { Notification } from "./Notification.interface";
 import { UserProject } from "./UserProject.interface";
 import { UserActivity } from "./UserActivity.interface";
 import { UserProfile } from "./UserProfile.interface";

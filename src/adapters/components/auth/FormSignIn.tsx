@@ -45,6 +45,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
     const [email, setEmail] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [last_name, setLastName] = useState<string>('');
+    const [phone_number, setPhoneNumber] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [valid, setValid] = useState<boolean>(false);
     const [input, setInput] = useState<string>('input input-light mt-6 input-bordered w-full mt-6');
@@ -80,7 +81,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
      * Función que maneja el registro de usuarios, y que si no recoje errores, ejecuta el login con los datos del usuario de manera automática.
      */
     const handleRegister = async () => {
-        await registerUser({name, last_name, email, password});
+        await registerUser({name, last_name, phone_number, email, password});
     }
 
     /**
@@ -100,9 +101,12 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
 
     /**
      * Se encarga de enviar el formulario.
+     * 
+     * Le entra o un evento de submit o any, porque no he sido capaz de asigarle tipo
+     * al butón de submit sin perder la funcionalidad de preventDefault().
      * @param event 
      */
-    const sendForm = (event: any) => {
+    const sendForm = ( event: SubmitEvent | any ) => {
         event.preventDefault();
         // El form no se debería de enviar
         if( props.type === "sign up" && valid ) {
@@ -142,6 +146,18 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
                                     value={last_name} 
                                     onChange={event => {
                                         setLastName(event.target.value)
+                                    }}
+                                    className="input input-bordered w-full mt-6"
+                                    required
+                                />
+                                <input 
+                                    type="phone" 
+                                    minLength={9} 
+                                    maxLength={9} 
+                                    placeholder="Enter your Phone Number" 
+                                    value={phone_number} 
+                                    onChange={event => {
+                                        setPhoneNumber(event.target.value)
                                     }}
                                     className="input input-bordered w-full mt-6"
                                     required

@@ -1,7 +1,6 @@
 import { ReactNode, useEffect } from "react";
 
 import { User } from "../../domain/User.interface";
-import { useAuth } from "../../application/customHooks/useAuth";
 import { Navigate } from "react-router-dom";
 
 interface Props {
@@ -9,13 +8,11 @@ interface Props {
     children: ReactNode
 }
 
-export function ProtectedRoute( props: { children: ReactNode }) {
-
-    const { user } = useAuth();
+export function ProtectedRoute( props: Props ) {
 
     return (
         <>
-            { user ? 
+            { props.user ? 
                 (props.children): 
                 (<Navigate to='/login' />)
             }
