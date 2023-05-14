@@ -31,7 +31,7 @@ import { Dashboard } from './adapters/pages/Dashboard';
  */
 export function App() {
     const [user, setUser] = useState<User | null>(null);
-    
+
     return (
         <>
             <AuthContext.Provider value={{ user, setUser }}>

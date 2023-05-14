@@ -74,6 +74,8 @@ export function Profile() {
             data.activity.map((act: UserActivity) => {
                 let fechaActual = new Date();
 
+                console.log(fechaActual)
+
                 let primerDiaSemana = new Date(fechaActual);
                 primerDiaSemana.setDate(fechaActual.getDate() - fechaActual.getDay());
 
@@ -116,6 +118,7 @@ export function Profile() {
                             title="Daily Tasks" 
                             amount={daily} 
                         />
+
                     </div>
                     <div className="bg-slate-800 rounded-xl w-5/12 p-4">
                         <Activity 
