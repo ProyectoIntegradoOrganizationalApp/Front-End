@@ -44,19 +44,19 @@ export function Sidebar( props: { children: ReactNode, parent: string } ) {
                                 <li key={link.name}>
                                     <div className="p-0 w-full block cursor-pointer active:bg-transparent">
                                         { link.children ? (
-                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${link.url.includes(props.parent) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
+                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${link.name.toLowerCase().includes(props.parent) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
                                                 <div className="flex items-center gap-4 p-4 pl-8 w-full">
                                                     <i className={link.icon + ` text-slate-400 ${link.url.includes(props.parent) ? "!text-white" : ""}`}></i>
                                                     <NavLink to={link.url} className="text-base">{link.name}</NavLink>
                                                 </div>
                                                 {
-                                                    link.url.includes(props.parent) &&
+                                                    link.name.toLowerCase().includes(props.parent) &&
                                                     <>
                                                         <hr className="w-full border-slate-600 border-2 bg-slate-600"/>
                                                         <ul className="menu shadow hover:bg-transparent w-fit py-3 px-8 flex flex-col gap-2" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
                                                                 <li key={child.name}>
-                                                                    <NavLink to={child.url} className={({isActive, isPending}) => isActive ? "hover:bg-transparent text-white" + btnStyles : btnStyles}>{child.name}</NavLink>
+                                                                    <NavLink to={child.url} className={({isActive, isPending}) => isActive ? "text-white hover:bg-transparent" + btnStyles : btnStyles}>{child.name}</NavLink>
                                                                 </li>
                                                             )}
                                                         </ul>
