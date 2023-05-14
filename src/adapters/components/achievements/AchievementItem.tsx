@@ -18,7 +18,7 @@ export function AchievementItem(props: { tab?: string, orderBy?: string, icon: s
                     <div className="relative z-2 flex flex-wrap justify-between items-center">
                         <div className="flex items-center gap-4">
                             {/* Achievement Icon */}
-                            <div className="w-14 aspect-square rounded-full bg-green-700"></div>
+                            <div className="w-12 aspect-square rounded-full bg-green-700"></div>
 
                             <div className="flex flex-col gap-2">
                                 <p className="text-white text-base leading-none">{props.title}</p>

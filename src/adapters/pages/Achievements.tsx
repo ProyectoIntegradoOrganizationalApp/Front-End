@@ -40,8 +40,8 @@ export function Achievements() {
                                 {
                                     url: "friends",
                                     name: "Friends"
-                                },
-                            ]}/>
+                                }
+                            ]} />
                             <Dropdown selectedElement={selectedElement} selectElement={selectElement} elements={[
                                 {
                                     action: "fe",
@@ -59,7 +59,7 @@ export function Achievements() {
                                     action: "fe",
                                     name: "Difficulty"
                                 }
-                            ]}/>
+                            ]} />
                         </div>
                         <div className="bg-slate-700 w-full h-full rounded-xl p-4">
                             {/* Foreach */}

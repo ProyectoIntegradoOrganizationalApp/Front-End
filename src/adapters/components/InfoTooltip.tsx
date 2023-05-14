@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { ReactNode } from "react";
 
 /**
  *  Componente de Tooltip para dar información de una determinada sección
@@ -7,12 +7,20 @@ import React from "react";
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-export function InfoTooltip(props: { title: string, position?: string }) {
+export function InfoTooltip(props: { title: string, target?: ReactNode, position?: string }) {
     return (
         <>
-            <div className={"tooltip tooltip-" + props.position} data-tip={props.title}>
-                <i className="fa-sharp fa-solid fa-circle-info text-white"></i>
-            </div>
+            {
+                props.target &&
+                <div className={"tooltip tooltip-" + props.position} data-tip={props.title}>
+                    {props.target}
+                </div>
+            } {
+                !props.target &&
+                <div className={"tooltip tooltip-" + props.position} data-tip={props.title}>
+                    <i className="fa-sharp fa-solid fa-circle-info text-white"></i>
+                </div>
+            }
         </>
     )
 }

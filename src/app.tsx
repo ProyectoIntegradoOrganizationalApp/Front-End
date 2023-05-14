@@ -18,6 +18,8 @@ import { Profile } from './adapters/pages/Profile';
 import { Projects } from './adapters/pages/Projects';
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 import { Achievements } from './adapters/pages/Achievements';
+import { Friends } from './adapters/pages/Friends';
+import { Friend } from './adapters/pages/Friend';
 
 /**
  *  Aplicación principal.
@@ -34,20 +36,24 @@ export function App() {
                 <BrowserRouter basename='/'>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/dashboard/profile" 
+
+                        {/* DASHBOARD */}
+                        <Route path="/profile" 
                             element={
                                 <ProtectedRoute>
                                     <Profile />
                                 </ProtectedRoute>
                             } 
                         />
-                        <Route path="/dashboard/achievements" 
+                        <Route path="/achievements" 
                             element={
                                 <ProtectedRoute>
                                     <Achievements />
                                 </ProtectedRoute>
                             } 
                         />
+
+                        {/* PROJECTS */}
                         <Route path="/projects" 
                             element={
                                 <ProtectedRoute>
@@ -55,6 +61,30 @@ export function App() {
                                 </ProtectedRoute>
                             } 
                         />
+                        <Route path="/project/:project" 
+                            element={
+                                <ProtectedRoute>
+                                    <Projects />
+                                </ProtectedRoute>
+                            } 
+                        />
+
+                        {/* FRIENDS */}
+                        <Route path="/friends" 
+                            element={
+                                <ProtectedRoute>
+                                    <Friends />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route path="/friend/:name" 
+                            element={
+                                <ProtectedRoute>
+                                    <Friend />
+                                </ProtectedRoute>
+                            } 
+                        />
+
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="*" element={<Error />} />

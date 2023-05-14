@@ -4,15 +4,15 @@ export const Routes: Array<Route> = [
     {
         icon: "fa-solid fa-house",
         name: "Dashboard",
-        url: "/dashboard/profile",
+        url: "/profile",
         children: [
             {
                 name: "Profile",
-                url: "/dashboard/profile"
+                url: "/profile"
             },
             {
                 name: "My Achievements",
-                url: "/dashboard/achievements"
+                url: "/achievements"
             }
         ]
     },
@@ -27,7 +27,7 @@ export const Routes: Array<Route> = [
             },
             {
                 name: "Settings",
-                url: "/projects/settings"
+                url: "/settings/projects"
             }
         ]
     },
@@ -41,12 +41,8 @@ export const Routes: Array<Route> = [
                 url: "/friends"
             },
             {
-                name: "Add Friend",
-                url: "/users"
-            },
-            {
                 name: "Settings",
-                url: "/friends/settings"
+                url: "/settings/friends"
             }
         ]
     }

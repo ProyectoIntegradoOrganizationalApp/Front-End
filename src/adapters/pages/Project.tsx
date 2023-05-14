@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { InfoTooltip } from '../components/InfoTooltip';
 import { Share } from '../components/Share';
 
-export function Projects() {
+export function Project() {
     const { user } = useUser();
     const [selectedProject, selectProject] = useState<string>("none");
 

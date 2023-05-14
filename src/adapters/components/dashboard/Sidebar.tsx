@@ -8,7 +8,6 @@ import logo from "../../../assets/svg/logo.svg";
 import { Route } from "../../../domain/Route.interface";
 
 export function Sidebar( props: { children: ReactNode, routes: Array<Route>, parent: string } ) {
-
     const { user, logout } = useAuth();
 
     return (
@@ -25,7 +24,7 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route>, par
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu w-52 bg-slate-800 text-base-content flex flex-col justify-around">
                     <div className="headerSidebar">
-                        <Link to="/" className="block flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
+                        <Link to="/" className="flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
                             <img className="mr-3" src={logo}></img>
                             Teamer    
                         </Link>
@@ -37,19 +36,19 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route>, par
                                 <li key={link.name}>
                                     <Link to={link.url} className="p-0 w-full block cursor-pointer active:bg-transparent">
                                         { link.children ? (
-                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${link.url.includes(props.parent) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
+                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${link.name.toLowerCase().includes(props.parent) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
                                                 <div className="flex items-center gap-4 p-4 pl-8 w-full">
-                                                    <i className={link.icon + ` text-slate-400 ${link.url.includes(props.parent) ? "!text-white" : ""}`}></i>
-                                                    <label tabIndex={0} className={`cursor-pointer text-base ${link.url.includes(props.parent) ? "text-base text-white" : ""}`}>{link.name}</label>
+                                                    <i className={link.icon + ` text-slate-400 ${link.name.toLowerCase().includes(props.parent) ? "!text-white" : ""}`}></i>
+                                                    <label tabIndex={0} className={`cursor-pointer text-base ${link.name.toLowerCase().includes(props.parent) ? "text-base text-white" : ""}`}>{link.name}</label>
                                                 </div>
                                                 {
-                                                    link.url.includes(props.parent) &&
+                                                    link.name.toLowerCase().includes(props.parent) &&
                                                     <>
                                                         <hr className="w-full border-slate-600 border-2 bg-slate-600"/>
                                                         <ul className="menu shadow hover:bg-transparent w-fit py-3 px-8 flex flex-col gap-2" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
                                                                 <li key={link.name}>
-                                                                    <Link to={child.url} className={`text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white ${location.pathname == child.url ? "hover:bg-transparent text-white" : ""}`}>{child.name}</Link>
+                                                                    <Link to={child.url} className={`text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white ${location.pathname == child.url || location.pathname.includes(child.url.substring(0, child.url.length - 1)) ? "hover:bg-transparent text-white" : ""}`}>{child.name}</Link>
                                                                 </li>
                                                             )}
                                                         </ul>
