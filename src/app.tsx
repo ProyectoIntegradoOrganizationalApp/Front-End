@@ -18,6 +18,8 @@ import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
 import { Projects } from './adapters/pages/Projects';
 import { Achievements } from './adapters/pages/Achievements';
+import { Friends } from './adapters/pages/Friends';
+import { Friend } from './adapters/pages/Friend';
 
 // Componentes
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
@@ -62,6 +64,30 @@ export function App() {
                                 </ProtectedRoute>
                             } 
                         />
+                        <Route path="/project/:project" 
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Projects />
+                                </ProtectedRoute>
+                            } 
+                        />
+
+                        {/* FRIENDS */}
+                        <Route path="/friends" 
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Friends />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route path="/friend/:name" 
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Friend />
+                                </ProtectedRoute>
+                            } 
+                        />
+
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="*" element={<Error />} />

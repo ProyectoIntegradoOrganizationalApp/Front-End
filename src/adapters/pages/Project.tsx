@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { InfoTooltip } from '../components/InfoTooltip';
 import { Share } from '../components/Share';
 
-export function Projects() {
+export function Project() {
     const { user } = useUser();
     const [selectedProject, selectProject] = useState<string>("none");
 
@@ -22,7 +22,7 @@ export function Projects() {
 
     return (
         <>
-            <Sidebar parent="projects">
+            <Sidebar routes={routes} parent="projects">
                 <DashboardBox>
                     <div className="bg-slate-800 w-full rounded-xl flex gap-6 p-4">
                         <div className="bg-slate-700 w-9/12 rounded-xl flex flex-col gap-4 p-4">

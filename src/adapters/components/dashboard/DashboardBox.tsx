@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export const DashboardBox = ( props: { children: ReactNode } ) => {
     return (
-        <div className="h-full flex gap-6 m-6 box-content">
+        <div className="h-full flex gap-6 m-6 box-content overflow-hidden">
             {props.children}
         </div>
     )

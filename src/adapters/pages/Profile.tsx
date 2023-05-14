@@ -162,7 +162,7 @@ export function Profile() {
                                         icon: "fa-solid fa-trash",
                                         color: "bg-red-700",
                                         target: "remove/idProyect"
-                                    },
+                                    }
                                 ]}/>
                             )
                         })}
