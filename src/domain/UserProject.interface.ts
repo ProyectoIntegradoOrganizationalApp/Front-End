@@ -7,6 +7,5 @@
 
 export interface UserProject {
     id: string,
-    userId: string,
-    name: string
+     name: string
 }

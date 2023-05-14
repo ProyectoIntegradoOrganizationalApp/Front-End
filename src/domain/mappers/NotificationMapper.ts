@@ -7,7 +7,6 @@ export class NotificationMapper extends Mapper<Notification, NotificationDTO> {
     mapFrom( data: Notification ): NotificationDTO {
         return {
             id: data.id,
-            iduser: data.userId,
             title: data.title,
             content: data.content,
             state: data.state
@@ -17,7 +16,6 @@ export class NotificationMapper extends Mapper<Notification, NotificationDTO> {
     mapTo( data: NotificationDTO ): Notification {
         return {
             id: data.id,
-            userId: data.iduser,
             title: data.title,
             content: data.content,
             state: data.state  

@@ -17,9 +17,9 @@ export function AchievementItem(props: { tab?: string, orderBy?: string, icon: s
                     <div className={"absolute top-0 left-0 h-full rounded-l-xl z-1 bg-slate-600 w-5/12 " + {/* width (w-6/12 == 50%) (si llega al final, rounded-xl) */ }}></div>
                     <div className="relative z-2 flex flex-wrap justify-between items-center">
                         <div className="flex items-center gap-4">
-                            {/* Achievement Icon */}
-                            <div className="w-12 aspect-square rounded-full bg-green-700"></div>
-
+                            <div className="w-16 h-16">
+                                <img src={props.icon}/>
+                            </div>
                             <div className="flex flex-col gap-2">
                                 <p className="text-white text-base leading-none">{props.title}</p>
                                 <p className="text-white/50 text-sm leading-none">{props.description}</p>
@@ -34,7 +34,9 @@ export function AchievementItem(props: { tab?: string, orderBy?: string, icon: s
                     <div className="relative z-2 flex flex-wrap justify-between items-center">
                         <div className="flex items-center gap-4">
                             {/* Achievement Icon */}
-                            <div className="w-14 aspect-square rounded-full bg-green-700"></div>
+                            <div className="w-10 h-10">
+                                <img src={props.icon}/>
+                            </div>
 
                             <div className="flex flex-col gap-2">
                                 <p className="text-white text-base leading-none">{props.title}</p>

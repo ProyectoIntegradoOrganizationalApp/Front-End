@@ -1,14 +1,22 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 import { ProfileBadge } from "./ProfileBadge";
 import { useAuth } from "../../../application/customHooks/useAuth";
 
 import logo from "../../../assets/svg/logo.svg";
-import { Route } from "../../../domain/Route.interface";
 
-export function Sidebar( props: { children: ReactNode, routes: Array<Route>, parent: string } ) {
+import { Routes } from "../../../application/customHooks/routes";
+
+export function Sidebar( props: { children: ReactNode, parent: string } ) {
+
     const { user, logout } = useAuth();
+
+    const location = useNavigate();
+
+    const btnStyles = `text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white`;
 
     return (
         <div className="drawer drawer-mobile">
@@ -32,14 +40,14 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route>, par
                     
                     <div className="middleSidebar flex-1 mt-8">
                         <ul className="menu dropdown-content">
-                            { props.routes && props.routes.map( link => 
+                            { Routes && Routes.map( link => 
                                 <li key={link.name}>
-                                    <Link to={link.url} className="p-0 w-full block cursor-pointer active:bg-transparent">
+                                    <div className="p-0 w-full block cursor-pointer active:bg-transparent">
                                         { link.children ? (
                                             <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${link.name.toLowerCase().includes(props.parent) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
                                                 <div className="flex items-center gap-4 p-4 pl-8 w-full">
-                                                    <i className={link.icon + ` text-slate-400 ${link.name.toLowerCase().includes(props.parent) ? "!text-white" : ""}`}></i>
-                                                    <label tabIndex={0} className={`cursor-pointer text-base ${link.name.toLowerCase().includes(props.parent) ? "text-base text-white" : ""}`}>{link.name}</label>
+                                                    <i className={link.icon + ` text-slate-400 ${link.url.includes(props.parent) ? "!text-white" : ""}`}></i>
+                                                    <NavLink to={link.url} className="text-base">{link.name}</NavLink>
                                                 </div>
                                                 {
                                                     link.name.toLowerCase().includes(props.parent) &&
@@ -47,8 +55,8 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route>, par
                                                         <hr className="w-full border-slate-600 border-2 bg-slate-600"/>
                                                         <ul className="menu shadow hover:bg-transparent w-fit py-3 px-8 flex flex-col gap-2" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
-                                                                <li key={link.name}>
-                                                                    <Link to={child.url} className={`text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white ${location.pathname == child.url || location.pathname.includes(child.url.substring(0, child.url.length - 1)) ? "hover:bg-transparent text-white" : ""}`}>{child.name}</Link>
+                                                                <li key={child.name}>
+                                                                    <NavLink to={child.url} className={({isActive, isPending}) => isActive ? "text-white hover:bg-transparent" + btnStyles : btnStyles}>{child.name}</NavLink>
                                                                 </li>
                                                             )}
                                                         </ul>
@@ -58,10 +66,10 @@ export function Sidebar( props: { children: ReactNode, routes: Array<Route>, par
                                         ): (
                                             <div className="flex items-center gap-4">
                                                 <i className={link.icon}></i>
-                                                <Link to={link.url} className="text-base">{link.name}</Link>
+                                                <NavLink to={link.url} className="text-base">{link.name}</NavLink>
                                             </div>
                                         )}
-                                    </Link>
+                                    </div>
                                 </li>
                             )}
                         </ul>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 // Imports para el Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+// Contextos
 import { AuthContext } from './context/AuthContext';
 
 // Modelos
@@ -16,10 +17,13 @@ import Register from './adapters/pages/Register';
 import { Error } from './adapters/pages/Error';
 import { Profile } from './adapters/pages/Profile';
 import { Projects } from './adapters/pages/Projects';
-import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 import { Achievements } from './adapters/pages/Achievements';
 import { Friends } from './adapters/pages/Friends';
 import { Friend } from './adapters/pages/Friend';
+
+// Componentes
+import { ProtectedRoute } from './adapters/components/ProtectedRoute';
+import { Dashboard } from './adapters/pages/Dashboard';
 
 /**
  *  Aplicación principal.
@@ -35,35 +39,34 @@ export function App() {
             <AuthContext.Provider value={{ user, setUser }}>
                 <BrowserRouter basename='/'>
                     <Routes>
+
                         <Route path="/" element={<Home />} />
 
-                        {/* DASHBOARD */}
-                        <Route path="/profile" 
-                            element={
-                                <ProtectedRoute>
+                        <Route path="dashboard" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
+                            <Route path="profile" 
+                                element={
                                     <Profile />
-                                </ProtectedRoute>
-                            } 
-                        />
-                        <Route path="/achievements" 
-                            element={
-                                <ProtectedRoute>
-                                    <Achievements />
-                                </ProtectedRoute>
-                            } 
-                        />
+                                }
+                            />
 
-                        {/* PROJECTS */}
+                            <Route path="achievements" 
+                                element={
+                                    <Achievements />
+                                } 
+                            />
+                        </Route>
+                        
+                        
                         <Route path="/projects" 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute user={user}>
                                     <Projects />
                                 </ProtectedRoute>
                             } 
                         />
                         <Route path="/project/:project" 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute user={user}>
                                     <Projects />
                                 </ProtectedRoute>
                             } 
@@ -72,14 +75,14 @@ export function App() {
                         {/* FRIENDS */}
                         <Route path="/friends" 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute user={user}>
                                     <Friends />
                                 </ProtectedRoute>
                             } 
                         />
                         <Route path="/friend/:name" 
                             element={
-                                <ProtectedRoute>
+                                <ProtectedRoute user={user}>
                                     <Friend />
                                 </ProtectedRoute>
                             } 
