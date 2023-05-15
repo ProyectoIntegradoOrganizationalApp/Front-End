@@ -9,7 +9,6 @@ import { Searcher } from '../components/Searcher';
 import { useState } from 'react';
 import { InfoTooltip } from '../components/InfoTooltip';
 import { Share } from '../components/Share';
-import { AlertContainer } from '../components/AlertContainer';
 
 export function Projects() {
     const { user } = useUser();
@@ -24,7 +23,6 @@ export function Projects() {
     return (
         <>
             <Sidebar parent="projects">
-                <AlertContainer />
                 <DashboardBox>
                     <div className="bg-slate-800 w-full rounded-xl flex gap-6 p-4">
                         <div className={`bg-slate-700 rounded-xl flex flex-col gap-4 p-4 w-9/12 ${selectedProject == "none" ? "!w-full" : ""}`}>

@@ -24,10 +24,8 @@ import { Friend } from './adapters/pages/Friend';
 // Componentes
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 import { Dashboard } from './adapters/pages/Dashboard';
-import { AlertContext } from './context/AlertContext';
-import { AlertInterface } from './domain/AlertInterface.interface';
 import { useLocalStorage } from './application/customHooks/useLocalStorage';
-import { Alert } from './adapters/components/Alert';
+import { ToastContainer } from 'react-toastify';
 
 /**
  *  Aplicación principal.
@@ -38,90 +36,79 @@ import { Alert } from './adapters/components/Alert';
 
 export function App() {
     const [user, setUser] = useState<User | null>(null);
-    const [alerts, setAlerts] = useState<AlertInterface[]>([]);
-
-    const { getItem } = useLocalStorage();
-    let alertss: AlertInterface[] = [];
-
-    useEffect(() => {
-        const getItems = getItem("alerts");
-        if (getItems) {
-            alertss = JSON.parse(getItems);
-        }
-    }, [alerts]);
 
     return (
         <>
-            {
-                alertss.map((element, index) => {
-                    console.log(element)
-                    return <Alert key={index} state={element.atts.state} title={element.atts.title} description={element.atts.description}/>
-                })
-            }
-            <AlertContext.Provider value={{ alerts, setAlerts }}>
-                <AuthContext.Provider value={{ user, setUser }}>
-                    <BrowserRouter basename='/'>
-                        <Routes>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
+            <AuthContext.Provider value={{ user, setUser }}>
+                <BrowserRouter basename='/'>
+                    <Routes>
 
-                            <Route path="/" element={<Home />} />
+                        <Route path="/" element={<Home />} />
 
-                            <Route path="profile" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
-                                <Route path=""
-                                    element={
-                                        <Profile />
-                                    }
-                                />
-
-                                <Route path="achievements"
-                                    element={
-                                        <Achievements />
-                                    }
-                                />
-                            </Route>
-
-
-                            <Route path="/projects"
+                        <Route path="profile" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
+                            <Route path=""
                                 element={
-                                    <ProtectedRoute user={user}>
-                                        <Projects />
-                                    </ProtectedRoute>
-                                }
-                            />
-                            <Route path="/project/:project"
-                                element={
-                                    <ProtectedRoute user={user}>
-                                        <Projects />
-                                    </ProtectedRoute>
+                                    <Profile />
                                 }
                             />
 
-                            {/* FRIENDS */}
-                            <Route path="/friends"
+                            <Route path="achievements"
                                 element={
-                                    <ProtectedRoute user={user}>
-                                        <Friends />
-                                    </ProtectedRoute>
+                                    <Achievements />
                                 }
                             />
-                            <Route path="/friend/:name"
-                                element={
-                                    <ProtectedRoute user={user}>
-                                        <Friend />
-                                    </ProtectedRoute>
-                                }
-                            />
+                        </Route>
 
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="*" element={<Error />} />
-                        </Routes>
-                    </BrowserRouter>
-                </AuthContext.Provider>
-            </AlertContext.Provider>
+
+                        <Route path="/projects"
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Projects />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route path="/project/:project"
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Projects />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        {/* FRIENDS */}
+                        <Route path="/friends"
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Friends />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route path="/friend/:name"
+                            element={
+                                <ProtectedRoute user={user}>
+                                    <Friend />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="*" element={<Error />} />
+                    </Routes>
+                </BrowserRouter>
+            </AuthContext.Provider>
         </>
     )
 }
-
-
-
-

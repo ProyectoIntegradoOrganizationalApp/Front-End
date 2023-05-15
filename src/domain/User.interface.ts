@@ -15,4 +15,3 @@ export interface User {
     _token: string,
     notifications: Array<Notification>
 }
-

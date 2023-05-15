@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,600;0,800;0,1000;1,200;1,600;1,1000&display=swap');
+@import 'react-toastify/dist/ReactToastify.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
     @apply text-slate-900 dark:text-slate-400;
@@ -175,9 +177,9 @@ progress {
 }
 
 /* Alert */
-.w-160 {
-    width: 160px;
+.Toastify__toast {
+    @apply bg-slate-900;
 }
-.max-w-160 {
-    max-width: 160px;
+.Toastify__toast-body {
+    @apply text-base;
 }

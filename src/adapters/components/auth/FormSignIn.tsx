@@ -10,7 +10,7 @@ import { useUserApi } from "../../../application/api/useUserApi";
 import { useAuth } from "../../../application/customHooks/useAuth";
 
 // Mensaje de error
-import { ErrorMsg } from "../ErrorMsg";
+import { toast } from "react-toastify";
 
 // Fotos o SVGs
 import google from "../../../assets/svg/login/google.svg";
@@ -215,11 +215,8 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
                     </div>
 
                     { error?.error == true && (
-                        <ErrorMsg 
-                            message={error.message}
-                        />
+                        toast.error(error.message)
                     )}
-
                 </div>
             </article>
         </>
