@@ -14,6 +14,8 @@ import { InfoTooltip } from '../components/InfoTooltip';
 import { AchievementsInfo } from '../components/achievements/AchievementsInfo';
 import { Item } from '../components/Item';
 import { useOutletContext } from 'react-router-dom';
+import { Sidebar } from '../components/dashboard/Sidebar';
+import { DashboardBox } from '../components/dashboard/DashboardBox';
 
 
 const date = new Date();
@@ -62,19 +64,15 @@ function GenerateCalendar(): MyCalendar {
 }
 
 export function Profile() {
-
     const [daily, setDaily] = useState<number>(0);
     const [weekly, setWeekly] = useState<number>(0);
 
     const data: Profile = useOutletContext();
 
     useEffect(() => {
-        if( data ) {
-
+        if (data) {
             data.activity.map((act: UserActivity) => {
                 let fechaActual = new Date();
-
-                console.log(fechaActual)
 
                 let primerDiaSemana = new Date(fechaActual);
                 primerDiaSemana.setDate(fechaActual.getDate() - fechaActual.getDay());
@@ -84,16 +82,14 @@ export function Profile() {
 
                 let aVerificar = new Date(act.date);
 
-                if( aVerificar.getDate() == fechaActual.getDate() ) {
+                if (aVerificar.getDate() == fechaActual.getDate()) {
                     setDaily(act.commits);
                 }
 
-                if( aVerificar >= primerDiaSemana && aVerificar <= ultimoDiaSemana ) {
+                if (aVerificar >= primerDiaSemana && aVerificar <= ultimoDiaSemana) {
                     setWeekly(act.commits);
                 }
-                
             })
-        
         }
     }, [data?.user.id])
 
@@ -103,27 +99,26 @@ export function Profile() {
 
     return (
         <>
-
             <AchievementsInfo
-                data={data}   
+                data={data}
             />
             <div className="w-3/4 rounded-xl flex flex-col gap-6">
                 <div className="flex gap-6">
                     <div className="flex flex-col gap-6 w-4/12">
-                        <Statistics 
-                            title="Weekly Tasks" 
-                            amount={weekly} 
+                        <Statistics
+                            title="Weekly Tasks"
+                            amount={weekly}
                         />
-                        <Statistics 
-                            title="Daily Tasks" 
-                            amount={daily} 
+                        <Statistics
+                            title="Daily Tasks"
+                            amount={daily}
                         />
 
                     </div>
                     <div className="bg-slate-800 rounded-xl w-5/12 p-4">
-                        <Activity 
-                            title="Daily Activity" 
-                            activity={activity} 
+                        <Activity
+                            title="Daily Activity"
+                            activity={activity}
                         />
                     </div>
                     <div className="bg-slate-800 rounded-xl w-3/12 p-4">
@@ -141,11 +136,11 @@ export function Profile() {
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 p-4">
-
-                        { data?.projects.map( project => {
+                        
+                        {data?.projects.map(project => {
                             return (
-                                <Item key={project.id} title={project.name} description="nada más que comentar" tools={[ 
-                                    { 
+                                <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
+                                    {
                                         action: "view",
                                         icon: "fa-solid fa-eye",
                                         color: "bg-blue-700",
@@ -163,14 +158,13 @@ export function Profile() {
                                         color: "bg-red-700",
                                         target: "remove/idProyect"
                                     }
-                                ]}/>
+                                ]} />
                             )
                         })}
-                        
+
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

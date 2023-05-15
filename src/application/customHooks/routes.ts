@@ -4,15 +4,15 @@ export const Routes: Array<Route> = [
     {
         icon: "fa-solid fa-house",
         name: "Dashboard",
-        url: "/dashboard",
+        url: "/profile",
         children: [
             {
                 name: "Profile",
-                url: "/dashboard/profile"
+                url: "/profile"
             },
             {
                 name: "My Achievements",
-                url: "/dashboard/achievements"
+                url: "achievements"
             }
         ]
     },

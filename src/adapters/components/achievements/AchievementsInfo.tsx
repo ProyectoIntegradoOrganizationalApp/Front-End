@@ -15,7 +15,7 @@ import { Profile } from "../../../domain/Profile.interface";
  */
 export function AchievementsInfo( props: { data: Profile | undefined } ) {
 
-    let rank: string = "newbie";
+    let rank: string = "Newbie";
     let level: number = 1;
 
     if ( props.data ) {
@@ -23,7 +23,7 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
     }
 
     if( level > 1 && level < 10 ) {
-        rank = "newbie";
+        rank = "Newbie";
     }
 
     if( level > 10 && level < 20 ) {

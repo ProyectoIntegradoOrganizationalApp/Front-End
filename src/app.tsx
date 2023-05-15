@@ -24,6 +24,10 @@ import { Friend } from './adapters/pages/Friend';
 // Componentes
 import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 import { Dashboard } from './adapters/pages/Dashboard';
+import { AlertContext } from './context/AlertContext';
+import { AlertInterface } from './domain/AlertInterface.interface';
+import { useLocalStorage } from './application/customHooks/useLocalStorage';
+import { Alert } from './adapters/components/Alert';
 
 /**
  *  Aplicación principal.
@@ -31,69 +35,89 @@ import { Dashboard } from './adapters/pages/Dashboard';
  *  DaisyUI, el drawer ( sidebar ) tiene el contenido de la web dentro.
  *  @returns 
  */
+
 export function App() {
     const [user, setUser] = useState<User | null>(null);
+    const [alerts, setAlerts] = useState<AlertInterface[]>([]);
+
+    const { getItem } = useLocalStorage();
+    let alertss: AlertInterface[] = [];
+
+    useEffect(() => {
+        const getItems = getItem("alerts");
+        if (getItems) {
+            alertss = JSON.parse(getItems);
+        }
+    }, [alerts]);
 
     return (
         <>
-            <AuthContext.Provider value={{ user, setUser }}>
-                <BrowserRouter basename='/'>
-                    <Routes>
+            {
+                alertss.map((element, index) => {
+                    console.log(element)
+                    return <Alert key={index} state={element.atts.state} title={element.atts.title} description={element.atts.description}/>
+                })
+            }
+            <AlertContext.Provider value={{ alerts, setAlerts }}>
+                <AuthContext.Provider value={{ user, setUser }}>
+                    <BrowserRouter basename='/'>
+                        <Routes>
 
-                        <Route path="/" element={<Home />} />
+                            <Route path="/" element={<Home />} />
 
-                        <Route path="dashboard" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
-                            <Route path="profile" 
+                            <Route path="profile" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
+                                <Route path=""
+                                    element={
+                                        <Profile />
+                                    }
+                                />
+
+                                <Route path="achievements"
+                                    element={
+                                        <Achievements />
+                                    }
+                                />
+                            </Route>
+
+
+                            <Route path="/projects"
                                 element={
-                                    <Profile />
+                                    <ProtectedRoute user={user}>
+                                        <Projects />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route path="/project/:project"
+                                element={
+                                    <ProtectedRoute user={user}>
+                                        <Projects />
+                                    </ProtectedRoute>
                                 }
                             />
 
-                            <Route path="achievements" 
+                            {/* FRIENDS */}
+                            <Route path="/friends"
                                 element={
-                                    <Achievements />
-                                } 
+                                    <ProtectedRoute user={user}>
+                                        <Friends />
+                                    </ProtectedRoute>
+                                }
                             />
-                        </Route>
-                        
-                        
-                        <Route path="/projects" 
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Projects />
-                                </ProtectedRoute>
-                            } 
-                        />
-                        <Route path="/project/:project" 
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Projects />
-                                </ProtectedRoute>
-                            } 
-                        />
+                            <Route path="/friend/:name"
+                                element={
+                                    <ProtectedRoute user={user}>
+                                        <Friend />
+                                    </ProtectedRoute>
+                                }
+                            />
 
-                        {/* FRIENDS */}
-                        <Route path="/friends" 
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Friends />
-                                </ProtectedRoute>
-                            } 
-                        />
-                        <Route path="/friend/:name" 
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Friend />
-                                </ProtectedRoute>
-                            } 
-                        />
-
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="*" element={<Error />} />
-                    </Routes>
-                </BrowserRouter>
-            </AuthContext.Provider>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="*" element={<Error />} />
+                        </Routes>
+                    </BrowserRouter>
+                </AuthContext.Provider>
+            </AlertContext.Provider>
         </>
     )
 }

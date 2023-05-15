@@ -9,19 +9,17 @@ import { Profile } from "../../../domain/Profile.interface";
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-export function AchievementsList( props: { data: Profile | undefined } ) {
+export function AchievementsList(props: { data: Profile | undefined }) {
     return (
         <>
             <div className="w-full flex flex-col items-center gap-4">
-                {/* Foreach (Achievement) */}
-
-                { props.data?.achievements.map( achievement => {
+                {props.data?.achievements.map(achievement => {
                     return (
                         <AchievementItem
-                            key={achievement.id} 
-                            icon={achievement.icon} 
-                            title={achievement.title} 
-                            description={achievement.description} 
+                            key={achievement.id}
+                            icon={achievement.icon}
+                            title={achievement.title}
+                            description={achievement.description}
                             percentage={{
                                 type: "basic",
                                 number: achievement.progress
@@ -29,8 +27,6 @@ export function AchievementsList( props: { data: Profile | undefined } ) {
                         />
                     )
                 })}
-                
-                {/* EndForeach */}
             </div>
         </>
     )

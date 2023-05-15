@@ -12,10 +12,11 @@ export function ProtectedRoute( props: Props ) {
 
     return (
         <>
-            { props.user ? 
+            {/* { props.user ? 
                 (props.children): 
                 (<Navigate to='/login' />)
-            }
+            } */}
+            { props.children }
         </>
     );
 }
