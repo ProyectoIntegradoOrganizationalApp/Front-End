@@ -37,7 +37,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
 
     // Redirect si el usuario ya está logueado
     if( user ) {
-        return <Navigate to="/profile" />
+        return <Navigate to="/profile/dashboard" />
     }
     
     // Hook de la Autenticación
