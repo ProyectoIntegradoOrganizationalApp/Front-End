@@ -2,8 +2,8 @@
 import React, { MouseEventHandler } from "react";
 import Modal from 'react-modal';
 
-import { ModalInterface } from "../../../domain/ModalInterface.interface";
-import { ModalContent } from './ModalContent';
+import { ModalInterface } from "../../domain/ModalInterface.interface";
+import { ModalContent } from '../../adapters/components/modal/ModalContent';
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
