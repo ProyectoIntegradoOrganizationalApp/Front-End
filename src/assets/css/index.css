@@ -183,3 +183,27 @@ progress {
 .Toastify__toast-body {
     @apply text-base;
 }
+
+/* Modal */
+.modal {
+    @apply bg-black/0;
+}
+.modalcontainer {
+    pointer-events: all !important;
+}
+.modal-box {
+    @apply min-w-fit w-[62%] max-w-[80%] p-0 text-black dark:text-white rounded-xl;
+}
+.ReactModal__Content {
+    @apply !modal;
+}
+.ReactModal__Overlay {
+    @apply !bg-black/50 !flex !items-center !justify-center !pointer-events-none;
+    z-index: 9999999999999999999999999999999999999999999;
+}
+.ReactModal__Content--after-open {
+    @apply !visible !opacity-100;
+}
+.ReactModal__Content--after-open .modal {
+    @apply !visible !opacity-100;
+}

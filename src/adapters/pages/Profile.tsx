@@ -13,10 +13,12 @@ import { Calendar } from '../components/profile/Calendar';
 import { InfoTooltip } from '../components/InfoTooltip';
 import { AchievementsInfo } from '../components/achievements/AchievementsInfo';
 import { Item } from '../components/Item';
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { Sidebar } from '../components/dashboard/Sidebar';
 import { DashboardBox } from '../components/dashboard/DashboardBox';
 
+// Hooks
+import { useModal } from '../../application/customHooks/useModal';
 
 const date = new Date();
 function GenerateMonthYear(): string {
@@ -66,6 +68,8 @@ function GenerateCalendar(): MyCalendar {
 export function Profile() {
     const [daily, setDaily] = useState<number>(0);
     const [weekly, setWeekly] = useState<number>(0);
+
+    const { openModal } = useModal();
 
     const data: Profile = useOutletContext();
 
@@ -125,7 +129,29 @@ export function Profile() {
                         <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
                     </div>
                 </div>
-                <div className="bg-slate-700 rounded-xl w-full h-full">
+                <div className="bg-slate-700 rounded-xl w-full h-full relative">
+                    {/* Create Project */}
+                    <div onClick={() => openModal({
+                        isOpen: true,
+                        type: "crud",
+                        title: "Create Project",
+                        content: [
+                            {
+                                discriminator: "crud",
+                                type: "text",
+                                name: "title",
+                                placeholder: "Enter title"
+                            },
+                            {
+                                discriminator: "crud",
+                                type: "text",
+                                name: "description",
+                                placeholder: "Enter description"
+                            }
+                        ]
+                    })} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-slate-800 absolute bottom-4 right-4">
+                        <i className="fa-solid fa-plus text-white"></i>
+                    </div>
                     <div className="bg-slate-800 flex items-center justify-center w-full h-16 rounded-t-xl relative text-white text-base">
                         <div className="absolute top-5 left-4">
                             <InfoTooltip title="All your projects" />
@@ -136,7 +162,6 @@ export function Profile() {
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 p-4">
-                        
                         {data?.projects.map(project => {
                             return (
                                 <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
@@ -161,7 +186,6 @@ export function Profile() {
                                 ]} />
                             )
                         })}
-
                     </div>
                 </div>
             </div>

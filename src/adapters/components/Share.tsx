@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
  */
 
 function getLink() {
-    toast.success('Copy to clipboard!');
+    toast.success('Copied to clipboard!');
 }
 
 export function Share(props: { link: string }) {

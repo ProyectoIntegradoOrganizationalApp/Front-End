@@ -26,6 +26,10 @@ import { ProtectedRoute } from './adapters/components/ProtectedRoute';
 import { Dashboard } from './adapters/pages/Dashboard';
 import { useLocalStorage } from './application/customHooks/useLocalStorage';
 import { ToastContainer } from 'react-toastify';
+import { ModalInterface } from './domain/ModalInterface.interface';
+import { ModalContext } from './context/ModalContext';
+import { CustomModal } from './adapters/components/modal/CustomModal';
+import { useModal } from './application/customHooks/useModal';
 
 /**
  *  Aplicación principal.
@@ -36,6 +40,8 @@ import { ToastContainer } from 'react-toastify';
 
 export function App() {
     const [user, setUser] = useState<User | null>(null);
+    const [modal, setModal] = useState<ModalInterface | null>(null);
+    const { closeModal } = useModal();
 
     return (
         <>
@@ -52,62 +58,65 @@ export function App() {
                 theme="dark"
             />
             <AuthContext.Provider value={{ user, setUser }}>
-                <BrowserRouter basename='/'>
-                    <Routes>
+                <ModalContext.Provider value={{ modal, setModal }}>
+                    <CustomModal isOpen={modal?.isOpen ? true : false} closeModal={() => { setModal(null) }} atts={modal}/>
+                    <BrowserRouter basename='/'>
+                        <Routes>
 
-                        <Route path="/" element={<Home />} />
+                            <Route path="/" element={<Home />} />
 
-                        <Route path="profile" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
-                            <Route path=""
+                            <Route path="profile" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
+                                <Route path=""
+                                    element={
+                                        <Profile />
+                                    }
+                                />
+
+                                <Route path="achievements"
+                                    element={
+                                        <Achievements />
+                                    }
+                                />
+                            </Route>
+
+
+                            <Route path="/projects"
                                 element={
-                                    <Profile />
+                                    <ProtectedRoute user={user}>
+                                        <Projects />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route path="/project/:project"
+                                element={
+                                    <ProtectedRoute user={user}>
+                                        <Projects />
+                                    </ProtectedRoute>
                                 }
                             />
 
-                            <Route path="achievements"
+                            {/* FRIENDS */}
+                            <Route path="/friends"
                                 element={
-                                    <Achievements />
+                                    <ProtectedRoute user={user}>
+                                        <Friends />
+                                    </ProtectedRoute>
                                 }
                             />
-                        </Route>
+                            <Route path="/friend/:name"
+                                element={
+                                    <ProtectedRoute user={user}>
+                                        <Friend />
+                                    </ProtectedRoute>
+                                }
+                            />
 
-
-                        <Route path="/projects"
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Projects />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route path="/project/:project"
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Projects />
-                                </ProtectedRoute>
-                            }
-                        />
-
-                        {/* FRIENDS */}
-                        <Route path="/friends"
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Friends />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route path="/friend/:name"
-                            element={
-                                <ProtectedRoute user={user}>
-                                    <Friend />
-                                </ProtectedRoute>
-                            }
-                        />
-
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="*" element={<Error />} />
-                    </Routes>
-                </BrowserRouter>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="*" element={<Error />} />
+                        </Routes>
+                    </BrowserRouter>
+                </ModalContext.Provider>
             </AuthContext.Provider>
         </>
     )
