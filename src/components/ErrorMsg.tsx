@@ -1,4 +1,4 @@
-export const ErrorMsg = ( props: { message: string } ) => {
+export const ErrorMg = ( props: { message: string } ) => {
     return (
         <div className="alert alert-error shadow-lg absolute bottom-24 w-64">
             <div>

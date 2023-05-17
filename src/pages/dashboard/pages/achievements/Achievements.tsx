@@ -15,7 +15,6 @@ import { Tabs } from '../../../../components/Tabs';
 import { Dropdown } from '../../../../components/Dropdown';
 
 // Modelos
-import { User } from '../../../../domain/user/User.interface';
 import { Profile } from '../../../../domain/profile/Profile.interface';
 import { Achievement } from '../../../../domain/achievement/Achievement.interface';
 import { UserAchievement } from '../../../../domain/user/UserAchievement.interface';
@@ -48,7 +47,7 @@ export function Achievements() {
             headers: {
                 Authorization: `Bearer ${user?._token}`
             }
-        }).then( data => {
+        }).then(data => {
             const mappedAchievements: Array<Achievement> = AchievementMapper.prototype.mapArrayTo(data.data.achievements);
             setAchievements(mappedAchievements);
         })
@@ -56,17 +55,16 @@ export function Achievements() {
 
     return (
         <>
-
             <AchievementsInfo
                 data={data}
             />
             <div className="bg-slate-800 w-3/4 rounded-xl p-4 pt-0 flex flex-col">
                 <div className="py-3 flex justify-between items-center">
-                    <Tabs 
-                        tab={tab} 
-                        setTab={setTab} 
-                        icon="fa-solid fa-medal" 
-                        title="Achievements" 
+                    <Tabs
+                        tab={tab}
+                        setTab={setTab}
+                        icon="fa-solid fa-medal"
+                        title="Achievements"
                         links={[
                             {
                                 url: "all",
@@ -83,9 +81,9 @@ export function Achievements() {
                         ]}
                     />
 
-                    <Dropdown 
-                        selectedElement={selectedElement} 
-                        selectElement={selectElement} 
+                    <Dropdown
+                        selectedElement={selectedElement}
+                        selectElement={selectElement}
                         elements={[
                             {
                                 action: "fe",
@@ -107,10 +105,10 @@ export function Achievements() {
                     />
                 </div>
                 <div className="bg-slate-700 w-full h-full rounded-xl p-4">
-                    { achievements && tab === "all" ? (
-                        achievements.map( ach => {
+                    {achievements && tab === "all" ? (
+                        achievements.map(ach => {
                             return (
-                               <AchievementItem
+                                <AchievementItem
                                     key={ach.id}
                                     tab={tab}
                                     orderBy={selectedElement}
@@ -121,20 +119,17 @@ export function Achievements() {
                                         type: "progress",
                                         number: 0
                                     }}
-                                /> 
+                                />
                             )
-                    })
-                        
-                    ): tab === "projects" ? (
+                        })
+
+                    ) : tab === "projects" ? (
                         <h1>Projects</h1>
-                    ): (
+                    ) : (
                         <h1>Soon</h1>
                     )}
-                    
-                    
                 </div>
             </div>
-
         </>
     )
 }

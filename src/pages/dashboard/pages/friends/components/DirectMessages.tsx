@@ -1,6 +1,9 @@
 // React
 import React, { MouseEventHandler } from "react";
+
 import { User } from "../../../../../components/User";
+
+import { useLocation } from "react-router-dom";
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
@@ -10,6 +13,9 @@ import { User } from "../../../../../components/User";
  */
 
 export function DirectMessages(props: { selected?: string }) {
+
+    const location = useLocation();
+
     return (
         <>
             <div className="flex flex-col gap-6">

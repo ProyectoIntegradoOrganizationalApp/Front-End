@@ -26,7 +26,7 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
         <>
             {
                 props.dm == true &&
-                <Link to={"/dashboard/friend/" + props.name}>
+                <Link to={"/friend/" + props.name}>
                     {
                         props.selected == true &&
                         <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 bg-slate-700 transition-all">

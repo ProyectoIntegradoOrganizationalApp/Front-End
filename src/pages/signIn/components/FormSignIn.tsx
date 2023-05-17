@@ -10,7 +10,7 @@ import { useUserApi } from "../../../adapters/api/useUserApi";
 import { useAuth } from "../../../hooks/useAuth";
 
 // Mensaje de error
-import { ErrorMsg } from "../../../components/ErrorMsg"; 
+import { ToastContainer, toast } from "react-toastify";
 
 // Fotos o SVGs
 import google from "../../../assets/svg/login/google.svg";
@@ -20,6 +20,7 @@ import github from "../../../assets/svg/login/github.png";
 import { User } from "../../../domain/user/User.interface";
 import { Loading } from "../../../components/Loading";
 import { UserMapper } from "../../../adapters/mappers/UserMapper";
+import { ErrorMg } from '../../../components/ErrorMsg';
 
 /**
  * Componente reutilizable de formulario de login/register, le entra una prop,
@@ -36,7 +37,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
 
     // Redirect si el usuario ya está logueado
     if( user ) {
-        return <Navigate to="/dashboard/profile" />
+        return <Navigate to="/profile/dashboard" />
     }
     
     // Hook de la Autenticación
@@ -68,8 +69,16 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
             const user: User = UserMapper.prototype.mapTo(data);            
             login(user);
         }
+
+        
     }, [data?.id])
-    
+
+    useEffect(() => {
+        // Comprobamos si hay errores y sacamos mensajito si los hay
+        if( error && error.message != '' ) {
+            toast.error(error.message);
+        }
+    }, [error]);
 
     /**
      * Función que maneja el login del usuario, ejecuta la función fetchUser del Hook de la API
@@ -214,12 +223,6 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
                         <button className="btn bg-white hover:bg-gray-300 flex-1 rounded-none"><img src={google} className="w-5"/></button>
                         <button className="btn flex-1 rounded-none"><img src={github} className="w-5"/></button>
                     </div>
-
-                    { error?.error == true && (
-                        <ErrorMsg 
-                            message={error.message}
-                        />
-                    )}
 
                 </div>
             </article>

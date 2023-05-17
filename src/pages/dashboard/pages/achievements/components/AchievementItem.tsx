@@ -45,9 +45,7 @@ export function AchievementItem(props: { tab?: string, orderBy?: string, icon: s
                         </div>
                         <div className={"text-white leading-none flex items-end flex-col gap-2 w-5/12 " + {/* width (w-6/12 == 50%) (si llega al final, rounded-xl) */ }}>
                             <p className="text-base">{props.percentage.number + "%"}</p>
-                            <div className="bg-slate-700 w-full h-3 rounded-xl">
-                                <div className="bg-slate-600 w-5/12 h-full rounded-l-xl"></div>
-                            </div>
+                            <progress className="progress progress-primary w-full left-0 !rounded-full bg-slate-700" value={props.percentage.number} max="100"></progress>
                         </div>
                     </div>
                 </div>

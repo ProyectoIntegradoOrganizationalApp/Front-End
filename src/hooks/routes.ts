@@ -1,52 +1,61 @@
+import { useState } from "react";
+
 import { Route } from "../domain/Route.interface"
+
+const Route = () => {
+
+    const [parent, setParent] = useState<string>();
+
+    return {parent};
+}
 
 export const Routes: Array<Route> = [
     {
         icon: "fa-solid fa-house",
-        name: "Dashboard",
-        url: "/dashboard/profile",
+        name: "Profile",
+        url: "/profile/dashboard",
         children: [
             {
-                name: "Profile",
-                url: "/dashboard/profile"
+                name: "Dashboard",
+                url: "/profile/dashboard"
             },
             {
-                name: "My Achievements",
-                url: "/dashboard/achievements"
+                name: "Achievements",
+                url: "/profile/achievements"
             }
         ]
     },
     {
         icon: "fa-solid fa-diagram-project",
         name: "Projects",
-        url: "/dashboard/projects",
+        url: "/projects/dashboard",
         children: [
             {
-                name: "Your Projects",
-                url: "/dashboard/projects"
+                name: "Projects",
+                url: "/projects/dashboard"
             },
             {
-                name: "Project Settings",
-                url: "/dashboard/projects/settings"
+                name: "Settings",
+                url: "/projects/settings"
             }
         ]
     },
     {
         icon: "fa-solid fa-user-group",
         name: "Friends",
-        url: "/dashboard/friends",
+        url: "/friends/dashboard",
         children: [
             {
                 name: "Your Friends",
-                url: "/dashboard/friends"
+                url: "/friends/dashboard"
             },
             {
                 name: "Add Friend",
-                url: "/dashboard/users"
+                url: "/users"
             },
             {
                 name: "Friends Settings",
-                url: "/dashboard/friends/settings"
+                url: "/friends/settings"
             }
         ]
     }

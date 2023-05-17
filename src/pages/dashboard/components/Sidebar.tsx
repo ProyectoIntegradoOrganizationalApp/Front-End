@@ -20,8 +20,8 @@ export function Sidebar( props: { children: ReactNode } ) {
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col bg-slate-600">
                 <label htmlFor="my-drawer-2" className="btn btn-primary w-12 absolute top-1/2 -left-5 rounded-full swap swap-rotate">
-                    <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
-                    <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/></svg>
+                    <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
+                    <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" /></svg>
                 </label>
                 {props.children}
             </div>
@@ -31,22 +31,23 @@ export function Sidebar( props: { children: ReactNode } ) {
                     <div className="headerSidebar">
                         <Link to="/" className="flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
                             <img className="mr-3" src={logo}></img>
-                            Teamer    
+                            Teamer
                         </Link>
                     </div>
-                    
+
                     <div className="middleSidebar flex-1 mt-8">
                         <ul className="menu dropdown-content">
-                            { Routes && Routes.map( link => 
+                            { Routes && Routes.map(link =>
                                 <li key={link.name}>
                                     <div className="p-0 w-full block cursor-pointer active:bg-transparent">
                                         { link.children ? (
-                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${location.pathname.includes(link.url.toLowerCase()) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
+                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${location.pathname.includes(link.name.toLowerCase()) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
+                                                
                                                 <div className="flex items-center gap-4 p-4 pl-8 w-full">
-                                                    <i className={link.icon + ` text-slate-400 ${location.pathname.includes(link.url.toLowerCase()) ? "!text-white" : ""}`}></i>
+                                                    <i className={link.icon + ` text-slate-400 ${location.pathname.includes(link.name.toLowerCase()) ? "!text-white" : ""}`}></i>
                                                     <NavLink to={link.url} className="text-base">{link.name}</NavLink>
                                                 </div>
-                                                { location.pathname.includes(link.url.toLowerCase()) && (
+                                                { location.pathname.includes(link.name.toLowerCase()) && (
                                                     <>
                                                         <hr className="w-full border-slate-600 border-2 bg-slate-600"/>
                                                         <ul className="menu shadow hover:bg-transparent w-fit py-3 px-8 flex flex-col gap-2" tabIndex={0}>
@@ -73,10 +74,10 @@ export function Sidebar( props: { children: ReactNode } ) {
                         </ul>
 
                     </div>
-                    
+
                     <div className="flex-1 flex flex-col justify-end">
                         <div className="flex justify-between items-center px-6 py-3">
-                            <ProfileBadge 
+                            <ProfileBadge
                                 user={user}
                                 logout={logout}
                                 position={"dropdown dropdown-top"}

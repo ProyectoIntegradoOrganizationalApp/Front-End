@@ -1,5 +1,6 @@
 // React
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useEffect } from "react";
+import { toast } from "react-toastify";
 
 /**
  *  Componente Share para compartir el enlace del proyecto y que se una people
@@ -8,16 +9,14 @@ import React, { MouseEventHandler } from "react";
  *  @returns 
  */
 
-function share() {
-    console.log('Copied to clipboard!')
-    // Notificación de 'Se ha copiado el enlace de invitación'
+function getLink() {
+    toast.success('Copied to clipboard!');
 }
 
 export function Share(props: { link: string }) {
     return (
         <>
-            <div onClick={(event: React.MouseEvent<HTMLElement>) => { share() }}
-                className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-slate-800 hover:bg-slate-900"><i className="fa-solid fa-share text-white"></i></div>
+            <div onClick={(event: React.MouseEvent<HTMLElement>) => { getLink() }} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-slate-800 hover:bg-slate-900"><i className="fa-solid fa-paste text-white"></i></div>
         </>
     )
 }

@@ -17,5 +17,5 @@ export function ProtectedRoute( props: Props ) {
                 (<Navigate to='/login' />)
             }
         </>
-    );
+    )
 }
