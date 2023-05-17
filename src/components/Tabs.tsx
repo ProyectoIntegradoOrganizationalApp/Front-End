@@ -17,7 +17,7 @@ function doAction(action: string, target: string) {
 export function Tabs(props: { tab: string, setTab: Function, icon?: string, title: string, links: Array<Tabs> }) {
 
     return (
-        <div className="bg-slate-800 h-fit px-4 py-0 flex justify-between items-center rounded-xl">
+        <div className="bg-slate-800 h-fit px-3 py-0 flex justify-between items-center rounded-xl">
             <div className="flex items-center gap-7 h-full">
                 {/* Header */}
                 <div className="flex items-center gap-4">
@@ -29,7 +29,6 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                 {/* Tabs */}
                 <div className="flex gap-2">
                     { props.links.map((link) =>
-                            
                         <li key={link.url} className="list-none">
                             { props.tab == link.url ? (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
@@ -44,7 +43,6 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                                 )
                             }
                         </li>
-                            
                     )}
                 </div>
             </div>

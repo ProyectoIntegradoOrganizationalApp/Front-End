@@ -57,6 +57,9 @@ b {
 .input {
     @apply rounded-none text-base border-slate-700/40 focus:outline-none dark:border-slate-700;
 }
+textarea {
+    @apply pt-3;
+}
 
 /* Or login */
 .divider::before {
@@ -206,4 +209,21 @@ progress {
 }
 .ReactModal__Content--after-open .modal {
     @apply !visible !opacity-100;
+}
+.min-h-28 {
+    min-height: 7rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    @apply py-0 text-black dark:text-white mb-6 overflow-hidden;
+}
+.breadcrumbs > ul > li + *:before, .breadcrumbs > ol > li + *:before {
+    @apply !text-black dark:!text-white opacity-100;
+}
+
+/* Grid */
+.gridApps {
+    @apply grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }

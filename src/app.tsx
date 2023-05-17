@@ -24,12 +24,14 @@ import Register from './pages/signIn/Register';
 import { Error } from './pages/Error';
 
 // Componentes
-import { ModalInterface } from './domain/ModalInterface.interface';
+import { ModalInterface } from './domain/UI/ModalInterface.interface';
 import { ModalContext } from './domain/context/ModalContext';
-import { CustomModal } from './adapters/components/modal/CustomModal';
+import { CustomModal } from './components/CustomModal';
 import { useModal } from './hooks/useModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
+import { Project } from './pages/dashboard/pages/project/Project';
+import { Store } from './pages/dashboard/pages/project/Store';
 
 /**
  *  Aplicación principal.
@@ -59,49 +61,61 @@ export function App() {
             />
             <AuthContext.Provider value={{ user, setUser }}>
                 <ModalContext.Provider value={{ modal, setModal }}>
-                    <CustomModal isOpen={modal?.isOpen ? true : false} closeModal={() => { setModal(null) }} atts={modal}/>
-                        <BrowserRouter basename='/'>
-                            <Routes>
+                    <CustomModal isOpen={modal?.isOpen ? true : false} closeModal={() => { setModal(null) }} atts={modal} />
+                    <BrowserRouter basename='/'>
+                        <Routes>
 
-                                <Route path="/home" element={<Home />} />
+                            <Route path="/home" element={<Home />} />
 
-                                <Route path="/" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
+                            <Route path="/" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
 
-                                    <Route path="profile/dashboard"
-                                        element={
-                                            <Profile />
-                                        }
-                                    />
+                                <Route path="profile/dashboard"
+                                    element={
+                                        <Profile />
+                                    }
+                                />
 
-                                    <Route path="profile/achievements"
-                                        element={
-                                            <Achievements />
-                                        }
-                                    />
+                                <Route path="profile/achievements"
+                                    element={
+                                        <Achievements />
+                                    }
+                                />
 
-                                    <Route path="projects/dashboard"
-                                        element={
-                                            <Projects />
-                                        }
-                                    />
+                                <Route path="projects/dashboard"
+                                    element={
+                                        <Projects />
+                                    }
+                                />
 
-                                    <Route path="friends/dashboard"
-                                        element={
-                                            <Friends />
-                                        }
-                                    />
-                                    <Route path="friend/:name"
-                                        element={
-                                            <Friend />
-                                        }
-                                    />
+                                <Route path="project/:name"
+                                    element={
+                                        <Project />
+                                    }
+                                />
 
-                                </Route>
+                                <Route path="project/:name/store"
+                                    element={
+                                        <Store />
+                                    }
+                                />
 
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/register" element={<Register />} />
-                                <Route path="*" element={<Error />} />
-                            </Routes>
+                                <Route path="friends/dashboard"
+                                    element={
+                                        <Friends />
+                                    }
+                                />
+                                <Route path="friend/:name"
+                                    element={
+                                        <Friend />
+                                    }
+                                />
+
+                            </Route>
+
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="*" element={<Error />} />
+                        </Routes>
                     </BrowserRouter>
                 </ModalContext.Provider>
             </AuthContext.Provider>

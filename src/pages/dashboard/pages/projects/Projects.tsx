@@ -28,12 +28,14 @@ export function Projects() {
                                 <div className="selectedProject" onClick={(event: React.MouseEvent<HTMLElement>) => { selectProject("ptoelquelolea") }}>
                                     <Item title="ptoelquelolea" description="nada más que comentar" tools={[
                                         {
+                                            type: "button",
                                             action: "edit",
                                             icon: "fa-solid fa-pen-to-square",
                                             color: "bg-green-700",
                                             target: "edit/idProyect"
                                         },
                                         {
+                                            type: "button",
                                             action: "remove",
                                             icon: "fa-solid fa-trash",
                                             color: "bg-red-700",
@@ -45,12 +47,14 @@ export function Projects() {
                                 <div onClick={(event: React.MouseEvent<HTMLElement>) => { selectProject("ptoelquelolea") }}>
                                     <Item title="ptoelquelolea" description="nada más que comentar" tools={[
                                         {
+                                            type: "button",
                                             action: "edit",
                                             icon: "fa-solid fa-pen-to-square",
                                             color: "bg-green-700",
                                             target: "edit/idProyect"
                                         },
                                         {
+                                            type: "button",
                                             action: "remove",
                                             icon: "fa-solid fa-trash",
                                             color: "bg-red-700",

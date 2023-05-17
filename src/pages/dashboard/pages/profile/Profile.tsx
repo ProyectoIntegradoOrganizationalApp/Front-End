@@ -115,7 +115,6 @@ export function Profile() {
                             title="Daily Tasks"
                             amount={daily}
                         />
-
                     </div>
                     <div className="bg-slate-800 rounded-xl w-5/12 p-4">
                         <Activity
@@ -136,17 +135,27 @@ export function Profile() {
                         content: [
                             {
                                 discriminator: "crud",
+                                tag: "input",
                                 type: "text",
                                 name: "title",
-                                placeholder: "Enter title"
+                                placeholder: "Enter title",
+                                min: 3,
+                                max: 35,
+                                required: true,
+                                width: "half"
                             },
                             {
                                 discriminator: "crud",
-                                type: "text",
+                                tag: "textarea",
                                 name: "description",
-                                placeholder: "Enter description"
+                                placeholder: "Enter description",
+                                min: 3,
+                                max: 250,
+                                width: "full"
                             }
-                        ]
+                        ],
+                        submitText: "Create Project",
+                        submitAction: ""
                     })} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-slate-800 absolute bottom-4 right-4">
                         <i className="fa-solid fa-plus text-white"></i>
                     </div>
@@ -164,18 +173,21 @@ export function Profile() {
                             return (
                                 <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
                                     {
+                                        type: "button",
                                         action: "view",
                                         icon: "fa-solid fa-eye",
                                         color: "bg-blue-700",
                                         target: "view/idProyect"
                                     },
                                     {
+                                        type: "button",
                                         action: "edit",
                                         icon: "fa-solid fa-pen-to-square",
                                         color: "bg-green-700",
                                         target: "edit/idProyect"
                                     },
                                     {
+                                        type: "button",
                                         action: "remove",
                                         icon: "fa-solid fa-trash",
                                         color: "bg-red-700",

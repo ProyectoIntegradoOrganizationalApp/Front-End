@@ -38,7 +38,7 @@ export function Friends() {
                             }
                         ]} />
                         <div
-                            className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-green-700 text-black dark:text-white hover:bg-green-700/50">
+                            className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-green-700 dark:text-white hover:bg-green-700/50">
                             <i className="fa-solid fa-plus"></i>
                         </div>
                     </div>
@@ -47,17 +47,19 @@ export function Friends() {
                         <div className="flex flex-col gap-3">
                             <Item title="Firebloh" description="sometimes world feels like on fire..." tools={[
                                 {
-                                    action: "edit",
+                                    type: "button",
+                                    action: "message",
                                     icon: "fa-solid fa-message",
                                     color: "bg-slate-700",
                                     target: "message/idFriend"
                                 },
                                 {
+                                    type: "button",
                                     action: "remove",
                                     icon: "fa-solid fa-trash",
                                     color: "bg-red-700",
                                     target: "remove/idFriend"
-                                },
+                                }
                             ]} />
                         </div>
                     </div>

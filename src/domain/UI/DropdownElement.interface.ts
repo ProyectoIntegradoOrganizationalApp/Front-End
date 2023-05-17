@@ -1,5 +1,5 @@
 /**
- *  Interfaz de DropdownElement
+ *  Interfaz de DropdownElements
  */
 export interface DropdownElement {
     action: string,
