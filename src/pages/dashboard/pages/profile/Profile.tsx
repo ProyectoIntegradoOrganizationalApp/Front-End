@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 // Interfaces
 import { MyCalendar } from '../../../../domain/UI/Calendar.interface';
-import { UserActivity } from '../../../../domain/user/UserActivity.interface';
 import { Profile } from '../../../../domain/profile/Profile.interface';
 
 // Componentes
@@ -17,6 +16,7 @@ import { useOutletContext } from 'react-router-dom';
 
 // Hooks
 import { useModal } from '../../../../hooks/useModal';
+import { useUtils } from '../../../../hooks/useUtils';
 
 const date = new Date();
 function GenerateMonthYear(): string {
@@ -73,26 +73,12 @@ export function Profile() {
 
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
-        if (data) {
-            data.activity.map((act: UserActivity) => {
-                let fechaActual = new Date();
-
-                let primerDiaSemana = new Date(fechaActual);
-                primerDiaSemana.setDate(fechaActual.getDate() - fechaActual.getDay());
-
-                let ultimoDiaSemana = new Date(fechaActual);
-                ultimoDiaSemana.setDate(fechaActual.getDate() + (6 - fechaActual.getDay()));
-
-                let aVerificar = new Date(act.date);
-
-                if (aVerificar.getDate() == fechaActual.getDate()) {
-                    setDaily(act.commits);
-                }
-
-                if (aVerificar >= primerDiaSemana && aVerificar <= ultimoDiaSemana) {
-                    setWeekly(act.commits);
-                }
-            })
+        if( data ) {
+            const getUserWork = useUtils(data?.activity);
+            const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
+    
+            setDaily(commitsDaily);
+            setWeekly(commitsWeekly);
         }
     }, [data?.user.id]);
 
@@ -115,10 +101,13 @@ export function Profile() {
 
                     </div>
                     <div className="bg-slate-800 rounded-xl w-5/12 p-4">
-                        <Activity
-                            title="Daily Activity"
-                            data={data}
-                        />
+                        { data?.activity && (
+                            <Activity
+                                title="Daily Activity"
+                                data={data}
+                            />
+                        )}
+                        
                     </div>
                     <div className="bg-slate-800 rounded-xl w-3/12 p-4">
                         <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
