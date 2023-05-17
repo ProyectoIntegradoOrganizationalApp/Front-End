@@ -29,7 +29,7 @@ export function Item(props: { icon?: string, title: string, description: string,
                             {/* Title */}
                             <div className="flex flex-col gap-2">
                                 <p className="leading-none text-white text-base">{props.title}</p>
-                                <p className="leading-none text-white/50 text-base">{props.description}</p>
+                                <p className="leading-none text-white/50 text-sm">{props.description}</p>
                             </div>
                         </div>
                     } {

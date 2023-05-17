@@ -161,17 +161,17 @@ progress {
     border-right: none;
 }
 
-/* Projects */
-.selectProject {
+/* Projects & Apps */
+.selectElement {
     @apply flex flex-col gap-3;
 }
-.selectProject > div > div {
+.selectElement > div > div {
     @apply cursor-pointer transition-all select-none;
 }
-.selectProject > div > div:hover {
+.selectElement > div > div:hover {
     @apply bg-slate-900;
 }
-.selectedProject > div {
+.selectedElement > div {
     @apply bg-slate-900;
 }
 .rotate-35 {
@@ -216,14 +216,8 @@ progress {
 
 /* Breadcrumbs */
 .breadcrumbs {
-    @apply py-0 text-black dark:text-white mb-6 overflow-hidden;
+    @apply py-0 text-black dark:text-white mb-4 overflow-hidden ml-2 w-full;
 }
 .breadcrumbs > ul > li + *:before, .breadcrumbs > ol > li + *:before {
     @apply !text-black dark:!text-white opacity-100;
-}
-
-/* Grid */
-.gridApps {
-    @apply grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }

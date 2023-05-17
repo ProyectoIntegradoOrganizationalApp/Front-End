@@ -104,9 +104,9 @@ export function Profile() {
             <AchievementsInfo
                 data={data}
             />
-            <div className="w-3/4 rounded-xl flex flex-col gap-6">
-                <div className="flex gap-6">
-                    <div className="flex flex-col gap-6 w-4/12">
+            <div className="w-3/4 rounded-xl flex flex-col gap-4 h-full">
+                <div className="flex gap-4">
+                    <div className="flex flex-col gap-4 w-4/12">
                         <Statistics
                             title="Weekly Tasks"
                             amount={weekly}

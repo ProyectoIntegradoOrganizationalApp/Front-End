@@ -31,7 +31,7 @@ import { useModal } from './hooks/useModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
-import { Store } from './pages/dashboard/pages/project/Store';
+import { Store } from './pages/dashboard/pages/project/components/Store';
 
 /**
  *  Aplicación principal.

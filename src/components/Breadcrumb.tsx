@@ -24,14 +24,14 @@ export function Breadcrumb(props: { breadcrumbs: BreadcrumbInterface[] }) {
                                         index != props.breadcrumbs.length - 1 &&
                                         <Link to={breadcrumb.link ? breadcrumb.link : ""} className="flex gap-2">
                                             <i className={breadcrumb.icon}></i>
-                                            <p className="leading-[1.1]">{breadcrumb.name}</p>
+                                            <p>{breadcrumb.name}</p>
                                         </Link>
                                     } {
                                         index == props.breadcrumbs.length - 1 &&
                                         <>
                                             <div className="flex items-center gap-2 text-white/50">
                                                 <i className={breadcrumb.icon}></i>
-                                                <p className="leading-[1.1]">{breadcrumb.name}</p>
+                                                <p>{breadcrumb.name}</p>
                                             </div>
                                         </>
                                     }

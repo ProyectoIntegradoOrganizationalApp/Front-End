@@ -32,12 +32,12 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                         <li key={link.url} className="list-none">
                             { props.tab == link.url ? (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !px-5 !py-1 !max-h-none !h-fit border-none">
+                                        className="btn btn-primary flex justify-center items-center !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">
                                         {link.name}
                                     </div>
                                 ): (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !px-5 !py-1 !max-h-none !h-fit border-none !bg-transparent hover:!bg-slate-600">
+                                        className="btn btn-primary flex justify-center items-center !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-slate-600">
                                         {link.name}
                                     </div>
                                 )
