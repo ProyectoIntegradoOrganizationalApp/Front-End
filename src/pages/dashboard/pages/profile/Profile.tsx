@@ -71,6 +71,7 @@ export function Profile() {
 
     const data: Profile = useOutletContext();
 
+    // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
         if (data) {
             data.activity.map((act: UserActivity) => {
@@ -93,11 +94,7 @@ export function Profile() {
                 }
             })
         }
-    }, [data?.user.id])
-
-    const activity = {
-
-    };
+    }, [data?.user.id]);
 
     return (
         <>
@@ -120,7 +117,7 @@ export function Profile() {
                     <div className="bg-slate-800 rounded-xl w-5/12 p-4">
                         <Activity
                             title="Daily Activity"
-                            activity={activity}
+                            data={data}
                         />
                     </div>
                     <div className="bg-slate-800 rounded-xl w-3/12 p-4">
