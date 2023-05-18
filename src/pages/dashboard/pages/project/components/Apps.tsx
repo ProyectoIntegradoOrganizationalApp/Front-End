@@ -14,7 +14,7 @@ export function Apps(props: { project: string }) {
         <>
             <div className="flex flex-wrap bg-slate-700 flex-[4] p-4 gap-2 h-full rounded-xl content-start">
                 {/* Foreach (Apps) */}
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("Taskman") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
+                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
                         <Item title="Taskman" description="Work Management" tools={[
                             {
@@ -27,7 +27,7 @@ export function Apps(props: { project: string }) {
                         ]} descriptionBottom={true} />
                     </div>
                 </div>
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("Taskman") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
+                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
                         <Item title="Taskman" description="Work Management" tools={[
                             {
@@ -40,7 +40,7 @@ export function Apps(props: { project: string }) {
                         ]} descriptionBottom={true} />
                     </div>
                 </div>
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("Taskman") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
+                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
                         <Item title="Taskman" description="Work Management" tools={[
                             {

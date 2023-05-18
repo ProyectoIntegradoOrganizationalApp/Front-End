@@ -100,13 +100,13 @@ export function Profile() {
     };
 
     return (
-        <>
+        <div className="w-full flex flex-wrap gap-4">
             <AchievementsInfo
                 data={data}
             />
-            <div className="w-3/4 rounded-xl flex flex-col gap-4 h-full">
-                <div className="flex gap-4">
-                    <div className="flex flex-col gap-4 w-4/12">
+            <div className="flex-[.625] basis-[820px] rounded-xl flex flex-col gap-4 w-full">
+                <div className="flex flex-col lg:flex-row flex-wrap gap-4">
+                    <div className="flex-[1.8] basis-[80px] flex flex-col gap-4">
                         <Statistics
                             title="Weekly Tasks"
                             amount={weekly}
@@ -116,17 +116,19 @@ export function Profile() {
                             amount={daily}
                         />
                     </div>
-                    <div className="bg-slate-800 rounded-xl w-5/12 p-4">
-                        <Activity
-                            title="Daily Activity"
-                            activity={activity}
-                        />
-                    </div>
-                    <div className="bg-slate-800 rounded-xl w-3/12 p-4">
-                        <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
+                    <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4">
+                        <div className="flex-[3] bg-slate-800 rounded-xl p-4">
+                            <Activity
+                                title="Daily Activity"
+                                activity={activity}
+                            />
+                        </div>
+                        <div className="flex-[2] bg-slate-800 rounded-xl p-4">
+                            <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
+                        </div>
                     </div>
                 </div>
-                <div className="bg-slate-700 rounded-xl w-full h-full relative">
+                <div className="bg-slate-700 flex-1 rounded-xl w-full relative">
                     {/* Create Project */}
                     <div onClick={() => openModal({
                         isOpen: true,
@@ -168,7 +170,7 @@ export function Profile() {
                             {/* <SettingsIcon/> */}
                         </div>
                     </div>
-                    <div className="flex flex-col gap-3 p-4">
+                    <div className="flex flex-col gap-3 p-4 min-h-[4.5rem]">
                         {data?.projects.map(project => {
                             return (
                                 <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
@@ -199,6 +201,6 @@ export function Profile() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
