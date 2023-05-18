@@ -20,34 +20,36 @@ export function Item(props: { icon?: string, title: string, description: string,
         <>
             <div className="bg-slate-800 w-full h-fit px-4 py-3 flex justify-between items-center rounded-xl gap-4">
                 {/* Info */}
-                <div className="flex items-center gap-7 h-full">
-                    {
-                        props.descriptionBottom == true &&
-                        <div className="flex items-center gap-4">
-                            {/* Icon (si no hay icon, uno por defecto) */}
-                            <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
-                            {/* Title */}
-                            <div className="flex flex-col gap-2">
-                                <p className="leading-none text-white text-base">{props.title}</p>
-                                <p className="leading-none text-white/50 text-sm">{props.description}</p>
-                            </div>
+                {
+                    props.descriptionBottom == true &&
+                    <div className="flex items-center gap-4">
+                        {/* Icon (si no hay icon, uno por defecto) */}
+                        <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
+                        {/* Title */}
+                        <div className="flex flex-col gap-2">
+                            <p className="leading-none text-white text-base">{props.title}</p>
+                            <p className="leading-none text-white/50 text-sm">{props.description}</p>
                         </div>
-                    } {
-                        !props.descriptionBottom &&
-                        <>
+                    </div>
+                } {
+                    !props.descriptionBottom &&
+                    <>
+                        <div className="flex gap-2">
                             <div className="flex items-center gap-4">
                                 {/* Icon (si no hay icon, uno por defecto) */}
                                 <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
                                 {/* Title */}
-                                <p className="leading-none text-white text-base">{props.title}</p>
+                                <p className="leading-none text-white text-base mr-7">{props.title}</p>
                             </div>
-                            {/* Separator */}
-                            <div className="h-9 w-0.5 bg-slate-600"></div>
-                            {/* Description */}
-                            <p className="leading-none text-white/50 text-base">{props.description}</p>
-                        </>
-                    }
-                </div>
+                            <div className="items-center hidden sm:flex gap-7">
+                                {/* Separator */}
+                                <div className="w-0.5 bg-slate-600 h-9"></div>
+                                {/* Description */}
+                                <p className="leading-none text-white/50 text-base">{props.description}</p>
+                            </div>
+                        </div>
+                    </>
+                }
                 {/* Tools */}
                 <div className="flex items-center gap-2">
                     {

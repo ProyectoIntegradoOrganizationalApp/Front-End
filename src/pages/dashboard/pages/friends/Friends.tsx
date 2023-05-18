@@ -37,10 +37,7 @@ export function Friends() {
                                 name: "Blocked"
                             }
                         ]} />
-                        <div
-                            className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-green-700 dark:text-white hover:bg-green-700/50">
-                            <i className="fa-solid fa-plus"></i>
-                        </div>
+                        <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                     </div>
                     <div className="m-4 flex flex-col gap-4">
                         <Searcher bg="bg-slate-800" placeholder="Search friends..." />
