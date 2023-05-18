@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import { AchievementPercentage } from "../../domain/AchievementPercentage.interface";
+import { AchievementPercentage } from "../../../../../domain/achievement/AchievementPercentage.interface";
 
 /**
  *  Componente de Achievement Info para ver el conjunto de Level y List de logros del usuario

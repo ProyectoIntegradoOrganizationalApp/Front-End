@@ -13,10 +13,12 @@ import { UserDTO } from "../../domain/user/UserDTO";
  */
 interface FormProps {
     name?: string
-    last_name?:string
+    last_name?: string
+    prefix?: string
     phone_number?: string
     email: string
     password: string
+    confirmPass?: string
 }
 
 export const useUserApi = () => {
@@ -27,9 +29,7 @@ export const useUserApi = () => {
 
     const API = import.meta.env.VITE_API_URL;
 
-    const { setInternalError } = useErrorHandler();
-
-    const fetchUser = async ( props: FormProps ) => {
+    const fetchUser = ( props: FormProps ) => {
         setLoading(true);
 
         const body = JSON.stringify({email: props.email, password: props.password});
@@ -39,48 +39,45 @@ export const useUserApi = () => {
                 "Content-Type": "application/json" 
             }
         }).then( data => {
-            if( data.status == 200 ) {
-                handleData(data.data);
-            }
-
+            handleData(data.data);
             setLoading(false);
-        })
+        });
+
+        return () => {
+            setLoading(false);
+        }
 
     }
 
-    const registerUser = async ( props: FormProps ) => {
+    const registerUser = ( props: FormProps ) => {
         setLoading(true);
 
-        if ( !props.name || !props.last_name ) {
+        if ( !props.name || !props.last_name || !props.confirmPass || !props.phone_number || !props.prefix ) {
             return;
         }
 
-        const body = JSON.stringify({email: props.email, phone: props.phone_number, first_name: props.name, last_name: props.last_name, password: props.password});
+        let phone = props.prefix + props.phone_number;
+        
+        const body = JSON.stringify({email: props.email, phone: phone, first_name: props.name, last_name: props.last_name, password: props.password, confirmpass: props.confirmPass});
 
         axios.post<Register | ApiError>(`${API}/register`, body, {
             headers: {
                 "Content-Type": "application/json"
             },
-        }).then( data => {
-            if( data.status == 200 ) {
-                handleData(data.data, props);
-            }
-
+        }).then( data => {   
+            handleData(data.data, props);  
+        }).catch(err => {
+            const error: ApiError = { error: true, message: err };
+            handleData(error);
         })
-
-        return () => {
-            setLoading(false);
-        }
     }
 
     const handleData = ( data: UserDTO | Register | ApiError, props?: FormProps ) => {
-        
+
         // Limpiamos errores
         setError({error: false, message: ''});
 
-        /**
-         *  Register & Error
-         */
+        // Register & error
         if( data && "error" in data ) {
             // Error
             if( data.error ) {
@@ -93,14 +90,12 @@ export const useUserApi = () => {
             }
         }
 
-        /**
-         *  Login
-         */
+        // Login
         if( data && "id" in data ) {
             setData(data);
         }
         
-
+        setLoading(false);
     }
     
     return { data, error, loading, fetchUser, registerUser };

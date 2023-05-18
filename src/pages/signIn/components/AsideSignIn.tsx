@@ -11,7 +11,7 @@ interface Props {
     }
 }
 
-export const AsideSignIn = function ( props: Props) {
+export const AsideSignIn = function ( props: Props ) {
     return (
         <>
             <aside className="flex-1 flex flex-col justify-center gap-16">
