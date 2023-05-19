@@ -1,6 +1,6 @@
 import { InputModalInterface } from "./InputModalInterface";
 import { SettingInterface } from "./SettingInterface.interface";
-import { SideElementsModal } from "./SideElementsModal.interface";
+import { SideElementsModal } from "../SideElementsModal.interface";
 
 /**
  * Interfaz que declara la estructura con la que nos llegan
@@ -11,5 +11,7 @@ export interface ModalInterface {
     type: string,
     title?: string,
     sidebarElements?: SideElementsModal[],
-    content: SettingInterface[] | InputModalInterface[]
+    content: SettingInterface[] | InputModalInterface[],
+    submitText: string,
+    submitAction: string
 }

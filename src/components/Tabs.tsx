@@ -17,7 +17,7 @@ function doAction(action: string, target: string) {
 export function Tabs(props: { tab: string, setTab: Function, icon?: string, title: string, links: Array<Tabs> }) {
 
     return (
-        <div className="bg-slate-800 h-fit px-4 py-0 flex justify-between items-center rounded-xl">
+        <div className="bg-slate-800 h-fit px-3 py-0 flex justify-between items-center rounded-xl">
             <div className="flex items-center gap-7 h-full">
                 {/* Header */}
                 <div className="flex items-center gap-4">
@@ -29,22 +29,20 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                 {/* Tabs */}
                 <div className="flex gap-2">
                     { props.links.map((link) =>
-                            
                         <li key={link.url} className="list-none">
                             { props.tab == link.url ? (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !px-5 !py-1 !max-h-none !h-fit border-none">
+                                        className="btn btn-primary flex justify-center items-center !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">
                                         {link.name}
                                     </div>
                                 ): (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !px-5 !py-1 !max-h-none !h-fit border-none !bg-transparent hover:!bg-slate-600">
+                                        className="btn btn-primary flex justify-center items-center !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-slate-600">
                                         {link.name}
                                     </div>
                                 )
                             }
                         </li>
-                            
                     )}
                 </div>
             </div>

@@ -16,6 +16,7 @@ export function ProtectedRoute( props: Props ) {
                 (props.children): 
                 (<Navigate to='/login' />)
             }
+            {/* { props.children } */}
         </>
     )
 }

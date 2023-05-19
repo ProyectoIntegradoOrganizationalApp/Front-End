@@ -83,13 +83,13 @@ export function Profile() {
     }, [data?.user.id]);
 
     return (
-        <>
+        <div className="w-full flex flex-wrap gap-4">
             <AchievementsInfo
                 data={data}
             />
-            <div className="w-3/4 rounded-xl flex flex-col gap-6">
-                <div className="flex gap-6">
-                    <div className="flex flex-col gap-6 w-4/12">
+            <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 w-full">
+                <div className="flex flex-col lg:flex-row flex-wrap gap-4">
+                    <div className="flex-[1.8] basis-[80px] flex flex-col gap-4">
                         <Statistics
                             title="Weekly Tasks"
                             amount={weekly}
@@ -98,70 +98,76 @@ export function Profile() {
                             title="Daily Tasks"
                             amount={daily}
                         />
-
                     </div>
-                    <div className="bg-slate-800 rounded-xl w-5/12 p-4">
-                        { data?.activity && (
-                            <Activity
-                                title="Daily Activity"
-                                data={data}
-                            />
-                        )}
-                        
-                    </div>
-                    <div className="bg-slate-800 rounded-xl w-3/12 p-4">
-                        <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
+                    <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4">
+                        <div className="flex-[3] bg-slate-800 rounded-xl p-4">
+                            { data?.activity && (
+                                <Activity
+                                    title="Daily Activity"
+                                    data={data}
+                                />
+                            )}
+                        </div>
+                        <div className="flex-[2] bg-slate-800 rounded-xl p-4">
+                            <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
+                        </div>
                     </div>
                 </div>
-                <div className="bg-slate-700 rounded-xl w-full h-full relative">
-                    {/* Create Project */}
-                    <div onClick={() => openModal({
-                        isOpen: true,
-                        type: "crud",
-                        title: "Create Project",
-                        content: [
-                            {
-                                discriminator: "crud",
-                                type: "text",
-                                name: "title",
-                                placeholder: "Enter title"
-                            },
-                            {
-                                discriminator: "crud",
-                                type: "text",
-                                name: "description",
-                                placeholder: "Enter description"
-                            }
-                        ]
-                    })} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-slate-800 absolute bottom-4 right-4">
-                        <i className="fa-solid fa-plus text-white"></i>
-                    </div>
-                    <div className="bg-slate-800 flex items-center justify-center w-full h-16 rounded-t-xl relative text-white text-base">
-                        <div className="absolute top-5 left-4">
-                            <InfoTooltip title="All your projects" />
-                        </div>
+                <div className="flex-1 rounded-xl bg-slate-700 flex flex-col min-h-[20rem]">
+                    <div className="bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-white text-base p-4">
+                        <InfoTooltip title="All your projects" />
                         Your Projects
-                        <div className="absolute top-5 right-4">
-                            {/* <SettingsIcon/> */}
-                        </div>
+                        {/* Create Project */}
+                        <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all" onClick={() => openModal({
+                            isOpen: true,
+                            type: "crud",
+                            title: "Create Project",
+                            content: [
+                                {
+                                    discriminator: "crud",
+                                    tag: "input",
+                                    type: "text",
+                                    name: "title",
+                                    placeholder: "Enter title",
+                                    min: 3,
+                                    max: 35,
+                                    required: true,
+                                    width: "half"
+                                },
+                                {
+                                    discriminator: "crud",
+                                    tag: "textarea",
+                                    name: "description",
+                                    placeholder: "Enter description",
+                                    min: 3,
+                                    max: 250,
+                                    width: "full"
+                                }
+                            ],
+                            submitText: "Create Project",
+                            submitAction: ""
+                        })}></i>
                     </div>
-                    <div className="flex flex-col gap-3 p-4">
+                    <div id="scrollbar" className="flex flex-col gap-3 p-4 min-h-[4.5rem]">
                         {data?.projects.map(project => {
                             return (
                                 <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
                                     {
+                                        type: "button",
                                         action: "view",
                                         icon: "fa-solid fa-eye",
                                         color: "bg-blue-700",
                                         target: "view/idProyect"
                                     },
                                     {
+                                        type: "button",
                                         action: "edit",
                                         icon: "fa-solid fa-pen-to-square",
                                         color: "bg-green-700",
                                         target: "edit/idProyect"
                                     },
                                     {
+                                        type: "button",
                                         action: "remove",
                                         icon: "fa-solid fa-trash",
                                         color: "bg-red-700",
@@ -170,9 +176,239 @@ export function Profile() {
                                 ]} />
                             )
                         })}
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
+                        <Item title={"fa"} description="nada más que comentar" tools={[
+                            {
+                                type: "button",
+                                action: "view",
+                                icon: "fa-solid fa-eye",
+                                color: "bg-blue-700",
+                                target: "view/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "edit",
+                                icon: "fa-solid fa-pen-to-square",
+                                color: "bg-green-700",
+                                target: "edit/idProyect"
+                            },
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
+                                color: "bg-red-700",
+                                target: "remove/idProyect"
+                            }
+                        ]} />
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

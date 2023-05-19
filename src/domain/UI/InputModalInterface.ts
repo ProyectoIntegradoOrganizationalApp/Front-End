@@ -4,7 +4,12 @@
  */
 export interface InputModalInterface {
     discriminator: "crud",
-    type: string,
+    tag: string,
+    type?: string,
     name: string,
     placeholder: string
+    min?: number,
+    max?: number,
+    required?: boolean,
+    width: string
 }
