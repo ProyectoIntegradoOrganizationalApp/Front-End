@@ -128,7 +128,7 @@ export function Profile() {
                         </div>
                     </div>
                 </div>
-                <div className="flex-1 rounded-xl flex flex-col gap-4 w-full">
+                <div className="flex-1 rounded-xl bg-slate-700 flex flex-col min-h-[20rem]">
                     <div className="bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-white text-base p-4">
                         <InfoTooltip title="All your projects" />
                         Your Projects
