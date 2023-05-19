@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { ModalInterface } from '../ModalInterface.interface';
+import { ModalInterface } from '../UI/ModalInterface.interface';
 
 interface ModalContext {
     modal: ModalInterface | null,

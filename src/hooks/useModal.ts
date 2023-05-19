@@ -2,8 +2,8 @@
 import { useContext } from "react";
 
 // Interfaces
-import { ModalInterface } from "../domain/ModalInterface.interface";
-import { SettingInterface } from "../domain/SettingInterface.interface";
+import { ModalInterface } from "../domain/UI/ModalInterface.interface";
+import { SettingInterface } from "../domain/UI/SettingInterface.interface";
 import { SideElementsModal } from "../domain/SideElementsModal.interface";
 import { ModalContext } from "../domain/context/ModalContext";
 

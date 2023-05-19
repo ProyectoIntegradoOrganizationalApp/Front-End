@@ -13,6 +13,14 @@
 * {
     font-family: 'Mulish';
 }
+*::-webkit-scrollbar {
+    @apply w-5;
+}
+*::-webkit-scrollbar-thumb {
+    @apply bg-slate-900 bg-clip-padding;
+    border: 10px solid rgba(0, 0, 0, 0);
+    border-right: none;
+}
 
 html, body {
     height: 100%;
@@ -56,6 +64,9 @@ b {
 /* Inputs */
 .input {
     @apply rounded-none text-base border-slate-700/40 focus:outline-none dark:border-slate-700;
+}
+textarea {
+    @apply pt-3;
 }
 
 /* Or login */
@@ -146,29 +157,23 @@ progress {
 .sendico::after {
     font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\e20a";
 }
+
+/* Scrollbar */
 #scrollbar {
     @apply overflow-y-auto;
 }
-#scrollbar::-webkit-scrollbar {
-    @apply w-7;
-}
-#scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-slate-900 bg-clip-padding;
-    border: 20px solid rgba(0, 0, 0, 0);
-    border-right: none;
-}
 
-/* Projects */
-.selectProject {
+/* Projects & Apps */
+.selectElement {
     @apply flex flex-col gap-3;
 }
-.selectProject > div > div {
+.selectElement > div > div {
     @apply cursor-pointer transition-all select-none;
 }
-.selectProject > div > div:hover {
+.selectElement > div > div:hover {
     @apply bg-slate-900;
 }
-.selectedProject > div {
+.selectedElement > div {
     @apply bg-slate-900;
 }
 .rotate-35 {
@@ -206,4 +211,15 @@ progress {
 }
 .ReactModal__Content--after-open .modal {
     @apply !visible !opacity-100;
+}
+.min-h-28 {
+    min-height: 7rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    @apply py-0 text-black dark:text-white mb-4 overflow-hidden ml-2 w-full;
+}
+.breadcrumbs > ul > li + *:before, .breadcrumbs > ol > li + *:before {
+    @apply !text-black dark:!text-white opacity-100;
 }

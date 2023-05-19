@@ -1,6 +1,6 @@
 // React / Router
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Item } from '../../../../components/Item';
 import { Searcher } from '../../../../components/Searcher';
@@ -11,59 +11,205 @@ import { useUser } from '../../../../hooks/useUser';
 
 export function Projects() {
     const { user } = useUser();
-    
-    const [selectedProject, selectProject] = useState<string>("none");
+    const [selectedElement, selectElement] = useState<string>("none");
+
+    let navigate = useNavigate();
+    const openProject = (link: string) => {
+        navigate("/project/" + link);
+    }
 
     return (
         <>
-            <div className="bg-slate-800 w-full rounded-xl flex gap-6 p-4">
-                <div className={`bg-slate-700 rounded-xl flex flex-col gap-4 p-4 w-9/12 ${selectedProject == "none" ? "!w-full" : ""}`}>
-                    <div id="scrollbar" className="flex flex-col gap-4">
+            <div className="flex-1 bg-slate-800 w-full rounded-xl flex gap-6 p-4">
+                <div className={`flex-1 bg-slate-700 rounded-xl flex flex-col gap-4 p-4 w-9/12 ${selectedElement == "none" ? "!w-full" : ""}`}>
+                    <div id="scrollbar" className="flex-1 flex flex-col gap-4">
                         <Searcher bg="bg-slate-800" placeholder="Search a project..." />
-                        <div className="selectProject">
+                        <div id="scrollbar" className="flex-1 selectElement">
                             {/* Foreach (cambiar 'ptoelquelolea' por el nombre que llega por el bucle) */}
-                            {/* ONE */}
-                            {
-                                selectedProject == "ptoelquelolea" &&
-                                <div className="selectedProject" onClick={(event: React.MouseEvent<HTMLElement>) => { selectProject("ptoelquelolea") }}>
-                                    <Item title="ptoelquelolea" description="nada más que comentar" tools={[
-                                        {
-                                            action: "edit",
-                                            icon: "fa-solid fa-pen-to-square",
-                                            color: "bg-green-700",
-                                            target: "edit/idProyect"
-                                        },
-                                        {
-                                            action: "remove",
-                                            icon: "fa-solid fa-trash",
-                                            color: "bg-red-700",
-                                            target: "remove/idProyect"
-                                        }
-                                    ]} />
-                                </div>
-                            } { selectedProject != "ptoelquelolea" &&
-                                <div onClick={(event: React.MouseEvent<HTMLElement>) => { selectProject("ptoelquelolea") }}>
-                                    <Item title="ptoelquelolea" description="nada más que comentar" tools={[
-                                        {
-                                            action: "edit",
-                                            icon: "fa-solid fa-pen-to-square",
-                                            color: "bg-green-700",
-                                            target: "edit/idProyect"
-                                        },
-                                        {
-                                            action: "remove",
-                                            icon: "fa-solid fa-trash",
-                                            color: "bg-red-700",
-                                            target: "remove/idProyect"
-                                        }
-                                    ]} />
-                                </div>
-                            }
-                            
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
+                            <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                    {
+                                        type: "button",
+                                        action: "edit",
+                                        icon: "fa-solid fa-pen-to-square",
+                                        color: "bg-green-700",
+                                        target: "edit/idProyect"
+                                    },
+                                    {
+                                        type: "button",
+                                        action: "remove",
+                                        icon: "fa-solid fa-trash",
+                                        color: "bg-red-700",
+                                        target: "remove/idProyect"
+                                    }
+                                ]} />
+                            </div>
                         </div>
                     </div>
                 </div>
-                { selectedProject != "none" &&
+                {selectedElement != "none" &&
                     <div className="bg-slate-700 w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
                         <div className="absolute top-5 right-4">
                             <Share link="url_proyecto_invitación" />
@@ -83,7 +229,7 @@ export function Projects() {
                             }
                             {/* Info */}
                             <div className="flex flex-col items-center gap-4">
-                                <p className="text-black dark:text-white text-3xl leading-none">{selectedProject}</p>
+                                <p className="text-black dark:text-white text-3xl leading-none">{selectedElement}</p>
                                 <p className="text-black dark:text-white/50 text-center leading-none">nada más que comentar</p>
                             </div>
                             {/* Members */}

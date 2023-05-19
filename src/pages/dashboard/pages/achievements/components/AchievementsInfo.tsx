@@ -33,7 +33,7 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
 
     return (
         <>
-            <div className="bg-slate-800 w-1/4 rounded-xl relative flex flex-col items-center gap-12 p-8">
+            <div className="bg-slate-800 rounded-xl relative flex-1 flex flex-col items-center gap-12 p-8 min-w-[25%]">
                 <div className="absolute top-5 left-4">
                     <InfoTooltip title="Your last 6 achievements completing" position="right" />
                 </div>
