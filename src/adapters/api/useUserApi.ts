@@ -18,6 +18,7 @@ interface FormProps {
     email: string
     password: string
     confirmPass?: string
+    photo?: string
 }
 
 export const useUserApi = () => {
@@ -64,13 +65,13 @@ export const useUserApi = () => {
     const registerUser = ( props: FormProps ): void => {
         setLoading(true);
 
-        if ( !props.name || !props.last_name || !props.confirmPass || !props.phone_number || !props.prefix ) {
+        if ( !props.name || !props.last_name || !props.confirmPass || !props.phone_number || !props.prefix || !props.photo ) {
             return;
         }
 
         let phone = props.prefix + props.phone_number;
         
-        const body = JSON.stringify({email: props.email, phone: phone, first_name: props.name, last_name: props.last_name, password: props.password, confirmpass: props.confirmPass});
+        const body = JSON.stringify({email: props.email, phone: phone, first_name: props.name, last_name: props.last_name, password: props.password, confirmpass: props.confirmPass, photo: props.photo});
 
         axios.post<Register | ApiError>(`${API}/register`, body, {
             headers: {
