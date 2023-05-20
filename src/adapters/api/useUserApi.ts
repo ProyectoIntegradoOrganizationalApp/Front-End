@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import { ApiError } from "../../domain/ApiError.interface";
 import { Register } from "./Register.interface";
-import { useErrorHandler } from "../../hooks/useErrorHandler";
 import { UserDTO } from "../../domain/user/UserDTO";
 
 /**
@@ -23,13 +22,22 @@ interface FormProps {
 
 export const useUserApi = () => {
 
+    /**
+     * Estados que se exportan del hook
+     */
     const [data, setData] = useState<UserDTO>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
     const API = import.meta.env.VITE_API_URL;
 
-    const fetchUser = ( props: FormProps ) => {
+    /**
+     * Función de login, genera un ApiError en caso de fallar y 
+     * un UserDTO si sale bien, UserDTO son los datos que se 
+     * persisten en el contexto de la APP.
+     * @param props 
+     */
+    const fetchUser = ( props: FormProps ): void => {
         setLoading(true);
 
         const body = JSON.stringify({email: props.email, password: props.password});
@@ -41,15 +49,19 @@ export const useUserApi = () => {
         }).then( data => {
             handleData(data.data);
             setLoading(false);
-        });
-
-        return () => {
-            setLoading(false);
-        }
+        }).catch( err => {
+            const error: ApiError = { error: true, message: err};
+            handleData(error);
+        })
 
     }
 
-    const registerUser = ( props: FormProps ) => {
+    /**
+     * Función de registro.
+     * @param props 
+     * @returns 
+     */
+    const registerUser = ( props: FormProps ): void => {
         setLoading(true);
 
         if ( !props.name || !props.last_name || !props.confirmPass || !props.phone_number || !props.prefix ) {
@@ -72,7 +84,16 @@ export const useUserApi = () => {
         })
     }
 
-    const handleData = ( data: UserDTO | Register | ApiError, props?: FormProps ) => {
+    /**
+     * Función que procesa la respuesta del servidor generada por 
+     * las funciones anteriores, se encarga de manejar errores y 
+     * alterar el estado dependiendo de las respuestas.
+     * 
+     * @param data Datos generados por la respuestas
+     * @param props Datos que le llega a la función tras registrar
+     * para logear al usuario automáticamente.
+     */
+    const handleData = ( data: UserDTO | Register | ApiError, props?: FormProps ): void => {
 
         // Limpiamos errores
         setError({error: false, message: ''});

@@ -8,9 +8,7 @@ const useChart = ( data: Profile ) => {
     const options = {
         responsive: true,
         plugins: {
-          legend: {
-            position: 'top' as const,
-          },
+
         },
     };
 
