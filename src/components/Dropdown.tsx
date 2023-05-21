@@ -21,7 +21,7 @@ export function Dropdown(props: { selectedElement?: string, selectElement?: Func
     return (
         <>
             <div className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} className="btn btn-primary flex items-center justify-between !text-left !px-5 gap-7 !outline-none leading-none h-fit min-h-0" onClick={(event: React.MouseEvent<HTMLElement>) => { openDropdown()}}>
+                <div tabIndex={0} className="btn btn-primary flex flex-nowrap items-center justify-between !text-left !px-5 gap-7 !outline-none leading-none h-fit min-h-0" onClick={(event: React.MouseEvent<HTMLElement>) => { openDropdown()}}>
                     <p className="dark:text-white w-fit py-3" id="selectedElement">{props.selectedElement}</p>
                     <i className="fa-solid fa-play text-black dark:text-white rotate-90 scale-75"></i>
                 </div>

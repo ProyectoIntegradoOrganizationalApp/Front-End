@@ -8,10 +8,12 @@ import { Searcher } from '../../../../components/Searcher';
 import { InfoTooltip } from '../../../../components/InfoTooltip';
 import { Share } from '../../../../components/Share';
 import { useUser } from '../../../../hooks/useUser';
+import { Dropdown } from '../../../../components/Dropdown';
 
 export function Projects() {
     const { user } = useUser();
     const [selectedElement, selectElement] = useState<string>("none");
+    const [selectedOrder, selectOrder] = useState<string>("Order By");
 
     let navigate = useNavigate();
     const openProject = (link: string) => {
@@ -23,7 +25,25 @@ export function Projects() {
             <div className="flex-1 bg-slate-800 w-full rounded-xl flex gap-6 p-4">
                 <div className={`flex-1 bg-slate-700 rounded-xl flex flex-col gap-4 p-4 w-9/12 ${selectedElement == "none" ? "!w-full" : ""}`}>
                     <div id="scrollbar" className="flex-1 flex flex-col gap-4">
-                        <Searcher bg="bg-slate-800" placeholder="Search a project..." />
+                        <div className="flex items-center gap-5">
+                            <div className="flex-1">
+                                <Searcher bg="bg-slate-800" placeholder="Search a project..." />
+                            </div>
+                            <Dropdown
+                                selectedElement={selectedOrder}
+                                selectElement={selectOrder}
+                                elements={[
+                                    {
+                                        action: "fe",
+                                        name: "All"
+                                    },
+                                    {
+                                        action: "fe",
+                                        name: "My Projects"
+                                    }
+                                ]}
+                            />
+                        </div>
                         <div id="scrollbar" className="flex-1 selectElement">
                             {/* Foreach (cambiar 'ptoelquelolea' por el nombre que llega por el bucle) */}
                             <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>

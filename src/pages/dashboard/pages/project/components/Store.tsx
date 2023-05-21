@@ -31,7 +31,7 @@ export function Store(props: { project: string }) {
                         }
                     ]} />
                 </div>
-                <div className="bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 p-4 pt-3">
+                <div className="flex-1 bg-slate-800 w-full h-fit rounded-xl flex flex-col gap-3 p-4 pt-3">
                     <div className="flex items-center justify-between pr-2">
                         <div className="bg-slate-800 h-fit px-3 py-0 flex justify-between items-center rounded-xl">
                             <div className="flex items-center gap-6 h-full">
@@ -128,7 +128,7 @@ export function Store(props: { project: string }) {
                         {/* Sideinfo */}
                         {
                             selectedApp != "none" &&
-                            <div className="bg-slate-700 flex-[1] min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
+                            <div className="bg-slate-700 flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
                                 <div className="flex flex-col items-center gap-8">
                                     {/* Icon (comprobar si tiene icono, si no tiene, dejar el div de abajo) */}
                                     {
@@ -148,8 +148,8 @@ export function Store(props: { project: string }) {
                                         <p className="text-black dark:text-white/50 text-center leading-none">Taskman ofrece un manejo de tareas</p>
                                     </div>
                                 </div>
-                                <div className="w-full flex flex-wrap gap-3">
-                                    <div className="flex-auto btn btn-primary !bg-green-700 hover:!bg-green-800 !px-2 mt-8">Install App</div>
+                                <div className="w-full flex mt-8">
+                                    <div className="flex-auto btn btn-primary !bg-green-700 hover:!bg-green-800 !px-2">Install App</div>
                                 </div>
                             </div>
                         }

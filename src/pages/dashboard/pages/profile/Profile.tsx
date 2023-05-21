@@ -17,57 +17,14 @@ import { useOutletContext } from 'react-router-dom';
 
 // Hooks
 import { useModal } from '../../../../hooks/useModal';
-
-const date = new Date();
-function GenerateMonthYear(): string {
-    const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
-    const month = formatter.format(date);
-    const year = date.getFullYear();
-    return month + " - " + year;
-}
-
-function daysInMonth(month: number, year: number) {
-    return new Date(year, month, 0).getDate();
-}
-
-function getFirstDayName(date: Date) {
-    return date.getDay();
-}
-
-function GenerateCalendar(): MyCalendar {
-    const currentDay = date.getDate();
-    const pastDays = [];
-    const futureDays = [];
-    const daysMonth = daysInMonth(date.getMonth() + 1, date.getFullYear());
-
-    // Past days
-    let pastDay = 1;
-    while (pastDay < currentDay) {
-        pastDays.push(pastDay);
-        pastDay++;
-    }
-
-    // Future days
-    let futureDay = currentDay + 1;
-    while (futureDay <= daysMonth) {
-        futureDays.push(futureDay);
-        futureDay++;
-    }
-
-
-    return {
-        firstDay: getFirstDayName(new Date(date.getFullYear(), date.getMonth(), 1)) + 1,
-        pastDays: pastDays,
-        currentDay: currentDay,
-        futureDays: futureDays
-    };
-}
+import { useProfile } from '../../../../hooks/useProfile';
 
 export function Profile() {
     const [daily, setDaily] = useState<number>(0);
     const [weekly, setWeekly] = useState<number>(0);
-
+    
     const { openModal } = useModal();
+    const { GenerateMonthYear, GenerateCalendar } = useProfile();
 
     const data: Profile = useOutletContext();
 

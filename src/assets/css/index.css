@@ -203,7 +203,7 @@ progress {
     @apply !modal;
 }
 .ReactModal__Overlay {
-    @apply !bg-black/50 !flex !items-center !justify-center !pointer-events-none;
+    @apply !bg-black/50 flex !items-center !justify-center !pointer-events-none;
     z-index: 9999999999999999999999999999999999999999999;
 }
 .ReactModal__Content--after-open {
