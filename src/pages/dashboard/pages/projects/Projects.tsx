@@ -35,8 +35,8 @@ export function Projects() {
                         <Searcher bg="bg-slate-800" placeholder="Search a project..." />
                         <div id="scrollbar" className="flex-1 selectElement">
                             {/* Foreach (cambiar 'ptoelquelolea' por el nombre que llega por el bucle) */}
-                            { userData.projects && (
-                                userData.projects.map( project => {
+                            { userData?.projects && (
+                                userData?.projects.map( project => {
                                     return (
                                         <div key={project.id} className={selectedElement == project.name ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement(project.name) }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject(project.name) }}>
                                             <Item title={project.name} description="xd" tools={[
