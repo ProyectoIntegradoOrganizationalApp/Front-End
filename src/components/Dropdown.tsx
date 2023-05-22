@@ -9,27 +9,38 @@ import { DropdownElement } from "../domain/UI/DropdownElement.interface";
  *  @returns 
  */
 
-function openDropdown() {
-    document.getElementById("dropdown")?.classList.remove("!invisible", "!opacity-0");
+function openDropdown(event: React.MouseEvent<HTMLElement>, broElement: HTMLElement) {
+    broElement.classList.remove("!invisible", "!opacity-0");
 }
 
-function closeDropdown() {
-    document.getElementById("dropdown")?.classList.add("!invisible", "!opacity-0");
+function closeDropdown(event: React.MouseEvent<HTMLElement>, parentElement: HTMLElement) {
+    parentElement.classList.add("!invisible", "!opacity-0");
 }
 
 export function Dropdown(props: { selectedElement?: string, selectElement?: Function, elements: DropdownElement[] }) {
     return (
         <>
             <div className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} className="btn btn-primary flex flex-nowrap items-center justify-between !text-left !px-5 gap-7 !outline-none leading-none h-fit min-h-0" onClick={(event: React.MouseEvent<HTMLElement>) => { openDropdown()}}>
-                    <p className="dark:text-white w-fit py-3" id="selectedElement">{props.selectedElement}</p>
+                <div tabIndex={0} className="btn btn-primary flex flex-nowrap items-center justify-between !bg-white dark:!bg-slate-600 !text-left !px-5 gap-7 !outline-none leading-none h-fit min-h-0" onClick={(event: React.MouseEvent<HTMLElement>) => {
+                    const siblingElement = event.currentTarget.nextElementSibling as HTMLElement;
+                    if (siblingElement) {
+                        openDropdown(event, siblingElement);
+                    }
+                }}>
+                    <p className="text-black dark:text-white w-fit py-3" id="selectedElement">{props.selectedElement}</p>
                     <i className="fa-solid fa-play text-black dark:text-white rotate-90 scale-75"></i>
                 </div>
-                <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-slate-600 w-52" id="dropdown">
+                <ul tabIndex={0} className="dropdown-content menu p-2 mt-1 shadow bg-white dark:bg-slate-600 w-52" id="dropdown">
                     {
                         props.elements.map((element, index) =>
-                            <li key={index} onClick={(event: React.MouseEvent<HTMLElement>) => { closeDropdown(); props.selectElement ? props.selectElement(element.name) : undefined}}>
-                                <a className="btn btn-primary text-white justify-start !px-3 !rounded-none leading-none h-fit min-h-0">{element.name}</a>
+                            <li key={index} onClick={(event: React.MouseEvent<HTMLElement>) => {
+                                const parentElement = event.currentTarget.parentNode as HTMLElement;
+                                if (parentElement) {
+                                    closeDropdown(event, parentElement);
+                                    props.selectElement ? props.selectElement(element.name) : undefined
+                                }
+                            }}>
+                                <a className="!bg-white hover:!bg-gray-200 dark:hover:!bg-slate-500 dark:!bg-slate-600 !text-black dark:!text-white justify-start !px-3 !rounded-none leading-none h-fit min-h-0">{element.name}</a>
                             </li>
                         )
                     }

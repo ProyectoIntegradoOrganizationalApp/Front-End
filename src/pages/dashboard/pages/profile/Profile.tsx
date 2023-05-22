@@ -74,19 +74,19 @@ export function Profile() {
                         />
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4">
-                        <div className="flex-[3] bg-slate-800 rounded-xl p-4">
+                        <div className="flex-[3] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
                             <Activity
                                 title="Daily Activity"
                                 activity={activity}
                             />
                         </div>
-                        <div className="flex-[2] bg-slate-800 rounded-xl p-4">
+                        <div className="flex-[2] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
                             <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
                         </div>
                     </div>
                 </div>
-                <div className="flex-1 rounded-xl bg-slate-700 flex flex-col min-h-[20rem]">
-                    <div className="bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-white text-base p-4">
+                <div className="flex-1 rounded-xl bg-gray-200 dark:bg-slate-700 flex flex-col min-h-[20rem]">
+                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-black dark:text-white text-base p-4">
                         <InfoTooltip title="All your projects" />
                         Your Projects
                         {/* Create Project */}

@@ -13,12 +13,12 @@ export function Sidebar( props: { children: ReactNode } ) {
 
     const location = useLocation();
 
-    const btnStyles = `text-sm p-0 w-fit focus:bg-transparent hover:bg-transparent hover:text-white`;
+    const btnStyles = `text-sm p-0 w-fit focus:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white`;
 
     return (
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col bg-slate-600 !h-full" id="scrollbar">
+            <div className="drawer-content flex flex-col dark:bg-slate-600 !h-full" id="scrollbar">
                 <label htmlFor="my-drawer-2" className="btn btn-primary w-12 absolute top-1/2 -left-5 rounded-full swap swap-rotate">
                     <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
                     <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" /></svg>
@@ -27,10 +27,10 @@ export function Sidebar( props: { children: ReactNode } ) {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu w-52 bg-slate-800 text-base-content flex flex-col justify-around">
+                <ul className="menu w-52 bg-gray-300 dark:bg-slate-800 text-base-content flex flex-col justify-around">
                     <div className="headerSidebar">
-                        <Link to="/" className="flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-white">
-                            <img className="mr-3" src={logo}></img>
+                        <Link to="/" className="flex btn btn-ghost normal-case text-xl h-fit py-3 w-fit mx-auto hover:bg-transparent text-black dark:text-white">
+                            <img className="mr-3" src={logo}/>
                             Teamer
                         </Link>
                     </div>
@@ -41,19 +41,19 @@ export function Sidebar( props: { children: ReactNode } ) {
                                 <li key={link.name}>
                                     <div className="p-0 w-full block cursor-pointer active:bg-transparent">
                                         { link.children ? (
-                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 cursor-pointer ${location.pathname.includes(link.name.toLowerCase()) ? "dropdown dropdown-end bg-slate-700 flex flex-col items-start p-0 gap-0 cursor-auto" : ""}`}>
+                                            <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 ${location.pathname.includes(link.name.toLowerCase()) ? "bg-white dark:bg-slate-700 cursor-auto" : "cursor-pointer"}`}>
                                                 
-                                                <div className="flex items-center gap-4 p-4 pl-8 w-full">
-                                                    <i className={link.icon + ` text-slate-400 ${location.pathname.includes(link.name.toLowerCase()) ? "!text-white" : ""}`}></i>
-                                                    <NavLink to={link.url} className="text-base">{link.name}</NavLink>
-                                                </div>
+                                                <NavLink to={link.url} className={`flex items-center gap-4 p-4 pl-8 w-full transition-all outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/30" : ""}`}>
+                                                    <i className={link.icon + ` ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}></i>
+                                                    <p className="text-base text-black dark:text-white">{link.name}</p>
+                                                </NavLink>
                                                 { location.pathname.includes(link.name.toLowerCase()) && (
                                                     <>
-                                                        <hr className="w-full border-slate-600 border-2 bg-slate-600"/>
-                                                        <ul className="menu shadow hover:bg-transparent w-fit py-3 px-8 flex flex-col gap-2" tabIndex={0}>
+                                                        <hr className="w-full border-gray-300 bg-gray-300 dark:border-slate-600 border-[1.5px] dark:bg-slate-600"/>
+                                                        <ul className="menu shadow hover:bg-transparent w-full py-3 px-8 flex flex-col gap-2" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
                                                                 <li key={child.name}>
-                                                                    <NavLink to={child.url} className={({isActive, isPending}) => isActive ? `text-white hover:bg-transparent ${btnStyles}` : btnStyles}>{child.name}</NavLink>
+                                                                    <NavLink to={child.url} className={({isActive, isPending}) => isActive ? `text-black dark:text-white hover:bg-transparent ${btnStyles}` : `text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</NavLink>
                                                                 </li>
                                                             )}
                                                         </ul>

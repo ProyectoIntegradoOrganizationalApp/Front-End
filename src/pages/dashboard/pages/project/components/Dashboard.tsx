@@ -5,14 +5,16 @@ import { Statistics } from "../../profile/components/Statistics"
 export function Dashboard(props: { project: string }) {
     return (
         <>
-            <div className="bg-slate-700 p-4 gap-2 w-full h-full rounded-xl">
+            <div className="bg-gray-300 dark:bg-slate-700 p-4 gap-2 w-full h-full rounded-xl">
                 <div className="w-full rounded-xl flex flex-col gap-4">
                     <div className="flex gap-4">
                         <div className="flex flex-col gap-4 w-4/12">
-                            <Statistics
-                                title="Total Pending Tasks"
-                                amount={132}
-                            />
+                            <div className="[&_.statisticss]:bg-white dark:[&_.statisticss]:!bg-slate-800">
+                                <Statistics
+                                    title="Total Pending Tasks"
+                                    amount={132}
+                                />
+                            </div>
                         </div>
                         <div className="bg-slate-800 rounded-xl w-5/12 p-4">
                             

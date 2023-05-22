@@ -29,7 +29,7 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                 <Link to={"/friend/" + props.name}>
                     {
                         props.selected == true &&
-                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 bg-slate-700 transition-all">
+                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 bg-white dark:bg-slate-700 transition-all">
                             {/* Picture */}
                             <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                                 <div className="absolute -top-0.5 -right-1">
@@ -41,7 +41,7 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                             <p className="text-black dark:text-white text-base">{props.name}</p>
                         </div>
                     } {props.selected == false &&
-                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-slate-700 transition-all">
+                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-white dark:hover:bg-slate-700 transition-all">
                             {/* Picture */}
                             <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                                 <div className="absolute -top-0.5 -right-1">
@@ -54,7 +54,7 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                         </div>
                     } {
                         props.selected === undefined &&
-                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-slate-700 transition-all">
+                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-white dark:hover:bg-slate-700 transition-all">
                             {/* Picture */}
                             <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                                 <div className="absolute -top-0.5 -right-1">

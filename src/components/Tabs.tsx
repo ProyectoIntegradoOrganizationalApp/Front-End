@@ -17,14 +17,14 @@ function doAction(action: string, target: string) {
 export function Tabs(props: { tab: string, setTab: Function, icon?: string, title: string, links: Array<Tabs> }) {
 
     return (
-        <div className="bg-slate-800 h-fit md:px-3 py-0 flex justify-between items-center rounded-xl">
+        <div className="h-fit md:px-3 py-0 flex justify-between items-center rounded-xl">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-7 h-full">
                 {/* Header */}
                 <div className="items-center gap-4 hidden md:flex">
-                    <i className={props.icon + " text-white"}></i>
-                    <p className="leading-none text-white text-base">{props.title}</p>
+                    <i className={props.icon + " text-black dark:text-white"}></i>
+                    <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
                 </div>
-                <div className="h-9 w-0.5 bg-slate-600 hidden md:block"></div>
+                <div className="h-9 w-0.5 bg-white hidden md:block"></div>
 
                 {/* Tabs */}
                 <div className="flex gap-2">
@@ -32,12 +32,12 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                         <li key={link.url} className="list-none">
                             { props.tab == link.url ? (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">
+                                        className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">
                                         {link.name}
                                     </div>
                                 ): (
                                     <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !px-3.5 md!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-slate-600">
+                                        className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600">
                                         {link.name}
                                     </div>
                                 )

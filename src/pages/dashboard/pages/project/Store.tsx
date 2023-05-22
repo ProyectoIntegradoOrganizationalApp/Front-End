@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Breadcrumb } from '../../../../../components/Breadcrumb';
-import { Item } from '../../../../../components/Item';
-import { Dropdown } from '../../../../../components/Dropdown';
-import { Link, useNavigate } from 'react-router-dom';
+import { Breadcrumb } from '../../../../components/Breadcrumb';
+import { Item } from '../../../../components/Item';
+import { Dropdown } from '../../../../components/Dropdown';
+import { useNavigate } from 'react-router-dom';
 
 export function Store(props: { project: string }) {
     const [selectedElement, selectElement] = useState<string>("Order By");
@@ -31,15 +31,15 @@ export function Store(props: { project: string }) {
                         }
                     ]} />
                 </div>
-                <div className="flex-1 bg-slate-800 w-full h-fit rounded-xl flex flex-col gap-3 p-4 pt-3">
+                <div className="flex-1 bg-gray-200 dark:bg-slate-800 w-full h-fit rounded-xl flex flex-col gap-3 p-4 pt-3">
                     <div className="flex items-center justify-between pr-2">
-                        <div className="bg-slate-800 h-fit px-3 py-0 flex justify-between items-center rounded-xl">
+                        <div className="h-fit px-3 py-0 flex justify-between items-center rounded-xl">
                             <div className="flex items-center gap-6 h-full">
-                                <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
+                                <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
                                 {/* Header */}
                                 <div className="flex items-center gap-4">
-                                    <i className="fa-solid fa-bag-shopping text-white"></i>
-                                    <p className="leading-none text-white text-base">Store</p>
+                                    <i className="fa-solid fa-bag-shopping text-black dark:text-white"></i>
+                                    <p className="leading-none text-black dark:text-white text-base">Store</p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@ export function Store(props: { project: string }) {
                         </div>
                     </div>
                     <div className="flex flex-wrap h-full gap-6">
-                        <div className={`flex flex-wrap bg-slate-700 flex-[4] p-4 gap-2 h-auto rounded-xl content-start min-w-fit ${selectedElement == "none" ? "!w-full" : "w-9/12 order-2 lg:order-none"}`}>
+                        <div className={`flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 gap-2 h-auto rounded-xl content-start min-w-fit ${selectedElement == "none" ? "!w-full" : "w-9/12 order-2 lg:order-none"}`}>
                             {/* Foreach (Store Apps) */}
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>

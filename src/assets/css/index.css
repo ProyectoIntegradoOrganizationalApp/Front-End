@@ -171,10 +171,10 @@ progress {
     @apply cursor-pointer transition-all select-none;
 }
 .selectElement > div > div:hover {
-    @apply bg-slate-900;
+    @apply bg-gray-200 dark:bg-slate-900;
 }
 .selectedElement > div {
-    @apply bg-slate-900;
+    @apply bg-gray-200 dark:bg-slate-900;
 }
 .rotate-35 {
     --tw-rotate: 35deg;
@@ -183,10 +183,13 @@ progress {
 
 /* Alert */
 .Toastify__toast {
-    @apply bg-slate-900;
+    @apply bg-white dark:bg-slate-900;
 }
 .Toastify__toast-body {
-    @apply text-base;
+    @apply text-base text-black dark:text-white;
+}
+.Toastify__close-button {
+    @apply text-base text-black dark:text-white;
 }
 
 /* Modal */
