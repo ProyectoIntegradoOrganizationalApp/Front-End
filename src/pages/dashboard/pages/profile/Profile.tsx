@@ -83,30 +83,9 @@ export function Profile() {
                         {/* Create Project */}
                         <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all" onClick={() => openModal({
                             isOpen: true,
-                            type: "crud",
+                            type: "crudProject",
                             title: "Create Project",
-                            content: [
-                                {
-                                    discriminator: "crud",
-                                    tag: "input",
-                                    type: "text",
-                                    name: "title",
-                                    placeholder: "Enter title",
-                                    min: 3,
-                                    max: 35,
-                                    required: true,
-                                    width: "half"
-                                },
-                                {
-                                    discriminator: "crud",
-                                    tag: "textarea",
-                                    name: "description",
-                                    placeholder: "Enter description",
-                                    min: 3,
-                                    max: 250,
-                                    width: "full"
-                                }
-                            ],
+                            content: [],
                             submitText: "Create Project",
                             submitAction: ""
                         })}>
