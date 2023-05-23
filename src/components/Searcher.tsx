@@ -15,7 +15,7 @@ function search(evt: ChangeEvent) {
 export function Searcher(props: { bg: string, placeholder: string }) {
     return (
         <>
-            <input onChange={evt => search(evt)} placeholder={props.placeholder} className={"w-full h-fit px-4 py-3 rounded-xl outline-none text-white " + props.bg}/>
+            <input onChange={evt => search(evt)} placeholder={props.placeholder} className={"w-full h-fit px-4 py-2.5 rounded-xl outline-none text-black dark:text-white " + props.bg}/>
         </>
     )
 }

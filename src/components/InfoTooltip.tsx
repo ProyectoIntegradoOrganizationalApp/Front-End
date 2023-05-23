@@ -18,7 +18,7 @@ export function InfoTooltip(props: { title: string, target?: ReactNode, position
             } {
                 !props.target &&
                 <div className={"tooltip tooltip-" + props.position} data-tip={props.title}>
-                    <i className="fa-sharp fa-solid fa-circle-info text-white"></i>
+                    <i className="fa-sharp fa-solid fa-circle-info text-black dark:text-white"></i>
                 </div>
             }
         </>

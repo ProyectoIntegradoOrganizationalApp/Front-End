@@ -18,7 +18,7 @@ function doAction(action: string | undefined, target: string | undefined) {
 export function Item(props: { icon?: string, title: string, description: string, tools?: Array<Tool>, descriptionBottom?: boolean }) {
     return (
         <>
-            <div className="bg-slate-800 w-full h-fit px-4 py-3 flex justify-between items-center rounded-xl gap-4">
+            <div className="bg-white dark:bg-slate-800 w-full h-fit px-4 py-3 flex justify-between items-center rounded-xl gap-4">
                 {/* Info */}
                 {
                     props.descriptionBottom == true &&
@@ -27,25 +27,25 @@ export function Item(props: { icon?: string, title: string, description: string,
                         <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
                         {/* Title */}
                         <div className="flex flex-col gap-2">
-                            <p className="leading-none text-white text-base">{props.title}</p>
-                            <p className="leading-none text-white/50 text-sm">{props.description}</p>
+                            <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
+                            <p className="leading-none text-black dark:text-white/50 text-sm">{props.description}</p>
                         </div>
                     </div>
                 } {
                     !props.descriptionBottom &&
                     <>
-                        <div className="flex gap-2">
-                            <div className="flex items-center gap-4">
+                        <div className="flex">
+                            <div className="flex items-center gap-3 sm:gap-4">
                                 {/* Icon (si no hay icon, uno por defecto) */}
                                 <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
                                 {/* Title */}
-                                <p className="leading-none text-white text-base mr-7">{props.title}</p>
+                                <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
                             </div>
-                            <div className="items-center hidden sm:flex gap-7">
+                            <div className="items-center hidden min-[715px]:flex">
                                 {/* Separator */}
-                                <div className="w-0.5 bg-slate-600 h-9"></div>
+                                <div className="w-0.5 bg-gray-300 dark:bg-slate-600 h-9 mx-7"></div>
                                 {/* Description */}
-                                <p className="leading-none text-white/50 text-base">{props.description}</p>
+                                <p className="leading-none text-black dark:text-white/50 text-base">{props.description}</p>
                             </div>
                         </div>
                     </>
@@ -59,7 +59,7 @@ export function Item(props: { icon?: string, title: string, description: string,
                                     <i className={tool.icon + " text-white"}></i>
                                 </div>
                                 : tool.type == "dropdown" ?
-                                    <div className="mx-3">
+                                    <div>
                                         {
                                             tool.dropdown?.type == "default" &&
                                             <Dropdown elements={[...tool.dropdown?.elements ? tool.dropdown.elements : []]} />

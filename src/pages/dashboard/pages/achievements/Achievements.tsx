@@ -54,11 +54,11 @@ export function Achievements() {
     }, []);
 
     return (
-         <div className="w-full flex flex-wrap gap-4">
+        <div className="w-full flex flex-wrap gap-4">
             <AchievementsInfo
                 data={data}
             />
-            <div className="bg-slate-800 w-full rounded-xl p-4 pt-0 flex flex-col md:w-3/4">
+            <div className="bg-gray-200 dark:bg-slate-800 flex-1 basis-[820px] h-full rounded-xl flex flex-col w-full p-4 pt-0">
                 <div className="py-3 flex justify-between items-center">
                     <Tabs
                         tab={tab}
@@ -104,7 +104,7 @@ export function Achievements() {
                         ]}
                     />
                 </div>
-                <div className="bg-slate-700 w-full h-full rounded-xl p-4">
+                <div className="bg-white dark:bg-slate-700 w-full h-full rounded-xl p-4">
                     {achievements && tab === "all" ? (
                         achievements.map(ach => {
                             return (
