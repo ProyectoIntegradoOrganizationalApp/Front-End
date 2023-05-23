@@ -29,11 +29,6 @@ export const useProfileApi = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     /**
-     *  Hook de Manejo de errores.
-     */
-    const { setInternalError } = useErrorHandler();
-
-    /**
      *  Variable de entorno con la información de la API
      */
     const API = import.meta.env.VITE_API_URL;
@@ -52,12 +47,13 @@ export const useProfileApi = () => {
                 Authorization: `Bearer ${user?._token}`
             }
         }).then( data => {
-            if( !ignore && data.status == 200 ) {
+            if ( !ignore ) {
                 handleData(data.data);
             }
-
-            setLoading(false);
-        });
+        }).catch( err => {
+            const error: ApiError = {error: true, message: err};
+            handleData(error);
+        })
         
         return () => {
             ignore = true;
@@ -70,14 +66,11 @@ export const useProfileApi = () => {
      */
     const handleData = ( info: ProfileDTO | ApiError ) => {
 
-        console.log(info)
-
         /**
          * Hay Error
          */
         if( info && "error" in info && info.error ) {
             setError(info);
-            setInternalError(info);
         }
         
         /**
@@ -91,6 +84,8 @@ export const useProfileApi = () => {
             let userData: Profile = ProfileMapper.prototype.mapTo(info);
             setData(userData);
         }
+
+        setLoading(false);
     }
 
 

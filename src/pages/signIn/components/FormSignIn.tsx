@@ -104,7 +104,7 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
         event.preventDefault();
         
         if( props.type === "sign up" && valid ) {
-            registerUser({name, last_name, prefix, phone_number, email, password, confirmPass: confirmpass});
+            registerUser({name, last_name, prefix, phone_number, email, password, confirmPass: confirmpass, photo: "https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1684609159~exp=1684609759~hmac=700c15129fea8d9ad79baf8e80b38669e4316820469a65febbedcac473740017cd ."});
         } else if( props.type === "log in" && email.length > 10 && password.length > 5 ) {
             fetchUser({email, password})
         }
