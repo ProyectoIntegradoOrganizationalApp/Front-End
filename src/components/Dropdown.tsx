@@ -20,7 +20,7 @@ function closeDropdown(event: React.MouseEvent<HTMLElement>, parentElement: HTML
 export function Dropdown(props: { selectedElement?: string, selectElement?: Function, elements: DropdownElement[] }) {
     return (
         <>
-            <div className="dropdown dropdown-bottom dropdown-end">
+            <div className="dropdown dropdown-bottom dropdown-end w-full">
                 <div tabIndex={0} className="btn btn-primary flex flex-nowrap items-center justify-between !bg-white dark:!bg-slate-600 !text-left !px-5 gap-7 !outline-none leading-none h-fit min-h-0" onClick={(event: React.MouseEvent<HTMLElement>) => {
                     const siblingElement = event.currentTarget.nextElementSibling as HTMLElement;
                     if (siblingElement) {

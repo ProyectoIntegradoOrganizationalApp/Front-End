@@ -18,15 +18,27 @@ export function DirectMessages(props: { selected?: string }) {
 
     return (
         <>
-            <div className="flex flex-col gap-[1.1rem]">
+            <div className="h-full max-[575px]:h-[unset] flex flex-col gap-[1.1rem]">
                 <p className="text-black dark:text-white text-base mt-2">Direct Messages</p>
-                <div className="w-full h-[0.1rem] bg-gray-400 dark:bg-slate-600"></div>
-                <div className="flex flex-col gap-1">
+                <div className="w-full h-[0.1rem] bg-white dark:bg-slate-600"></div>
+                <div id="scrollbar" className="flex flex-col gap-1 max-h-full max-[575px]:max-h-[200px]">
                     {/* Foreach (Friends Users DM) */}
                     {
                         props.selected &&
                         <>
                             {/* if(name == selected) {selected = true} */}
+                            <User dm={true} selected={location.pathname.includes("Firebloh")} picture="nose" name="Firebloh" state="connected" />
+                            <User dm={true} selected={location.pathname.includes("sparejo1311")} picture="nose" name="sparejo1311" state="disconnected" />
+                            <User dm={true} selected={location.pathname.includes("maiki69")} picture="nose" name="maiki69" state="busy" />
+                            <User dm={true} selected={location.pathname.includes("Firebloh")} picture="nose" name="Firebloh" state="connected" />
+                            <User dm={true} selected={location.pathname.includes("sparejo1311")} picture="nose" name="sparejo1311" state="disconnected" />
+                            <User dm={true} selected={location.pathname.includes("maiki69")} picture="nose" name="maiki69" state="busy" />
+                            <User dm={true} selected={location.pathname.includes("Firebloh")} picture="nose" name="Firebloh" state="connected" />
+                            <User dm={true} selected={location.pathname.includes("sparejo1311")} picture="nose" name="sparejo1311" state="disconnected" />
+                            <User dm={true} selected={location.pathname.includes("maiki69")} picture="nose" name="maiki69" state="busy" />
+                            <User dm={true} selected={location.pathname.includes("Firebloh")} picture="nose" name="Firebloh" state="connected" />
+                            <User dm={true} selected={location.pathname.includes("sparejo1311")} picture="nose" name="sparejo1311" state="disconnected" />
+                            <User dm={true} selected={location.pathname.includes("maiki69")} picture="nose" name="maiki69" state="busy" />
                             <User dm={true} selected={location.pathname.includes("Firebloh")} picture="nose" name="Firebloh" state="connected" />
                             <User dm={true} selected={location.pathname.includes("sparejo1311")} picture="nose" name="sparejo1311" state="disconnected" />
                             <User dm={true} selected={location.pathname.includes("maiki69")} picture="nose" name="maiki69" state="busy" />

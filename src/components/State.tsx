@@ -11,7 +11,7 @@ import React, { MouseEventHandler } from "react";
 export function State(props: { color: string }) {
     return (
         <>
-            <div className={"w-5 border-slate-800 border-4 aspect-square rounded-full " + props.color}></div>
+            <div className={"w-5 dark:border-slate-800 border-4 aspect-square rounded-full cursor-default " + props.color}></div>
         </>
     )
 }

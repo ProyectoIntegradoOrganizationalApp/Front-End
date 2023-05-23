@@ -28,16 +28,8 @@ export function Members(props: { project: string }) {
                     },
                     {
                         type: "button",
-                        action: "message",
-                        icon: "fa-solid fa-message",
-                        color: "bg-slate-700",
-                        target: "message/idFriend"
-                    },
-                    {
-                        type: "button",
                         action: "remove",
-                        icon: "fa-solid fa-trash",
-                        color: "bg-red-700",
+                        icon: "fa-solid fa-right-from-bracket",
                         target: "remove/idFriend"
                     }
                 ]} />
@@ -64,16 +56,8 @@ export function Members(props: { project: string }) {
                     },
                     {
                         type: "button",
-                        action: "message",
-                        icon: "fa-solid fa-message",
-                        color: "bg-slate-700",
-                        target: "message/idFriend"
-                    },
-                    {
-                        type: "button",
                         action: "remove",
-                        icon: "fa-solid fa-trash",
-                        color: "bg-red-700",
+                        icon: "fa-solid fa-right-from-bracket",
                         target: "remove/idFriend"
                     }
                 ]} />

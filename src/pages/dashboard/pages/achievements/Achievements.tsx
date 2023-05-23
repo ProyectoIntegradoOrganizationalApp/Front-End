@@ -54,12 +54,12 @@ export function Achievements() {
     }, []);
 
     return (
-        <div className="w-full flex flex-wrap gap-4">
+        <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo
                 data={data}
             />
             <div className="bg-gray-200 dark:bg-slate-800 flex-1 basis-[820px] h-full rounded-xl flex flex-col w-full p-4 pt-0">
-                <div className="py-3 flex justify-between items-center">
+                <div className="py-3 flex flex-wrap-reverse justify-between items-center gap-2">
                     <Tabs
                         tab={tab}
                         setTab={setTab}
@@ -80,29 +80,30 @@ export function Achievements() {
                             },
                         ]}
                     />
-
-                    <Dropdown
-                        selectedElement={selectedElement}
-                        selectElement={selectElement}
-                        elements={[
-                            {
-                                action: "fe",
-                                name: "Older"
-                            },
-                            {
-                                action: "fe",
-                                name: "Recently"
-                            },
-                            {
-                                action: "fe",
-                                name: "Alphabetical"
-                            },
-                            {
-                                action: "fe",
-                                name: "Difficulty"
-                            }
-                        ]}
-                    />
+                    <div className="max-[499px]:flex-1">
+                        <Dropdown
+                            selectedElement={selectedElement}
+                            selectElement={selectElement}
+                            elements={[
+                                {
+                                    action: "fe",
+                                    name: "Older"
+                                },
+                                {
+                                    action: "fe",
+                                    name: "Recently"
+                                },
+                                {
+                                    action: "fe",
+                                    name: "Alphabetical"
+                                },
+                                {
+                                    action: "fe",
+                                    name: "Difficulty"
+                                }
+                            ]}
+                        />
+                    </div>
                 </div>
                 <div className="bg-white dark:bg-slate-700 w-full h-full rounded-xl p-4">
                     {achievements && tab === "all" ? (

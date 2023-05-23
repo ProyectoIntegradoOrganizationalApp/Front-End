@@ -8,6 +8,5 @@ export interface Tool {
     dropdown?: DropdownInterface
     action?: string,
     icon?: string,
-    color?: string,
     target?: string
 }

@@ -19,23 +19,9 @@ export function Apps(props: { project: string }) {
                         <Item title="Taskman" description="Work Management" tools={[
                             {
                                 type: "button",
-                                action: "add",
+                                action: "remove",
                                 icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "add/app"
-                            }
-                        ]} descriptionBottom={true} />
-                    </div>
-                </div>
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
-                    <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
-                        <Item title="Taskman" description="Work Management" tools={[
-                            {
-                                type: "button",
-                                action: "add",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "add/app"
+                                target: "remove/app"
                             }
                         ]} descriptionBottom={true} />
                     </div>
@@ -47,7 +33,18 @@ export function Apps(props: { project: string }) {
                                 type: "button",
                                 action: "remove",
                                 icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
+                                target: "remove/app"
+                            }
+                        ]} descriptionBottom={true} />
+                    </div>
+                </div>
+                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
+                    <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
+                        <Item title="Taskman" description="Work Management" tools={[
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
                                 target: "remove/app"
                             }
                         ]} descriptionBottom={true} />

@@ -69,7 +69,7 @@ export function Store(props: { project: string }) {
                         </div>
                     </div>
                     <div className="flex flex-wrap h-full gap-6">
-                        <div className={`flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 gap-2 h-auto rounded-xl content-start min-w-fit ${selectedElement == "none" ? "!w-full" : "w-9/12 order-2 lg:order-none"}`}>
+                        <div className={`flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 gap-2 h-auto rounded-xl content-start ${selectedElement == "none" ? "!w-full" : "w-9/12 order-2 lg:order-none"}`}>
                             {/* Foreach (Store Apps) */}
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
@@ -78,7 +78,6 @@ export function Store(props: { project: string }) {
                                             type: "button",
                                             action: "add",
                                             icon: "fa-solid fa-plus",
-                                            color: "bg-green-700",
                                             target: "add/app"
                                         }
                                     ]} descriptionBottom={true} />
@@ -89,9 +88,20 @@ export function Store(props: { project: string }) {
                                     <Item title="Taskman" description="Work Management" tools={[
                                         {
                                             type: "button",
-                                            action: "add",
+                                            action: "remove",
                                             icon: "fa-solid fa-trash",
-                                            color: "bg-red-700",
+                                            target: "remove/app"
+                                        }
+                                    ]} descriptionBottom={true} />
+                                </div>
+                            </div>
+                            <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
+                                <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
+                                    <Item title="Taskman" description="Work Management" tools={[
+                                        {
+                                            type: "button",
+                                            action: "add",
+                                            icon: "fa-solid fa-plus",
                                             target: "add/app"
                                         }
                                     ]} descriptionBottom={true} />
@@ -104,20 +114,6 @@ export function Store(props: { project: string }) {
                                             type: "button",
                                             action: "add",
                                             icon: "fa-solid fa-plus",
-                                            color: "bg-green-700",
-                                            target: "add/app"
-                                        }
-                                    ]} descriptionBottom={true} />
-                                </div>
-                            </div>
-                            <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
-                                <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
-                                        {
-                                            type: "button",
-                                            action: "add",
-                                            icon: "fa-solid fa-plus",
-                                            color: "bg-green-700",
                                             target: "add/app"
                                         }
                                     ]} descriptionBottom={true} />
@@ -128,14 +124,14 @@ export function Store(props: { project: string }) {
                         {/* Sideinfo */}
                         {
                             selectedApp != "none" &&
-                            <div className="bg-slate-700 flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
+                            <div className="bg-white dark:bg-slate-700 flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
                                 <div className="flex flex-col items-center gap-8">
                                     {/* Icon (comprobar si tiene icono, si no tiene, dejar el div de abajo) */}
                                     {
                                         2 == 2 &&
                                         <>
-                                            <div className="bg-slate-800 w-32 aspect-square rounded-full flex justify-center items-center">
-                                                <i className="fa-solid fa-bag-shopping text-white text-3xl"></i>
+                                            <div className="bg-gray-200 dark:bg-slate-800 w-32 aspect-square rounded-full flex justify-center items-center">
+                                                <i className="fa-solid fa-bag-shopping text-black dark:text-white text-3xl"></i>
                                             </div>
                                         </>
                                     } {

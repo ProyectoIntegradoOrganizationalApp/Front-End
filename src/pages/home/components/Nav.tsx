@@ -25,10 +25,10 @@ export function Nav() {
     return (
         <>
             
-            <div className="navbar px-12 bg-slate-800 dark:bg-transparent">
+            <div className="navbar px-12 bg-gray-300 dark:bg-slate-800 dark:bg-transparent">
 
                 <div className="navbar-start">
-                    <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-white">
+                    <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">
                         <img className="mr-3" src={logo}></img>
                         Teamer    
                     </Link>

@@ -26,7 +26,7 @@ export function Project() {
                     ]} />
                 </div>
                 <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 p-4 pt-3">
-                    <div className="flex items-center justify-between pr-2">
+                    <div className="flex flex-wrap-reverse items-center justify-between pr-2 gap-2">
                         <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-list-check" title="ptoelquelolea" links={[
                             {
                                 url: "dashboard",
@@ -41,7 +41,7 @@ export function Project() {
                                 name: "Members"
                             }
                         ]} />
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 justify-end max-[450px]:w-full">
                             {
                                 tab == "apps" &&
                                 <Link to="/project/ptoelquelolea/store">
