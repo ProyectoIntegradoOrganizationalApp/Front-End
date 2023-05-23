@@ -15,6 +15,15 @@ export function AchievementsList(props: { data: Profile | undefined }) {
     return (
         <>
             <div className="w-full flex flex-col items-center gap-4">
+            <AchievementItem
+                            icon={"d"}
+                            title={"Timeline Captain"}
+                            description={"Assign tasks to project members in Timeline"}
+                            percentage={{
+                                type: "basic",
+                                number: 50
+                            }}
+                        />
                 {props.data?.achievements.map(achievement => {
                     return (
                         <AchievementItem

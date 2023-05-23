@@ -31,7 +31,8 @@ import { useModal } from './hooks/useModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
-import { Store } from './pages/dashboard/pages/project/components/Store';
+import { Store } from './pages/dashboard/pages/project/Store';
+import { CookieModal } from './components/CookieModal';
 
 /**
  *  Aplicación principal.
@@ -43,7 +44,22 @@ import { Store } from './pages/dashboard/pages/project/components/Store';
 export function App() {
     const [user, setUser] = useState<User | null>(null);
     const [modal, setModal] = useState<ModalInterface | null>(null);
-    const { closeModal } = useModal();
+
+    const [cookiesAccepted, setCookiesAccepted] = useState<string | null>(null);
+    const [cookiesIsOpen, setCookiesIsOpen] = useState<boolean>(true);
+
+    useEffect(() => {
+        const cookiesAcceptedStatus = localStorage.getItem('cookiesAccepted');
+        if (cookiesAcceptedStatus == 'true') {
+            setCookiesAccepted('true');
+            setCookiesIsOpen(false);
+        } else if (cookiesAcceptedStatus == 'false') {
+            setCookiesAccepted('false');
+            setCookiesIsOpen(false);
+        } else {
+            setCookiesIsOpen(true);
+        }
+    }, [cookiesAccepted]);
 
     return (
         <>
@@ -61,6 +77,10 @@ export function App() {
             />
             <AuthContext.Provider value={{ user, setUser }}>
                 <ModalContext.Provider value={{ modal, setModal }}>
+                    {
+                        cookiesAccepted == null &&
+                        <CookieModal isOpen={cookiesIsOpen} />
+                    }
                     <CustomModal isOpen={modal?.isOpen ? true : false} closeModal={() => { setModal(null) }} atts={modal} />
                     <BrowserRouter basename='/'>
                         <Routes>

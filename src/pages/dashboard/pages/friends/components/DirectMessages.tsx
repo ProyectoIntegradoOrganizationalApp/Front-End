@@ -18,9 +18,9 @@ export function DirectMessages(props: { selected?: string }) {
 
     return (
         <>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-[1.1rem]">
                 <p className="text-black dark:text-white text-base mt-2">Direct Messages</p>
-                <div className="w-full h-0.5 bg-slate-600"></div>
+                <div className="w-full h-[0.1rem] bg-gray-400 dark:bg-slate-600"></div>
                 <div className="flex flex-col gap-1">
                     {/* Foreach (Friends Users DM) */}
                     {

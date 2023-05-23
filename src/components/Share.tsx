@@ -16,7 +16,7 @@ function getLink() {
 export function Share(props: { link: string }) {
     return (
         <>
-            <div onClick={(event: React.MouseEvent<HTMLElement>) => { getLink() }} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-slate-800 hover:bg-slate-900"><i className="fa-solid fa-paste text-white"></i></div>
+            <div onClick={(event: React.MouseEvent<HTMLElement>) => { getLink() }} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-gray-200 hover:bg-gray-300 dark:bg-slate-800 dark:hover:bg-slate-900"><i className="fa-solid fa-paste text-black dark:text-white"></i></div>
         </>
     )
 }
