@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 // Interfaces
 import { MyCalendar } from '../../../../domain/UI/Calendar.interface';
-import { UserActivity } from '../../../../domain/user/UserActivity.interface';
 import { Profile } from '../../../../domain/profile/Profile.interface';
 
 // Componentes
@@ -18,6 +17,7 @@ import { useOutletContext } from 'react-router-dom';
 // Hooks
 import { useModal } from '../../../../hooks/useModal';
 import { useProfile } from '../../../../hooks/useProfile';
+import { useUtils } from '../../../../hooks/useUtils';
 
 export function Profile() {
     const [daily, setDaily] = useState<number>(0);
@@ -28,33 +28,16 @@ export function Profile() {
 
     const data: Profile = useOutletContext();
 
+    // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
-        if (data) {
-            data.activity.map((act: UserActivity) => {
-                let fechaActual = new Date();
-
-                let primerDiaSemana = new Date(fechaActual);
-                primerDiaSemana.setDate(fechaActual.getDate() - fechaActual.getDay());
-
-                let ultimoDiaSemana = new Date(fechaActual);
-                ultimoDiaSemana.setDate(fechaActual.getDate() + (6 - fechaActual.getDay()));
-
-                let aVerificar = new Date(act.date);
-
-                if (aVerificar.getDate() == fechaActual.getDate()) {
-                    setDaily(act.commits);
-                }
-
-                if (aVerificar >= primerDiaSemana && aVerificar <= ultimoDiaSemana) {
-                    setWeekly(act.commits);
-                }
-            })
+        if( data ) {
+            const getUserWork = useUtils(data?.activity);
+            const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
+    
+            setDaily(commitsDaily);
+            setWeekly(commitsWeekly);
         }
-    }, [data?.user.id])
-
-    const activity = {
-
-    };
+    }, [data?.user.id]);
 
     return (
         <div className="w-full flex flex-wrap gap-4">
@@ -74,11 +57,13 @@ export function Profile() {
                         />
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4">
-                        <div className="flex-[3] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
-                            <Activity
-                                title="Daily Activity"
-                                activity={activity}
-                            />
+                        <div className="flex-[3] bg-slate-800 rounded-xl p-4">
+                            { data?.activity && (
+                                <Activity
+                                    title="Daily Activity"
+                                    data={data}
+                                />
+                            )}
                         </div>
                         <div className="flex-[2] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
                             <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
@@ -148,236 +133,6 @@ export function Profile() {
                                 ]} />
                             )
                         })}
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
-                        <Item title={"fa"} description="nada más que comentar" tools={[
-                            {
-                                type: "button",
-                                action: "view",
-                                icon: "fa-solid fa-eye",
-                                color: "bg-blue-700",
-                                target: "view/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "edit",
-                                icon: "fa-solid fa-pen-to-square",
-                                color: "bg-green-700",
-                                target: "edit/idProyect"
-                            },
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "remove/idProyect"
-                            }
-                        ]} />
                     </div>
                 </div>
             </div>

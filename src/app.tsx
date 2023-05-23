@@ -115,7 +115,7 @@ export function App() {
 
                                 <Route path="project/:name/store"
                                     element={
-                                        <Store />
+                                        <Store project={''} />
                                     }
                                 />
 
