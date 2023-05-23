@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 
 // Interfaces
-import { MyCalendar } from '../../../../domain/UI/Calendar.interface';
 import { Profile } from '../../../../domain/profile/Profile.interface';
 
 // Componentes
@@ -45,6 +44,8 @@ export function Profile() {
                 data={data}
             />
             <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 w-full">
+
+                {/* TODO => Dividir esto en componentes */}
                 <div className="flex flex-col lg:flex-row flex-wrap gap-4">
                     <div className="flex-[1.8] basis-[80px] flex flex-col gap-4">
                         <Statistics
@@ -60,16 +61,21 @@ export function Profile() {
                         <div className="flex-[3] bg-slate-800 rounded-xl p-4">
                             { data?.activity && (
                                 <Activity
-                                    title="Daily Activity"
+                                    title="Monthly Activity"
                                     data={data}
                                 />
                             )}
                         </div>
                         <div className="flex-[2] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
-                            <Calendar monthYear={GenerateMonthYear()} calendar={GenerateCalendar()} />
+                            <Calendar 
+                                monthYear={GenerateMonthYear()} 
+                                calendar={GenerateCalendar()} 
+                            />
                         </div>
                     </div>
                 </div>
+
+                {/* TODO => Dividir esto en componentes */}
                 <div className="flex-1 rounded-xl bg-gray-200 dark:bg-slate-700 flex flex-col min-h-[20rem]">
                     <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-black dark:text-white text-base p-4">
                         <InfoTooltip title="All your projects" />
@@ -103,10 +109,14 @@ export function Profile() {
                             ],
                             submitText: "Create Project",
                             submitAction: ""
-                        })}></i>
+                        })}>
+                            
+                        </i>
                     </div>
+
+                    {/* TODO => Hacer esto un componente reusable */}
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 min-h-[4.5rem]">
-                        {data?.projects.map(project => {
+                        { data?.projects.map(project => {
                             return (
                                 <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
                                     {
@@ -116,25 +126,12 @@ export function Profile() {
                                         color: "bg-blue-700",
                                         target: "view/idProyect"
                                     },
-                                    {
-                                        type: "button",
-                                        action: "edit",
-                                        icon: "fa-solid fa-pen-to-square",
-                                        color: "bg-green-700",
-                                        target: "edit/idProyect"
-                                    },
-                                    {
-                                        type: "button",
-                                        action: "remove",
-                                        icon: "fa-solid fa-trash",
-                                        color: "bg-red-700",
-                                        target: "remove/idProyect"
-                                    }
                                 ]} />
                             )
                         })}
                     </div>
                 </div>
+
             </div>
         </div>
     )

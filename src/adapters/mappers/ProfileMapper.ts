@@ -15,7 +15,7 @@ export class ProfileMapper extends Mapper<Profile, ProfileDTO> {
             user: UserProfileMapper.prototype.mapFrom(data.user),
             achievements: UserAchievementMapper.prototype.mapArrayFrom(data.achievements),
             projects: UserProjectMapper.prototype.mapArrayFrom(data.projects),
-            activity: UserActivityMapper.prototype.mapArrayFrom(data.activity)
+            activity: UserActivityMapper.prototype.mapArrayFrom(data.activity),
         }
     }
 

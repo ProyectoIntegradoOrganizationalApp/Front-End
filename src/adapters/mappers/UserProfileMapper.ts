@@ -10,6 +10,7 @@ export class UserProfileMapper extends Mapper<UserProfile, UserProfileDTO> {
            name: data.name,
            email: data.email,
            level: data.level,
+           photo: data.photo
         }
     }
 
@@ -19,6 +20,7 @@ export class UserProfileMapper extends Mapper<UserProfile, UserProfileDTO> {
             name: data.name,
             email: data.email,
             level: data.level,
+            photo: data.photo
         }
     }
 }

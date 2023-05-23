@@ -27,7 +27,6 @@ import { Error } from './pages/Error';
 import { ModalInterface } from './domain/UI/ModalInterface.interface';
 import { ModalContext } from './domain/context/ModalContext';
 import { CustomModal } from './components/CustomModal';
-import { useModal } from './hooks/useModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';

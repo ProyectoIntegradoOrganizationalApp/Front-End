@@ -58,7 +58,14 @@ export function Projects() {
                         { userData?.projects && (
                             userData?.projects.map( project => {
                                 return (
-                                    <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                                    <div className={selectedElement == project.name ? "selectedElement" : ""} 
+                                        onClick={(event: React.MouseEvent<HTMLElement>) => 
+                                            { selectElement("ptoelquelolea") }
+                                        } 
+                                        onDoubleClick={(event: React.MouseEvent<HTMLElement>) => 
+                                            { openProject("ptoelquelolea") }
+                                        }
+                                    >
                                         <Item title="ptoelquelolea" description="nada más que comentar" tools={[
                                             {
                                                 type: "button",
@@ -83,24 +90,20 @@ export function Projects() {
                         
                     </div>
                 </div>
-                {selectedElement != "none" &&
+                { selectedElement != "none" &&
                     <div className="bg-white dark:bg-slate-700 flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
                         <div className="absolute top-5 right-4">
                             <Share link="url_proyecto_invitación" />
                         </div>
                         <div className="flex flex-col items-center gap-8">
                             {/* Icon (comprobar si tiene icono, si no tiene, dejar el div de abajo) */}
-                            {
-                                2 == 2 &&
-                                <>
-                                    <div className="bg-gray-200 dark:bg-slate-800 w-32 aspect-square rounded-full flex justify-center items-center">
-                                        <i className="fa-solid fa-diagram-project text-black dark:text-white text-3xl"></i>
-                                    </div>
-                                </>
-                            } {
-                                2 != 2 &&
+                            { 2 == 2 ? (
+                                <div className="bg-gray-200 dark:bg-slate-800 w-32 aspect-square rounded-full flex justify-center items-center">
+                                    <i className="fa-solid fa-diagram-project text-black dark:text-white text-3xl"></i>
+                                </div>
+                            ) :(
                                 <div className="bg-green-700 w-32 aspect-square rounded-full"></div>
-                            }
+                            )}
                             {/* Info */}
                             <div className="flex flex-col items-center gap-4">
                                 <p className="text-black dark:text-white text-3xl leading-none">{selectedElement}</p>

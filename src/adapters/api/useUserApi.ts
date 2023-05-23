@@ -48,6 +48,7 @@ export const useUserApi = () => {
                 "Content-Type": "application/json" 
             }
         }).then( data => {
+            console.log(data.data)
             handleData(data.data);
             setLoading(false);
         }).catch( err => {

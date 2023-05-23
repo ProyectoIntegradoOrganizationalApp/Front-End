@@ -5,15 +5,18 @@ import axios from 'axios';
 import { useAuth } from "../../hooks/useAuth";
 
 import { ApiError } from '../../domain/ApiError.interface';
-import { Profile } from "../../domain/profile/Profile.interface";
-import { ProfileMapper } from "../mappers/ProfileMapper";
-import { ProfileDTO } from "../../domain/profile/ProfileDTO.interface";
+import { AchievementDTO } from "../../domain/profile/AchievementDTO.interface";
+
+interface AchievementResponse {
+    total: number,
+    achievements: Array<AchievementDTO & { states: Array<number>}>
+}
 
 /**
  * Hook de conexión con la Base de datos para la vista de Profile.
  * @returns 
  */
-export const useProfileApi = () => {
+export const useAchievementsApi = () => {
 
     /**
      *  Hook de autenticación del que recogemos el usuario.
@@ -23,7 +26,7 @@ export const useProfileApi = () => {
     /**
      *  Variables reactivas necesarias para el funcionamiento del Hook
      */
-    const [data, setData] = useState<Profile>();
+    const [data, setData] = useState<AchievementResponse>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,7 +43,7 @@ export const useProfileApi = () => {
         let ignore = false;
         setLoading(true);
         
-        axios.get<ProfileDTO | ApiError>(`${API}/profile/${user?.id}`, {
+        axios.get<AchievementResponse | ApiError>(`${API}/achievements`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${user?._token}`
@@ -63,9 +66,7 @@ export const useProfileApi = () => {
      *  Función que maneja los datos que salen de la API.
      *  @param info 
      */
-    const handleData = ( info: ProfileDTO | ApiError ) => {
-
-        console.log(info)
+    const handleData = ( info: AchievementResponse | ApiError ) => {
 
         /**
          * Hay Error
@@ -77,13 +78,13 @@ export const useProfileApi = () => {
         /**
          * Si no hay error
          */
-        if( info && "user" in info ) {
+        if( info && "achievements" in info ) {
             // Quitamos los errores en caso de que los halla
             setError(undefined);
-
+            setData(info)
             // Transformamos el objecto que nos llega con los mappers a algo que nuestra app entiende
-            let userData: Profile = ProfileMapper.prototype.mapTo(info);
-            setData(userData);
+            // let userData: Profile = ProfileMapper.prototype.mapTo(info);
+            // setData(userData);
         }
 
         setLoading(false);

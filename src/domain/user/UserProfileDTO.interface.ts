@@ -2,5 +2,6 @@ export interface UserProfileDTO {
     id: string,
     name: string,
     email: string,
-    level: number
+    level: number,
+    photo: string,
 }
