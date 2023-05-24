@@ -1,7 +1,5 @@
 // React
-import React, { KeyboardEventHandler, MouseEventHandler } from "react";
-import { User } from "../../../../../components/User";
-import { Friend } from "../pages/friend/Friend";
+import React from "react";
 import { Navigate } from "react-router-dom";
 
 /**

@@ -43,7 +43,7 @@ export function Item(props: { icon?: string, title: string, description: string,
                             </div>
                             <div className="items-center hidden min-[715px]:flex">
                                 {/* Separator */}
-                                <div className="w-0.5 bg-gray-300 dark:bg-slate-600 h-9 mx-7"></div>
+                                <div className="w-[0.1rem] bg-gray-400 dark:bg-slate-500 h-9 mx-7"></div>
                                 {/* Description */}
                                 <p className="leading-none text-black dark:text-white/50 text-base">{props.description}</p>
                             </div>

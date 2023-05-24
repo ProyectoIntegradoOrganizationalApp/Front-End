@@ -41,14 +41,14 @@ export function Sidebar( props: { children: ReactNode } ) {
                                         { link.children ? (
                                             <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 ${location.pathname.includes(link.name.toLowerCase()) ? "bg-white dark:bg-slate-700 cursor-auto" : "cursor-pointer"}`}>
                                                 
-                                                <NavLink to={link.url} className={`flex items-center gap-4 p-4 pl-8 w-full outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/30" : ""}`}>
+                                                <NavLink to={link.url} className={`flex items-center gap-4 p-3.5 pl-[1.7rem] w-full outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/30" : ""}`}>
                                                     <i className={link.icon + ` ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}></i>
-                                                    <p className="text-base text-black dark:text-white">{link.name}</p>
+                                                    <p className={`text-base ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}>{link.name}</p>
                                                 </NavLink>
                                                 { location.pathname.includes(link.name.toLowerCase()) && (
                                                     <>
                                                         <hr className="w-full border-gray-300 bg-gray-300 dark:border-slate-600 border-[1.5px] dark:bg-slate-600"/>
-                                                        <ul className="menu shadow hover:bg-transparent w-full py-3 px-8 flex flex-col gap-2" tabIndex={0}>
+                                                        <ul className="menu shadow hover:bg-transparent w-full py-3 px-[1.7rem] flex flex-col gap-[0.3rem]" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
                                                                 <li key={child.name}>
                                                                     <NavLink to={child.url} className={({isActive, isPending}) => isActive ? `text-black dark:text-white hover:bg-transparent ${btnStyles}` : `text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</NavLink>
