@@ -29,12 +29,19 @@ export function Activity(props: { title: string, data: Profile }) {
                     </div>
                     <p className="w-full flex justify-center text-black dark:text-white leading-none text-base">{props.title}</p>
                 </div>
-                <div className="charttt">
-                    <Line 
-                        options={options}
-                        data={chartData}
-                    />
-                </div>
+                { props.data.activity.length > 0 ? (
+                    <div className="charttt">
+                        <Line 
+                            options={options}
+                            data={chartData}
+                        />
+                    </div>
+                ): (
+                    <div className="w-full h-full flex items-center justify-center">
+                        <h1 className="text-2xl"> No Data </h1>
+                    </div>
+                )}
+                
             </div>
         </>
     )

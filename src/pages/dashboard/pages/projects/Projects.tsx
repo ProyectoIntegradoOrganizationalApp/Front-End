@@ -9,16 +9,22 @@ import { InfoTooltip } from '../../../../components/InfoTooltip';
 import { Share } from '../../../../components/Share';
 import { Profile } from '../../../../domain/profile/Profile.interface';
 import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
-import { useUser } from '../../../../hooks/useUser';
 import { Dropdown } from '../../../../components/Dropdown';
 
+/**
+ * Componente Projects, representa la ruta /projects/{id_user} y nos muestra
+ * los proyectos de los que forma parte el usuario.
+ * @returns 
+ */
 export function Projects() {
 
     // Datos del usuario provenientes del componente padre
     const userData: Profile = useOutletContext();
 
-    // Hook de acceso al back-end al apartado de proyectos
-    const { data, error, loading } = useProjectsApi();
+    /**
+     *  Hook de la API de proyectos, le pasamos true para que haga la query al inicializar.
+     */
+    const { data, error, loading } = useProjectsApi(true);
 
     // Estado para manejar las tabs
     const [selectedElement, selectElement] = useState<string>("none");

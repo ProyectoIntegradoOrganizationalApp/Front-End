@@ -19,7 +19,7 @@ import { useProfile } from '../../../../hooks/useProfile';
 import { useUtils } from '../../../../hooks/useUtils';
 
 /**
- * Componente Profile, que representa la ruta /profile/{id} en la cual podremos
+ * Componente Profile, que representa la ruta /profile/{id_user} en la cual podremos
  * ver un overview de las estadísticas del usuario.
  * @returns React.FC
  */
@@ -99,12 +99,16 @@ export function Profile() {
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
                         {data?.projects.map(project => {
                             return (
-                                <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
+                                <Item 
+                                    key={project.id} 
+                                    title={project.name} 
+                                    description={project.name} 
+                                    tools={[
                                     {
                                         type: "button",
                                         action: "view",
                                         icon: "fa-solid fa-eye",
-                                        target: "view/idProyect"
+                                        target: `/project/${project.id}`
                                     },
                                 ]} />
                             )

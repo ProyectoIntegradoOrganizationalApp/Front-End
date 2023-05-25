@@ -3,6 +3,7 @@ import React, { MouseEventHandler } from "react";
 import { Tool } from "../domain/UI/Tool.interface";
 import { Dropdown } from "./Dropdown";
 import { RoleDropdown } from "./RoleDropdown";
+import { useNavigate } from "react-router-dom";
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
@@ -10,12 +11,16 @@ import { RoleDropdown } from "./RoleDropdown";
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
+export function Item( props: { icon?: string, title: string, description: string, tools?: Array<Tool>, descriptionBottom?: boolean } ) {
 
-function doAction(action: string | undefined, target: string | undefined) {
-    console.log(action + " " + target);
-}
+    const navigate = useNavigate();
 
-export function Item(props: { icon?: string, title: string, description: string, tools?: Array<Tool>, descriptionBottom?: boolean }) {
+    const doAction = ( target: string | undefined ) => {
+        if( target ) {
+            navigate(target);
+        }
+    }
+
     return (
         <>
             <div className="bg-white dark:bg-slate-800 w-full h-fit px-4 py-3 flex max-[499px]:flex-wrap justify-between items-center rounded-xl gap-2.5">
@@ -55,7 +60,7 @@ export function Item(props: { icon?: string, title: string, description: string,
                     {
                         props.tools?.map((tool) => {
                             return tool.type == "button" ?
-                                <div key={tool.target} onClick={(event: React.MouseEvent<HTMLElement>) => { doAction(tool.action, tool.target) }} className={`btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none ${tool.action == "view" ? "bg-blue-700 hover:bg-blue-800" : tool.action == "edit" ? "bg-green-700 hover:bg-green-800" : tool.action == "remove" ? "bg-red-700 hover:bg-red-800" : tool.action == "add" ? "bg-green-700 hover:bg-green-800": ""}`}>
+                                <div key={tool.target} onClick={(event: React.MouseEvent<HTMLElement>) => { doAction(tool.target) }} className={`btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none ${tool.action == "view" ? "bg-blue-700 hover:bg-blue-800" : tool.action == "edit" ? "bg-green-700 hover:bg-green-800" : tool.action == "remove" ? "bg-red-700 hover:bg-red-800" : tool.action == "add" ? "bg-green-700 hover:bg-green-800": ""}`}>
                                     <i className={tool.icon + " text-white"}></i>
                                 </div>
                                 : tool.type == "dropdown" ?
