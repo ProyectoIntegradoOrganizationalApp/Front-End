@@ -13,7 +13,7 @@ import { useUser } from '../../../../hooks/useUser';
 import { Dropdown } from '../../../../components/Dropdown';
 
 export function Projects() {
-    
+
     // Datos del usuario provenientes del componente padre
     const userData: Profile = useOutletContext();
 
@@ -32,31 +32,64 @@ export function Projects() {
 
     return (
         <>
-            <div className="h-fit flex-1 bg-gray-200 dark:bg-slate-800 w-full rounded-xl flex flex-wrap-reverse gap-6 p-4">
-                <div className={`h-full flex-[4] bg-gray-300 dark:bg-slate-700 rounded-xl flex flex-col gap-4 p-4 w-9/12 ${selectedElement == "none" ? "!w-full" : ""}`}>
-                    <div className="flex items-center gap-5">
+            <div className={`h-full ${selectedElement != "none" ? "max-[839.50px]:h-fit max-[839.50px]:min-h-full" : ""} flex-1 bg-gray-200 dark:bg-slate-800 w-full rounded-xl flex flex-wrap-reverse gap-6 p-4 max-[500px]:p-2 max-[500px]:rounded-none`}>
+                <div className={`max-[839.50px]:h-auto h-full flex-[4] bg-gray-300 dark:bg-slate-700 rounded-xl flex flex-col gap-4 max-[500px]:gap-2 max-[500px]:p-2 p-4 w-9/12 ${selectedElement == "none" ? "!w-full" : ""}`}>
+                    <div className="flex flex-wrap-reverse items-center gap-2">
                         <div className="flex-1">
                             <Searcher bg="bg-white dark:bg-slate-800" placeholder="Search a project..." />
                         </div>
-                        <Dropdown
-                            selectedElement={selectedOrder}
-                            selectElement={selectOrder}
-                            elements={[
+                        <div className="max-[499px]:flex-1">
+                            <Dropdown
+                                selectedElement={selectedOrder}
+                                selectElement={selectOrder}
+                                elements={[
+                                    {
+                                        action: "fe",
+                                        name: "All"
+                                    },
+                                    {
+                                        action: "fe",
+                                        name: "My Projects"
+                                    }
+                                ]}
+                            />
+                        </div>
+                    </div>
+                    <div id="scrollbar" className="flex-1 selectElement max-[500px]:gap-2">
+                        <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                            <Item title="ptoelquelolea" description="nada más que comentar" tools={[
                                 {
-                                    action: "fe",
-                                    name: "All"
+                                    type: "button",
+                                    action: "edit",
+                                    icon: "fa-solid fa-pen-to-square",
+                                    target: "edit/idProyect"
                                 },
                                 {
-                                    action: "fe",
-                                    name: "My Projects"
+                                    type: "button",
+                                    action: "remove",
+                                    icon: "fa-solid fa-trash",
+                                    target: "remove/idProyect"
                                 }
-                            ]}
-                        />
-                    </div>
-                    <div id="scrollbar" className="flex-1 selectElement">
-
-                        { userData?.projects && (
-                            userData?.projects.map( project => {
+                            ]} />
+                        </div>
+                        <div className={selectedElement == "ptoelquelolea" ? "selectedElement" : undefined} onClick={(event: React.MouseEvent<HTMLElement>) => { selectElement("ptoelquelolea") }} onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openProject("ptoelquelolea") }}>
+                            <Item title="ptoelquelolea" description="nada más que comentar" tools={[
+                                {
+                                    type: "button",
+                                    action: "edit",
+                                    icon: "fa-solid fa-pen-to-square",
+                                    target: "edit/idProyect"
+                                },
+                                {
+                                    type: "button",
+                                    action: "remove",
+                                    icon: "fa-solid fa-trash",
+                                    target: "remove/idProyect"
+                                }
+                            ]} />
+                        </div>
+                        {userData?.projects && (
+                            userData?.projects.map(project => {
                                 return (
                                     <div className={selectedElement == project.name ? "selectedElement" : ""} 
                                         onClick={(event: React.MouseEvent<HTMLElement>) => 
@@ -71,23 +104,21 @@ export function Projects() {
                                                 type: "button",
                                                 action: "edit",
                                                 icon: "fa-solid fa-pen-to-square",
-                                                color: "bg-green-700",
                                                 target: "edit/idProyect"
                                             },
                                             {
                                                 type: "button",
                                                 action: "remove",
                                                 icon: "fa-solid fa-trash",
-                                                color: "bg-red-700",
                                                 target: "remove/idProyect"
                                             }
                                         ]} />
                                     </div>
                                 )
                             })
-                            
+
                         )}
-                        
+
                     </div>
                 </div>
                 { selectedElement != "none" &&

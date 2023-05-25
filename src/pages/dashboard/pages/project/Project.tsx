@@ -25,8 +25,8 @@ export function Project() {
                         }
                     ]} />
                 </div>
-                <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 p-4 pt-3">
-                    <div className="flex items-center justify-between pr-2">
+                <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
+                    <div className="flex items-center justify-between pr-2 gap-2">
                         <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-list-check" title="ptoelquelolea" links={[
                             {
                                 url: "dashboard",
@@ -41,7 +41,7 @@ export function Project() {
                                 name: "Members"
                             }
                         ]} />
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 justify-end max-[450px]:w-full max-[500px]:absolute bottom-5 right-5">
                             {
                                 tab == "apps" &&
                                 <Link to="/project/ptoelquelolea/store">
@@ -54,7 +54,7 @@ export function Project() {
 
                         </div>
                     </div>
-                    <div className="flex flex-wrap gap-6 h-full">
+                    <div className="flex flex-wrap gap-6 h-full overflow-y-hidden">
                         {/* En vez de project como string, pasarle el id y 
                         cargar sus componentes */}
 

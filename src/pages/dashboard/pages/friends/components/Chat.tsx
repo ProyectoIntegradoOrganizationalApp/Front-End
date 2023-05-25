@@ -1,7 +1,5 @@
 // React
-import React, { KeyboardEventHandler, MouseEventHandler } from "react";
-import { User } from "../../../../../components/User";
-import { Friend } from "../pages/friend/Friend";
+import React from "react";
 import { Navigate } from "react-router-dom";
 
 /**
@@ -60,7 +58,7 @@ export function Chat(props: { friend: string | undefined }) {
         <>
             {
                 props.friend !== undefined &&
-                <div className="bg-white dark:bg-slate-800 w-full h-full flex flex-col justify-between gap-7 rounded-xl p-6">
+                <div className="bg-white dark:bg-slate-800 w-full h-full flex flex-col justify-between gap-7 rounded-xl p-6 max-[575px]:p-4">
                     {getMessages()}
 
                     <div className="flex bg-gray-200 dark:bg-slate-700 rounded-xl">

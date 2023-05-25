@@ -12,42 +12,27 @@ export function Apps(props: { project: string }) {
     
     return (
         <>
-            <div className="flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 gap-2 h-full rounded-xl content-start">
+            <div className="flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 max-[500px]:p-2 gap-2 h-full rounded-xl content-start overflow-y-auto">
                 {/* Foreach (Apps) */}
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
-                    <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
-                        <Item title="Taskman" description="Work Management" tools={[
-                            {
-                                type: "button",
-                                action: "add",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "add/app"
-                            }
-                        ]} descriptionBottom={true} />
-                    </div>
-                </div>
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
-                    <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
-                        <Item title="Taskman" description="Work Management" tools={[
-                            {
-                                type: "button",
-                                action: "add",
-                                icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
-                                target: "add/app"
-                            }
-                        ]} descriptionBottom={true} />
-                    </div>
-                </div>
-                <div className="selectElement !min-w-fit lg:max-w-[33%] flex-1 cursor-pointer" onDoubleClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
+                <div className="selectElement max-[1024px]:!min-w-full lg:!min-w-[32.5%] lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
                         <Item title="Taskman" description="Work Management" tools={[
                             {
                                 type: "button",
                                 action: "remove",
                                 icon: "fa-solid fa-trash",
-                                color: "bg-red-700",
+                                target: "remove/app"
+                            }
+                        ]} descriptionBottom={true} />
+                    </div>
+                </div>
+                <div className="selectElement max-[1024px]:!min-w-full lg:!min-w-[32.5%] lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "Taskman") }}>
+                    <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
+                        <Item title="Taskman" description="Work Management" tools={[
+                            {
+                                type: "button",
+                                action: "remove",
+                                icon: "fa-solid fa-trash",
                                 target: "remove/app"
                             }
                         ]} descriptionBottom={true} />

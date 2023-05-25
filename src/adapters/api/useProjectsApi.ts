@@ -10,7 +10,7 @@ import { ApiError } from "../../domain/ApiError.interface";
  */
 export const useProjectsApi = () => {
 
-    const [data, setData] = useState<>();
+    const [data, setData] = useState();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState();
 

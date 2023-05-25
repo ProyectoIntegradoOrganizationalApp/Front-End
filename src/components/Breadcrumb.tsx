@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 export function Breadcrumb(props: { breadcrumbs: BreadcrumbInterface[] }) {
     return (
         <>
-            <div className="text-sm breadcrumbs">
+            <div className="text-sm breadcrumbs max-[1085px]:mt-4 max-[1085px]:ml-5 !w-fit">
                 <ul>
                     {
                         props.breadcrumbs.map((breadcrumb, index) => {

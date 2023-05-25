@@ -11,16 +11,20 @@ import { DropdownElement } from "../domain/UI/DropdownElement.interface";
 
 function openDropdown(event: React.MouseEvent<HTMLElement>, broElement: HTMLElement) {
     broElement.classList.remove("!invisible", "!opacity-0");
+    document.getElementById("dropdownArrow")?.classList.toggle("rotate-[270deg]");
+    document.getElementById("dropdownArrow")?.classList.toggle("translate-x-[0.220rem]");
 }
 
 function closeDropdown(event: React.MouseEvent<HTMLElement>, parentElement: HTMLElement) {
     parentElement.classList.add("!invisible", "!opacity-0");
+    document.getElementById("dropdownArrow")?.classList.toggle("rotate-[270deg]");
+    document.getElementById("dropdownArrow")?.classList.toggle("translate-x-[0.220rem]");
 }
 
 export function Dropdown(props: { selectedElement?: string, selectElement?: Function, elements: DropdownElement[] }) {
     return (
         <>
-            <div className="dropdown dropdown-bottom dropdown-end">
+            <div className="dropdown dropdown-bottom dropdown-end w-full">
                 <div tabIndex={0} className="btn btn-primary flex flex-nowrap items-center justify-between !bg-white dark:!bg-slate-600 !text-left !px-5 gap-7 !outline-none leading-none h-fit min-h-0" onClick={(event: React.MouseEvent<HTMLElement>) => {
                     const siblingElement = event.currentTarget.nextElementSibling as HTMLElement;
                     if (siblingElement) {
@@ -28,7 +32,7 @@ export function Dropdown(props: { selectedElement?: string, selectElement?: Func
                     }
                 }}>
                     <p className="text-black dark:text-white w-fit py-3" id="selectedElement">{props.selectedElement}</p>
-                    <i className="fa-solid fa-play text-black dark:text-white rotate-90 scale-75"></i>
+                    <i id="dropdownArrow" className="fa-solid fa-play text-black dark:text-white rotate-90 scale-75 transition-all"></i>
                 </div>
                 <ul tabIndex={0} className="dropdown-content menu p-2 mt-1 shadow bg-white dark:bg-slate-600 w-52" id="dropdown">
                     {

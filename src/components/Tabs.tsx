@@ -18,13 +18,13 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
 
     return (
         <div className="h-fit md:px-3 py-0 flex justify-between items-center rounded-xl">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-7 h-full">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 max-[500px]:gap-2 md:gap-7 h-full">
                 {/* Header */}
-                <div className="items-center gap-4 hidden md:flex">
+                <div className="items-center gap-4 max-[500px]:gap-2 hidden md:flex">
                     <i className={props.icon + " text-black dark:text-white"}></i>
                     <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
                 </div>
-                <div className="h-9 w-0.5 bg-white hidden md:block"></div>
+                <div className="h-9 w-[1.7px] bg-gray-400 dark:bg-slate-500 hidden md:block"></div>
 
                 {/* Tabs */}
                 <div className="flex gap-2">

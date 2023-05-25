@@ -39,15 +39,14 @@ export function Profile() {
     }, [data?.user.id]);
 
     return (
-        <div className="w-full flex flex-wrap gap-4">
+        <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo
                 data={data}
             />
-            <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 w-full">
-
-                {/* TODO => Dividir esto en componentes */}
-                <div className="flex flex-col lg:flex-row flex-wrap gap-4">
-                    <div className="flex-[1.8] basis-[80px] flex flex-col gap-4">
+            
+            <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 max-[500px]:gap-2 w-full">
+                <div className="flex flex-col lg:flex-row flex-wrap gap-4 max-[500px]:gap-2">
+                    <div className="flex-[1.8] basis-[80px] flex flex-col gap-4 max-[500px]:gap-2">
                         <Statistics
                             title="Weekly Tasks"
                             amount={weekly}
@@ -57,8 +56,8 @@ export function Profile() {
                             amount={daily}
                         />
                     </div>
-                    <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4">
-                        <div className="flex-[3] bg-slate-800 rounded-xl p-4">
+                    <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4 max-[500px]:gap-2">
+                        <div className="flex-[3] bg-gray-200 dark:bg-slate-800 rounded-xl p-4 max-[500px]:p-2">
                             { data?.activity && (
                                 <Activity
                                     title="Monthly Activity"
@@ -77,7 +76,7 @@ export function Profile() {
 
                 {/* TODO => Dividir esto en componentes */}
                 <div className="flex-1 rounded-xl bg-gray-200 dark:bg-slate-700 flex flex-col min-h-[20rem]">
-                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-black dark:text-white text-base p-4">
+                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-black dark:text-white text-base p-4 max-[500px]:p-2">
                         <InfoTooltip title="All your projects" />
                         Your Projects
                         {/* Create Project */}
@@ -113,17 +112,14 @@ export function Profile() {
                             
                         </i>
                     </div>
-
-                    {/* TODO => Hacer esto un componente reusable */}
-                    <div id="scrollbar" className="flex flex-col gap-3 p-4 min-h-[4.5rem]">
-                        { data?.projects.map(project => {
+                    <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
+                        {data?.projects.map(project => {
                             return (
                                 <Item key={project.id} title={project.name} description="nada más que comentar" tools={[
                                     {
                                         type: "button",
                                         action: "view",
                                         icon: "fa-solid fa-eye",
-                                        color: "bg-blue-700",
                                         target: "view/idProyect"
                                     },
                                 ]} />

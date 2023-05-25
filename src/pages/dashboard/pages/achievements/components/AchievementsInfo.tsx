@@ -35,9 +35,15 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
     }
 
     return (
-        <div className="bg-gray-200 dark:bg-slate-800 rounded-xl relative flex-1 flex flex-col items-center gap-12 py-8 px-4 min-w-[25%]">
-            <div className="absolute top-5 left-4">
-                <InfoTooltip title="Your last 6 achievements completing" position="right" />
+        <>
+            <div className="bg-gray-200 dark:bg-slate-800 min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-12 py-8 px-4 min-w-[25%]">
+                <div className="absolute top-5 left-4">
+                    <InfoTooltip title="Your last 6 achievements completing" position="right" />
+                </div>
+                <AchievementsLevel level={level} rank={rank}/>
+                <AchievementsList
+                    data={props.data}
+                />
             </div>
             <AchievementsLevel 
                 level={level} 
@@ -46,6 +52,6 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
             <AchievementsList
                 data={props.data}
             />
-        </div>
+        </>
     )
 }

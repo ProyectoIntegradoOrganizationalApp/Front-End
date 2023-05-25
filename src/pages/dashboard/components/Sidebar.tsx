@@ -19,9 +19,7 @@ export function Sidebar( props: { children: ReactNode } ) {
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col dark:bg-slate-600 !h-full" id="scrollbar">
-                <label htmlFor="my-drawer-2" className="btn btn-primary w-12 absolute top-1/2 -left-5 rounded-full swap swap-rotate">
-                    <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
-                    <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" /></svg>
+                <label htmlFor="my-drawer-2" className="btn btn-primary w-0 !pl-4 !pr-4 !h-32 absolute top-[40%] -left-5 rounded-full swap swap-rotate z-40 !rounded-r-xl !bg-gray-400 dark:!bg-black">
                 </label>
                 {props.children}
             </div>
@@ -43,14 +41,14 @@ export function Sidebar( props: { children: ReactNode } ) {
                                         { link.children ? (
                                             <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 ${location.pathname.includes(link.name.toLowerCase()) ? "bg-white dark:bg-slate-700 cursor-auto" : "cursor-pointer"}`}>
                                                 
-                                                <NavLink to={link.url} className={`flex items-center gap-4 p-4 pl-8 w-full transition-all outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/30" : ""}`}>
+                                                <NavLink to={link.url} className={`flex items-center gap-4 p-3.5 pl-[1.7rem] w-full outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/30" : ""}`}>
                                                     <i className={link.icon + ` ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}></i>
-                                                    <p className="text-base text-black dark:text-white">{link.name}</p>
+                                                    <p className={`text-base ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}>{link.name}</p>
                                                 </NavLink>
                                                 { location.pathname.includes(link.name.toLowerCase()) && (
                                                     <>
                                                         <hr className="w-full border-gray-300 bg-gray-300 dark:border-slate-600 border-[1.5px] dark:bg-slate-600"/>
-                                                        <ul className="menu shadow hover:bg-transparent w-full py-3 px-8 flex flex-col gap-2" tabIndex={0}>
+                                                        <ul className="menu shadow hover:bg-transparent w-full py-3 px-[1.7rem] flex flex-col gap-[0.3rem]" tabIndex={0}>
                                                             { link.children && link.children.map( child => 
                                                                 <li key={child.name}>
                                                                     <NavLink to={child.url} className={({isActive, isPending}) => isActive ? `text-black dark:text-white hover:bg-transparent ${btnStyles}` : `text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</NavLink>

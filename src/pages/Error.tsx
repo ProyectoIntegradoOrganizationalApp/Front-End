@@ -6,8 +6,8 @@ export function Error() {
 
     return (
         <>
-            <div className="min-h-[100vh] flex">
-                <div className="flex-1 w-full flex flex-wrap items-center justify-center max-[640px]:gap-0 max-[926px]:gap-6 gap-12 p-10">
+            <div className="min-h-[100vh] max-[640px]:min-h-full flex">
+                <div className="flex-1 w-full flex flex-wrap max-[640px]:content-center items-center justify-center max-[640px]:gap-0 max-[926px]:gap-6 gap-12 p-10 max-[500px]:p-6">
                     <img src={error} className="w-[400px]"/>
                     <div className="w-fit text-black dark:text-white">
                         <h1 className="text-5xl font-bold leading-none">404</h1>
