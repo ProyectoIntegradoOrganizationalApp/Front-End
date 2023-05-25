@@ -18,6 +18,11 @@ import { useModal } from '../../../../hooks/useModal';
 import { useProfile } from '../../../../hooks/useProfile';
 import { useUtils } from '../../../../hooks/useUtils';
 
+/**
+ * Componente Profile, que representa la ruta /profile/{id} en la cual podremos
+ * ver un overview de las estadísticas del usuario.
+ * @returns React.FC
+ */
 export function Profile() {
     const [daily, setDaily] = useState<number>(0);
     const [weekly, setWeekly] = useState<number>(0);

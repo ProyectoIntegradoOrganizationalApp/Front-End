@@ -16,8 +16,6 @@ import { useAchievementsApi } from "../../../../../adapters/api/useAchievementsA
  */
 export function AchievementsInfo( props: { data: Profile | undefined } ) {
 
-    const { data, error, loading } = useAchievementsApi();
-
     let rank: string = "Newbie";
     let level: number = 1;
 
@@ -45,13 +43,7 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
                     data={props.data}
                 />
             </div>
-            <AchievementsLevel 
-                level={level} 
-                rank={rank}
-            />
-            <AchievementsList
-                data={props.data}
-            />
+
         </>
     )
 }
