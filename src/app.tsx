@@ -32,7 +32,7 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
 import { Store } from './pages/dashboard/pages/project/Store';
 import { CookieModal } from './components/CookieModal';
-import { Application } from './pages/dashboard/pages/project/pages/app/Application';
+import { Taskman } from './pages/dashboard/pages/project/pages/apps/Taskman';
 
 /**
  *  Aplicación principal.
@@ -121,7 +121,7 @@ export function App() {
 
                                 <Route path="project/:project/app/:name"
                                     element={
-                                        <Application />
+                                        <Taskman />
                                     }
                                 />
 
