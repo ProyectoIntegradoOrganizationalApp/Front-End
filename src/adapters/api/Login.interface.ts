@@ -1,4 +1,4 @@
-import { Notification } from "../../domain/Notification.interface"
+import { Notification } from "../../domain/notification/Notification.interface"
 
 /**
  *  Interfaz con los datos que nos llegan desde el login.

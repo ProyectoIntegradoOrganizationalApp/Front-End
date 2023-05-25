@@ -6,7 +6,6 @@
  */
 export interface Friend {
     id: string,
-    pic: string,
-    full_name: string,
-    description: string
+    photo: string,
+    name: string,
 }

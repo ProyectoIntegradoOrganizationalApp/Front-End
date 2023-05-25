@@ -1,4 +1,5 @@
-import { NotificationDTO } from "../profile/NotificationDTO.interface";
+import { FriendDTO } from "../friend/FriendDTO.interface";
+import { NotificationsDTO } from "../notification/NotificationsDTO.interface";
 
 export interface UserDTO {
     id: string,
@@ -10,5 +11,6 @@ export interface UserDTO {
     updated_at: Date,
     level: number,
     _token: string,
-    notifications: Array<NotificationDTO>
+    notifications: NotificationsDTO,
+    friends: Array<FriendDTO>
 }

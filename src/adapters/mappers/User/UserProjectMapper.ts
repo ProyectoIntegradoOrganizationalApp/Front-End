@@ -1,6 +1,6 @@
-import { Mapper } from "./Mapper";
-import { UserProject } from "../../domain/user/UserProject.interface";
-import { UserProjectDTO } from "../../domain/user/UserProjectDTO.interface";
+import { Mapper } from "../Mapper";
+import { UserProject } from "../../../domain/user/UserProject.interface";
+import { UserProjectDTO } from "../../../domain/user/UserProjectDTO.interface";
 
 export class UserProjectMapper extends Mapper<UserProject, UserProjectDTO> {
 

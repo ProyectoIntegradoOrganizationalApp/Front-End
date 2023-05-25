@@ -1,24 +1,22 @@
 import { Mapper } from "./Mapper";
-import { Friend } from "../../domain/Friend.interface";
-import { FriendDTO } from "../../domain/profile/FriendDTO.interface";
+import { Friend } from "../../domain/friend/Friend.interface";
+import { FriendDTO } from "../../domain/friend/FriendDTO.interface";
 
 export class FriendMapper extends Mapper<Friend, FriendDTO> {
 
     mapFrom( data: Friend ): FriendDTO {
         return {
-            id: data.id,
-            pic: data.pic,
-            full_name: data.full_name,
-            description: data.description
+            idFriend: data.id,
+            photo: data.photo,
+            name: data.name,
         }
     }
 
     mapTo( data: FriendDTO ): Friend {
         return {
-            id: data.id,
-            pic: data.pic,
-            full_name: data.full_name,
-            description: data.description
+            id: data.idFriend,
+            photo: data.photo,
+            name: data.name,
         }
     }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 
 import { useAuth } from "../../hooks/useAuth";
 
@@ -8,6 +8,8 @@ import { ApiError } from '../../domain/ApiError.interface';
 import { Profile } from "../../domain/profile/Profile.interface";
 import { ProfileMapper } from "../mappers/ProfileMapper";
 import { ProfileDTO } from "../../domain/profile/ProfileDTO.interface";
+import { RequestParams } from "../../domain/RequestParams.interface";
+import { useAxios } from "./useAxios";
 
 /**
  * Hook de conexión con la Base de datos para la vista de Profile.
@@ -37,26 +39,25 @@ export const useProfileApi = () => {
      *  para su funcionamiento.
      */
     useEffect(() => {
-        let ignore = false;
         setLoading(true);
         
-        axios.get<ProfileDTO | ApiError>(`${API}/profile/${user?.id}`, {
-            headers: {
+        const props: RequestParams = {
+            url: `${API}/profile/${user?.id}`,
+            method: "GET",
+            headers: new AxiosHeaders({
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${user?._token}`
-            }
-        }).then( data => {
-            if ( !ignore ) {
-                handleData(data.data);
-            }
-        }).catch( err => {
-            const error: ApiError = {error: true, message: err};
-            handleData(error);
-        })
-        
-        return () => {
-            ignore = true;
+            }),
         }
+        
+        useAxios(props)
+            .then( data => handleData(data.data))
+            .catch( err => {
+                handleData({error: true, message: err});
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     /**

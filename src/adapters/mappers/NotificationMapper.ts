@@ -1,27 +1,27 @@
 // Mapper
 import { Mapper } from "./Mapper";
 
-// 
-import { Notification } from "../../domain/Notification.interface";
-import { NotificationDTO } from "../../domain/profile/NotificationDTO.interface";
+// Interfaces
+import { Notification } from "../../domain/notification/Notification.interface";
+import { NotificationDTO } from "../../domain/notification/NotificationDTO.interface";
 
 export class NotificationMapper extends Mapper<Notification, NotificationDTO> {
 
     mapFrom( data: Notification ): NotificationDTO {
         return {
-            id: data.id,
+            idguest: data.idGuest,
+            iduser: data.idUser,
             title: data.title,
-            content: data.content,
-            state: data.state
+            message: data.message
         }
     }
 
     mapTo( data: NotificationDTO ): Notification {
         return {
-            id: data.id,
+            idGuest: data.idguest,
+            idUser: data.iduser,
             title: data.title,
-            content: data.content,
-            state: data.state  
+            message: data.message 
         }
     }
 }

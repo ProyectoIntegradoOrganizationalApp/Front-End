@@ -1,6 +1,6 @@
-import { Mapper } from "./Mapper";
-import { UserActivity } from "../../domain/user/UserActivity.interface";
-import { UserActivityDTO } from "../../domain/user/UserActivityDTO.interface";
+import { Mapper } from "../Mapper";
+import { UserActivity } from "../../../domain/user/UserActivity.interface";
+import { UserActivityDTO } from "../../../domain/user/UserActivityDTO.interface";
 
 export class UserActivityMapper extends Mapper<UserActivity, UserActivityDTO> {
 

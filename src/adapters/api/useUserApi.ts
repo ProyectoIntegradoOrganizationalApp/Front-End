@@ -1,16 +1,18 @@
 import { useState } from "react";
 
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
+import { useAxios } from "./useAxios";
 
 import { ApiError } from "../../domain/ApiError.interface";
 import { Register } from "./Register.interface";
-import { UserDTO } from "../../domain/user/UserDTO";
+import { UserDTO } from "../../domain/user/UserDTO.interface";
+import { RequestParams } from "../../domain/RequestParams.interface";
 
 /**
  *  Interfaz de props del formulario de la UI, tiene los campos opcionales
  *  para también controlar tanto el login como el register.
  */
-interface FormProps {
+export interface FormProps {
     name?: string
     last_name?: string
     prefix?: string
@@ -41,21 +43,27 @@ export const useUserApi = () => {
     const fetchUser = ( props: FormProps ): void => {
         setLoading(true);
 
-        const body = JSON.stringify({email: props.email, password: props.password});
+       /**
+        * Props de la petición
+        */
+        const reqProps: RequestParams = {
+            url: `${API}/login`,
+            method: "POST",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+            }),
+            data: { email: props.email, password: props.password }
+        }
 
-        axios.post<UserDTO | ApiError>(`${API}/login`, body, {
-            headers: {
-                "Content-Type": "application/json" 
-            }
-        }).then( data => {
-            console.log(data.data)
-            handleData(data.data);
-            setLoading(false);
-        }).catch( err => {
-            const error: ApiError = { error: true, message: err};
-            handleData(error);
-        })
-
+        useAxios(reqProps)
+            .then( data => {
+                handleData(data.data);
+            }).catch( err => {
+                const error: ApiError = { error: true, message: err};
+                handleData(error);
+            }).finally(() => {
+                setLoading(false);
+            });
     }
 
     /**
@@ -71,19 +79,33 @@ export const useUserApi = () => {
         }
 
         let phone = props.prefix + props.phone_number;
-        
-        const body = JSON.stringify({email: props.email, phone: phone, first_name: props.name, last_name: props.last_name, password: props.password, confirmpass: props.confirmPass, photo: props.photo});
 
-        axios.post<Register | ApiError>(`${API}/register`, body, {
-            headers: {
-                "Content-Type": "application/json"
-            },
-        }).then( data => {   
-            handleData(data.data, props);  
-        }).catch(err => {
-            const error: ApiError = { error: true, message: err };
-            handleData(error);
-        })
+        const reqProps: RequestParams = {
+            url: `${API}/register`,
+            method: "POST",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+            }),
+            data: {
+                email: props.email, 
+                phone: phone, 
+                first_name: props.name, 
+                last_name: props.last_name, 
+                password: props.password, 
+                confirmpass: props.confirmPass, 
+                photo: props.photo
+            }
+        }
+
+        useAxios(reqProps)
+            .then( data => {   
+                handleData(data.data, props);  
+            }).catch(err => {
+                const error: ApiError = { error: true, message: err };
+                handleData(error);
+            }).finally(() => {
+                setLoading(false);
+            });
     }
 
     /**
@@ -118,7 +140,6 @@ export const useUserApi = () => {
             setData(data);
         }
         
-        setLoading(false);
     }
     
     return { data, error, loading, fetchUser, registerUser };

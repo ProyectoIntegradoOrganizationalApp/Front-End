@@ -3,10 +3,10 @@ import { Mapper } from "./Mapper";
 import { Profile } from "../../domain/profile/Profile.interface";
 import { ProfileDTO } from "../../domain/profile/ProfileDTO.interface";
 
-import { UserAchievementMapper } from "./UserAchievementMapper";
-import { UserProjectMapper } from "./UserProjectMapper";
-import { UserProfileMapper } from "./UserProfileMapper";
-import { UserActivityMapper } from "./UserActivityMapper";
+import { UserAchievementMapper } from "./User/UserAchievementMapper";
+import { UserProjectMapper } from "./User/UserProjectMapper";
+import { UserProfileMapper } from "./User/UserProfileMapper";
+import { UserActivityMapper } from "./User/UserActivityMapper";
 
 export class ProfileMapper extends Mapper<Profile, ProfileDTO> {
 
