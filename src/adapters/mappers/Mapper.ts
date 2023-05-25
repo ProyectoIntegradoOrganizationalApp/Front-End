@@ -4,18 +4,18 @@
  */
 export abstract class Mapper<I, O> {
 
-    /** Mapeado de un objeto a otro **/
+    /** Mapeado de entidad a DTO **/
     abstract mapFrom( param: I ): O;
 
-    /** Mapeado a la inversa **/
+    /** Mapeado de DTO a entidad **/
     abstract mapTo( param: O ): I;
 
-    /** Mapea un array de objetos de tipo I a O **/
+    /** Mapea un array de entidades a DTO **/
     mapArrayFrom( params: I[] ): O[] {
         return params.map((param) => this.mapFrom(param));
     }
 
-    /** Mapea un Array de objetos de tipo O a I **/
+    /** Mapea un Array de DTO a entidades **/
     mapArrayTo( params: O[] ): I[] {
         return params.map((param) => this.mapTo(param));
     }

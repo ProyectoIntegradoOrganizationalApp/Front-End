@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-
-import axios, { AxiosHeaders, AxiosResponse } from 'axios';
-
-import { ApiError } from "../../domain/ApiError.interface";
-import { UserProjectDTO } from '../../domain/user/UserProjectDTO.interface';
-import { useAuth } from '../../hooks/useAuth';
-import { UserProject } from '../../domain/user/UserProject.interface';
-
 import { useAxios } from './useAxios';
+import { AxiosHeaders } from 'axios';
+
+import { useAuth } from '../../hooks/useAuth';
+
 import { RequestParams } from '../../domain/RequestParams.interface';
+import { Project } from '../../domain/projects/Project.interface';
+import { ApiError } from "../../domain/ApiError.interface";
+import { ProjectMapper } from '../mappers/ProjectsMapper';
+import { ProjectDTO } from '../../domain/projects/ProjectDTO.interface';
 
 /**
  * Hook para la conexión con los endpoints del back-end que se
@@ -18,7 +18,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
 
     const { user } = useAuth();
 
-    const [data, setData] = useState<Array<UserProject>>();
+    const [data, setData] = useState<Array<Project>>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,18 +40,27 @@ export const useProjectsApi = ( fetch: boolean ) => {
      */
     const fetchData = () => {
         setLoading(true);
-        
-        axios.get<Array<UserProject> | ApiError>(`${API}/user/${user?.id}/projects`, {
-            headers: {
+
+        /**
+         * Props de la petición
+         */
+        const props: RequestParams = {
+            url: `${API}/user/${user?.id}/projects`,
+            method: "GET",
+            headers: new AxiosHeaders({
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${user?._token}`
-            }
-        }).then( data => {
-            handleData(data.data);
-        }).catch( err => {
-            const error: ApiError = {error: true, message: err};
-            handleData(error);
-        })
+            }),
+        }
+        
+        useAxios(props)
+            .then( data => handleData(data.data))
+            .catch( err => {
+                handleData({error: true, message: err});
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }
 
     /**
@@ -63,6 +72,9 @@ export const useProjectsApi = ( fetch: boolean ) => {
     const createProject = ( name: string, description: string ) => {
         setLoading(true);
 
+        /**
+         * Props de la petición
+         */
         const props: RequestParams = {
             url: `${API}/project`,
             method: "POST",
@@ -81,14 +93,17 @@ export const useProjectsApi = ( fetch: boolean ) => {
          */
         useAxios(props)
             .then( data => console.log(data))
-            .catch( err => console.log("err"))
+            .catch( err => {
+                const error: ApiError = {error: true, message: err};
+                handleData(error);
+            })
             .finally(() => {
                 setLoading(false)
             });
 
     }
 
-    const removeUserProjects = () => {
+    const leaveProject = () => {
 
     }
 
@@ -100,7 +115,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
      *  Función que maneja los datos que salen de la API.
      *  @param info 
      */
-    const handleData = ( info: Array<UserProjectDTO> | ApiError ) => {
+    const handleData = ( info: ProjectWrapper | ApiError ) => {
 
         console.log(info)
 
@@ -114,14 +129,22 @@ export const useProjectsApi = ( fetch: boolean ) => {
         /**
          * Si no hay error
          */
-        if( info && "user" in info ) {
+        if( info && "projects" in info ) {
             // Quitamos los errores en caso de que los halla
             setError(undefined);
+
+            // Cambiamos el state
+            let projects: Array<Project> = ProjectMapper.prototype.mapArrayTo(info.projects);
+            setData(projects);
         }
 
         setLoading(false);
     }
 
-    return { data, error, loading, createProject, removeUserProjects, editProject };
+    return { data, error, loading, createProject, leaveProject, editProject };
 
+}
+
+interface ProjectWrapper {
+    projects: Array<Project>
 }
