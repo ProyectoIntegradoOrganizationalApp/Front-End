@@ -32,7 +32,9 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
 import { Store } from './pages/dashboard/pages/project/Store';
 import { CookieModal } from './components/CookieModal';
-import { Taskman } from './pages/dashboard/pages/project/pages/apps/Taskman';
+import { Boards } from './pages/dashboard/pages/project/pages/apps/taskman/Boards';
+import Board from './pages/dashboard/pages/project/pages/apps/taskman/board/Board';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 /**
  *  Aplicación principal.
@@ -121,7 +123,15 @@ export function App() {
 
                                 <Route path="project/:project/app/:name"
                                     element={
-                                        <Taskman />
+                                        <Boards />
+                                    }
+                                />
+
+                                <Route path="project/:project/app/:name/:board"
+                                    element={
+                                        <DragDropContext onDragEnd={() => console.log("movido")}>
+                                            <Board />
+                                        </DragDropContext>
                                     }
                                 />
 

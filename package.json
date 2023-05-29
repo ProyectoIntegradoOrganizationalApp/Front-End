@@ -17,6 +17,7 @@
     "i": "^0.3.7",
     "npm": "^9.6.4",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@tauri-apps/cli": "^1.2.3",
     "@types/react": "^18.0.28",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-dom": "^18.0.11",
     "@types/react-modal": "^3.16.0",
     "@types/uuid": "^9.0.1",

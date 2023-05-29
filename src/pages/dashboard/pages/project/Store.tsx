@@ -31,9 +31,9 @@ export function Store(props: { project: string }) {
                         }
                     ]} />
                 </div>
-                <div className="flex-1 bg-gray-200 dark:bg-slate-800 w-full h-fit rounded-xl flex flex-col gap-3 p-4 pt-3">
+                <div className="flex-1 bg-gray-200 dark:bg-slate-800 w-full h-fit rounded-xl flex flex-col gap-3 min-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3">
                     <div className="flex items-center justify-between pr-2">
-                        <div className="h-fit px-3 py-0 flex justify-between items-center rounded-xl">
+                        <div className="h-fit px-3 py-0 flex justify-between items-center rounded-xl max-[500px]:my-2">
                             <div className="flex items-center gap-6 h-full">
                                 <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
                                 {/* Header */}
