@@ -8,7 +8,6 @@ import { RequestParams } from '../../domain/RequestParams.interface';
 import { Project } from '../../domain/projects/Project.interface';
 import { ApiError } from "../../domain/ApiError.interface";
 import { ProjectMapper } from '../mappers/ProjectsMapper';
-import { ProjectDTO } from '../../domain/projects/ProjectDTO.interface';
 
 /**
  * Hook para la conexión con los endpoints del back-end que se
@@ -84,7 +83,8 @@ export const useProjectsApi = ( fetch: boolean ) => {
             }),
             data: {
                 name: name,
-                description: description
+                description: description,
+                icon: "https://www.svgrepo.com/show/513474/rocket.svg"
             }
         }
         

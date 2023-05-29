@@ -97,21 +97,26 @@ export function Profile() {
                         </i>
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
-                        {data?.projects.map(project => {
-                            return (
-                                <Item 
-                                    key={project.id} 
-                                    title={project.name} 
-                                    description={project.name} 
-                                    tools={[
-                                    {
-                                        type: "button",
-                                        action: "view",
-                                        icon: "fa-solid fa-eye",
-                                        target: `/project/${project.id}`
-                                    },
-                                ]} />
-                            )
+                        {   data?.projects.map(project => {
+                                return (
+                                    <Item
+                                        project={project}
+                                        tools={[
+                                            {
+                                                type: "button",
+                                                action: "edit",
+                                                icon: "fa-solid fa-pen-to-square",
+                                                target: "edit/idProyect"
+                                            },
+                                            {
+                                                type: "button",
+                                                action: "remove",
+                                                icon: "fa-solid fa-trash",
+                                                target: "remove/idProyect"
+                                            }
+                                        ]} 
+                                    />
+                                )
                         })}
                     </div>
                 </div>

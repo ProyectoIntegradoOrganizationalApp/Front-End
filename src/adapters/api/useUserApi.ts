@@ -95,7 +95,7 @@ export const useUserApi = () => {
                 confirmpass: props.confirmPass, 
                 photo: props.photo
             }
-        }
+        };
 
         useAxios(reqProps)
             .then( data => {   

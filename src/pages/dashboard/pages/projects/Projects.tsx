@@ -87,29 +87,9 @@ export function Projects() {
                             />
                         </div>
                     </div>
+
                     <div id="scrollbar" className="flex-1 selectElement max-[500px]:gap-2">
-                    <div 
-                                        onDoubleClick={() => openProject("project.id")}
-                                    >
-                                        <Item 
-                                            title={"project.name"} 
-                                            description={"project.description"} 
-                                            tools={[
-                                                {
-                                                    type: "button",
-                                                    action: "edit",
-                                                    icon: "fa-solid fa-pen-to-square",
-                                                    target: "edit/idProyect"
-                                                },
-                                                {
-                                                    type: "button",
-                                                    action: "remove",
-                                                    icon: "fa-solid fa-trash",
-                                                    target: "remove/idProyect"
-                                                }
-                                            ]} 
-                                        />
-                                    </div>
+
                         { data && (
                             data.map( project => {
                                 return (
@@ -121,9 +101,8 @@ export function Projects() {
                                         }} 
                                         onDoubleClick={() => openProject(project.id)}
                                     >
-                                        <Item 
-                                            title={project.name} 
-                                            description={project.description} 
+                                        <Item
+                                            project={project}
                                             tools={[
                                                 {
                                                     type: "button",

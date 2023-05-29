@@ -6,6 +6,8 @@
  */
 
 export interface UserProject {
+    icon: string,
     id: string,
-    name: string
+    name: string,
+    description: string,
 }

@@ -1,9 +1,13 @@
 // React
 import React, { MouseEventHandler } from "react";
-import { Tool } from "../domain/UI/Tool.interface";
+
+import { useNavigate } from "react-router-dom";
+
 import { Dropdown } from "./Dropdown";
 import { RoleDropdown } from "./RoleDropdown";
-import { useNavigate } from "react-router-dom";
+
+import { Tool } from "../domain/UI/Tool.interface";
+import { UserProject } from "../domain/user/UserProject.interface";
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
@@ -11,7 +15,9 @@ import { useNavigate } from "react-router-dom";
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-export function Item( props: { icon?: string, title: string, description: string, tools?: Array<Tool>, descriptionBottom?: boolean } ) {
+export function Item( props: { project: UserProject, tools?: Array<Tool>, descriptionBottom?: boolean } ) {
+
+    console.log(props)
 
     const navigate = useNavigate();
 
@@ -25,43 +31,44 @@ export function Item( props: { icon?: string, title: string, description: string
         <>
             <div className="bg-white dark:bg-slate-800 w-full h-fit px-4 py-3 flex max-[499px]:flex-wrap justify-between items-center rounded-xl gap-2.5">
                 {/* Info */}
-                {
-                    props.descriptionBottom == true &&
+                {   props.descriptionBottom == true &&
                     <div className="flex items-center gap-4">
                         {/* Icon (si no hay icon, uno por defecto) */}
                         <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
                         {/* Title */}
                         <div className="flex flex-col gap-2">
-                            <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
-                            <p className="leading-none text-black dark:text-white/50 text-sm">{props.description}</p>
+                            <p className="leading-none text-black dark:text-white text-base">{props.project?.name}</p>
+                            <p className="leading-none text-black dark:text-white/50 text-sm">{props.project?.description}</p>
                         </div>
                     </div>
-                } {
-                    !props.descriptionBottom &&
-                    <>
-                        <div className="flex">
-                            <div className="flex items-center gap-3 sm:gap-4">
-                                {/* Icon (si no hay icon, uno por defecto) */}
-                                <div className="rounded-full bg-green-700 w-12 aspect-square"></div>
-                                {/* Title */}
-                                <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
-                            </div>
-                            <div className="items-center hidden min-[715px]:flex">
-                                {/* Separator */}
-                                <div className="w-[0.1rem] bg-gray-400 dark:bg-slate-500 h-9 mx-7"></div>
-                                {/* Description */}
-                                <p className="leading-none text-black dark:text-white/50 text-base">{props.description}</p>
-                            </div>
+                } { !props.descriptionBottom &&
+                    <div className="flex">
+                        <div className="flex items-center gap-3 sm:gap-4">
+                            {/* Icon (si no hay icon, uno por defecto) */}
+                            <div className={`rounded-full bg-[url(${props.project?.icon})] w-12 aspect-square`}></div>
+                            {/* Title */}
+                            <p className="leading-none text-black dark:text-white text-base">{props.project?.name}</p>
                         </div>
-                    </>
+                        <div className="items-center hidden min-[715px]:flex">
+                            {/* Separator */}
+                            <div className="w-[0.1rem] bg-gray-400 dark:bg-slate-500 h-9 mx-7"></div>
+                            {/* Description */}
+                            <p className="leading-none text-black dark:text-white/50 text-base">{props.project?.description}</p>
+                        </div>
+                    </div>
                 }
                 {/* Tools */}
                 <div className="flex items-center gap-2">
-                    {
-                        props.tools?.map((tool) => {
+                    {   props.tools?.map((tool) => {
                             return tool.type == "button" ?
-                                <div key={tool.target} onClick={(event: React.MouseEvent<HTMLElement>) => { doAction(tool.target) }} className={`btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none ${tool.action == "view" ? "bg-blue-700 hover:bg-blue-800" : tool.action == "edit" ? "bg-green-700 hover:bg-green-800" : tool.action == "remove" ? "bg-red-700 hover:bg-red-800" : tool.action == "add" ? "bg-green-700 hover:bg-green-800": ""}`}>
-                                    <i className={tool.icon + " text-white"}></i>
+                                <div 
+                                    key={tool.target} 
+                                    onClick={(event: React.MouseEvent<HTMLElement>) => { doAction(tool.target) }} 
+                                    className={`btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none ${tool.action == "view" ? "bg-blue-700 hover:bg-blue-800" : tool.action == "edit" ? "bg-green-700 hover:bg-green-800" : tool.action == "remove" ? "bg-red-700 hover:bg-red-800" : tool.action == "add" ? "bg-green-700 hover:bg-green-800": ""}`}
+                                >
+                                    <i className={tool?.icon + " text-white"}>
+
+                                    </i>
                                 </div>
                                 : tool.type == "dropdown" ?
                                     <div>
