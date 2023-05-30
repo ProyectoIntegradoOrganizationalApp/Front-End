@@ -16,7 +16,7 @@ export function Task(props: TaskProps) {
         <Draggable draggableId={task.id} index={index}>
             {(provided) => (
                 <div
-                    className="bg-white text-black p-2 rounded-lg mb-2 select-none break-all w-full leading-[1.2rem]"
+                    className="bg-[#fef375] text-black p-2 rounded-lg mb-2 select-none break-all w-full leading-[1.2rem]"
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef} id={task.id}

@@ -1,46 +1,19 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Column from './Column';
 import { Breadcrumb } from '../../../../../../../../components/Breadcrumb';
-import { useNavigate } from 'react-router-dom';
+import { useBeforeUnload, useNavigate } from 'react-router-dom';
 import { useModal } from '../../../../../../../../hooks/useModal';
+import { useBoard } from '../../../../../../../../hooks/useBoard';
 import { Tabs } from '../../../../../../../../components/Tabs';
 import { StrictDroppable } from './StrictDroppable';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { ColumnData } from '../../../../../../../../domain/apps/taskman/ColumnData.interface';
 
 export function Board() {
-    const [tab, setTab] = useState<string>("dashboard");
+    const [ tab, setTab ] = useState<string>("dashboard");
     const { openModal } = useModal();
-
+    const { onDragEnd, columnOrder, columnsData } = useBoard();
     let navigate = useNavigate();
-
-    const columnOrder = ['column-1', 'column-2', 'column-3']; // Orden de las columnas
-
-    const columnsData: {
-        [key: string]: {
-            id: string;
-            title: string;
-            taskIds: string[];
-            index: number
-        };
-    } = {
-        'column-1': {
-            id: 'column-1',
-            title: 'To Do',
-            taskIds: ['task-1', 'task-2', 'task-3'],
-            index: 1
-        },
-        'column-2': {
-            id: 'column-2',
-            title: 'In Progress',
-            taskIds: ['task-4', 'task-5'],
-            index: 2
-        },
-        'column-3': {
-            id: 'column-3',
-            title: 'Done',
-            taskIds: ['task-6'],
-            index: 3
-        },
-    };
 
     const tasksData: {
         [key: string]: {
@@ -72,59 +45,82 @@ export function Board() {
             id: 'task-6',
             content: 'Task 6',
         },
+        'task-7': {
+            id: 'task-7',
+            content: ' faef aef ea fea fae fea fa',
+        },
+        'task-8': {
+            id: 'task-8',
+            content: 'Tseraraf',
+        }
     };
 
-    return (
-        <div className="w-full flex flex-col">
-            <div className="w-full">
-                <Breadcrumb breadcrumbs={[
-                    {
-                        icon: "fa-solid fa-diagram-project",
-                        name: "Projects",
-                        link: "/projects/dashboard"
-                    },
-                    {
-                        icon: "fa-solid fa-list-check",
-                        name: "ptoelquelolea",
-                        link: "/project/ptoelquelolea"
-                    },
-                    {
-                        icon: "fa-solid fa-chess-board",
-                        name: "Taskman"
-                    }
-                ]} />
-            </div>
-            <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
-                <div className="flex gap-3 ml-3 max-[500px]:my-2">
-                    <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
-                    <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chess-board" title="Taskman Cols" />
-                </div>
-                <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
-                    {(provided) => (
-                        <div
-                            className="flex-1 rounded-xl bg-gray-300 dark:bg-slate-700 flex p-4 max-[500px]:p-2"
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                        >
-                            {
-                                columnOrder.map((columnId) => {
-                                    const column = columnsData[columnId];
-                                    const tasks = column.taskIds.map((taskId) => tasksData[taskId]);
+    useBeforeUnload((e: BeforeUnloadEvent) => {
+        e.preventDefault();
 
-                                    return (
-                                        <Column
-                                            key={column.id}
-                                            column={column}
-                                            tasks={tasks}
-                                        />
-                                    );
-                                })
-                            }
-                        </div>
-                    )}
-                </StrictDroppable>
+        // Maiki, aquí debes poner actualización de datos en la bbdd con el nuevo columnData y eso
+    });
+
+    return (
+        <DragDropContext onDragEnd={onDragEnd}>
+            <div className="w-full flex flex-col">
+                <div className="w-full">
+                    <Breadcrumb breadcrumbs={[
+                        {
+                            icon: "fa-solid fa-diagram-project",
+                            name: "Projects",
+                            link: "/projects/dashboard"
+                        },
+                        {
+                            icon: "fa-solid fa-list-check",
+                            name: "ptoelquelolea",
+                            link: "/project/ptoelquelolea"
+                        },
+                        {
+                            icon: "fa-solid fa-chess-board",
+                            name: "Taskman",
+                            link: "/project/ptoelquelolea/app/taskman"
+                        },
+                        {
+                            icon: "fa-solid fa-chess-board",
+                            name: "front-End"
+                        },
+                    ]} />
+                </div>
+                <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
+                    <div className="flex gap-3 ml-3 max-[500px]:my-2">
+                        <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
+                        <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chess-board" title="Taskman Cols" />
+                    </div>
+                    <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
+                        {(provided) => (
+                            <div id="scrollbarx"
+                                className="flex-1 rounded-xl bg-gray-300 dark:bg-slate-700 flex p-4 max-[500px]:p-2 overflow-x-auto"
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                            >
+                                {
+                                    columnOrder.map((columnId) => {
+                                        // console.log(columnId)
+                                        const column = columnsData[columnId];
+                                        const tasks = column.taskIds.map((taskId) => tasksData[taskId]);
+
+                                        return (
+                                            <Column
+                                                key={column.id}
+                                                column={column}
+                                                tasks={tasks}
+                                                index={columnOrder.indexOf(columnId)}
+                                            />
+                                        );
+                                    })
+                                }
+                            </div>
+                        )}
+                    </StrictDroppable>
+                </div>
             </div>
-        </div>
+        </DragDropContext>
     );
 };
 

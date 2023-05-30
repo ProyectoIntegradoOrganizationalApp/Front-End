@@ -35,21 +35,21 @@ export function Projects() {
     const [selectedOrder, setSelectedOrder] = useState<string>("Order By");
 
     useEffect(() => {
-        if( error?.error ) {
+        if (error?.error) {
             logout();
         }
     }, [error?.error])
 
-    const handleSelection = ( project: Project ) => {
-        if( selectedElement && selectedElement.id === project.id ) {
+    const handleSelection = (project: Project) => {
+        if (selectedElement && selectedElement.id === project.id) {
             setSelectedElement(undefined);
         }
 
-        if( selectedElement && selectedElement.id != project.id ) {
+        if (selectedElement && selectedElement.id != project.id) {
             setSelectedElement(project);
         }
 
-        if( !selectedElement ) {
+        if (!selectedElement) {
             setSelectedElement(project);
         }
     }
@@ -66,9 +66,9 @@ export function Projects() {
                 <div className={`max-[839.50px]:h-auto h-full flex-[4] bg-gray-300 dark:bg-slate-700 rounded-xl flex flex-col gap-4 max-[500px]:gap-2 max-[500px]:p-2 p-4 w-9/12 ${selectedElement == null ? "!w-full" : ""}`}>
                     <div className="flex flex-wrap-reverse items-center gap-2">
                         <div className="flex-1">
-                            <Searcher 
-                                bg="bg-white dark:bg-slate-800" 
-                                placeholder="Search a project..." 
+                            <Searcher
+                                bg="bg-white dark:bg-slate-800"
+                                placeholder="Search a project..."
                             />
                         </div>
                         <div className="max-[499px]:flex-1">
@@ -94,12 +94,12 @@ export function Projects() {
                         { data && (
                             data.map( project => {
                                 return (
-                                    <div 
-                                        key={project.id} 
-                                        className={selectedElement?.id == project.id ? "selectedElement" : ""} 
+                                    <div
+                                        key={project.id}
+                                        className={selectedElement?.id == project.id ? "selectedElement" : ""}
                                         onClick={() => {
                                             handleSelection(project);
-                                        }} 
+                                        }}
                                         onDoubleClick={() => openProject(project.id)}
                                     >
                                         <MainItem
@@ -119,8 +119,6 @@ export function Projects() {
                         selection={selectedElement}
                     />
                 )}
-                
-                
             </div>
         </>
     )
