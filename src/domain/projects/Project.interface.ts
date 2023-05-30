@@ -6,9 +6,13 @@ import { ProjectMember } from "./ProjectMember.interface";
  * estructura a otra para hacerlo lo más reutilizable.
  */
 export interface Project {
-    id: string,
+    idProject: string,
+    idUser: string,
     name: string,
-    description: string,
     icon: string,
-    members: Array<ProjectMember>
+    description: string,
+    members: Array<ProjectMember>,
+    created_at: string,
+    updated_at: string,
+    owner: boolean
 }

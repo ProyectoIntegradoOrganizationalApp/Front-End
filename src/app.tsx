@@ -30,7 +30,7 @@ import { CustomModal } from './components/CustomModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
-import { Store } from './pages/dashboard/pages/project/Store';
+import { Store } from './pages/dashboard/pages/project/pages/apps/Store';
 import { CookieModal } from './components/CookieModal';
 import { Boards } from './pages/dashboard/pages/project/pages/apps/taskman/Boards';
 import Board from './pages/dashboard/pages/project/pages/apps/taskman/board/Board';
@@ -105,7 +105,7 @@ export function App() {
                         <Routes>
 
                             <Route path="/home" element={<Home />} />
-                            <Route element={<ProtectedRoute></ProtectedRoute>}>
+                            <Route element={<ProtectedRoute/>}>
                                 <Route element={<Dashboard />}>
                                     <Route path="profile/dashboard" element={<Profile />} />
                                     <Route path="profile/achievements" element={<Achievements />} />

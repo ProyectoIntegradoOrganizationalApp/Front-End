@@ -16,26 +16,12 @@ export function Apps(props: { project: string }) {
                 {/* Foreach (Apps) */}
                 <div className="selectElement max-[1024px]:!min-w-full lg:!min-w-[32.5%] lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
-                        <MainItem title="Taskman" description="Work Management" tools={[
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                target: "remove/app"
-                            }
-                        ]} descriptionBottom={true} />
+                        
                     </div>
                 </div>
                 <div className="selectElement max-[1024px]:!min-w-full lg:!min-w-[32.5%] lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>
-                        <MainItem title="Taskman" description="Work Management" tools={[
-                            {
-                                type: "button",
-                                action: "remove",
-                                icon: "fa-solid fa-trash",
-                                target: "remove/app"
-                            }
-                        ]} descriptionBottom={true} />
+                        
                     </div>
                 </div>
                 {/* EndForeach */}

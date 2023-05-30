@@ -8,21 +8,29 @@ export class ProjectMapper extends Mapper<Project, ProjectDTO> {
 
     mapFrom( data: Project ): ProjectDTO {
         return {
-            id: data.id,
+            idproject: data.idProject,
+            iduser: data.idUser,
             name: data.name,
-            description: data.description,
             icon: data.icon,
-            members: ProjectMemberMapper.prototype.mapArrayTo(data.members)
+            description: data.description,
+            members: ProjectMemberMapper.prototype.mapArrayFrom(data.members),
+            created_at: data.created_at,
+            updated_at: data.updated_at,
+            owner: data.owner
         }
     }
 
     mapTo( data: ProjectDTO ): Project {
         return {
-            id: data.id,
+            idProject: data.idproject,
+            idUser: data.iduser,
             name: data.name,
-            description: data.description,
             icon: data.icon,
-            members: ProjectMemberMapper.prototype.mapArrayFrom(data.members)
+            description: data.description,
+            members: ProjectMemberMapper.prototype.mapArrayTo(data.members),
+            created_at: data.created_at,
+            updated_at: data.updated_at,
+            owner: data.owner
         }
     }
 }

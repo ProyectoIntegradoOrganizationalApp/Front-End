@@ -8,6 +8,7 @@ import { RequestParams } from '../../domain/RequestParams.interface';
 import { Project } from '../../domain/projects/Project.interface';
 import { ApiError } from "../../domain/ApiError.interface";
 import { ProjectMapper } from '../mappers/ProjectMapper';
+import { ProjectDTO } from '../../domain/projects/ProjectDTO.interface';
 
 /**
  * Hook para la conexión con los endpoints del back-end que se
@@ -17,7 +18,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
 
     const { user } = useAuth();
 
-    const [data, setData] = useState<Array<Project>>();
+    const [data, setData] = useState<Array<Project> | Project>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -45,6 +46,34 @@ export const useProjectsApi = ( fetch: boolean ) => {
          */
         const props: RequestParams = {
             url: `${API}/user/${user?.id}/projects`,
+            method: "GET",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user?._token}`
+            }),
+        }
+        
+        useAxios(props)
+            .then( data => handleData(data.data))
+            .catch( err => {
+                handleData({error: true, message: err});
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+
+    /**
+     *  Función que recibe un ID y busca el proyecto concreto
+     */
+    const fetchProject = ( id: string ) => {
+        setLoading(true);
+
+        /**
+         * Props de la petición
+         */
+        const props: RequestParams = {
+            url: `${API}/project/${id}`,
             method: "GET",
             headers: new AxiosHeaders({
                 "Content-Type": "application/json",
@@ -140,9 +169,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
      *  Función que maneja los datos que salen de la API.
      *  @param info 
      */
-    const handleData = ( info: ProjectWrapper | ApiError ) => {
-
-        console.log(info)
+    const handleData = ( info: ProjectWrapper | ProjectDTO | ApiError ) => {
 
         /**
          * Hay Error
@@ -159,17 +186,29 @@ export const useProjectsApi = ( fetch: boolean ) => {
             setError(undefined);
 
             // Cambiamos el state
+            console.log(info)
             let projects: Array<Project> = ProjectMapper.prototype.mapArrayTo(info.projects);
             setData(projects);
+        }
+
+        if( info && "idproject" in info) {
+            // Quitamos los errores en caso de que los halla
+            setError(undefined);
+
+            let project: Project = ProjectMapper.prototype.mapTo(info);
+            setData(project);
         }
 
         setLoading(false);
     }
 
-    return { data, error, loading, createProject, leaveProject, editProject };
+    return { data, error, loading, fetchProject, createProject, leaveProject, editProject };
 
 }
 
+/**
+ *  Envoltorio de una propiedad que es un array. Esta es la respuesta del back-end.
+ */
 interface ProjectWrapper {
-    projects: Array<Project>
+    projects: Array<ProjectDTO>
 }

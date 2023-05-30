@@ -45,11 +45,11 @@ export function Projects() {
     }, [error?.error])
 
     const handleSelection = (project: Project) => {
-        if (selectedElement && selectedElement.id === project.id) {
+        if (selectedElement && selectedElement.idProject === project.idProject) {
             setSelectedElement(undefined);
         }
 
-        if (selectedElement && selectedElement.id != project.id) {
+        if (selectedElement && selectedElement.idProject != project.idProject) {
             setSelectedElement(project);
         }
 
@@ -95,16 +95,16 @@ export function Projects() {
 
                     <div id="scrollbar" className="flex-1 selectElement max-[500px]:gap-2">
 
-                        { data && (
+                        { data && Array.isArray(data) && (
                             data.map( project => {
                                 return (
                                     <div
-                                        key={project.id}
-                                        className={selectedElement?.id == project.id ? "selectedElement" : ""}
+                                        key={project.idProject}
+                                        className={selectedElement?.idProject == project.idProject ? "selectedElement" : ""}
                                         onClick={() => {
                                             handleSelection(project);
                                         }}
-                                        onDoubleClick={() => openProject(project.id)}
+                                        onDoubleClick={() => openProject(project.idProject)}
                                     >
                                         <MainItem
                                             item={{name: project.name, description: project.description, icon: project.icon}} 
