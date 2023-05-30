@@ -129,9 +129,7 @@ export function App() {
 
                                 <Route path="project/:project/app/:name/:board"
                                     element={
-                                        <DragDropContext onDragEnd={() => console.log("movido")}>
-                                            <Board />
-                                        </DragDropContext>
+                                        <Board />
                                     }
                                 />
 

@@ -14,10 +14,17 @@
     font-family: 'Mulish';
 }
 *::-webkit-scrollbar {
-    @apply w-0 sm:w-4;
+    @apply w-0 sm:w-2;
 }
 *::-webkit-scrollbar-thumb {
-    @apply bg-clip-padding border-[10px] border-solid bg-gray-400 border-transparent dark:bg-slate-900;
+    @apply bg-clip-padding border-[2px] border-solid bg-gray-400 border-transparent dark:bg-slate-900;
+    border-right: none;
+}
+#scrollbarx::-webkit-scrollbar {
+    @apply h-0 sm:h-[.6rem];
+}
+#scrollbarx::-webkit-scrollbar-thumb {
+    @apply bg-clip-padding border-[.2px] border-solid bg-gray-400 border-transparent dark:bg-slate-900;
     border-right: none;
 }
 
