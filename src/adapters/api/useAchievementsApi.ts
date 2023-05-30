@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useAuth } from "../../hooks/useAuth";
 
 import { ApiError } from '../../domain/ApiError.interface';
-import { AchievementDTO } from "../../domain/profile/AchievementDTO.interface";
+import { AchievementDTO } from "../../domain/achievement/AchievementDTO.interface";
 
 interface AchievementResponse {
     total: number,

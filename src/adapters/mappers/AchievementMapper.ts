@@ -1,6 +1,6 @@
 import { Mapper } from "./Mapper";
 import { Achievement } from "../../domain/achievement/Achievement.interface";
-import { AchievementDTO } from "../../domain/profile/AchievementDTO.interface";
+import { AchievementDTO } from "../../domain/achievement/AchievementDTO.interface";
 
 export class AchievementMapper extends Mapper<Achievement, AchievementDTO> {
 

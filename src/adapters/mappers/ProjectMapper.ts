@@ -11,6 +11,7 @@ export class ProjectMapper extends Mapper<Project, ProjectDTO> {
             id: data.id,
             name: data.name,
             description: data.description,
+            icon: data.icon,
             members: ProjectMemberMapper.prototype.mapArrayTo(data.members)
         }
     }
@@ -20,6 +21,7 @@ export class ProjectMapper extends Mapper<Project, ProjectDTO> {
             id: data.id,
             name: data.name,
             description: data.description,
+            icon: data.icon,
             members: ProjectMemberMapper.prototype.mapArrayFrom(data.members)
         }
     }

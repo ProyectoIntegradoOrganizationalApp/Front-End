@@ -1,4 +1,4 @@
-import { Item } from "../../../../../components/Item";
+import { Item } from "../../../../../components/list-items/MainItem";
 
 export function Members(props: { project: string }) {
     return (

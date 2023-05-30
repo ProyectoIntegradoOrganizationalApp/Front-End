@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { Item } from "../../../../../components/Item"
+import { Item } from "../../../../../components/list-items/MainItem"
 import { useState } from "react";
 
 export function Apps(props: { project: string }) {

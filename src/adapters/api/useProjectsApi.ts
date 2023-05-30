@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { RequestParams } from '../../domain/RequestParams.interface';
 import { Project } from '../../domain/projects/Project.interface';
 import { ApiError } from "../../domain/ApiError.interface";
-import { ProjectMapper } from '../mappers/ProjectsMapper';
+import { ProjectMapper } from '../mappers/ProjectMapper';
 
 /**
  * Hook para la conexión con los endpoints del back-end que se

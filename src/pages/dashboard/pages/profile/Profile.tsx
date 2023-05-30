@@ -10,7 +10,7 @@ import { Activity } from './components/Activity';
 import { Calendar } from './components/Calendar';
 import { InfoTooltip } from '../../../../components/InfoTooltip';
 import { AchievementsInfo } from '../achievements/components/AchievementsInfo';
-import { Item } from '../../../../components/Item';
+import { Item } from '../../../../components/list-items/MainItem';
 import { useOutletContext } from 'react-router-dom';
 
 // Hooks
@@ -33,7 +33,7 @@ export function Profile() {
     const data: Profile = useOutletContext();
 
     // Use effect con el que calculamos el trabajo realizado.
-    useEffect(() => {
+    useEffect(() => {        
         if( data ) {
             const getUserWork = useUtils(data?.activity);
             const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
@@ -97,26 +97,23 @@ export function Profile() {
                         </i>
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
-                        {   data?.projects.map(project => {
-                                return (
-                                    <Item
-                                        project={project}
-                                        tools={[
-                                            {
-                                                type: "button",
-                                                action: "edit",
-                                                icon: "fa-solid fa-pen-to-square",
-                                                target: "edit/idProyect"
-                                            },
-                                            {
-                                                type: "button",
-                                                action: "remove",
-                                                icon: "fa-solid fa-trash",
-                                                target: "remove/idProyect"
-                                            }
-                                        ]} 
-                                    />
-                                )
+                        { data?.projects.map( project => {
+                            return (
+                                <Item
+                                    key={project.id}
+                                    project={project}
+                                    descriptionBottom={true}
+                                    tools={[
+                                        {
+                                            type: "button",
+                                            action: "show",
+                                            icon: "fa-solid fa-pen-to-square",
+                                            target: `/project/${project.id}`
+                                        },
+                                        
+                                    ]} 
+                                />
+                            )
                         })}
                     </div>
                 </div>

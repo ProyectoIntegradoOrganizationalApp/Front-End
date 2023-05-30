@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Tabs } from '../../../../components/Tabs';
 import { Searcher } from '../../../../components/Searcher';
 import { DirectMessages } from './components/DirectMessages';
-import { Item } from '../../../../components/Item';
+import { Item } from '../../../../components/list-items/MainItem';
 
 export function Friends() {
 

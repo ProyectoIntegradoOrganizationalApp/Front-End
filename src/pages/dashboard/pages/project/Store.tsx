@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Breadcrumb } from '../../../../components/Breadcrumb';
-import { Item } from '../../../../components/Item';
+import { Item } from '../../../../components/list-items/MainItem';
 import { Dropdown } from '../../../../components/Dropdown';
 import { useNavigate } from 'react-router-dom';
 

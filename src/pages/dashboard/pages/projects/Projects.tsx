@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
-import { Item } from '../../../../components/Item';
+import { Item } from '../../../../components/list-items/MainItem';
 import { Searcher } from '../../../../components/Searcher';
 
 import { Profile } from '../../../../domain/profile/Profile.interface';

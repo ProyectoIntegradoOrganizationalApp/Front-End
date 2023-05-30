@@ -7,7 +7,6 @@ import { RequestParams } from '../../domain/RequestParams.interface';
  * @param props 
  */
 export const useAxios = ( props: RequestParams ): Promise<AxiosResponse> => {
-    console.log(props)
     return axios.request(props);
 }
 
