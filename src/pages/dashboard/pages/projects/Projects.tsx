@@ -2,15 +2,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
-import { Item } from '../../../../components/list-items/MainItem';
+import { MainItem } from '../../../../components/list-items/MainItem';
 import { Searcher } from '../../../../components/Searcher';
 
 import { Profile } from '../../../../domain/profile/Profile.interface';
 import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
 import { Dropdown } from '../../../../components/Dropdown';
-import { SelectedElement } from './components/SelectedElement';
+import { ProjectSelection } from './components/ProjectSelection';
 import { Project } from '../../../../domain/projects/Project.interface';
 import { useAuth } from '../../../../hooks/useAuth';
+import AddButton from '../../../../components/buttons/AddButton';
 
 /**
  * Componente Projects, representa la ruta /projects/{id_user} y nos muestra
@@ -101,23 +102,10 @@ export function Projects() {
                                         }} 
                                         onDoubleClick={() => openProject(project.id)}
                                     >
-                                        <Item
-                                            project={project}
-                                            tools={[
-                                                {
-                                                    type: "button",
-                                                    action: "edit",
-                                                    icon: "fa-solid fa-pen-to-square",
-                                                    target: "edit/idProyect"
-                                                },
-                                                {
-                                                    type: "button",
-                                                    action: "remove",
-                                                    icon: "fa-solid fa-trash",
-                                                    target: "remove/idProyect"
-                                                }
-                                            ]} 
-                                        />
+                                        <MainItem
+                                            item={{name: project.name, description: project.description, icon: project.icon}} 
+                                        >
+                                        </MainItem>
                                     </div>
                                 )
                             })
@@ -127,7 +115,7 @@ export function Projects() {
                     </div>
                 </div>
                 { selectedElement && (
-                    <SelectedElement
+                    <ProjectSelection
                         selection={selectedElement}
                     />
                 )}

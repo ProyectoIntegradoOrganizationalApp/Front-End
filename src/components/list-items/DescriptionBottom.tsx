@@ -1,4 +1,4 @@
-export const DescriptionBottom = ( props: { icon: string, title: string, description: string } ) => {
+export const DescriptionBottom = ( props: { icon: string, title: string, description?: string } ) => {
     return (
         <div className="flex items-center gap-4">
             {/* Icon (si no hay icon, uno por defecto) */}

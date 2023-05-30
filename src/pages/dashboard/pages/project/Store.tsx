@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Breadcrumb } from '../../../../components/Breadcrumb';
-import { Item } from '../../../../components/list-items/MainItem';
+import { MainItem } from '../../../../components/list-items/MainItem';
 import { Dropdown } from '../../../../components/Dropdown';
 import { useNavigate } from 'react-router-dom';
 
@@ -73,7 +73,7 @@ export function Store(props: { project: string }) {
                             {/* Foreach (Store Apps) */}
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
+                                    <MainItem title="Taskman" description="Work Management" tools={[
                                         {
                                             type: "button",
                                             action: "add",
@@ -85,7 +85,7 @@ export function Store(props: { project: string }) {
                             </div>
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
+                                    <MainItem title="Taskman" description="Work Management" tools={[
                                         {
                                             type: "button",
                                             action: "remove",
@@ -97,7 +97,7 @@ export function Store(props: { project: string }) {
                             </div>
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
+                                    <MainItem title="Taskman" description="Work Management" tools={[
                                         {
                                             type: "button",
                                             action: "add",
@@ -109,7 +109,7 @@ export function Store(props: { project: string }) {
                             </div>
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
+                                    <MainItem title="Taskman" description="Work Management" tools={[
                                         {
                                             type: "button",
                                             action: "add",

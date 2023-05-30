@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { InfoTooltip } from "../../../../../components/InfoTooltip"
 import { Share } from "../../../../../components/Share"
@@ -7,14 +7,17 @@ import { Project } from "../../../../../domain/projects/Project.interface"
 import { ProjectMember } from "../../../../../domain/projects/ProjectMember.interface"
 import { useProjectsApi } from "../../../../../adapters/api/useProjectsApi"
 
-export const SelectedElement = ( props: { selection: Project } ) => {
+export const ProjectSelection = ( props: { selection: Project } ) => {
 
     const { leaveProject } = useProjectsApi(false);
+
+    const navigate = useNavigate();
 
     const admin: ProjectMember | undefined = props.selection.members.find( elem => elem.name === "admin");
 
     const handleLeave = () => {
-
+        leaveProject(props.selection.id);
+        navigate('.');
     }
 
     return (
@@ -64,6 +67,7 @@ export const SelectedElement = ( props: { selection: Project } ) => {
                                 props.selection.members.map( member => {
                                     return (
                                         <InfoTooltip 
+                                            key={member.name}
                                             title={member.name}
                                             // Aquí iría la foto
                                             target={

@@ -93,8 +93,24 @@ export function Achievements() {
                             )
                         })
 
-                    ) : tab === "projects" ? (
-                        <h1>Projects</h1>
+                    ) : userData?.achievements && tab === "projects" ? (
+                        //.filter antes del map para filtar las categorías
+                        userData?.achievements.map( ach => {    
+                            return (
+                                <AchievementItem
+                                    key={ach.id}
+                                    tab={tab}
+                                    orderBy={selectedElement}
+                                    icon={ach.icon}
+                                    title={ach.title}
+                                    description={ach.description}
+                                    percentage={{
+                                        type: "progress",
+                                        number: 0
+                                    }}
+                                />
+                            )
+                        })
                     ) : (
                         <h1>Soon</h1>
                     )}

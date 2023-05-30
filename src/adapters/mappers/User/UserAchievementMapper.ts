@@ -12,6 +12,8 @@ export class UserAchievementMapper extends Mapper<UserAchievement, UserAchieveme
             description: data.description,
             icon: data.icon,
             progress: data.progress,
+            current_state: data.current_state,
+            percentage: data.percentage,
             completed: data.completed
         }
     }
@@ -23,6 +25,8 @@ export class UserAchievementMapper extends Mapper<UserAchievement, UserAchieveme
             description: data.description,
             icon: data.icon,
             progress: data.progress,
+            current_state: data.current_state,
+            percentage: data.percentage,
             completed: data.completed
         }
     }

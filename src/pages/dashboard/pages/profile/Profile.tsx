@@ -10,13 +10,16 @@ import { Activity } from './components/Activity';
 import { Calendar } from './components/Calendar';
 import { InfoTooltip } from '../../../../components/InfoTooltip';
 import { AchievementsInfo } from '../achievements/components/AchievementsInfo';
-import { Item } from '../../../../components/list-items/MainItem';
-import { useOutletContext } from 'react-router-dom';
+import { MainItem } from '../../../../components/list-items/MainItem';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 // Hooks
 import { useModal } from '../../../../hooks/useModal';
 import { useProfile } from '../../../../hooks/useProfile';
 import { useUtils } from '../../../../hooks/useUtils';
+import ShowButton from '../../../../components/buttons/ShowButton';
+import RemoveButton from '../../../../components/buttons/RemoveButton';
+import EditButton from '../../../../components/buttons/EditButton';
 
 /**
  * Componente Profile, que representa la ruta /profile/{id_user} en la cual podremos
@@ -29,6 +32,8 @@ export function Profile() {
     
     const { openModal } = useModal();
     const { GenerateMonthYear, GenerateCalendar } = useProfile();
+
+    const navigate = useNavigate();
 
     const data: Profile = useOutletContext();
 
@@ -99,20 +104,29 @@ export function Profile() {
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
                         { data?.projects.map( project => {
                             return (
-                                <Item
+                                <MainItem
                                     key={project.id}
-                                    project={project}
-                                    descriptionBottom={true}
-                                    tools={[
-                                        {
-                                            type: "button",
-                                            action: "show",
-                                            icon: "fa-solid fa-pen-to-square",
-                                            target: `/project/${project.id}`
-                                        },
-                                        
-                                    ]} 
-                                />
+                                    item={project}
+                                    descriptionBottom={false}
+                                >
+                                    <ShowButton 
+                                        cb={() => {
+                                            navigate(`/project/${project.id}`)
+                                        }}
+                                    />
+
+                                    <RemoveButton
+                                        cb={() => {
+                                            
+                                        }}
+                                    />
+
+                                    <EditButton
+                                        cb={() => {
+
+                                        }}
+                                    />
+                                </MainItem>
                             )
                         })}
                     </div>

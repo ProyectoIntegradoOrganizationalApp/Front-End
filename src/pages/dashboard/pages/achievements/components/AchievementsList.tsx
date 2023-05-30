@@ -13,7 +13,6 @@ import { UserAchievement } from "../../../../../domain/user/UserAchievement.inte
  *  @returns 
  */
 export function AchievementsList( props: { data: Profile | undefined } ) {
-
     let obtained: Array<UserAchievement> = [];
     let notObtained: Array<UserAchievement> = [];
 
@@ -39,7 +38,7 @@ export function AchievementsList( props: { data: Profile | undefined } ) {
                         description={achievement.description}
                         percentage={{
                             type: "progress",
-                            number: achievement.progress
+                            number: parseFloat(achievement.percentage)
                         }}
                     />
                 )
@@ -55,7 +54,7 @@ export function AchievementsList( props: { data: Profile | undefined } ) {
                         description={achievement.description}
                         percentage={{
                             type: "progress",
-                            number: achievement.progress
+                            number: parseFloat(achievement.percentage)
                         }}
                     />
                 )

@@ -103,8 +103,33 @@ export const useProjectsApi = ( fetch: boolean ) => {
 
     }
 
-    const leaveProject = () => {
+    const leaveProject = ( id: string ) => {
+        setLoading(true);
 
+        /**
+         * Props de la petición
+         */
+        const props: RequestParams = {
+            url: `${API}/project/${id}`,
+            method: "DELETE",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user?._token}`
+            }),
+        }
+        
+        /**
+         *  Petición usando el Hook de Axios
+         */
+        useAxios(props)
+            .then( data => console.log(data))
+            .catch( err => {
+                const error: ApiError = {error: true, message: err};
+                handleData(error);
+            })
+            .finally(() => {
+                setLoading(false)
+            });
     }
 
     const editProject = () => {

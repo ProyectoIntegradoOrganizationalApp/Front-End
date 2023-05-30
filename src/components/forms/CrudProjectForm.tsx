@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useProjectsApi } from "../../adapters/api/useProjectsApi";
 
-
 const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, close: () => void}> = ( props: { title: string | undefined, submitText: string, close: () => void } ) => {
 
     /** 
@@ -9,8 +8,15 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
      */
     const { createProject } = useProjectsApi(false);
 
+
     const [title, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+
+    const handleSubmit = ( event: React.FormEvent ) => {
+        event.preventDefault();
+        createProject(title, description);
+        props.close();
+    }
 
     return (
         <>
@@ -25,11 +31,7 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
             <div className="flex flex-col bg-transparent p-7 gap-5">
                 <form id="crudForm" 
                     className="flex flex-col gap-6 w-full"
-                    onSubmit={ event => {
-                        event.preventDefault();
-                        createProject(title, description);
-                        props.close();
-                    }}
+                    onSubmit={event => handleSubmit(event)}
                 >
                     <input 
                         type="text"

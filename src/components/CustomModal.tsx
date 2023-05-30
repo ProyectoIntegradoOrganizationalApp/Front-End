@@ -1,9 +1,7 @@
 // React
-import React, { MouseEventHandler } from "react";
 import Modal from 'react-modal';
 
 import { ModalInterface } from "../domain/UI/ModalInterface.interface";
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
 import CrudProjectForm from "./forms/CrudProjectForm";
 
 /**
