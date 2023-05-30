@@ -17,7 +17,7 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
 
     const handleLeave = () => {
         leaveProject(props.selection.id);
-        navigate('.');
+        navigate(0);
     }
 
     return (

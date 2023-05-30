@@ -2,15 +2,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
+// Hooks
+import { useAuth } from '../../../../hooks/useAuth';
+import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
+
+// Componentes
 import { MainItem } from '../../../../components/list-items/MainItem';
 import { Searcher } from '../../../../components/Searcher';
-
 import { Profile } from '../../../../domain/profile/Profile.interface';
-import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
 import { Dropdown } from '../../../../components/Dropdown';
 import { ProjectSelection } from './components/ProjectSelection';
 import { Project } from '../../../../domain/projects/Project.interface';
-import { useAuth } from '../../../../hooks/useAuth';
+
+// Botones
 import AddButton from '../../../../components/buttons/AddButton';
 
 /**

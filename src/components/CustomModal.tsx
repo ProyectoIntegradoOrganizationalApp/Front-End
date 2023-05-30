@@ -51,6 +51,7 @@ export function CustomModal(props: { isOpen: boolean, closeModal: () => void, at
                             title={props?.atts.title}
                             submitText={props.atts.submitText}
                             close={props.closeModal}
+                            submit={props.atts.submitAction}
                         />
                     ): (
                         <>

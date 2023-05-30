@@ -48,6 +48,10 @@ export function Profile() {
         }
     }, [data?.user.id]);
 
+    const handleCreateProject = () => {
+        navigate(0);
+    }
+
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo
@@ -90,14 +94,17 @@ export function Profile() {
                         <InfoTooltip title="All your projects" />
                         Your Projects
                         {/* Create Project */}
-                        <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all" onClick={() => openModal({
-                            isOpen: true,
-                            type: "crudProject",
-                            title: "Create Project",
-                            content: [],
-                            submitText: "Create Project",
-                            submitAction: ""
-                        })}>
+                        <i  
+                            className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all" 
+                            onClick={() => openModal({
+                                isOpen: true,
+                                type: "crudProject",
+                                title: "Create Project",
+                                content: [],
+                                submitText: "Create Project",
+                                submitAction: handleCreateProject
+                            }
+                        )}>
                             
                         </i>
                     </div>
@@ -112,18 +119,6 @@ export function Profile() {
                                     <ShowButton 
                                         cb={() => {
                                             navigate(`/project/${project.id}`)
-                                        }}
-                                    />
-
-                                    <RemoveButton
-                                        cb={() => {
-                                            
-                                        }}
-                                    />
-
-                                    <EditButton
-                                        cb={() => {
-
                                         }}
                                     />
                                 </MainItem>

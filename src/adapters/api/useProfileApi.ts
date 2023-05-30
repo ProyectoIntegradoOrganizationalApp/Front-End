@@ -66,7 +66,7 @@ export const useProfileApi = () => {
      */
     const handleData = ( info: ProfileDTO | ApiError ) => {
 
-        console.log(info)
+        // console.log(info)
 
         /**
          * Hay Error

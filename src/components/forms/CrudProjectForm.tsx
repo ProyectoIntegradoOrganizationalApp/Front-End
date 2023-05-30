@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useProjectsApi } from "../../adapters/api/useProjectsApi";
 
-const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, close: () => void}> = ( props: { title: string | undefined, submitText: string, close: () => void } ) => {
+const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, close: () => void, submit: () => void}> = ({ title, submitText, close, submit }) => {
 
     /** 
      * Hook de la API de proyectos, le pasamos un false para que no realice la query.
@@ -9,13 +9,14 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
     const { createProject } = useProjectsApi(false);
 
 
-    const [title, setName] = useState<string>("");
+    const [projectTitle, setProjectTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
     const handleSubmit = ( event: React.FormEvent ) => {
         event.preventDefault();
-        createProject(title, description);
-        props.close();
+        createProject(projectTitle, description);
+        close();
+        submit();
     }
 
     return (
@@ -23,7 +24,7 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
             {/* Titulo */}
             <div className="w-full flex flex-col w-5/5 bg-white dark:bg-slate-800 p-7 border-b-2 border-gray-300 dark:border-white/20">
                 <div className="flex gap-4">
-                    <p className="leading-none text-2xl">{props.title}</p>
+                    <p className="leading-none text-2xl">{title}</p>
                 </div>
             </div>
 
@@ -41,9 +42,9 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
                         maxLength={20} 
                         className={`flex-1 input input-bordered bg-slate-700 p-4`} 
                         required={true}
-                        value={title}
+                        value={projectTitle}
                         onChange={ event => {
-                            setName(event.target.value);
+                            setProjectTitle(event.target.value);
                         }}
                     />
                     <textarea 
@@ -59,7 +60,7 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
                         }}
                     />
                     <button className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-700/50">
-                        {props.submitText}
+                        {submitText}
                     </button>                                    
                 </form>
             </div>  

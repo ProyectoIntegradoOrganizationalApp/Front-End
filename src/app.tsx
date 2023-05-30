@@ -66,6 +66,14 @@ export function App() {
 
     }, [cookiesAccepted]);
 
+    useEffect(() => {
+        
+    }, [modal?.isOpen])
+
+    const closeModal = () => {
+        setModal(null);
+    }
+
     return (
         <>
             <ToastContainer
@@ -82,11 +90,17 @@ export function App() {
             />
             <AuthContext.Provider value={{ user: contextUser, setUser }}>
                 <ModalContext.Provider value={{ modal, setModal }}>
-                    {
-                        cookiesAccepted == null &&
+                    {  cookiesAccepted == null &&
                         <CookieModal isOpen={cookiesIsOpen} />
                     }
-                    <CustomModal isOpen={modal?.isOpen ? true : false} closeModal={() => { setModal(null) }} atts={modal} />
+                    { modal && 
+                        <CustomModal 
+                            isOpen={modal?.isOpen ? true : false} 
+                            closeModal={closeModal} 
+                            atts={modal} 
+                        />
+                    }
+                    
                     <BrowserRouter basename='/'>
                         <Routes>
 

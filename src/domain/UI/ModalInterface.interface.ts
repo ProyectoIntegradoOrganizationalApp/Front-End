@@ -13,5 +13,5 @@ export interface ModalInterface {
     sidebarElements?: SideElementsModal[],
     content: SettingInterface[] | InputModalInterface[],
     submitText: string,
-    submitAction: string
+    submitAction: () => void
 }
