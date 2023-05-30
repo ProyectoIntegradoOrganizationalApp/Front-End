@@ -35,6 +35,7 @@ import { CookieModal } from './components/CookieModal';
 import { Boards } from './pages/dashboard/pages/project/pages/apps/taskman/Boards';
 import Board from './pages/dashboard/pages/project/pages/apps/taskman/board/Board';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { useAuth } from './hooks/useAuth';
 
 /**
  *  Aplicación principal.
@@ -44,7 +45,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
  */
 
 export function App() {
-    const [user, setUser] = useState<User | null>(null);
+    const [contextUser, setUser] = useState<User | null>(null);
     const [modal, setModal] = useState<ModalInterface | null>(null);
 
     const [cookiesAccepted, setCookiesAccepted] = useState<string | null>(null);
@@ -52,6 +53,7 @@ export function App() {
 
     useEffect(() => {
         const cookiesAcceptedStatus = localStorage.getItem('cookiesAccepted');
+
         if (cookiesAcceptedStatus == 'true') {
             setCookiesAccepted('true');
             setCookiesIsOpen(false);
@@ -61,6 +63,7 @@ export function App() {
         } else {
             setCookiesIsOpen(true);
         }
+
     }, [cookiesAccepted]);
 
     return (
@@ -77,7 +80,7 @@ export function App() {
                 pauseOnHover
                 theme="dark"
             />
-            <AuthContext.Provider value={{ user, setUser }}>
+            <AuthContext.Provider value={{ user: contextUser, setUser }}>
                 <ModalContext.Provider value={{ modal, setModal }}>
                     {
                         cookiesAccepted == null &&
@@ -88,65 +91,22 @@ export function App() {
                         <Routes>
 
                             <Route path="/home" element={<Home />} />
-
-                            <Route path="/" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
-
-                                <Route path="profile/dashboard"
-                                    element={
-                                        <Profile />
-                                    }
-                                />
-
-                                <Route path="profile/achievements"
-                                    element={
-                                        <Achievements />
-                                    }
-                                />
-
-                                <Route path="projects/dashboard"
-                                    element={
-                                        <Projects />
-                                    }
-                                />
-
-                                <Route path="project/:name"
-                                    element={
-                                        <Project />
-                                    }
-                                />
-
-                                <Route path="project/:name/store"
-                                    element={
-                                        <Store project={''} />
-                                    }
-                                />
-
-                                <Route path="project/:project/app/:name"
-                                    element={
-                                        <Boards />
-                                    }
-                                />
-
-                                <Route path="project/:project/app/:name/:board"
-                                    element={
-                                        <DragDropContext onDragEnd={() => console.log("movido")}>
-                                            <Board />
-                                        </DragDropContext>
-                                    }
-                                />
-
-                                <Route path="friends/dashboard"
-                                    element={
-                                        <Friends />
-                                    }
-                                />
-                                <Route path="friend/:name"
-                                    element={
-                                        <Friend />
-                                    }
-                                />
-
+                            <Route element={<ProtectedRoute></ProtectedRoute>}>
+                                <Route element={<Dashboard />}>
+                                    <Route path="profile/dashboard" element={<Profile />} />
+                                    <Route path="profile/achievements" element={<Achievements />} />
+                                    <Route path="projects/dashboard" element={ <Projects /> }/>
+                                    <Route path="project/:name" element={ <Project /> }/>
+                                    <Route path="project/:name/store" element={ <Store project={''} /> } />
+                                    <Route path="project/:project/app/:name" element={ <Boards /> }/>
+                                    <Route path="project/:project/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext>}/>
+                                    <Route path="friends/dashboard" element={ <Friends /> } />
+                                    <Route path="friend/:name" element={ <Friend />} />
+                                </Route>
+                                
                             </Route>
+
+                            
 
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
