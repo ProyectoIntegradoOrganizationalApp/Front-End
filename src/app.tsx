@@ -36,6 +36,7 @@ import { Boards } from './pages/dashboard/pages/project/pages/apps/taskman/Board
 import Board from './pages/dashboard/pages/project/pages/apps/taskman/board/Board';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
+import { Timeline } from './pages/dashboard/pages/project/pages/apps/timeline/Timeline';
 
 /**
  *  Aplicación principal.
@@ -103,7 +104,6 @@ export function App() {
                     
                     <BrowserRouter basename='/'>
                         <Routes>
-
                             <Route path="/home" element={<Home />} />
                             <Route element={<ProtectedRoute></ProtectedRoute>}>
                                 <Route element={<Dashboard />}>
@@ -112,15 +112,13 @@ export function App() {
                                     <Route path="projects/dashboard" element={ <Projects /> }/>
                                     <Route path="project/:name" element={ <Project /> }/>
                                     <Route path="project/:name/store" element={ <Store project={''} /> } />
-                                    <Route path="project/:project/app/:name" element={ <Boards /> }/>
-                                    <Route path="project/:project/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext>}/>
+                                    <Route path="project/:project/app/taskman" element={ <Boards /> }/>
+                                    <Route path="project/:project/app/timeline" element={ <Timeline /> }/>
+                                    <Route path="project/:project/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
                                     <Route path="friends/dashboard" element={ <Friends /> } />
                                     <Route path="friend/:name" element={ <Friend />} />
                                 </Route>
-                                
                             </Route>
-
-                            
 
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />

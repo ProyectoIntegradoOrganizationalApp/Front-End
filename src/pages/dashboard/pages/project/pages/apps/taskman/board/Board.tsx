@@ -10,7 +10,7 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { ColumnData } from '../../../../../../../../domain/apps/taskman/ColumnData.interface';
 
 export function Board() {
-    const [ tab, setTab ] = useState<string>("dashboard");
+    const [tab, setTab] = useState<string>("dashboard");
     const { openModal } = useModal();
     const { onDragEnd, columnOrder, columnsData } = useBoard();
     let navigate = useNavigate();
@@ -88,9 +88,21 @@ export function Board() {
                     ]} />
                 </div>
                 <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
-                    <div className="flex gap-3 ml-3 max-[500px]:my-2">
-                        <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
-                        <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chess-board" title="Taskman Cols" />
+                    <div className="bg-gray-200 dark:bg-slate-800 w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
+                        <div className="flex gap-3">
+                            <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
+                            <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chess-board" title="Taskman Cols" />
+                        </div>
+                        <i onClick={() =>
+                            openModal({
+                                isOpen: true,
+                                type: "crudProject",
+                                title: "Create Column",
+                                content: [],
+                                submitText: "Create Column",
+                                submitAction: ""
+                            })}
+                            className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                     </div>
                     <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
                         {(provided) => (

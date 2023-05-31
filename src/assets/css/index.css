@@ -233,8 +233,14 @@ progress {
     @apply !text-black dark:!text-white opacity-100;
 }
 
+.board:hover div {
+    @apply bg-black/50 dark:bg-black/50;
+}
 .newBoard:hover div {
     @apply bg-gray-400 dark:bg-black/50;
+}
+.task:hover > div {
+    @apply flex;
 }
 
 /* Sidebar */

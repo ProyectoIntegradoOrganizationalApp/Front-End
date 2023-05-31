@@ -10,6 +10,8 @@ export interface ModalInterface {
     isOpen: boolean | undefined,
     type: string,
     title?: string,
+    action?: string,
+    target?: string,
     sidebarElements?: SideElementsModal[],
     content: SettingInterface[] | InputModalInterface[],
     submitText: string,
