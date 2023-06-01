@@ -12,7 +12,7 @@ export const Form = ( props: { type: string, registerUser: (props: FormProps) =>
     const [password, setPassword] = useState<string>('');
     const [confirmpass, setConfirmPass] = useState<string>('');
     const [valid, setValid] = useState<boolean>(false);
-    const [input, setInput] = useState<string>('input input-light mt-6 input-bordered w-full mt-6');
+    const [input, setInput] = useState<string>('input input-light input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5');
 
     /**
      * Se encarga de enviar el formulario.
@@ -67,7 +67,7 @@ export const Form = ( props: { type: string, registerUser: (props: FormProps) =>
                         onChange={event => {
                             setName(event.target.value);
                         }}
-                        className="input input-bordered w-full mt-6"
+                        className="input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5"
                         required
                     />
                     <input 
@@ -79,13 +79,13 @@ export const Form = ( props: { type: string, registerUser: (props: FormProps) =>
                         onChange={event => {
                             setLastName(event.target.value);
                         }}
-                        className="input input-bordered w-full mt-6"
+                        className="input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5"
                         required
                     />
-                    <div className="flex gap-8">
+                    <div className="flex gap-5">
                         <input
                             type="text"
-                            className="input input-bordered w-20 mt-6"
+                            className="input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5"
                             minLength={3} 
                             maxLength={3}
                             value={prefix}
@@ -98,12 +98,12 @@ export const Form = ( props: { type: string, registerUser: (props: FormProps) =>
                             type="number" 
                             minLength={9} 
                             maxLength={9} 
-                            placeholder="Enter your Phone Number" 
+                            placeholder="Enter phone number" 
                             value={phone_number} 
                             onChange={event => {
                                 setPhoneNumber(event.target.value);
                             }}
-                            className="input input-bordered w-full mt-6"
+                            className="input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5"
                             required
                         />
                     </div>
@@ -119,14 +119,14 @@ export const Form = ( props: { type: string, registerUser: (props: FormProps) =>
                 onChange={event => {
                     setEmail(event.target.value)
                 }}
-                className="input input-bordered w-full mt-6"
+                className="input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5"
                 required
             />
             <input 
                 type="password" 
-                minLength={4} 
+                minLength={8} 
                 placeholder="Enter password" 
-                className="input input-bordered w-full mt-6" 
+                className="input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4 mt-5" 
                 value={password}
                 onChange={ event => {
                     setPassword(event.target.value)
@@ -136,7 +136,7 @@ export const Form = ( props: { type: string, registerUser: (props: FormProps) =>
             { props.type === "sign up" && (
                 <input
                     type="password" 
-                    minLength={2} 
+                    minLength={8} 
                     placeholder="Confirm password" 
                     className={input}
                     value={confirmpass}

@@ -27,7 +27,7 @@ export function Achievements() {
             <AchievementsInfo
                 data={userData}
             />
-            <div className="bg-gray-200 dark:bg-slate-800 flex-1 basis-[820px] h-full rounded-xl flex flex-col w-full p-4 pt-0">
+            <div className="bg-gray-200 dark:bg-slate-800 flex-1 basis-[820px] h-full min-[500px]:rounded-xl flex flex-col w-full p-4 pt-0">
                 <div className="py-3 flex flex-wrap-reverse justify-between items-center gap-2">
                     <Tabs
                         tab={tab}

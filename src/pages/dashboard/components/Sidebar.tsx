@@ -41,7 +41,7 @@ export function Sidebar( props: { children: ReactNode } ) {
                                         { link.children ? (
                                             <div className={`dropdown dropdown-end flex flex-col items-start p-0 gap-0 ${location.pathname.includes(link.name.toLowerCase()) ? "bg-white dark:bg-slate-700 cursor-auto" : "cursor-pointer"}`}>
                                                 
-                                                <NavLink to={link.url} className={`flex items-center gap-4 p-3.5 pl-[1.7rem] w-full outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/30" : ""}`}>
+                                                <NavLink to={link.url} className={`flex items-center gap-4 p-3.5 pl-[1.7rem] w-full outline-none ${!location.pathname.includes(link.name.toLowerCase()) ? "hover:bg-gray-200 dark:hover:bg-slate-800/40" : ""}`}>
                                                     <i className={link.icon + ` ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}></i>
                                                     <p className={`text-base ${location.pathname.includes(link.name.toLowerCase()) ? "text-black dark:!text-white" : "text-slate-500 dark:text-slate-400"}`}>{link.name}</p>
                                                 </NavLink>
@@ -74,18 +74,12 @@ export function Sidebar( props: { children: ReactNode } ) {
                     </div>
 
                     <div className="flex-1 flex flex-col justify-end">
-                        <div className="flex justify-between items-center px-6 py-3">
+                        <div className="w-full flex justify-between items-center px-6 pb-6">
                             <ProfileBadge
                                 user={user}
                                 logout={logout}
                                 position={"dropdown dropdown-top"}
                             />
-                            <button className="btn ">
-                                <div className="indicator">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                                    <span className="badge badge-xs badge-primary indicator-item"></span>
-                                </div>
-                            </button>
                         </div>
                     </div>
                 </ul>

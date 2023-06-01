@@ -1,19 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Column from './Column';
 import { Breadcrumb } from '../../../../../../../../components/Breadcrumb';
-import { useBeforeUnload, useNavigate } from 'react-router-dom';
+import { Link, useBeforeUnload } from 'react-router-dom';
 import { useModal } from '../../../../../../../../hooks/useModal';
 import { useBoard } from '../../../../../../../../hooks/useBoard';
 import { Tabs } from '../../../../../../../../components/Tabs';
 import { StrictDroppable } from './StrictDroppable';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { ColumnData } from '../../../../../../../../domain/apps/taskman/ColumnData.interface';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 export function Board() {
     const [tab, setTab] = useState<string>("dashboard");
     const { openModal } = useModal();
     const { onDragEnd, columnOrder, columnsData } = useBoard();
-    let navigate = useNavigate();
 
     const tasksData: {
         [key: string]: {
@@ -87,11 +85,11 @@ export function Board() {
                         },
                     ]} />
                 </div>
-                <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
+                <div className="bg-gray-200 dark:bg-slate-800 w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
                     <div className="bg-gray-200 dark:bg-slate-800 w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
                         <div className="flex gap-3">
-                            <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
-                            <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chess-board" title="Taskman Cols" />
+                            <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
+                            <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
                         </div>
                         <i onClick={() =>
                             openModal({

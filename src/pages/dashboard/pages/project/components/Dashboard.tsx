@@ -5,7 +5,7 @@ import { Statistics } from "../../profile/components/Statistics"
 export function Dashboard(props: { project: string }) {
     return (
         <>
-            <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 gap-2 w-full h-full rounded-xl">
+            <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 gap-2 w-full h-full min-[500px]:rounded-xl">
                 <div className="w-full rounded-xl flex flex-col gap-4">
                     <div className="flex gap-4">
                         <div className="flex flex-col gap-4 w-4/12">

@@ -5,7 +5,7 @@ export const Loading = ({ state }: { state: boolean }) => {
                 <>
                     <div className="fixed w-full h-full left-0 top-0 backdrop-blur-sm opacity-60 dark:bg-black">
                     </div>
-                    <progress className="progress progress-info w-56 absolute top-1/2"></progress>
+                    <progress className="progress progress-info w-56 absolute top-1/2 dark:bg-slate-700"></progress>
                 </>
             )}
         </>

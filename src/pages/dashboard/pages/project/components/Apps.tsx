@@ -12,7 +12,7 @@ export function Apps(props: { project: string }) {
 
     return (
         <>
-            <div className="flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 max-[500px]:p-2 gap-2 h-full rounded-xl content-start overflow-y-auto">
+            <div className="flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 max-[500px]:p-2 gap-2 h-full min-[500px]:rounded-xl content-start overflow-y-auto">
                 {/* Foreach (Apps) */}
                 <div className="selectElement max-[1024px]:!min-w-full lg:!min-w-[32.5%] lg:max-w-[33%] flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { openApp("ptoelquelolea", "taskman") }}>
                     <div className={selectedElement == "Taskman" ? "selectedElement" : undefined}>

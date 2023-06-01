@@ -65,7 +65,7 @@ export function Task(props: TaskProps) {
                     {!toInput ? (
                         inputValue
                     ) : (
-                        <textarea id="textareaTask" value={inputValue} onChange={handleInput} onKeyDown={handleKeyDown} minLength={1} className="input input-bordered border-none w-[80%] text-black dark:text-white bg-transparent p-0 h-5 leading-[1.2rem] resize-none overflow-y-hidden" onClick={() => setToInput(true)}></textarea>
+                        <textarea id="textareaTask" value={inputValue} onChange={handleInput} onKeyDown={handleKeyDown} minLength={1} className="input input-bordered border-none w-[80%] text-black bg-transparent p-0 h-5 leading-[1.2rem] resize-none overflow-y-hidden" onClick={() => setToInput(true)}></textarea>
                     )}
                     <div className="items-center gap-2 hidden mt-0.5">
                         <i onClick={() => openModal({

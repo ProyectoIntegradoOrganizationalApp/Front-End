@@ -32,11 +32,11 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
 import { Store } from './pages/dashboard/pages/project/Store';
 import { CookieModal } from './components/CookieModal';
-import { Boards } from './pages/dashboard/pages/project/pages/apps/taskman/Boards';
-import Board from './pages/dashboard/pages/project/pages/apps/taskman/board/Board';
+import { Boards } from './pages/dashboard/pages/project/pages/apps/taskapp/Boards';
+import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
-import { Timeline } from './pages/dashboard/pages/project/pages/apps/timeline/Timeline';
+import { Account } from './pages/dashboard/pages/profile/account/Account';
 
 /**
  *  Aplicación principal.
@@ -109,11 +109,12 @@ export function App() {
                                 <Route element={<Dashboard />}>
                                     <Route path="profile/dashboard" element={<Profile />} />
                                     <Route path="profile/achievements" element={<Achievements />} />
+                                    <Route path="profile/account" element={<Account />} />
                                     <Route path="projects/dashboard" element={ <Projects /> }/>
                                     <Route path="project/:name" element={ <Project /> }/>
                                     <Route path="project/:name/store" element={ <Store project={''} /> } />
-                                    <Route path="project/:project/app/taskman" element={ <Boards /> }/>
-                                    <Route path="project/:project/app/timeline" element={ <Timeline /> }/>
+                                    <Route path="project/:project/app/taskman" element={ <Boards icon="fa-solid fa-table-columns" app="Taskman"/> }/>
+                                    <Route path="project/:project/app/timeline" element={ <Boards icon="fa-solid fa-chart-gantt" app="Timeline"/> }/>
                                     <Route path="project/:project/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
                                     <Route path="friends/dashboard" element={ <Friends /> } />
                                     <Route path="friend/:name" element={ <Friend />} />
