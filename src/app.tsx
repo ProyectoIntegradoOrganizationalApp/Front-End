@@ -104,7 +104,7 @@ export function App() {
                     
                     <BrowserRouter basename='/'>
                         <Routes>
-                            <Route path="/home" element={<Home />} />
+                            <Route path="/" element={<Home />} />
                             <Route element={<ProtectedRoute></ProtectedRoute>}>
                                 <Route element={<Dashboard />}>
                                     <Route path="profile/dashboard" element={<Profile />} />
