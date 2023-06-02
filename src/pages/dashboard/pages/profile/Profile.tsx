@@ -71,7 +71,7 @@ export function Profile() {
                         />
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4 max-[500px]:gap-2">
-                        <div className="flex-[3] bg-gray-200 dark:bg-slate-800 rounded-xl p-4 max-[500px]:p-2">
+                        <div className="flex-[3] bg-gray-200 dark:bg-slate-800 min-[500px]:rounded-xl p-4 max-[500px]:p-2">
                             { data?.activity && (
                                 <Activity
                                     title="Monthly Activity"
@@ -79,7 +79,7 @@ export function Profile() {
                                 />
                             )}
                         </div>
-                        <div className="flex-[2] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
+                        <div className="flex-[2] bg-gray-200 dark:bg-slate-800 min-[500px]:rounded-xl p-4">
                             <Calendar 
                                 monthYear={GenerateMonthYear()} 
                                 calendar={GenerateCalendar()} 
@@ -89,8 +89,8 @@ export function Profile() {
                 </div>
 
                 {/* TODO => Dividir esto en componentes */}
-                <div className="flex-1 rounded-xl bg-gray-200 dark:bg-slate-700 flex flex-col min-h-[20rem]">
-                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-black dark:text-white text-base p-4 max-[500px]:p-2">
+                <div className="flex-1 min-[500px]:rounded-xl bg-gray-200 dark:bg-slate-700 flex flex-col min-h-[20rem]">
+                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full min-[500px]:rounded-t-xl relative text-black dark:text-white text-base p-4">
                         <InfoTooltip title="All your projects" />
                         Your Projects
                         {/* Create Project */}

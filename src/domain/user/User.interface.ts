@@ -14,6 +14,4 @@ export interface User {
     updated_at: Date,
     level: number,
     _token: string,
-    notifications: Notifications,
-    friends: Array<Friend>
 }

@@ -40,7 +40,7 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
                         placeholder="Insert your project name"
                         minLength={3}
                         maxLength={20} 
-                        className={`flex-1 input input-bordered bg-slate-700 p-4`} 
+                        className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4`} 
                         required={true}
                         value={projectTitle}
                         onChange={ event => {
@@ -52,14 +52,14 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
                         placeholder="Insert Your Project Description"
                         minLength={10} 
                         maxLength={50}
-                        className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none bg-slate-700`} 
+                        className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-slate-700`} 
                         required={true}
                         value={description}
                         onChange={ event => {
                             setDescription(event.target.value);
                         }}
                     />
-                    <button className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-700/50">
+                    <button className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-800">
                         {submitText}
                     </button>                                    
                 </form>

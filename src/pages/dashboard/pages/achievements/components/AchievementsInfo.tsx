@@ -43,7 +43,6 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
                     data={props.data}
                 />
             </div>
-
         </>
     )
 }
