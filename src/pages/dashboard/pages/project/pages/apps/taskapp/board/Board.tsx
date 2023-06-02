@@ -7,12 +7,38 @@ import { useBoard } from '../../../../../../../../hooks/useBoard';
 import { Tabs } from '../../../../../../../../components/Tabs';
 import { StrictDroppable } from './StrictDroppable';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
+import "gantt-task-react/dist/index.css";
+import CustomGantt from './Gantt/CustomGantt';
 
 export function Board() {
     const [tab, setTab] = useState<string>("dashboard");
     const { openModal } = useModal();
     const { onDragEnd, columnOrder, columnsData } = useBoard();
     const { state } = useLocation();
+
+    let tasks: Task[] = [
+        {
+            start: new Date(2020, 1, 1),
+            end: new Date(2020, 1, 2),
+            name: 'Idea',
+            id: 'Task 0',
+            type: 'task',
+            progress: 45,
+            isDisabled: false,
+            styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+        },
+        {
+            start: new Date(2020, 1, 1),
+            end: new Date(2020, 1, 2),
+            name: 'Ideaaaaaa',
+            id: 'Task 1',
+            type: 'task',
+            progress: 45,
+            isDisabled: false,
+            styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+        },
+    ];
 
     const tasksData: {
         [key: string]: {
@@ -99,7 +125,7 @@ export function Board() {
                                 title: "Create Column",
                                 content: [],
                                 submitText: "Create Column",
-                                submitAction: ""
+                                submitAction: () => {}
                             })}
                             className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                     </div>
@@ -133,7 +159,7 @@ export function Board() {
                         </StrictDroppable>
                     } {
                         state.app == "Timeline" &&
-                        <div></div>
+                        <CustomGantt />
                     }
                 </div>
             </div>
