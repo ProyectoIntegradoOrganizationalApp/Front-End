@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Column from './Column';
 import { Breadcrumb } from '../../../../../../../../components/Breadcrumb';
-import { Link, useBeforeUnload } from 'react-router-dom';
+import { Link, useBeforeUnload, useLocation } from 'react-router-dom';
 import { useModal } from '../../../../../../../../hooks/useModal';
 import { useBoard } from '../../../../../../../../hooks/useBoard';
 import { Tabs } from '../../../../../../../../components/Tabs';
@@ -12,6 +12,7 @@ export function Board() {
     const [tab, setTab] = useState<string>("dashboard");
     const { openModal } = useModal();
     const { onDragEnd, columnOrder, columnsData } = useBoard();
+    const { state } = useLocation();
 
     const tasksData: {
         [key: string]: {
@@ -75,9 +76,9 @@ export function Board() {
                             link: "/project/ptoelquelolea"
                         },
                         {
-                            icon: "fa-solid fa-chess-board",
-                            name: "Taskman",
-                            link: "/project/ptoelquelolea/app/taskman"
+                            icon: state.icon,
+                            name: state.app,
+                            link: "/project/ptoelquelolea/app/" + state.app.toLowerCase()
                         },
                         {
                             icon: "fa-solid fa-chess-board",
@@ -102,32 +103,38 @@ export function Board() {
                             })}
                             className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                     </div>
-                    <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
-                        {(provided) => (
-                            <div id="scrollbarx"
-                                className="flex-1 rounded-xl bg-gray-300 dark:bg-slate-700 flex p-4 max-[500px]:p-2 overflow-x-auto"
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                            >
-                                {
-                                    columnOrder.map((columnId) => {
-                                        // console.log(columnId)
-                                        const column = columnsData[columnId];
-                                        const tasks = column.taskIds.map((taskId) => tasksData[taskId]);
+                    {
+                        state.app == "Taskman" &&
+                        <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
+                            {(provided) => (
+                                <div id="scrollbarx"
+                                    className="flex-1 rounded-xl bg-gray-300 dark:bg-slate-700 flex p-4 max-[500px]:p-2 overflow-x-auto"
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {
+                                        columnOrder.map((columnId) => {
+                                            // console.log(columnId)
+                                            const column = columnsData[columnId];
+                                            const tasks = column.taskIds.map((taskId) => tasksData[taskId]);
 
-                                        return (
-                                            <Column
-                                                key={column.id}
-                                                column={column}
-                                                tasks={tasks}
-                                                index={columnOrder.indexOf(columnId)}
-                                            />
-                                        );
-                                    })
-                                }
-                            </div>
-                        )}
-                    </StrictDroppable>
+                                            return (
+                                                <Column
+                                                    key={column.id}
+                                                    column={column}
+                                                    tasks={tasks}
+                                                    index={columnOrder.indexOf(columnId)}
+                                                />
+                                            );
+                                        })
+                                    }
+                                </div>
+                            )}
+                        </StrictDroppable>
+                    } {
+                        state.app == "Timeline" &&
+                        <div></div>
+                    }
                 </div>
             </div>
         </DragDropContext>
