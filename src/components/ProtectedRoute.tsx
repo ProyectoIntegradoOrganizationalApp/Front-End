@@ -15,7 +15,7 @@ export const ProtectedRoute: React.FC<{}> = () => {
     const { user } = useAuth();
 
     // Variable para controlar si se ha cargado el usuario
-    const [loaded, setLoaded] = React.useState<boolean>();
+    const [loaded, setLoaded] = React.useState<boolean>(false);
 
     /**
      *  Efecto para cargar el usuario y darle tiempo para pensar porque
@@ -34,11 +34,11 @@ export const ProtectedRoute: React.FC<{}> = () => {
     }, [user])
 
     // Si ha cargado y el usuario 
-    if( loaded && user == null ) {
-        return <Navigate to="/login" />;
-    }
+    // if( loaded && user == null ) {
+    //     return <Navigate to="/login" />;
+    // }
 
-    if( loaded && user != null ) {
+    if( loaded ) {
         return <Outlet />;
     }
 

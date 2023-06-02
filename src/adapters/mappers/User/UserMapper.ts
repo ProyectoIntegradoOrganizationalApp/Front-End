@@ -17,8 +17,6 @@ export class UserMapper extends Mapper<User, UserDTO> {
             updated_at: data.updated_at,
             level: data.level,
             _token: data._token,
-            notifications: NotificationsMapper.prototype.mapFrom(data.notifications),
-            friends: FriendMapper.prototype.mapArrayFrom(data.friends)
         }
     }
 
@@ -33,8 +31,6 @@ export class UserMapper extends Mapper<User, UserDTO> {
             updated_at: data.updated_at,
             level: data.level,
             _token: data._token,
-            notifications: NotificationsMapper.prototype.mapTo(data.notifications),
-            friends: FriendMapper.prototype.mapArrayTo(data.friends)       
         }
     }
 }
