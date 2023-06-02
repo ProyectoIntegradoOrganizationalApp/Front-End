@@ -1,8 +1,7 @@
 // React
 import { ReactNode } from "react";
 
-import { useNavigate } from "react-router-dom";
-
+// Componentes de Cajas de descripcion de items
 import { DescriptionBottom } from "./DescriptionBottom";
 import { DescriptionTop } from "./DescriptionTop";
 
@@ -20,33 +19,18 @@ interface ItemInfo {
  */
 export function MainItem( props: { item: ItemInfo, descriptionBottom?: boolean, children: ReactNode } ) {
 
-    const navigate = useNavigate();
-
-    const doAction = ( target: string | undefined ) => {
-        if( target ) {
-            navigate(target);
-        }
+    // Comprobamos que tipo de caja hay que renderizar
+    let description: ReactNode;
+    if( props.item.description && props.descriptionBottom == true ) {
+        description = <DescriptionBottom title={props.item.name} description={props.item.description} icon={props.item.icon}/>
+    } else {
+        description = <DescriptionTop title={props.item.name} description={props.item.description} icon={props.item.icon} />
     }
 
     return (
         <div className="bg-white dark:bg-slate-800 w-full h-fit px-4 py-3 flex max-[499px]:flex-wrap justify-between items-center rounded-xl gap-2.5">
             {/* Info */}
-            { props.item.description && props.descriptionBottom == true ? 
-                (
-                    <DescriptionBottom
-                        title={props.item.name}
-                        description={props.item.description}
-                        icon={props.item.icon}
-                    />
-                ): 
-                (
-                    <DescriptionTop
-                        title={props.item.name}
-                        description={props.item.description}
-                        icon={props.item.icon} 
-                    />
-                )
-            }
+            { description }
 
             {/* Buttons */}
             <div className="flex items-center gap-2">

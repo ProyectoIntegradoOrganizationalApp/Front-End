@@ -22,6 +22,9 @@ export function Achievements() {
     /** Datos del Usuario */
     const userData: Profile = useOutletContext();
 
+    /** Datos de los achievements en general */
+    const {data, error, loading } = useAchievementsApi(true);
+
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo

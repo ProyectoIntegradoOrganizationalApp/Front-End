@@ -18,8 +18,8 @@ import { useModal } from '../../../../hooks/useModal';
 import { useProfile } from '../../../../hooks/useProfile';
 import { useUtils } from '../../../../hooks/useUtils';
 import ShowButton from '../../../../components/buttons/ShowButton';
-import RemoveButton from '../../../../components/buttons/RemoveButton';
-import EditButton from '../../../../components/buttons/EditButton';
+import { Project } from '../../../../domain/projects/Project.interface';
+import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
 
 /**
  * Componente Profile, que representa la ruta /profile/{id_user} en la cual podremos
@@ -35,18 +35,19 @@ export function Profile() {
 
     const navigate = useNavigate();
 
-    const data: Profile = useOutletContext();
+    const profileData: Profile = useOutletContext();
+    const { data, error, loading } = useProjectsApi(true);
 
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {        
         if( data ) {
-            const getUserWork = useUtils(data?.activity);
+            const getUserWork = useUtils(profileData?.activity);
             const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
     
             setDaily(commitsDaily);
             setWeekly(commitsWeekly);
         }
-    }, [data?.user.id]);
+    }, [profileData?.user.id]);
 
     const handleCreateProject = () => {
         navigate(0);
@@ -55,7 +56,7 @@ export function Profile() {
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo
-                data={data}
+                data={profileData}
             />
             
             <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 max-[500px]:gap-2 w-full">
@@ -72,10 +73,10 @@ export function Profile() {
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4 max-[500px]:gap-2">
                         <div className="flex-[3] bg-gray-200 dark:bg-slate-800 min-[500px]:rounded-xl p-4 max-[500px]:p-2">
-                            { data?.activity && (
+                            { profileData?.activity && (
                                 <Activity
                                     title="Monthly Activity"
-                                    data={data}
+                                    data={profileData}
                                 />
                             )}
                         </div>
@@ -109,16 +110,17 @@ export function Profile() {
                         </i>
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
-                        { data?.projects.map( project => {
+                        { data && Array.isArray(data) && data.map(( project: Project ) => {
+                            console.log(data)
                             return (
                                 <MainItem
-                                    key={project.id}
+                                    key={project.idProject}
                                     item={project}
                                     descriptionBottom={false}
                                 >
                                     <ShowButton 
                                         cb={() => {
-                                            navigate(`/project/${project.id}`)
+                                            navigate(`/project/${project.idProject}`)
                                         }}
                                     />
                                 </MainItem>

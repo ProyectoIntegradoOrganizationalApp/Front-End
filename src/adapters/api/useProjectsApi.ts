@@ -186,7 +186,6 @@ export const useProjectsApi = ( fetch: boolean ) => {
             setError(undefined);
 
             // Cambiamos el state
-            console.log(info)
             let projects: Array<Project> = ProjectMapper.prototype.mapArrayTo(info.projects);
             setData(projects);
         }

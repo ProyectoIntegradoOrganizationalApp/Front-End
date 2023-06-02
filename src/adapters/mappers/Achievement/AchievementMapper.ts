@@ -1,6 +1,6 @@
-import { Mapper } from "./Mapper";
-import { Achievement } from "../../domain/achievement/Achievement.interface";
-import { AchievementDTO } from "../../domain/achievement/AchievementDTO.interface";
+import { Mapper } from "../Mapper";
+import { Achievement } from "../../../domain/achievement/Achievement.interface";
+import { AchievementDTO } from "../../../domain/achievement/AchievementDTO.interface";
 
 export class AchievementMapper extends Mapper<Achievement, AchievementDTO> {
 
@@ -18,7 +18,7 @@ export class AchievementMapper extends Mapper<Achievement, AchievementDTO> {
             id: data.id,
             title: data.title,
             description: data.description,
-            icon: data.icon            
+            icon: data.icon,
         }
     }
 }

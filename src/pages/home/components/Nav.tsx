@@ -40,12 +40,10 @@ export function Nav() {
                         <ProfileBadge
                             user={user}
                             logout={logout}
-                            position={"dropdown dropdown-end"}
                         />
                     )}
 
                     { !user && (
-                        
                         <Link to="/login">
                             <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">Log In</button>
                         </Link>
