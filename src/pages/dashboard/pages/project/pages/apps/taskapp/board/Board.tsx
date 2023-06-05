@@ -7,12 +7,38 @@ import { useBoard } from '../../../../../../../../hooks/useBoard';
 import { Tabs } from '../../../../../../../../components/Tabs';
 import { StrictDroppable } from './StrictDroppable';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
+import "gantt-task-react/dist/index.css";
+import CustomGantt from './Gantt/CustomGantt';
 
 export function Board() {
-    const [tab, setTab] = useState<string>("dashboard");
+    const [tab, setTab] = useState<string>("todo");
     const { openModal } = useModal();
     const { onDragEnd, columnOrder, columnsData } = useBoard();
     const { state } = useLocation();
+
+    let tasks: Task[] = [
+        {
+            start: new Date(2020, 1, 1),
+            end: new Date(2020, 1, 2),
+            name: 'Idea',
+            id: 'Task 0',
+            type: 'task',
+            progress: 45,
+            isDisabled: false,
+            styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+        },
+        {
+            start: new Date(2020, 1, 1),
+            end: new Date(2020, 1, 2),
+            name: 'Ideaaaaaa',
+            id: 'Task 1',
+            type: 'task',
+            progress: 45,
+            isDisabled: false,
+            styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+        },
+    ];
 
     const tasksData: {
         [key: string]: {
@@ -90,7 +116,30 @@ export function Board() {
                     <div className="bg-gray-200 dark:bg-slate-800 w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
                         <div className="flex gap-3">
                             <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
-                            <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
+                            {state.app == "Taskman" &&
+                                <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
+                            } {state.app == "Timeline" &&
+                                <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols"
+                                    links={[
+                                        {
+                                            url: "todo",
+                                            name: "To Do"
+                                        },
+                                        {
+                                            url: "inprogress",
+                                            name: "In Progress"
+                                        },
+                                        {
+                                            url: "done",
+                                            name: "Done"
+                                        },
+                                        {
+                                            url: "sergioesbobo",
+                                            name: "sergioesBobo"
+                                        }
+                                    ]}
+                                />
+                            }
                         </div>
                         <i onClick={() =>
                             openModal({
@@ -99,12 +148,11 @@ export function Board() {
                                 title: "Create Column",
                                 content: [],
                                 submitText: "Create Column",
-                                submitAction: ""
+                                submitAction: () => { }
                             })}
                             className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                     </div>
-                    {
-                        state.app == "Taskman" &&
+                    {state.app == "Taskman" &&
                         <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
                             {(provided) => (
                                 <div id="scrollbarx"
@@ -131,9 +179,10 @@ export function Board() {
                                 </div>
                             )}
                         </StrictDroppable>
-                    } {
-                        state.app == "Timeline" &&
-                        <div></div>
+                    } {state.app == "Timeline" &&
+                        <>
+                            <CustomGantt column={tab} />
+                        </>
                     }
                 </div>
             </div>

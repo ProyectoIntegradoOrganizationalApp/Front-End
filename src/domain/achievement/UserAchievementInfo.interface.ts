@@ -1,7 +1,11 @@
-export interface UserAchievementInfoDTO {
-    idAchievement: string,
-    idUser: string,
-    percentage: string,
+export interface UserAchievementInfo {
+    id: string,
+    title: string,
+    description: string,
+    icon: string,
+    category: string,
     progress: number,
-    current_state: 0
+    completed: boolean,
+    current_state: number,
+    percentage: number
 }

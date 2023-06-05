@@ -28,7 +28,7 @@ export function CustomModal(props: { isOpen: boolean, closeModal: () => void, at
                         <i className="fa-solid fa-xmark scale-150 text-black dark:text-white hover:text-black/50 dark:hover:text-white/50 transition-all"></i>
                     </div>
 
-                    {props.atts?.type == "settings" ? (
+                    {  props.atts?.type == "settings" ? (
                         <>
                             <div className="flex flex-col w-1/5 bg-white dark:bg-slate-800 p-7">
                                 {

@@ -1,18 +1,23 @@
+// React
 import { useEffect, useState } from "react";
 
+// Axios
+import { useAxios } from "./useAxios";
 import { AxiosHeaders } from 'axios';
 
+// Hooks / Mappers
+import { UserAchievementInfoMapper } from "../mappers/Achievement/UserAchievementInfoMapper";
 import { useAuth } from "../../hooks/useAuth";
 
+// Interfaces
 import { ApiError } from '../../domain/ApiError.interface';
-import { AchievementDTO } from "../../domain/achievement/AchievementDTO.interface";
 import { RequestParams } from "../../domain/RequestParams.interface";
-import { useAxios } from "./useAxios";
-import { Achievement } from "../../domain/achievement/Achievement.interface";
+import { UserAchievementInfo } from "../../domain/achievement/UserAchievementInfo.interface";
+import { UserAchievementInfoDTO } from "../../domain/achievement/UserAchievementInfoDTO.interface";
 
-interface AchievementResponse {
+interface UserAchievementResponse {
     total: number,
-    achievements: Array<AchievementDTO & { states: Array<number>}>
+    achievements: Array<UserAchievementInfoDTO>
 }
 
 /**
@@ -23,7 +28,7 @@ export const useAchievementsApi = ( fetch: boolean ) => {
 
     const { user } = useAuth();
 
-    const [data, setData] = useState<any>();
+    const [data, setData] = useState<Array<UserAchievementInfo>>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -50,7 +55,7 @@ export const useAchievementsApi = ( fetch: boolean ) => {
          * Props de la petición
          */
         const props: RequestParams = {
-            url: `${API}/achievements`,
+            url: `${API}/profile/${user?.id}/achievements`,
             method: "GET",
             headers: new AxiosHeaders({
                 "Content-Type": "application/json",
@@ -72,9 +77,7 @@ export const useAchievementsApi = ( fetch: boolean ) => {
      *  Función que maneja los datos que salen de la API.
      *  @param info 
      */
-    const handleData = ( info: any | ApiError ) => {
-
-        console.log(info)
+    const handleData = ( info: UserAchievementResponse | ApiError ) => {
 
         /**
          * Hay Error
@@ -86,18 +89,16 @@ export const useAchievementsApi = ( fetch: boolean ) => {
         /**
          * Si no hay error
          */
-        if( info && "projects" in info ) {
+        if( info && "total" in info ) {
             // Quitamos los errores en caso de que los halla
             setError(undefined);
 
-
-        }
-
-        if( info ) {
-            // Quitamos los errores en caso de que los halla
-            setError(undefined);
-            
-            
+            console.log(info)
+            const data: Array<UserAchievementInfo> = UserAchievementInfoMapper.prototype.mapArrayTo(info.achievements);
+            data.sort(( elemA, elemB ) => {
+                return elemA.percentage + elemB.percentage;
+            })
+            setData(data);
         }
 
         setLoading(false);

@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { useProjectsApi } from "../../adapters/api/useProjectsApi";
 
-const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, close: () => void, submit: () => void}> = ({ title, submitText, close, submit }) => {
+interface ProjectFormProps {
+    title: string | undefined,
+    submitText: string,
+    close: () => void,
+    submit: () => void
+}
+
+const CrudProjectForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
 
     /** 
      * Hook de la API de proyectos, le pasamos un false para que no realice la query.
      */
     const { createProject } = useProjectsApi(false);
-
 
     const [projectTitle, setProjectTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");

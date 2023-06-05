@@ -247,6 +247,7 @@ progress {
     background-color: transparent;
 }
 
+/* Board */
 .board:hover div {
     @apply bg-black/50 dark:bg-black/50;
 }
@@ -255,6 +256,103 @@ progress {
 }
 .task:hover > div {
     @apply flex;
+}
+
+/* Timeline */
+._35nLX {
+    @apply fill-gray-200 dark:fill-slate-700 h-[40px];
+}
+._1nBOt {
+    @apply bg-gray-200 dark:bg-slate-700 !h-[50px];
+}
+._1nBOt ._2eZzQ {
+    @apply mx-0 hidden;
+}
+._9w8d5 {
+    @apply fill-black dark:fill-white;
+}
+._WuQ0f {
+    @apply text-black dark:text-white;
+}
+._WuQ0f:first-child {
+    @apply pl-[12px];
+}
+._2dZTy {
+    @apply fill-white dark:fill-slate-800;
+}
+._3lLk3 {
+    @apply text-black dark:text-white;
+}
+._34SS0:nth-of-type(odd), ._2dZTy:nth-child(even) {
+    @apply bg-white dark:bg-slate-800 fill-gray-200 dark:fill-slate-700;
+}
+._34SS0:nth-of-type(even) {
+    @apply bg-gray-200 dark:bg-slate-700;
+}
+._3ZbQT, ._3_ygE {
+    @apply border-none;
+}
+._RuwuK, ._3rUKi, ._35nLX {
+    @apply stroke-none;
+}
+._CZjuD > svg {
+    @apply -translate-y-[2.2px];
+}
+._31ERP {
+    @apply fill-gray-300 dark:fill-slate-500 text-black;
+}
+._KxSXS > g > rect:last-child {
+    @apply fill-green-400/70;
+}
+._3KcaM {
+    @apply fill-black dark:fill-white font-normal;
+}
+._3zRJQ {
+    @apply fill-black dark:fill-white font-normal;
+}
+._nI1Xw > div:not(:first-child) {
+    @apply overflow-hidden whitespace-nowrap overflow-ellipsis max-w-[111px];
+}
+.calendar text {
+    @apply -translate-y-2;
+}
+.today rect {
+    @apply fill-yellow-200/40;
+}
+.calendarTop {
+    @apply hidden;
+}
+
+/* Zebra Table */
+:where(.table *:first-child) :where(*:first-child) :where(th, td):first-child {
+    @apply !rounded-tl-none;
+}
+:where(.table *:first-child) :where(*:first-child) :where(th, td):last-child {
+    @apply !rounded-tr-none;
+}
+.table :where(thead, tfoot) :where(th, td) {
+    @apply !bg-slate-900/[.85];
+}
+.table-zebra tbody tr:nth-child(odd) th,
+      .table-zebra tbody tr:nth-child(odd) td {
+    @apply !bg-slate-800;
+}
+.table-zebra tbody tr:nth-child(even) th,
+      .table-zebra tbody tr:nth-child(even) td {
+    @apply !bg-slate-900/[.85];
+}
+.table-zebra {
+    @apply block w-full;
+}
+.table-zebra thead {
+    @apply block w-full;
+}
+.table-zebra tbody {
+    @apply block w-full overflow-auto h-[222px];
+}
+.table-zebra thead tr, .table-zebra tbody tr {
+    @apply w-full table-fixed;
+    display: table;
 }
 
 /* Sidebar */

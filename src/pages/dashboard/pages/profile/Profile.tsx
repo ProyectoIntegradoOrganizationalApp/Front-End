@@ -36,7 +36,7 @@ export function Profile() {
     const navigate = useNavigate();
 
     const profileData: Profile = useOutletContext();
-    const { data, error, loading } = useProjectsApi(true);
+    const { data, error, loading, refreshData } = useProjectsApi(true);
 
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {        
@@ -50,7 +50,7 @@ export function Profile() {
     }, [profileData?.user.id]);
 
     const handleCreateProject = () => {
-        navigate(0);
+        refreshData();
     }
 
     return (

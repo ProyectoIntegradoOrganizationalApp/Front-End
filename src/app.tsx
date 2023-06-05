@@ -91,16 +91,20 @@ export function App() {
             />
             <AuthContext.Provider value={{ user: contextUser, setUser }}>
                 <ModalContext.Provider value={{ modal, setModal }}>
-                    {  cookiesAccepted == null &&
+
+                    {/* Modal de las coockies */}
+                    {  cookiesAccepted == null && (
                         <CookieModal isOpen={cookiesIsOpen} />
-                    }
-                    { modal && 
+                    )}
+
+                    {/* Modal custom que sirve para multiples cosas */}
+                    { modal && (
                         <CustomModal 
                             isOpen={modal?.isOpen ? true : false} 
                             closeModal={closeModal} 
                             atts={modal} 
                         />
-                    }
+                    )}
                     
                     <BrowserRouter basename='/'>
                         <Routes>

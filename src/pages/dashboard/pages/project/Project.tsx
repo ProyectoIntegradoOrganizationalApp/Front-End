@@ -44,7 +44,7 @@ export function Project() {
                     },
                     {
                         icon: "fa-solid fa-list-check",
-                        name: "ptoelquelolea"
+                        name: "xd"
                     }
                 ]} />
             </div>

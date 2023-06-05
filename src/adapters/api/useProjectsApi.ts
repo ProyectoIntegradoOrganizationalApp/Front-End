@@ -65,6 +65,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
 
     /**
      *  Función que recibe un ID y busca el proyecto concreto
+     *  @param id
      */
     const fetchProject = ( id: string ) => {
         setLoading(true);
@@ -113,7 +114,8 @@ export const useProjectsApi = ( fetch: boolean ) => {
             data: {
                 name: name,
                 description: description,
-                icon: "https://www.svgrepo.com/show/513474/rocket.svg"
+                icon: "https://www.svgrepo.com/show/513474/rocket.svg",
+                state: 1
             }
         }
         
@@ -132,6 +134,10 @@ export const useProjectsApi = ( fetch: boolean ) => {
 
     }
 
+    /**
+     *  Función para dejar un proyecto
+     *  @param id 
+     */
     const leaveProject = ( id: string ) => {
         setLoading(true);
 
@@ -161,8 +167,19 @@ export const useProjectsApi = ( fetch: boolean ) => {
             });
     }
 
-    const editProject = () => {
+    /**
+     *  Función para editar un projecto
+     *  @param id
+     */
+    const editProject = ( id: string ) => {
 
+    }
+
+    /**
+     *  Función que llama a fetchData para actualizar la información de los proyectos.
+     */
+    const refreshData = () => {
+        fetchData();
     }
 
     /**
@@ -201,7 +218,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
         setLoading(false);
     }
 
-    return { data, error, loading, fetchProject, createProject, leaveProject, editProject };
+    return { data, error, loading, refreshData, fetchProject, createProject, leaveProject, editProject };
 
 }
 
