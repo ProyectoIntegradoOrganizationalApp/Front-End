@@ -75,7 +75,7 @@ export function Column(props: ColumnProps) {
                                     action: "remove",
                                     target: props.column.title,
                                     submitText: "Remove Column",
-                                    submitAction: ""
+                                    submitAction: () => { }
                                 })}></i>
                             <i id="editButton" className="fa-solid fa-edit cursor-pointer text-green-700 hover:text-green-800" onClick={changeIcon}></i>
                         </div>
@@ -94,7 +94,7 @@ export function Column(props: ColumnProps) {
                                         title: "Create Task",
                                         content: [],
                                         submitText: "Create Task",
-                                        submitAction: ""
+                                        submitAction: () => { }
                                     })} className="bg-gray-300 dark:bg-black/30 hover:bg-gray-400/80 dark:hover:bg-black/50 transition-all cursor-pointer text-black dark:text-white p-3 rounded-lg mb-2.5 select-none break-all w-full leading-[1.2rem] flex gap-2 justify-center items-center">
                                     <b><p className="leading-none">New Task</p></b><i className="fa-solid fa-plus"></i>
                                 </div>

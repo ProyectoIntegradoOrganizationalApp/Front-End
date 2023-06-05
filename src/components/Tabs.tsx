@@ -18,7 +18,7 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
 
     return (
         <div className={`h-fit ${props.links ? "md:px-3" : "px-3"} py-0 flex justify-between items-center rounded-xl`}>
-            <div className={`flex flex-col md:flex-row items-start md:items-center gap-4 max-[500px]:gap-2 md:gap-7 h-full`}>
+            <div className={`flex flex-col md:flex-row items-start gap-4 max-[500px]:gap-2 md:gap-7 h-full`}>
                 {/* Header */}
                 <div className={`items-center gap-4 max-[500px]:gap-2 ${props.links ? "hidden md:flex" : "flex"} py-[0.73rem]`}>
                     <i className={props.icon + " text-black dark:text-white"}></i>
@@ -26,13 +26,13 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                 </div>
                 {
                     props.links &&
-                    <div className="h-9 w-[1.7px] bg-gray-400 dark:bg-slate-500 hidden md:block"></div>
+                    <div className="h-10 w-[1.7px] bg-gray-400 dark:bg-slate-500 hidden md:block"></div>
                 }
 
                 {/* Tabs */}
                 {
                     props.links &&
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                         {props.links?.map((link) =>
                             <li key={link.url} className="list-none">
                                 {props.tab == link.url ? (

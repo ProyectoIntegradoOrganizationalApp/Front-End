@@ -1,14 +1,17 @@
 import React from "react";
 import { Task, ViewMode, Gantt } from "gantt-task-react";
-import { ViewSwitcher } from "./ViewSwitcher";
 import { getStartEndDateForProject, initTasks } from "./helper";
+import { ViewSwitcher } from "./ViewSwitcher";
 import "gantt-task-react/dist/index.css";
+import { useModal } from "../../../../../../../../../hooks/useModal";
 
 // Init
-const CustomGantt = () => {
+const CustomGantt = (props: { column: string }) => {
 	const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
-	const [tasks, setTasks] = React.useState<Task[]>(initTasks());
+	const [tasks, setTasks] = React.useState<Task[]>(initTasks(props.column));
 	const [isChecked, setIsChecked] = React.useState(true);
+	const { openModal } = useModal();
+
 	let columnWidth = 65;
 	if (view === ViewMode.Year) {
 		columnWidth = 350;
@@ -53,22 +56,34 @@ const CustomGantt = () => {
 	};
 
 	return (
-		<div id="scrollbar" className="bg-gray-200 dark:bg-slate-700 rounded-xl h-full">
-			{/* <ViewSwitcher
-				onViewModeChange={viewMode => setView(viewMode)}
-				onViewListChange={setIsChecked}
-				isChecked={isChecked}
-			/> */}
-			<Gantt
-				tasks={tasks}
-				viewMode={view}
-				onDateChange={handleTaskChange}
-				onDelete={handleTaskDelete}
-				onProgressChange={handleProgressChange}
-				onExpanderClick={handleExpanderClick}
-				listCellWidth={isChecked ? "155px" : ""}
-				columnWidth={columnWidth}
-			/>
+		<div id="scrollbar" className="bg-gray-200 dark:bg-slate-700 rounded-xl h-full flex flex-col justify-between">
+			<div>
+				<ViewSwitcher
+					onViewListChange={setIsChecked}
+					isChecked={isChecked}
+				/>
+				<Gantt
+					tasks={tasks}
+					viewMode={view}
+					onDateChange={handleTaskChange}
+					onDelete={handleTaskDelete}
+					onProgressChange={handleProgressChange}
+					onExpanderClick={handleExpanderClick}
+					listCellWidth={isChecked ? "155px" : ""}
+					columnWidth={columnWidth}
+				/>
+			</div>
+			<div onClick={() =>
+				openModal({
+					isOpen: true,
+					type: "crudProject",
+					title: "Create Task",
+					content: [],
+					submitText: "Create Task",
+					submitAction: () => { }
+				})} className="bg-gray-300 dark:bg-black/30 hover:bg-gray-400/80 dark:hover:bg-black/50 transition-all cursor-pointer text-black dark:text-white p-4 select-none break-all w-full leading-[1.2rem] flex gap-2 justify-center items-center">
+				<b><p className="leading-none">New Task</p></b><i className="fa-solid fa-plus"></i>
+			</div>
 		</div>
 	);
 };

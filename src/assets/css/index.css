@@ -310,14 +310,49 @@ progress {
 ._3zRJQ {
     @apply fill-black dark:fill-white font-normal;
 }
+._nI1Xw > div:not(:first-child) {
+    @apply overflow-hidden whitespace-nowrap overflow-ellipsis max-w-[111px];
+}
 .calendar text {
     @apply -translate-y-2;
 }
 .today rect {
-    @apply fill-yellow-200/50;
+    @apply fill-yellow-200/40;
 }
 .calendarTop {
     @apply hidden;
+}
+
+/* Zebra Table */
+:where(.table *:first-child) :where(*:first-child) :where(th, td):first-child {
+    @apply !rounded-tl-none;
+}
+:where(.table *:first-child) :where(*:first-child) :where(th, td):last-child {
+    @apply !rounded-tr-none;
+}
+.table :where(thead, tfoot) :where(th, td) {
+    @apply !bg-slate-900/[.85];
+}
+.table-zebra tbody tr:nth-child(odd) th,
+      .table-zebra tbody tr:nth-child(odd) td {
+    @apply !bg-slate-800;
+}
+.table-zebra tbody tr:nth-child(even) th,
+      .table-zebra tbody tr:nth-child(even) td {
+    @apply !bg-slate-900/[.85];
+}
+.table-zebra {
+    @apply block w-full;
+}
+.table-zebra thead {
+    @apply block w-full;
+}
+.table-zebra tbody {
+    @apply block w-full overflow-auto h-[222px];
+}
+.table-zebra thead tr, .table-zebra tbody tr {
+    @apply w-full table-fixed;
+    display: table;
 }
 
 /* Sidebar */

@@ -12,8 +12,11 @@ interface Task {
     isDisabled?: boolean;
 }
 
-export function initTasks() {
+export function initTasks(column: string) {
     const currentDate = new Date();
+
+    // CONSEGUIR TAREAS DE LA COLUMNA POR PARÁMETRO Y CONSEGUIRLAS ASÍ:
+
     const tasks: Task[] = [
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
@@ -36,7 +39,7 @@ export function initTasks() {
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
             end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8, 0, 0),
-            name: "Discussion with team",
+            name: "Team discussion",
             id: "Task 2",
             progress: 10,
             type: "task",

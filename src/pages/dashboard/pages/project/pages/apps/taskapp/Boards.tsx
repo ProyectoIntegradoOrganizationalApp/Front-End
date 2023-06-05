@@ -49,7 +49,7 @@ export function Boards(props: { icon: string, app: string }) {
                                         title: "Create Board",
                                         content: [],
                                         submitText: "Create Board",
-                                        submitAction: ""
+                                        submitAction: () => {}
                                     })
                                 }
                                 className="w-full h-full flex justify-center items-center"

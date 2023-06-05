@@ -13,7 +13,7 @@ export interface ModalInterface {
     action?: string,
     target?: string,
     sidebarElements?: SideElementsModal[],
-    content: SettingInterface[] | InputModalInterface[],
+    content?: SettingInterface[] | InputModalInterface[],
     submitText: string,
     submitAction: () => void
 }

@@ -1,6 +1,5 @@
 // React
-import React, { useState } from "react";
-import { DropdownInterface } from "../domain/UI/DropdownInterface.interface";
+import React from "react";
 import { BreadcrumbInterface } from "../domain/UI/BreadcrumbInterface.interface";
 import { Link } from "react-router-dom";
 
