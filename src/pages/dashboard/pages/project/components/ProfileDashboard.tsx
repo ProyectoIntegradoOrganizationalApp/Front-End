@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { Pie, Bar } from 'react-chartjs-2';
-import 'chart.js/auto';
-import 'chartjs-plugin-datalabels';
 
 import { InfoTooltip } from "../../../../../components/InfoTooltip"
 import { TaskLog } from "../../../../../components/TaskLog"
 import { Statistics } from "../../profile/components/Statistics"
 
 import foto from "../../../../../assets/foto.png";
-
 import { Project } from "../../../../../domain/projects/Project.interface";
+import { useOutletContext } from "react-router";
+import { Pie, Bar } from "react-chartjs-2";
 
 const getMonths = (): string[] => {
     const months: string[] = [
@@ -34,7 +32,9 @@ const getMonths = (): string[] => {
     return months.slice(0, currentMonthIndex + 1);
 };
 
-export const ProjectDashboard: React.FC<{project: Project}> = ({ project }) => {
+export const ProjectDashboard: React.FC = () => {
+    const project: Project = useOutletContext();
+    
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
@@ -51,6 +51,7 @@ export const ProjectDashboard: React.FC<{project: Project}> = ({ project }) => {
             mediaQuery.removeEventListener("change", handleChange);
         };
     }, []);
+
     const tickColor = isDarkMode ? 'white' : 'black';
 
     return (
@@ -64,7 +65,7 @@ export const ProjectDashboard: React.FC<{project: Project}> = ({ project }) => {
                         />
                     </div>
                     <div className="w-[9rem] aspect-square">
-                        <Pie data={{
+                        {/* <Pie data={{
                             labels: ['Completed', 'Incompleted'],
                             datasets: [
                                 {
@@ -98,11 +99,11 @@ export const ProjectDashboard: React.FC<{project: Project}> = ({ project }) => {
                                     },
                                 }
                             }
-                        }} />
+                        }} /> */}
                     </div>
                 </div>
                 <div className="bg-white dark:bg-slate-800 rounded-xl flex-[7] p-4 w-full">
-                    <Bar data={{
+                    {/* <Bar data={{
                         labels: getMonths(),
                         datasets: [
                             {
@@ -146,7 +147,7 @@ export const ProjectDashboard: React.FC<{project: Project}> = ({ project }) => {
                                 },
                             }
                         }
-                    }} />
+                    }} /> */}
                 </div>
                 <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[2] min-w-fit flex flex-col items-center justify-center p-4 gap-12 relative">
                     <div className="absolute top-4 left-4">

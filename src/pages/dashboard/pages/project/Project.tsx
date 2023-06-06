@@ -82,7 +82,7 @@ export function Project() {
                 </div>
                 <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 gap-2 w-full h-full rounded-xl">
                     <div className="w-full rounded-xl flex flex-col justify-between gap-4 max-[500px]:gap-2 h-full">
-                       <Outlet /> 
+                       <Outlet context={project} /> 
                     </div>
                 </div>
                 

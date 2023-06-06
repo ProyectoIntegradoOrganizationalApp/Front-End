@@ -38,6 +38,8 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
 import { Account } from './pages/dashboard/pages/profile/account/Account';
 import { ProjectDashboard } from './pages/dashboard/pages/project/components/ProfileDashboard';
+import { ProjectApps } from './pages/dashboard/pages/project/components/ProjectApps';
+import { ProjectMembers } from './pages/dashboard/pages/project/components/ProjectMembers';
 
 /**
  *  Aplicación principal.
@@ -122,17 +124,17 @@ export function App() {
                                             {/* Dashboard */}
                                             <Route
                                                 path="dashboard"
-                                                element={ <ProjectDashboard project={''} />}
+                                                element={ <ProjectDashboard />}
                                             />
                                             {/* Apps */}
                                             <Route
                                                 path="apps"
-                                                element={ <ProjectDashboard project={''} />}
+                                                element={ <ProjectApps />}
                                             />
                                             {/* Members */}
                                             <Route
                                                 path="members"
-                                                element={ <ProjectDashboard project={''} />}
+                                                element={ <ProjectMembers />}
                                             />
                                     </Route>
 

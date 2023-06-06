@@ -1,8 +1,14 @@
-import { useNavigate } from "react-router-dom"
-import { MainItem } from "../../../../../components/list-items/MainItem"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function ProjectApps(props: { project: string }) {
+import { useNavigate, useOutletContext } from "react-router-dom"
+
+import { MainItem } from "../../../../../components/list-items/MainItem"
+
+import { Project } from "../../../../../domain/projects/Project.interface";
+
+export const ProjectApps: React.FC = () => {
+    
+    const project: Project = useOutletContext();
     const [selectedElement, selectElement] = useState<string>("none");
 
     let navigate = useNavigate();
