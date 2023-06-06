@@ -1,20 +1,16 @@
 // React
 import React, { MouseEventHandler } from "react";
-import { Tabs } from "../domain/UI/Tabs.interface";
+
 import { Link } from "react-router-dom";
 
-/**
- *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
- *  
- *  @param props Contiene las props que le pasa el elemento superior 
- *  @returns 
- */
+import { Tabs } from "../domain/UI/Tabs.interface";
 
-function doAction(action: string, target: string) {
-    console.log(action + " " + target);
-}
+export function Tabs(props: { tab: string, setTab: Function, icon?: string, title?: string, links?: Array<Tabs> }) {
 
-export function Tabs(props: { tab: string, setTab: Function, icon?: string, title: string, links?: Array<Tabs> }) {
+    const handleClick = ( tabName: string ) => {
+        console.log(tabName)
+        props.setTab(tabName);
+    }
 
     return (
         <div className={`h-fit ${props.links ? "md:px-3" : "px-3"} py-0 flex justify-between items-center rounded-xl`}>
@@ -30,24 +26,27 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                 }
 
                 {/* Tabs */}
-                {
-                    props.links &&
-                    <div className="flex flex-wrap gap-2">
-                        {props.links?.map((link) =>
-                            <li key={link.url} className="list-none">
-                                {props.tab == link.url ? (
-                                    <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">
+                { props.links &&
+                    <div className="flex justify-center items-center">
+                        { props.links?.map((link) =>
+                            link.url ? (
+                                <Link
+                                    key={link.name} 
+                                    to={link.url}
+                                    className={"btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"}    
+                                >
                                         {link.name}
-                                    </div>
-                                ) : (
-                                    <div onClick={(event: React.MouseEvent<HTMLElement>) => { props.setTab(link.url) }}
-                                        className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600">
+                                </Link>
+                            ): (
+                                <button
+                                    key={link.name}
+                                    className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"
+                                    onClick={() => handleClick(link.name)}  
+                                >
                                         {link.name}
-                                    </div>
-                                )
-                                }
-                            </li>
+                                </button>
+                            )
+                            
                         )}
                     </div>
                 }

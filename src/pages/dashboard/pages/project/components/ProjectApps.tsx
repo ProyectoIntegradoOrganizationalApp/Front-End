@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { MainItem } from "../../../../../components/list-items/MainItem"
 import { useState } from "react";
 
-export function Apps(props: { project: string }) {
+export function ProjectApps(props: { project: string }) {
     const [selectedElement, selectElement] = useState<string>("none");
 
     let navigate = useNavigate();

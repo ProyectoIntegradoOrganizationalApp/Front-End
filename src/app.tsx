@@ -37,6 +37,7 @@ import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Boar
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
 import { Account } from './pages/dashboard/pages/profile/account/Account';
+import { ProjectDashboard } from './pages/dashboard/pages/project/components/ProfileDashboard';
 
 /**
  *  Aplicación principal.
@@ -115,8 +116,27 @@ export function App() {
                                     <Route path="profile/achievements" element={<Achievements />} />
                                     <Route path="profile/account" element={<Account />} />
                                     <Route path="projects/dashboard" element={ <Projects /> }/>
-                                    <Route path="project/:name" element={ <Project /> }/>
-                                    <Route path="project/:name/store" element={ <Store project={''} /> } />
+
+                                    {/* Project */}
+                                    <Route path="project/:name" element={ <Project /> }>
+                                            {/* Dashboard */}
+                                            <Route
+                                                path="dashboard"
+                                                element={ <ProjectDashboard project={''} />}
+                                            />
+                                            {/* Apps */}
+                                            <Route
+                                                path="apps"
+                                                element={ <ProjectDashboard project={''} />}
+                                            />
+                                            {/* Members */}
+                                            <Route
+                                                path="members"
+                                                element={ <ProjectDashboard project={''} />}
+                                            />
+                                    </Route>
+
+                                    <Route path="project/:name/store" element={ <Store project={''} /> }/>
                                     <Route path="project/:project/app/taskman" element={ <Boards icon="fa-solid fa-table-columns" app="Taskman"/> }/>
                                     <Route path="project/:project/app/timeline" element={ <Boards icon="fa-solid fa-chart-gantt" app="Timeline"/> }/>
                                     <Route path="project/:project/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>

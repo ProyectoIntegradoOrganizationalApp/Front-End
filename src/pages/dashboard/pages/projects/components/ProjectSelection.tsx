@@ -5,11 +5,11 @@ import { Share } from "../../../../../components/Share"
 
 import { Project } from "../../../../../domain/projects/Project.interface"
 import { ProjectMember } from "../../../../../domain/projects/ProjectMember.interface"
-import { useProjectsApi } from "../../../../../adapters/api/useProjectsApi"
+import { useProjectApi } from "../../../../../adapters/api/useProjectApi"
 
 export const ProjectSelection = ( props: { selection: Project } ) => {
 
-    const { leaveProject } = useProjectsApi(false);
+    const { leaveProject } = useProjectApi(false);
 
     const navigate = useNavigate();
 
@@ -81,7 +81,7 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
                 </div>
             </div>
             <div className="w-full flex flex-wrap gap-3 mt-8">
-                <Link to={`/project/${props.selection.idProject}`} className="flex-auto btn btn-primary !bg-green-700 hover:!bg-green-800 !px-2">Open Project</Link>
+                <Link to={`/project/${props.selection.idProject}/dashboard`} className="flex-auto btn btn-primary !bg-green-700 hover:!bg-green-800 !px-2">Open Project</Link>
                 <button 
                     onClick={handleLeave}
                     className="w-fit btn btn-primary !bg-red-700 hover:!bg-red-800 aspect-square !px-0"

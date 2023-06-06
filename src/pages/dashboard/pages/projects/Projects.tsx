@@ -61,69 +61,67 @@ export function Projects() {
     let navigate = useNavigate();
 
     const openProject = (link: string) => {
-        navigate("/project/" + link);
+        navigate("/project/" + link + "/dashboard");
     }
 
     return (
-        <>
-            <div className={`h-full ${selectedElement == null ? "max-[839.50px]:h-fit max-[839.50px]:min-h-full" : ""} flex-1 bg-gray-200 dark:bg-slate-800 w-full rounded-xl flex flex-wrap-reverse gap-6 p-4 max-[500px]:p-2 max-[500px]:rounded-none`}>
-                <div className={`max-[839.50px]:h-auto h-full flex-[4] bg-gray-300 dark:bg-slate-700 rounded-xl flex flex-col gap-4 max-[500px]:gap-2 max-[500px]:p-2 p-4 w-9/12 ${selectedElement == null ? "!w-full" : ""}`}>
-                    <div className="flex flex-wrap-reverse items-center gap-2">
-                        <div className="flex-1">
-                            <Searcher
-                                bg="bg-white dark:bg-slate-800"
-                                placeholder="Search a project..."
-                            />
-                        </div>
-                        <div className="max-[499px]:flex-1">
-                            <Dropdown
-                                selectedElement={selectedOrder}
-                                selectElement={setSelectedElement}
-                                elements={[
-                                    {
-                                        action: "fe",
-                                        name: "All"
-                                    },
-                                    {
-                                        action: "fe",
-                                        name: "My Projects"
-                                    }
-                                ]}
-                            />
-                        </div>
+        <div className={`h-full ${selectedElement == null ? "max-[839.50px]:h-fit max-[839.50px]:min-h-full" : ""} flex-1 bg-gray-200 dark:bg-slate-800 w-full rounded-xl flex flex-wrap-reverse gap-6 p-4 max-[500px]:p-2 max-[500px]:rounded-none`}>
+            <div className={`max-[839.50px]:h-auto h-full flex-[4] bg-gray-300 dark:bg-slate-700 rounded-xl flex flex-col gap-4 max-[500px]:gap-2 max-[500px]:p-2 p-4 w-9/12 ${selectedElement == null ? "!w-full" : ""}`}>
+                <div className="flex flex-wrap-reverse items-center gap-2">
+                    <div className="flex-1">
+                        <Searcher
+                            bg="bg-white dark:bg-slate-800"
+                            placeholder="Search a project..."
+                        />
                     </div>
-
-                    <div id="scrollbar" className="flex-1 selectElement max-[500px]:gap-2">
-
-                        { data && Array.isArray(data) && (
-                            data.map( project => {
-                                return (
-                                    <div
-                                        key={project.idProject}
-                                        className={selectedElement?.idProject == project.idProject ? "selectedElement" : ""}
-                                        onClick={() => {
-                                            handleSelection(project);
-                                        }}
-                                        onDoubleClick={() => openProject(project.idProject)}
-                                    >
-                                        <MainItem
-                                            item={{name: project.name, description: project.description, icon: project.icon}} 
-                                        >
-                                        </MainItem>
-                                    </div>
-                                )
-                            })
-
-                        )}
-
+                    <div className="max-[499px]:flex-1">
+                        <Dropdown
+                            selectedElement={selectedOrder}
+                            selectElement={setSelectedElement}
+                            elements={[
+                                {
+                                    action: "fe",
+                                    name: "All"
+                                },
+                                {
+                                    action: "fe",
+                                    name: "My Projects"
+                                }
+                            ]}
+                        />
                     </div>
                 </div>
-                { selectedElement && (
-                    <ProjectSelection
-                        selection={selectedElement}
-                    />
-                )}
+
+                <div id="scrollbar" className="flex-1 selectElement max-[500px]:gap-2">
+
+                    { data && Array.isArray(data) && (
+                        data.map( project => {
+                            return (
+                                <div
+                                    key={project.idProject}
+                                    className={selectedElement?.idProject == project.idProject ? "selectedElement" : ""}
+                                    onClick={() => {
+                                        handleSelection(project);
+                                    }}
+                                    onDoubleClick={() => openProject(project.idProject)}
+                                >
+                                    <MainItem
+                                        item={{name: project.name, description: project.description, icon: project.icon}} 
+                                    >
+                                    </MainItem>
+                                </div>
+                            )
+                        })
+
+                    )}
+
+                </div>
             </div>
-        </>
+            { selectedElement && (
+                <ProjectSelection
+                    selection={selectedElement}
+                />
+            )}
+        </div>
     )
 }

@@ -15,7 +15,7 @@ import { UserAchievementInfo } from '../../../../domain/achievement/UserAchievem
 
 export function Achievements() {
 
-    const [tab, setTab] = useState<string>("all");
+    const [tab, setTab] = useState<string>("All");
     const [selectedElement, selectElement] = useState<string>("Order By");
 
     const API = import.meta.env.VITE_API_URL;
@@ -40,15 +40,15 @@ export function Achievements() {
                         title="Achievements"
                         links={[
                             {
-                                url: "all",
+                                url: "",
                                 name: "All"
                             },
                             {
-                                url: "projects",
+                                url: "",
                                 name: "Projects"
                             },
                             {
-                                url: "friends",
+                                url: "",
                                 name: "Friends"
                             },
                         ]}
@@ -79,7 +79,7 @@ export function Achievements() {
                     </div>
                 </div>
                 <div className="flex flex-col gap-6 bg-white dark:bg-slate-700 w-full h-full rounded-xl p-4">
-                    { data && tab === "all" ? (
+                    { data && tab === "All" ? (
                         data.map( ach => {
                             return (
                                 <AchievementItem
@@ -96,7 +96,7 @@ export function Achievements() {
                                 />
                             )
                         })
-                    ): data && tab === "projects" ? (
+                    ): data && tab === "Projects" ? (
                         //.filter antes del map para filtar las categorías
                         data.filter(( elem: UserAchievementInfo ) => elem.category === 'project' )
                             .map( ach => {    
@@ -115,7 +115,7 @@ export function Achievements() {
                                     />
                                 )
                             })
-                    ): data && tab === "friends" ? (
+                    ): data && tab === "Friends" ? (
                         data.filter(( elem: UserAchievementInfo ) => elem.category === 'friend' )
                             .map( ach => {
                                 return(
