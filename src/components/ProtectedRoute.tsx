@@ -23,24 +23,20 @@ export const ProtectedRoute: React.FC<{}> = () => {
      */
     React.useEffect(() => {
         // Si hay usuario, pasamos
-        if( user ) {
-            setLoaded(true);
-        }
+        setLoaded(true);
 
         // Si en dos segundos no ha cargado, pasamos
         setTimeout(() => {
             setLoaded(true);
         }, 2000);
-    }, [user])
+    }, [])
 
     // Si ha cargado y el usuario 
-    if( loaded && user == null ) {
-        return <Navigate to="/login" />;
-    }
+    
 
     if( loaded ) {
         return <Outlet />;
     }
 
-    return <Loading state={true}/>;
+    return <Loading state={false}/>;
 }
