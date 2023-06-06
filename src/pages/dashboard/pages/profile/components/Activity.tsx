@@ -30,7 +30,7 @@ export function Activity(props: { title: string, data: Profile }) {
                     <p className="w-full flex justify-center text-black dark:text-white leading-none text-base">{props.title}</p>
                 </div>
                 { props.data.activity.length > 0 ? (
-                    <div className="charttt">
+                    <div className="h-full">
                         <Line 
                             options={options}
                             data={chartData}

@@ -11,8 +11,8 @@ interface ProfileBadgeProps {
 export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
 
     return (
-        <div className={'dropdown dropdown-end h-fit w-full hover:bg-grey items-end'}>
-            <button className="btn !p-0 !bg-transparent border-none flex flex-nowrap justify-end items-center gap-2.5 normal-case !w-full !h-[unset] !min-h-[unset]">
+        <div className={'dropdown dropdown-end dropdown-top h-fit w-full hover:bg-grey items-end'}>
+            <button className="btn !p-0 !bg-transparent border-none flex flex-nowrap justify-start items-center gap-2.5 normal-case !w-full !h-[unset] !min-h-[unset]">
                 <img src={foto} className="!w-9 !aspect-square !h-[unset] !min-h-[unset]"/>
                 <p className="leading-none text-base text-black dark:text-white">{user?.name}</p>
             </button>

@@ -331,15 +331,15 @@ progress {
     @apply !rounded-tr-none;
 }
 .table :where(thead, tfoot) :where(th, td) {
-    @apply !bg-slate-900/[.85];
+    @apply !bg-gray-200 dark:!bg-slate-900/[.85];
 }
 .table-zebra tbody tr:nth-child(odd) th,
       .table-zebra tbody tr:nth-child(odd) td {
-    @apply !bg-slate-800;
+    @apply !bg-white dark:!bg-slate-800;
 }
 .table-zebra tbody tr:nth-child(even) th,
       .table-zebra tbody tr:nth-child(even) td {
-    @apply !bg-slate-900/[.85];
+    @apply !bg-gray-200 dark:!bg-slate-900/[.85];
 }
 .table-zebra {
     @apply block w-full;
@@ -348,7 +348,7 @@ progress {
     @apply block w-full;
 }
 .table-zebra tbody {
-    @apply block w-full overflow-auto h-[222px];
+    @apply block w-full overflow-auto max-h-[190px] rounded-b-xl;
 }
 .table-zebra thead tr, .table-zebra tbody tr {
     @apply w-full table-fixed;
