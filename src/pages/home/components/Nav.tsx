@@ -1,8 +1,6 @@
-// React
-import React, { useState } from "react";
 
 // Links para el router
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Tipado de las rutas
 import { useAuth } from '../../../hooks/useAuth';
@@ -23,7 +21,7 @@ export function Nav() {
     const { user, logout } = useAuth();
 
     return (
-        <div className="w-3/4 mx-auto mt-6 navbar px-12 bg-gray-300 dark:bg-cyan-800 dark:bg-transparent rounded-full">
+        <div className=" navbar px-12 bg-gray-300 dark:bg-cyan-800 dark:bg-transparent rounded-full">
 
             <div className="navbar-start">
                 <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">

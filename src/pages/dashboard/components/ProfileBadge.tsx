@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 
 import foto from "../../../assets/foto.png";
 import { User } from "../../../domain/user/User.interface";
@@ -9,6 +9,9 @@ interface ProfileBadgeProps {
 }
 
 export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
+
+    // Con esto haciendo un .pathname() puedes sacar si es / y renderizar una cosa u otra
+    let location = useLocation();
 
     return (
         <div className={'dropdown dropdown-end dropdown-top h-fit w-full hover:bg-grey items-end'}>
