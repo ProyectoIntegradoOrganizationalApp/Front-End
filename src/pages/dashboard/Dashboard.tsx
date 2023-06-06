@@ -26,6 +26,7 @@ export const Dashboard = () => {
         if( error?.error && error.message === 'The token provided is expired' ) {
             logout();
         }
+
     }, [error?.error]);
 
     if( location.pathname === '/') {

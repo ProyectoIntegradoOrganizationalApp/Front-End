@@ -26,12 +26,12 @@ import { Error } from './pages/Error';
 // Componentes
 import { ModalInterface } from './domain/UI/ModalInterface.interface';
 import { ModalContext } from './domain/context/ModalContext';
-import { CustomModal } from './components/CustomModal';
+import { CustomModal } from './components/modals/CustomModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
 import { Store } from './pages/dashboard/pages/project/pages/apps/Store';
-import { CookieModal } from './components/CookieModal';
+import { CookieModal } from './components/modals/CookieModal';
 import { Boards } from './pages/dashboard/pages/project/pages/apps/taskapp/Boards';
 import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
 import { DragDropContext } from 'react-beautiful-dnd';

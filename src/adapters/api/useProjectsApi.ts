@@ -76,6 +76,8 @@ export const useProjectsApi = ( fetch: boolean ) => {
      */
     const handleData = ( info: ProjectWrapper | ProjectDTO | ApiError ) => {
 
+        console.log(info)
+
         /**
          * Hay Error
          */

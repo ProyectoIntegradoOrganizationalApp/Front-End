@@ -1,9 +1,9 @@
 // React
 import Modal from 'react-modal';
 
-import { ModalInterface } from "../domain/UI/ModalInterface.interface";
-import CrudProjectForm from "./forms/CrudProjectForm";
-import CrudConfirmation from './forms/CrudConfirmation';
+import { ModalInterface } from "../../domain/UI/ModalInterface.interface";
+import CrudProjectForm from "../forms/CrudProjectForm";
+import CrudConfirmation from '../forms/CrudConfirmation';
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
