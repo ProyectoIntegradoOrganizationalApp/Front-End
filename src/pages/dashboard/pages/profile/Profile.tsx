@@ -111,7 +111,6 @@ export function Profile() {
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
                         { data && Array.isArray(data) && data.map(( project: Project ) => {
-                            console.log(data)
                             return (
                                 <MainItem
                                     key={project.idProject}
