@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
-
 import { Breadcrumb } from '../../../../components/Breadcrumb';
 import { Tabs } from '../../../../components/Tabs';
 import { Apps } from './components/Apps';
@@ -10,20 +8,19 @@ import { Dashboard } from './components/Dashboard';
 import { Members } from './components/Members';
 
 import { Project } from '../../../../domain/projects/Project.interface';
+import { useProjectApi } from '../../../../adapters/api/useProjectApi';
 
 export function Project() {
 
     const [project, setProject] = React.useState<Project>();
     const [tab, setTab] = React.useState<string>("dashboard");
 
-    const { data, error, loading, fetchProject } = useProjectsApi(false);
+    const { data, error, loading, fetchProject } = useProjectApi(false);
 
     let { name } = useParams();
     React.useEffect(() => {
         if( name ) {
             fetchProject(name);
-        } else {
-            
         }
     }, []);
 

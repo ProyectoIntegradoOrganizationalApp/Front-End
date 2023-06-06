@@ -23,35 +23,43 @@ export function Nav() {
     const { user, logout } = useAuth();
 
     return (
-        <>
-            
-            <div className="navbar px-12 bg-gray-300 dark:bg-slate-800 dark:bg-transparent">
+        <div className="w-3/4 mx-auto mt-6 navbar px-12 bg-gray-300 dark:bg-cyan-800 dark:bg-transparent rounded-full">
 
-                <div className="navbar-start">
-                    <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">
-                        <img className="mr-3" src={logo}></img>
-                        Teamer    
-                    </Link>
-                </div>
-
-                <div className="navbar-end">
-
-                    { user && (
-                        <ProfileBadge
-                            user={user}
-                            logout={logout}
-                        />
-                    )}
-
-                    { !user && (
-                        <Link to="/login">
-                            <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">Log In</button>
-                        </Link>
-                    )} 
-
-                </div>
+            <div className="navbar-start">
+                <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">
+                    <img className="mr-3" src={logo}></img>
+                    Teamer    
+                </Link>
             </div>
 
-        </>
+            { user && (
+                <div className="navbar-center">
+                    <Link to="/profile/dashboard">
+                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
+                            Profile
+                        </button>
+                    </Link>
+                </div>
+            )}
+
+            <div className="navbar-end">
+
+                { user && (
+                    <ProfileBadge
+                        user={user}
+                        logout={logout}
+                    />
+                )}
+
+                { !user && (
+                    <Link to="/login">
+                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
+                            Log In
+                        </button>
+                    </Link>
+                )} 
+
+            </div>
+        </div>
     )
 }
