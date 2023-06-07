@@ -4,7 +4,7 @@ import { Link, Outlet, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../../../../components/Breadcrumb';
 import { Tabs } from '../../../../components/Tabs';
 import { ProjectApps } from './components/ProjectApps';
-import { ProjectDashboard } from './components/ProfileDashboard';
+import { ProjectDashboard } from './components/ProjectDashboard';
 import { ProjectMembers } from './components/ProjectMembers';
 
 import { Project } from '../../../../domain/projects/Project.interface';
@@ -80,10 +80,8 @@ export function Project() {
 
                     </div>
                 </div>
-                <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 gap-2 w-full h-full rounded-xl">
-                    <div className="w-full rounded-xl flex flex-col justify-between gap-4 max-[500px]:gap-2 h-full">
-                       <Outlet context={project} /> 
-                    </div>
+                <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 gap-4 w-full h-full rounded-xl flex flex-col overflow-y-scroll">
+                    <Outlet context={project} />
                 </div>
                 
             </div>

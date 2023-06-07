@@ -37,7 +37,7 @@ import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Boar
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
 import { Account } from './pages/dashboard/pages/profile/account/Account';
-import { ProjectDashboard } from './pages/dashboard/pages/project/components/ProfileDashboard';
+import { ProjectDashboard } from './pages/dashboard/pages/project/components/ProjectDashboard';
 import { ProjectApps } from './pages/dashboard/pages/project/components/ProjectApps';
 import { ProjectMembers } from './pages/dashboard/pages/project/components/ProjectMembers';
 

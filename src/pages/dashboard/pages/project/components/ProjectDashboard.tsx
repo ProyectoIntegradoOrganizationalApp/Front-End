@@ -9,6 +9,9 @@ import foto from "../../../../../assets/foto.png";
 import { Project } from "../../../../../domain/projects/Project.interface";
 import { useOutletContext } from "react-router";
 import { Pie, Bar } from "react-chartjs-2";
+import 'chart.js/auto';
+import useChart from "../../../../../hooks/useChart";
+import { ChartConf } from "../../../../../domain/UI/ChartConf.interface";
 
 const getMonths = (): string[] => {
     const months: string[] = [
@@ -32,8 +35,9 @@ const getMonths = (): string[] => {
     return months.slice(0, currentMonthIndex + 1);
 };
 
-export const ProjectDashboard: React.FC = () => {
+export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
     const project: Project = useOutletContext();
+    const { options, data } = useChart(props.chartConf);
     
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -65,6 +69,7 @@ export const ProjectDashboard: React.FC = () => {
                         />
                     </div>
                     <div className="w-[9rem] aspect-square">
+                        <Pie data={chartData} options={options}/>
                         {/* <Pie data={{
                             labels: ['Completed', 'Incompleted'],
                             datasets: [
@@ -103,7 +108,8 @@ export const ProjectDashboard: React.FC = () => {
                     </div>
                 </div>
                 <div className="bg-white dark:bg-slate-800 rounded-xl flex-[7] p-4 w-full">
-                    {/* <Bar data={{
+
+                    <Bar data={{
                         labels: getMonths(),
                         datasets: [
                             {
@@ -114,6 +120,7 @@ export const ProjectDashboard: React.FC = () => {
                             },
                         ],
                     }} options={{
+                        maintainAspectRatio: false,
                         responsive: true,
                         elements: {
                             arc: {
@@ -147,15 +154,15 @@ export const ProjectDashboard: React.FC = () => {
                                 },
                             }
                         }
-                    }} /> */}
+                    }} />
                 </div>
-                <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[2] min-w-fit flex flex-col items-center justify-center p-4 gap-12 relative">
+                <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[2] min-w-fit flex flex-col items-center justify-center p-4 py-7 gap-12 relative">
                     <div className="absolute top-4 left-4">
                         <InfoTooltip position="left" title="Most Valuable Member (most tasks done this month)" />
                     </div>
                     <div className="relative translate-y-[1.4rem]">
-                        <i className="fa-solid fa-crown text-yellow-500 scale-[2.5] rotate-[26deg] absolute -top-3 right-5"></i>
-                        <img src={foto} className="w-28 aspect-square rounded-full" />
+                        <i className="fa-solid fa-crown text-yellow-500 scale-[2] rotate-[26deg] absolute -top-3 right-2"></i>
+                        <img src={foto} className="w-20 aspect-square rounded-full" />
                     </div>
                     <div className="flex flex-col items-center justify-center gap-4">
                         <p className="text-2xl leading-none"><b>MVM</b></p>
@@ -164,14 +171,14 @@ export const ProjectDashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex-[2] bg-white dark:bg-slate-700 rounded-xl relative">
+            <div className="flex-[2] bg-white dark:bg-slate-700 rounded-xl relative flex flex-col">
                 <div className="bg-white dark:bg-slate-800 flex items-center justify-center w-full h-14 rounded-t-xl relative text-black dark:text-white text-base">
                     <div className="absolute top-[1.09rem] left-4">
                         <InfoTooltip position="right" title="Task history displaying the latest tasks" />
                     </div>
                     Task History
                 </div>
-                <table className="table table-zebra !rounded-xl w-full h-full gap-2.5 text-left">
+                <table className="table table-zebra !rounded-xl w-full h-full gap-2.5 text-left relative">
                     <thead>
                         <tr>
                             <th className="leading-none text-black dark:text-white text-base !capitalize font-extrabold">

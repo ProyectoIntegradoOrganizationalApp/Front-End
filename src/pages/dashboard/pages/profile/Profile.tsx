@@ -77,6 +77,7 @@ export function Profile() {
                                 <Activity
                                     title="Monthly Activity"
                                     data={profileData}
+                                    chartConf={}
                                 />
                             )}
                         </div>

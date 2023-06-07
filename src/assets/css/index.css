@@ -342,13 +342,13 @@ progress {
     @apply !bg-gray-200 dark:!bg-slate-900/[.85];
 }
 .table-zebra {
-    @apply block w-full;
+    @apply block w-full flex-1;
 }
 .table-zebra thead {
     @apply block w-full;
 }
 .table-zebra tbody {
-    @apply block w-full overflow-auto max-h-[190px] rounded-b-xl;
+    @apply block w-full overflow-auto absolute min-[700px]:top-[3em] bottom-0 left-0 right-0 rounded-b-xl max-[700px]:relative max-[700px]:max-h-[200px];
 }
 .table-zebra thead tr, .table-zebra tbody tr {
     @apply w-full table-fixed;
