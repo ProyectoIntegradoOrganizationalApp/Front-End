@@ -11,5 +11,6 @@ export interface Profile {
     user: UserProfile
     achievements: Array<UserAchievement>
     projects: Array<Project>,
+    commitsPerMonth: Array<number>, // pos0 == January, pos1 == February...
     activity: Array<UserActivity>
 }

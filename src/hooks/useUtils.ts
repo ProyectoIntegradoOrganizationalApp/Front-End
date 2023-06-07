@@ -1,14 +1,14 @@
 import { UserActivity } from "../domain/user/UserActivity.interface";
 
-export const useUtils = ( activity: Array<UserActivity>) => {
-    
-    const getUserWork = (): { commitsWeekly: number, commitsDaily: number} => {
+export const useUtils = (activity?: Array<UserActivity>) => {
+
+    const getUserWork = (): { commitsWeekly: number, commitsDaily: number } => {
         // Contadores en los que vamos sumando la cantidad de commits realizados
         let commitsWeekly: number = 0;
         let commitsDaily: number = 0;
 
         // Bucle en el que recorremos las actividades y calculamos si se han realizado durante la semana y/o día 
-        activity.map((act: UserActivity) => {
+        activity?.map((act: UserActivity) => {
             let fechaActual = new Date();
 
             let primerDiaSemana = new Date(fechaActual);
@@ -31,7 +31,30 @@ export const useUtils = ( activity: Array<UserActivity>) => {
         return { commitsWeekly, commitsDaily };
     }
 
-    return { getUserWork };    
+    // Get months from January to actual
+    const getMonths = (): string[] => {
+        const months: string[] = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+
+        const currentDate = new Date();
+        const currentMonthIndex = currentDate.getMonth();
+
+        return months.slice(0, currentMonthIndex + 1);
+    }
+
+    return { getUserWork, getMonths };
 
 }
 

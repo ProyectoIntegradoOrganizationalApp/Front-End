@@ -1,5 +1,6 @@
 export interface ChartData {
     data: Array<number>,
-    backgroundColor: Array<string>,
-    hoverBackgroundColor: Array<string>
+    borderColor?: Array<string> | string,
+    backgroundColor?: Array<string> | string
+    hoverBackgroundColor?: Array<string> | string
 }

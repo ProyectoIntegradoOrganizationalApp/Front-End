@@ -1,63 +1,18 @@
-import { useEffect, useState } from "react";
-
-
 import { InfoTooltip } from "../../../../../components/InfoTooltip"
 import { TaskLog } from "../../../../../components/TaskLog"
 import { Statistics } from "../../profile/components/Statistics"
 
 import foto from "../../../../../assets/foto.png";
-import { Project } from "../../../../../domain/projects/Project.interface";
-import { useOutletContext } from "react-router";
-import { Pie, Bar } from "react-chartjs-2";
-import 'chart.js/auto';
-import useChart from "../../../../../hooks/useChart";
-import { ChartConf } from "../../../../../domain/UI/ChartConf.interface";
+import { TotalTasks } from "./dashboard/TotalTasks";
+import { TasksPerMonth } from "./dashboard/TasksPerMonth";
+import { useUtils } from "../../../../../hooks/useUtils";
 
-const getMonths = (): string[] => {
-    const months: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
+export const ProjectDashboard: React.FC = () => {
+    const { getMonths } = useUtils();
 
-    const currentDate = new Date();
-    const currentMonthIndex = currentDate.getMonth();
-
-    return months.slice(0, currentMonthIndex + 1);
-};
-
-export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
-    const project: Project = useOutletContext();
-    const { options, data } = useChart(props.chartConf);
+    // ignorar (cambiar por logs de verdad de la bd)
+    const logs = [1]
     
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        setIsDarkMode(mediaQuery.matches);
-
-        const handleChange = (e: MediaQueryListEvent) => {
-            setIsDarkMode(e.matches);
-        };
-
-        mediaQuery.addEventListener("change", handleChange)
-
-        return () => {
-            mediaQuery.removeEventListener("change", handleChange);
-        };
-    }, []);
-
-    const tickColor = isDarkMode ? 'white' : 'black';
-
     return (
         <>
             <div className="flex-1 flex flex-wrap gap-4 max-[500px]:gap-2">
@@ -68,95 +23,30 @@ export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
                             amount={132}
                         />
                     </div>
-                    <div className="w-[9rem] aspect-square">
-                        <Pie data={chartData} options={options}/>
-                        {/* <Pie data={{
+                    <div className="w-[13rem] aspect-square">
+                        <TotalTasks chartConf={{
+                            type: "pie",
                             labels: ['Completed', 'Incompleted'],
-                            datasets: [
-                                {
-                                    data: [300, 50],
-                                    backgroundColor: ['#19c37d', '#FF6384'],
-                                    hoverBackgroundColor: ['#19c37d', '#FF6384'],
-                                },
-                            ],
-                        }} options={{
-                            responsive: true,
-                            elements: {
-                                arc: {
-                                    borderWidth: 0
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: false
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: (context) => {
-                                            const label = context.label || '';
-
-                                            if (label) {
-                                                return ' ' + label + ': ' + context.raw;
-                                            }
-
-                                            return '';
-                                        },
-                                    },
-                                }
+                            data: {
+                                data: [300, 50],
+                                backgroundColor: ['#19c37d', '#FF6384'],
+                                hoverBackgroundColor: ['#19c37d', '#FF6384']
                             }
-                        }} /> */}
+                        }} />
                     </div>
                 </div>
-                <div className="bg-white dark:bg-slate-800 rounded-xl flex-[7] p-4 w-full">
-
-                    <Bar data={{
+                <div className="bg-white dark:bg-slate-800 rounded-xl flex-[6] p-4 w-full">
+                    <TasksPerMonth chartConf={{
+                        type: "bar",
                         labels: getMonths(),
-                        datasets: [
-                            {
-                                data: [12, 19, 3, 5, 2, 13],
-                                backgroundColor: 'rgb(0, 202, 247)',
-                                borderColor: 'rgb(0, 202, 247)',
-                                borderWidth: 1
-                            },
-                        ],
-                    }} options={{
-                        maintainAspectRatio: false,
-                        responsive: true,
-                        elements: {
-                            arc: {
-                                borderWidth: 0
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { color: tickColor }
-                            },
-                            x: {
-                                ticks: { color: tickColor }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: (context) => {
-                                        const label = context.label || '';
-
-                                        if (label) {
-                                            return ' ' + label + ': ' + context.raw;
-                                        }
-
-                                        return '';
-                                    },
-                                },
-                            }
+                        data: {
+                            data: [12, 19, 3, 5, 2, 13],
+                            backgroundColor: 'rgb(0, 202, 247)',
+                            borderColor: 'rgb(0, 202, 247)'
                         }
                     }} />
                 </div>
-                <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[2] min-w-fit flex flex-col items-center justify-center p-4 py-7 gap-12 relative">
+                <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[1] min-w-fit flex flex-col items-center justify-center p-4 py-7 gap-12 relative">
                     <div className="absolute top-4 left-4">
                         <InfoTooltip position="left" title="Most Valuable Member (most tasks done this month)" />
                     </div>
@@ -171,7 +61,7 @@ export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
                     </div>
                 </div>
             </div>
-            <div className="flex-[2] bg-white dark:bg-slate-700 rounded-xl relative flex flex-col">
+            <div className={`${logs.length > 0 ? "flex-1" : "flex-0"} bg-white dark:bg-slate-700 rounded-xl relative flex flex-col`}>
                 <div className="bg-white dark:bg-slate-800 flex items-center justify-center w-full h-14 rounded-t-xl relative text-black dark:text-white text-base">
                     <div className="absolute top-[1.09rem] left-4">
                         <InfoTooltip position="right" title="Task history displaying the latest tasks" />
@@ -184,7 +74,7 @@ export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
                             <th className="leading-none text-black dark:text-white text-base !capitalize font-extrabold">
                                 Title
                             </th>
-                            <th className="leading-none text-black dark:text-white text-base !capitalize font-extrabold hidden sm:block">
+                            <th className="leading-none text-black dark:text-white text-base !capitalize font-extrabold">
                                 User
                             </th>
                             <th className="leading-none text-black dark:text-white text-base !capitalize font-extrabold">
@@ -192,7 +82,8 @@ export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="scrollbar">
+                    <tbody>
+                        {/* FOREACH LOG */}
                         <tr>
                             <TaskLog
                                 task="workingon"
@@ -201,6 +92,7 @@ export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
                                 date={new Date("2022-02-02")}
                             />
                         </tr>
+                        {/* ENDFOREACH */}
                         <tr>
                             <TaskLog
                                 task="finished"
@@ -276,6 +168,6 @@ export const ProjectDashboard: React.FC = (props: { chartConf: ChartConf }) => {
                     </tbody>
                 </table>
             </div>
-        </> 
+        </>
     )
 }

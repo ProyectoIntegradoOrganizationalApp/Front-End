@@ -29,7 +29,7 @@ import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
 export function Profile() {
     const [daily, setDaily] = useState<number>(0);
     const [weekly, setWeekly] = useState<number>(0);
-    
+
     const { openModal } = useModal();
     const { GenerateMonthYear, GenerateCalendar } = useProfile();
 
@@ -38,12 +38,14 @@ export function Profile() {
     const profileData: Profile = useOutletContext();
     const { data, error, loading, refreshData } = useProjectsApi(true);
 
+    const { getMonths } = useUtils();
+
     // Use effect con el que calculamos el trabajo realizado.
-    useEffect(() => {        
-        if( data ) {
+    useEffect(() => {
+        if (data) {
             const getUserWork = useUtils(profileData?.activity);
-            const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
-    
+            const { commitsDaily, commitsWeekly } = getUserWork.getUserWork();
+
             setDaily(commitsDaily);
             setWeekly(commitsWeekly);
         }
@@ -58,7 +60,7 @@ export function Profile() {
             <AchievementsInfo
                 data={profileData}
             />
-            
+
             <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 max-[500px]:gap-2 w-full">
                 <div className="flex flex-col lg:flex-row flex-wrap gap-4 max-[500px]:gap-2">
                     <div className="flex-[1.8] basis-[80px] flex flex-col gap-4 max-[500px]:gap-2">
@@ -73,18 +75,26 @@ export function Profile() {
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4 max-[500px]:gap-2">
                         <div className="flex-[3] bg-gray-200 dark:bg-slate-800 min-[500px]:rounded-xl p-4 max-[500px]:p-2">
-                            { profileData?.activity && (
+                            {profileData?.activity && (
                                 <Activity
                                     title="Monthly Activity"
                                     data={profileData}
-                                    chartConf={}
+                                    chartConf={{
+                                        type: "line",
+                                        labels: getMonths(),
+                                        data: {
+                                            data: profileData.commitsPerMonth,
+                                            borderColor: 'white',
+                                            backgroundColor: 'cyan'
+                                        }
+                                    }}
                                 />
                             )}
                         </div>
                         <div className="flex-[2] bg-gray-200 dark:bg-slate-800 min-[500px]:rounded-xl p-4">
-                            <Calendar 
-                                monthYear={GenerateMonthYear()} 
-                                calendar={GenerateCalendar()} 
+                            <Calendar
+                                monthYear={GenerateMonthYear()}
+                                calendar={GenerateCalendar()}
                             />
                         </div>
                     </div>
@@ -96,8 +106,8 @@ export function Profile() {
                         <InfoTooltip title="All your projects" />
                         Your Projects
                         {/* Create Project */}
-                        <i  
-                            className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all" 
+                        <i
+                            className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"
                             onClick={() => openModal({
                                 isOpen: true,
                                 type: "crudProject",
@@ -106,19 +116,19 @@ export function Profile() {
                                 submitText: "Create Project",
                                 submitAction: handleCreateProject
                             }
-                        )}>
-                            
+                            )}>
+
                         </i>
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
-                        { data && Array.isArray(data) && data.map(( project: Project ) => {
+                        {data && Array.isArray(data) && data.map((project: Project) => {
                             return (
                                 <MainItem
                                     key={project.idProject}
                                     item={project}
                                     descriptionBottom={false}
                                 >
-                                    <ShowButton 
+                                    <ShowButton
                                         cb={() => {
                                             navigate(`/project/${project.idProject}`)
                                         }}

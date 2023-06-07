@@ -1,15 +1,26 @@
 // ChartJS
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { ChartConf } from '../domain/UI/ChartConf.interface';
+import { useInterfaceMode } from './useInterfaceMode';
 
 const useChart = (conf: ChartConf) => {
+    const { isDarkMode } = useInterfaceMode();
+    const tickColor = isDarkMode ? 'white' : 'black';
+
+    let data = {
+        labels: conf.labels,
+        datasets: [conf.data],
+    }
+
     let options = {
+        mantainAspectRatio: true,
         responsive: true,
         elements: {
             arc: {
                 borderWidth: 0
             }
         },
+        scales: {},
         plugins: {
             legend: {
                 display: true
@@ -30,13 +41,31 @@ const useChart = (conf: ChartConf) => {
         }
     };
 
-    let data = {
-        labels: conf.labels,
-        datasets: [conf.data],
-    }
-
-    if (conf.type == "pie") {
+    if (!conf.labels || conf.type == "pie" || conf.type == "bar") {
         options.plugins.legend.display = false;
+    }
+    if (conf.type == "line") {
+        options.scales = {
+            y: {
+                beginAtZero: true,
+                ticks: { color: tickColor }
+            },
+            x: {
+                ticks: { color: tickColor }
+            }
+        }
+    }
+    if (conf.type == "bar") {
+        (options as any).indexAxis = "y";
+        options.scales = {
+            y: {
+                beginAtZero: true,
+                ticks: { color: tickColor }
+            },
+            x: {
+                ticks: { color: tickColor }
+            }
+        }
     }
 
     // function line() {
@@ -89,7 +118,7 @@ const useChart = (conf: ChartConf) => {
     //     return [options, data];
     // }
 
-    return { options, data };
+    return { data, options };
 }
 
 export default useChart;

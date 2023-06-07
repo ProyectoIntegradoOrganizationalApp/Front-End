@@ -19,7 +19,7 @@ import { ChartConf } from "../../../../../domain/UI/ChartConf.interface";
  */
 
 export function Activity(props: { title: string, data: Profile, chartConf: ChartConf }) {
-    const { options, data } = useChart(props.chartConf);
+    const { data, options } = useChart(props.chartConf);
 
     return (
         <>
@@ -33,8 +33,8 @@ export function Activity(props: { title: string, data: Profile, chartConf: Chart
                 {props.data.activity.length > 0 ? (
                     <div className="h-full">
                         <Line
-                            options={options}
                             data={data}
+                            options={options}
                         />
                     </div>
                 ) : (
