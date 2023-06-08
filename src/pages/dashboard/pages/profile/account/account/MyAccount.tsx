@@ -1,19 +1,28 @@
 // React
 import { useState } from 'react';
+import { Profile } from '../../../../../../domain/profile/Profile.interface';
+import React from 'react';
 
 /**
  * Componente Account, que representa la ruta /account en la cual podremos
  * ver y configurar nuestra cuenta
  * @returns React.FC
  */
-export function MyAccount() {
+export const MyAccount: React.FC<{data: Profile}> = ( data ) => {
+
     const [tab, setTab] = useState<string>("account");
-    const [email, setEmail] = useState<string>('pablo@pablo.es');
-    const [name, setName] = useState<string>('Pablo');
-    const [last_name, setLastName] = useState<string>('Valderas');
+
+    const [email, setEmail] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [last_name, setLastName] = useState<string>('');
     const [prefix, setPrefix] = useState<string>('+34');
-    const [phone_number, setPhoneNumber] = useState<string>('727733353');
-    const [description, setDescription] = useState<string>('sometime world feels like on fire');
+    const [phone_number, setPhoneNumber] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+
+    React.useEffect(() => {
+        setEmail(data.data.user.email);
+        
+    }, [data.data.user.id])
 
     return (
         <div className="flex-1 flex flex-col justify-between min-[811px]:mt-9 gap-5">

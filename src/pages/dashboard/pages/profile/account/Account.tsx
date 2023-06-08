@@ -4,6 +4,8 @@ import { MyAccount } from './account/MyAccount';
 import { Security } from './account/Security';
 import { Preferences } from './account/Preferences';
 import { Notifications } from './account/Notifications';
+import { useOutletContext } from 'react-router-dom';
+import { Profile } from '../../../../../domain/profile/Profile.interface';
 
 /**
  * Componente Account, que representa la ruta /account en la cual podremos
@@ -11,14 +13,28 @@ import { Notifications } from './account/Notifications';
  * @returns React.FC
  */
 export function Account() {
+
     const [tab, setTab] = useState<string>("account");
+
+    const context: Profile = useOutletContext();
 
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <div className="bg-gray-200 dark:bg-slate-800 min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-8 py-8 min-w-[260px]">
                 <div className="flex flex-col items-center gap-5 px-4">
-                    <div className="bg-green-600 w-28 aspect-square rounded-full"></div>
-                    <p className="text-xl leading-none text-black dark:text-white">Firebloh</p>
+                    { context && context.user.photo ? (
+                        <img src={context.user.photo} />
+                    ): (    
+                        <div className="bg-green-600 w-28 aspect-square rounded-full">
+                        
+                        </div>
+                    )}
+                    { context && context.user.name && (
+                        <p className="text-xl leading-none text-black dark:text-white">
+                        { context.user.name}
+                        </p>
+                    )}
+                    
                 </div>
                 <ul className="w-full flex flex-col justify-around select-none">
                     <li onClick={() => setTab("account")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "account" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-house"></i>My Account</li>
@@ -31,7 +47,7 @@ export function Account() {
                 <p className="capitalize text-2xl text-black dark:text-white leading-none max-[811px]:hidden">{tab} Settings</p>
                 {
                     tab == "account" &&
-                    <MyAccount/>
+                    <MyAccount data={context}/>
                 } {
                     tab == "security" &&
                     <Security/>
