@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 import { InfoTooltip } from "../../../../../components/InfoTooltip"
 import { TaskLog } from "../../../../../components/TaskLog"
 import { Statistics } from "../../profile/components/Statistics"
@@ -9,32 +8,24 @@ import foto from "../../../../../assets/foto.png";
 import { Project } from "../../../../../domain/projects/Project.interface";
 import { useOutletContext } from "react-router";
 import { Pie, Bar } from "react-chartjs-2";
+import useChart from "../../../../../hooks/useChart";
 
-const getMonths = (): string[] => {
-    const months: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
-
-    const currentDate = new Date();
-    const currentMonthIndex = currentDate.getMonth();
-
-    return months.slice(0, currentMonthIndex + 1);
-};
-
+/**
+ *  Componente que es la vista del dashboard de un proyecto.
+ *  Muestra información acerca de ese proyecto.
+ * 
+ *  @returns React.FC
+ */
 export const ProjectDashboard: React.FC = () => {
+
+    // Recogemos las props que nos llegan desde el router
     const project: Project = useOutletContext();
-    
+
+    // Recogemos las charts
+    const { pieChart, barChart } = useChart();
+    const { pieChartData, pieChartOptions } = pieChart({ completed: 5, uncompleted: 2});
+    const { barChartData, barChartOptions } = barChart([12, 19, 3, 5, 2, 13]);
+
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
@@ -65,89 +56,21 @@ export const ProjectDashboard: React.FC = () => {
                         />
                     </div>
                     <div className="w-[9rem] aspect-square">
-                        {/* <Pie data={{
-                            labels: ['Completed', 'Incompleted'],
-                            datasets: [
-                                {
-                                    data: [300, 50],
-                                    backgroundColor: ['#19c37d', '#FF6384'],
-                                    hoverBackgroundColor: ['#19c37d', '#FF6384'],
-                                },
-                            ],
-                        }} options={{
-                            responsive: true,
-                            elements: {
-                                arc: {
-                                    borderWidth: 0
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: false
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: (context) => {
-                                            const label = context.label || '';
-
-                                            if (label) {
-                                                return ' ' + label + ': ' + context.raw;
-                                            }
-
-                                            return '';
-                                        },
-                                    },
-                                }
-                            }
-                        }} /> */}
+                        { pieChartData && (
+                            <Pie
+                                data={pieChartData}
+                                options={pieChartOptions}
+                            />
+                        )}
                     </div>
                 </div>
                 <div className="bg-white dark:bg-slate-800 rounded-xl flex-[7] p-4 w-full">
-                    {/* <Bar data={{
-                        labels: getMonths(),
-                        datasets: [
-                            {
-                                data: [12, 19, 3, 5, 2, 13],
-                                backgroundColor: 'rgb(0, 202, 247)',
-                                borderColor: 'rgb(0, 202, 247)',
-                                borderWidth: 1
-                            },
-                        ],
-                    }} options={{
-                        responsive: true,
-                        elements: {
-                            arc: {
-                                borderWidth: 0
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { color: tickColor }
-                            },
-                            x: {
-                                ticks: { color: tickColor }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: (context) => {
-                                        const label = context.label || '';
-
-                                        if (label) {
-                                            return ' ' + label + ': ' + context.raw;
-                                        }
-
-                                        return '';
-                                    },
-                                },
-                            }
-                        }
-                    }} /> */}
+                    { barChartData && (
+                        <Bar 
+                            data={barChartData}
+                            options={barChartOptions}
+                        />
+                    )}
                 </div>
                 <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[2] min-w-fit flex flex-col items-center justify-center p-4 gap-12 relative">
                     <div className="absolute top-4 left-4">

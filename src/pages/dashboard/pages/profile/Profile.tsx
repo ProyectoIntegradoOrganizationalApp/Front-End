@@ -41,8 +41,8 @@ export function Profile() {
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {        
         if( data ) {
-            const getUserWork = useUtils(profileData?.activity);
-            const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
+            const { getUserWork } = useUtils();
+            const {commitsDaily, commitsWeekly} = getUserWork(profileData?.activity);
     
             setDaily(commitsDaily);
             setWeekly(commitsWeekly);
@@ -119,7 +119,7 @@ export function Profile() {
                                 >
                                     <ShowButton 
                                         cb={() => {
-                                            navigate(`/project/${project.idProject}`)
+                                            navigate(`/project/${project.idProject}/dashboard`)
                                         }}
                                     />
                                 </MainItem>

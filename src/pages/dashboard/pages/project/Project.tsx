@@ -3,9 +3,6 @@ import { Link, Outlet, useParams } from 'react-router-dom';
 
 import { Breadcrumb } from '../../../../components/Breadcrumb';
 import { Tabs } from '../../../../components/Tabs';
-import { ProjectApps } from './components/ProjectApps';
-import { ProjectDashboard } from './components/ProfileDashboard';
-import { ProjectMembers } from './components/ProjectMembers';
 
 import { Project } from '../../../../domain/projects/Project.interface';
 import { useProjectApi } from '../../../../adapters/api/useProjectApi';
