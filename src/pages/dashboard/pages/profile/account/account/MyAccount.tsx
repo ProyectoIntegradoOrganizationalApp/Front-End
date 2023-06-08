@@ -8,7 +8,7 @@ import React from 'react';
  * ver y configurar nuestra cuenta
  * @returns React.FC
  */
-export const MyAccount: React.FC<{data: Profile}> = ( data ) => {
+export const MyAccount: React.FC<{data: Profile}> = ({data}) => {
 
     const [tab, setTab] = useState<string>("account");
 
@@ -20,9 +20,14 @@ export const MyAccount: React.FC<{data: Profile}> = ( data ) => {
     const [description, setDescription] = useState<string>('');
 
     React.useEffect(() => {
-        setEmail(data.data.user.email);
+        if ( data ) {
+            setEmail(data.user.email);
+            setName(data.user.name);
+            setPhoneNumber("");
+        }
         
-    }, [data.data.user.id])
+
+    }, [data?.user.id])
 
     return (
         <div className="flex-1 flex flex-col justify-between min-[811px]:mt-9 gap-5">

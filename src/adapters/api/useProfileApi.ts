@@ -81,7 +81,7 @@ export const useProfileApi = () => {
         if( info && "user" in info ) {
             // Quitamos los errores en caso de que los halla
             setError(undefined);
-
+            console.log(info)
             // Transformamos el objecto que nos llega con los mappers a algo que nuestra app entiende
             let userData: Profile = ProfileMapper.prototype.mapTo(info);
             setData(userData);
