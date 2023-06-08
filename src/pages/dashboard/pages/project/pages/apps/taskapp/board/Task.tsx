@@ -74,7 +74,7 @@ export function Task(props: TaskProps) {
                             action: "remove",
                             target: task.content,
                             submitText: "Remove Task",
-                            submitAction: ""
+                            submitAction: () => {}
                         })} className="fa-solid fa-trash cursor-pointer text-red-700 hover:text-red-800"></i>
                         <i id="editButton" className={`fa-solid ${icon} cursor-pointer text-green-700 hover:text-green-800`} onClick={changeIcon}></i>
                     </div>
