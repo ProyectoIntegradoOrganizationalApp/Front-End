@@ -3,10 +3,23 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import { Profile } from '../domain/profile/Profile.interface';
 import { useUtils } from './useUtils';
 
+/**
+ *  Custom Hook que exporta funciones para la generación
+ *  de gráficas.
+ *  @returns 
+ */
 const useChart = () => {
 
+    // Meses extraídos del hook de utils
     const { getMonths } = useUtils();
 
+    /**
+     *  Función que genera los datos necesarios para un LineChart
+     *  con los datos que le entran por parámetros.
+     * 
+     *  @param data 
+     *  @returns 
+     */
     const lineChart = ( data: Profile ) => {
         // Opciones para la tabla
         const options = {
@@ -59,6 +72,13 @@ const useChart = () => {
         return { chartData, options };
     }
 
+    /**
+     *  Función que genera los datos necesarios para un BarChart
+     *  por meses con los datos que le entran por parámetros.
+     * 
+     *  @param data 
+     *  @returns 
+     */
     const barChart = ( data: Array<number> ) => {
     
         // Configuración del BarChart
@@ -107,6 +127,13 @@ const useChart = () => {
         return { barChartOptions, barChartData };
     }
 
+    /**
+     *  Función que genera los datos necesario para un PieChart
+     *  con los datos que le entran por parámetros.
+     * 
+     *  @param data 
+     *  @returns 
+     */
     const pieChart = ( data: { completed: number, uncompleted: number } ) => {
 
         // Configuración del PieChart
@@ -155,7 +182,6 @@ const useChart = () => {
 
     }
     
-
     return { lineChart, pieChart, barChart };
 }
 
