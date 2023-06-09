@@ -1,5 +1,11 @@
 // React
-import React, { ChangeEvent, MouseEventHandler } from "react";
+import React from "react";
+
+interface SearcherProps {
+    bg: string,
+    placeholder: string,
+    cb: ( value: string ) => void
+}
 
 /**
  *  Componente Searcher para buscar un target
@@ -7,15 +13,12 @@ import React, { ChangeEvent, MouseEventHandler } from "react";
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-
-function search(evt: ChangeEvent) {
-    const target = (evt.target as HTMLInputElement).value;
-}
-
-export function Searcher(props: { bg: string, placeholder: string }) {
+export const Searcher: React.FC<SearcherProps> = ({ bg, placeholder, cb }) => {
     return (
-        <>
-            <input onChange={evt => search(evt)} placeholder={props.placeholder} className={"w-full min-w-[200px] h-fit px-4 py-2.5 rounded-xl outline-none text-black dark:text-white " + props.bg}/>
-        </>
+        <input 
+            onChange={evt => cb(evt.target.value)} 
+            placeholder={placeholder} 
+            className={"w-full min-w-[200px] h-fit px-4 py-2.5 rounded-xl outline-none text-black dark:text-white " + bg}
+        />
     )
 }

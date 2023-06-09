@@ -20,17 +20,15 @@ export function Friends() {
 
     const [tab, setTab] = useState<string>("all");
 
-    const { data, error, loading, addUser, removeUser } = useFriendApi();
-
-    const { user } = useUser();
+    const { friendData, userData, error, loading, addFriend, removeFriend, fetchUsers } = useFriendApi(true);
 
     useEffect(() => {
-        if( !error ) {
-            toast.info(data?.message)
+        if( error?.error ) {
+            toast.error(error?.message)
         }
 
-        if( error ) {
-            toast.error(data?.message)
+        if( !error?.error ) {
+            toast.info(error?.message);
         }
     }, [error?.error]);
 
@@ -58,24 +56,48 @@ export function Friends() {
                     <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                 </div>
                 <div className="m-4 max-[500px]:m-2 flex flex-col gap-4 max-[500px]:gap-2 max-[500px]:gap-2">
-                    <Searcher bg="bg-white dark:bg-slate-800" placeholder="Search friends..." />
+                    <Searcher 
+                        bg="bg-white dark:bg-slate-800" 
+                        placeholder="Search friends..." 
+                        cb={fetchUsers}
+                    />
+
+                    { userData && userData.length > 0 && (
+                        userData.map( user => {
+                            return (
+                                <MainItem
+                                        key={user.id}
+                                        item={{name: user.name+" "+user.lastname, description: "Level "+user.level, icon: user.photo}}
+                                    >
+                                        <AddButton 
+                                            cb={() => {
+                                                addFriend(user.id);
+                                            }}
+                                        /> 
+                                    </MainItem>
+                            )
+                        })
+                    )}
+
                     <div className="flex flex-col gap-3">
-                        { user?.friends && (
-                            user.friends.map( (friend, index) => {
+                        { friendData && (
+                            friendData.map( (friend, index) => {
                                 return (
                                     <MainItem
                                         key={index}
                                         item={{name: friend.name, icon: friend.photo}}
                                     >
+
                                         <MessageButton 
                                             cb={() => {
-
+                                                // Crear mensaje
+                                                // Redirigir al mensaje
                                             }}
                                         />
                                         
-                                        <AddButton 
+                                        <RemoveButton 
                                             cb={() => {
-                                                addUser(friend.id);
+                                                removeFriend(friend.idfriend);
                                             }}
                                         /> 
                                     </MainItem>

@@ -12,7 +12,7 @@ export function Project() {
     const [project, setProject] = React.useState<Project>();
     const [tab, setTab] = React.useState<string>("dashboard");
 
-    const { data, error, loading, fetchProject } = useProjectApi(false);
+    const { data, error, loading, fetchProject } = useProjectApi();
 
     let { name } = useParams();
     React.useEffect(() => {
