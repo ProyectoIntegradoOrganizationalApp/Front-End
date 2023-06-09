@@ -15,10 +15,13 @@ import AddButton from '../../../../components/buttons/AddButton';
 
 import { toast } from "react-toastify";
 import MessageButton from '../../../../components/buttons/MessageButton';
+import { useWebsocket } from '../../../../adapters/useWebsocket';
 
 export function Friends() {
 
     const [tab, setTab] = useState<string>("all");
+
+    const { send } = useWebsocket("ws://localhost:9001");
 
     const { friendData, userData, error, loading, addFriend, removeFriend, fetchUsers } = useFriendApi(true);
 
@@ -58,7 +61,7 @@ export function Friends() {
                 <div className="m-4 max-[500px]:m-2 flex flex-col gap-4 max-[500px]:gap-2 max-[500px]:gap-2">
                     <Searcher 
                         bg="bg-white dark:bg-slate-800" 
-                        placeholder="Search friends..." 
+                        placeholder="Search users..." 
                         cb={fetchUsers}
                     />
 
@@ -66,15 +69,19 @@ export function Friends() {
                         userData.map( user => {
                             return (
                                 <MainItem
-                                        key={user.id}
-                                        item={{name: user.name+" "+user.lastname, description: "Level "+user.level, icon: user.photo}}
-                                    >
-                                        <AddButton 
-                                            cb={() => {
-                                                addFriend(user.id);
-                                            }}
-                                        /> 
-                                    </MainItem>
+                                    key={user.id}
+                                    item={{
+                                        name: user.name+" "+user.lastname,
+                                        description: "Level "+user.level, 
+                                        icon: user.photo
+                                    }}
+                                >
+                                    <AddButton 
+                                        cb={() => {
+                                            addFriend(user.id);
+                                        }}
+                                    /> 
+                                </MainItem>
                             )
                         })
                     )}
@@ -85,7 +92,10 @@ export function Friends() {
                                 return (
                                     <MainItem
                                         key={index}
-                                        item={{name: friend.name, icon: friend.photo}}
+                                        item={{
+                                            name: friend.name, 
+                                            icon: friend.photo
+                                        }}
                                     >
 
                                         <MessageButton 
