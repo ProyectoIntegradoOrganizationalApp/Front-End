@@ -6,28 +6,29 @@ import { Breadcrumb } from '../../../../../../../components/Breadcrumb';
 import { Tabs } from '../../../../../../../components/Tabs';
 
 import { useModal } from '../../../../../../../hooks/useModal';
-import { useProjectApi } from '../../../../../../../adapters/api/useProjectApi';
-import useTaskApp from '../../../../../../../adapters/api/useTaskAppApi';
+import { useTaskApp } from '../../../../../../../adapters/api/useTaskAppApi';
 
 export function Boards(props: { icon: string, app: string }) {
 
     const [tab, setTab] = useState<string>("dashboard");
     const { openModal } = useModal();
 
-    // const { data, error, loading, fetchProject } = useProjectApi();
-    const { data, error, loading, getProyectInfo, refreshData } = useTaskApp();
+    const { data, error, loading, getProyectInfo, refreshData, createBoard } = useTaskApp();
 
-    let { name } = useParams();
+    let { idapp } = useParams();
     React.useEffect(() => {
-        if (name) {
-            getProyectInfo(name);
+        if (idapp) {
+            getProyectInfo(idapp);
         }
-    }, [name]);
+    }, [idapp]);
 
-    const handleCreateBoard = () => {
-        if ( name ) {
-            refreshData(name);
+    const handleCreateBoard = ( valor1?: string, valor2?: string ) => {
+
+        if( valor1 && valor2 && idapp ) {
+            createBoard(valor1, valor2, idapp);
+            refreshData(idapp);
         }
+
     }
 
     return (
@@ -65,7 +66,7 @@ export function Boards(props: { icon: string, app: string }) {
                                     <Link 
                                         state={{icon: props.icon, app: props.app}} to='./front-end' className="w-full h-full relative">
                                         <div className="bg-black/30 w-full h-full rounded-xl transition-all"></div>
-                                        <p className="absolute top-3 left-3 text-white"><b className="text-white">front-End</b></p>
+                                        <p className="absolute top-3 left-3 text-white"><b className="text-white">{board?.title}</b></p>
                                     </Link>
                                 </li>
                             )

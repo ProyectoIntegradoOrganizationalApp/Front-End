@@ -14,5 +14,5 @@ export interface ModalInterface {
     sidebarElements?: SideElementsModal[],
     content?: React.ReactNode,
     submitText: string,
-    submitAction: () => void
+    submitAction: (value1?: string, value2?: string) => void
 }

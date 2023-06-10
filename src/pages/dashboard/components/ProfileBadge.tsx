@@ -76,7 +76,7 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                         { data && (
                             <>
                                 <h1>Friends</h1>
-                                {  data.friends.map( noti => {
+                                {  data.friends.map(( noti, index ) => {
                                         return(
                                             <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
                                                 <MainItem 
@@ -93,6 +93,9 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                                                                 userId: noti.idUser,
                                                                 action: "accept"
                                                             });
+
+                                                            data.friends.splice(index, index + 1);
+                                                            
                                                         }}
                                                     />
 
@@ -102,7 +105,9 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                                                                 type: "friend",
                                                                 userId: noti.idUser,
                                                                 action: "deny"
-                                                            }); 
+                                                            });
+                                                            
+                                                            data.friends.splice(index, index + 1);
                                                         }}
                                                     />
                                                 </MainItem> 
@@ -111,7 +116,7 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                                     })
                                 }
                                 <h1>Projects</h1>
-                                {  data.projects.map( noti => {
+                                {  data.projects.map(( noti, index ) => {
                                         return(
                                             <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
                                                 <MainItem 
@@ -129,6 +134,8 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                                                                 projectId: noti.idProject,
                                                                 action: "accept"
                                                             })
+
+                                                            data.friends.splice(index, index + 1);
                                                         }}
                                                     />
 
@@ -140,6 +147,8 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                                                                 projectId: noti.idProject,
                                                                 action: "deny"
                                                             });
+
+                                                            data.friends.splice(index, index + 1);
                                                         }}
                                                     />
                                                 </MainItem> 

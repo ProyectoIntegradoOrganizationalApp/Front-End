@@ -3,21 +3,16 @@ import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import useTaskApp from '../../adapters/api/useTaskAppApi';
+import { useTaskApp } from '../../adapters/api/useTaskAppApi';
 
 interface ProjectFormProps {
     title: string | undefined,
     submitText: string,
     close: () => void,
-    submit: () => void
+    submit: (value1?: string, value2?:string) => void
 }
 
 const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
-
-    /** 
-     * Hook de la API de proyectos, le pasamos un false para que no realice la query.
-     */
-    const { createBoard } = useTaskApp();
 
     const [projectTitle, setProjectTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
@@ -25,13 +20,8 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
     const handleSubmit = ( event: React.FormEvent ) => {
         event.preventDefault();
 
-        const { name } = useParams();
-        if( name ) {
-            createBoard(projectTitle, description, name);
-            close();
-            submit();
-        }
-        
+        submit(projectTitle, description);
+        close();
     }
 
     return (
@@ -52,7 +42,7 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
                     <input 
                         type="text"
                         name="Project Name" 
-                        placeholder="Insert your project name"
+                        placeholder="Insert your board name"
                         minLength={3}
                         maxLength={20} 
                         className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4`} 
@@ -64,7 +54,7 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
                     />
                     <textarea 
                         name="Project Description"
-                        placeholder="Insert Your Project Description"
+                        placeholder="Insert Your board Description"
                         minLength={10} 
                         maxLength={50}
                         className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-slate-700`} 
