@@ -1,11 +1,14 @@
-export const DescriptionTop = ( props: { icon: string, title: string, description?: string } ) => {
+export const DescriptionTop = (props: { icon: string, title: string, description?: string }) => {
     return (
         <div className="flex">
             <div className="flex items-center gap-3 sm:gap-4">
                 {/* Icon (si no hay icon, uno por defecto) */}
-                <div className="rounded-full w-12 aspect-square">
-                    <img src={`${props.icon}`} />
-                </div>
+                {
+                    props.icon &&
+                    <div className="rounded-full w-12 aspect-square">
+                        <img src={`${props.icon}`} />
+                    </div>
+                }
                 {/* Title */}
                 <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
             </div>

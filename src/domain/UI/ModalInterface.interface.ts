@@ -1,4 +1,3 @@
-import { InputModalInterface } from "./InputModalInterface";
 import { SettingInterface } from "./SettingInterface.interface";
 import { SideElementsModal } from "../SideElementsModal.interface";
 
@@ -13,7 +12,7 @@ export interface ModalInterface {
     action?: string,
     target?: string,
     sidebarElements?: SideElementsModal[],
-    content?: SettingInterface[] | InputModalInterface[],
+    content?: React.ReactNode,
     submitText: string,
     submitAction: () => void
 }

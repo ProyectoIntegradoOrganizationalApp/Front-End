@@ -33,10 +33,70 @@ html, body {
     @apply !bg-white dark:!bg-slate-800;
 }
 
-/* Separator Home */
+/* Home */
 .separator {
-    width: 100%;
-    height: 120px;
+    @apply w-full h-[120px];
+}
+.swiper {
+    @apply w-full h-full;
+}
+.swiper-slide {
+    @apply text-center text-[18px] bg-white flex justify-center items-center;
+}
+.swiper-slide img {
+    @apply block w-full h-full object-cover;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    @apply absolute top-[47%] translate-y-1/2 w-[40px] h-[40px] bg-black/50 text-white rounded-[50%] text-[24px] flex items-center justify-center cursor-pointer;
+    transition: background-color 0.3s;
+}
+.swiper-button-next {
+    @apply -right-20;
+}
+.swiper-button-prev {
+    @apply -left-20;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    @apply bg-black/70;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    @apply absolute top-1/2 w-[10px] h-[10px];
+    content: "";
+    transform: translate(-50%, -50%);
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    transition: transform 0.3s;
+}
+.swiper-button-next::after {
+    transform: translate(-22%, -50%) rotate(45deg);
+}
+.swiper-button-prev::after {
+    transform: translate(22%, -50%) rotate(-135deg);
+}
+.swiper-pagination {
+    @apply !-bottom-12;
+}
+.swiper-pagination-bullet {
+    @apply bg-black dark:bg-white w-3 aspect-square h-[unset];
+}
+.progressVideo::-webkit-progress-value {
+    @apply bg-gray-400 dark:bg-slate-900;
+    border-radius: var(--rounded-box, 1rem);
+}
+.progressVideo::-moz-progress-bar{
+    @apply bg-gray-400 dark:bg-slate-900;
+}
+.progressVideo {
+    @apply left-[unset];
+}
+.progressVideo::-webkit-progress-value {
+    transition: width 0.5s ease;
+}
+.progressVideo::-moz-progress-bar{
+    transition: width 0.5s ease;
 }
 
 /* Bolders */
@@ -65,6 +125,17 @@ b {
     /* Common */ px-12 capitalize rounded-none transition-all text-white border-none text-base
     /* Light */ bg-slate-700 hover:bg-slate-800
     /* Dark */ dark:bg-slate-600 dark:hover:bg-slate-500/50;
+}
+.btn.btn-third {
+    @apply 
+    /* Common */ px-12 capitalize rounded-none transition-all text-black dark:text-white border-none text-base
+    /* Light */ bg-gray-300 hover:bg-gray-400
+    /* Dark */ dark:bg-slate-600 dark:hover:bg-slate-500/50;
+}
+.btn.btn-special {
+    @apply 
+    /* Common */ px-12 capitalize rounded-none transition-all text-white border-none text-base
+    /* Light */ bg-blue-600 hover:bg-blue-700;
 }
 
 /* Inputs */
@@ -141,13 +212,17 @@ textarea {
     @apply flex flex-col justify-center items-center gap-2 rounded-full w-full aspect-square;
     border-width: .9em;
 }
-.progress::-webkit-progress-value {
+.progressAchievement::-webkit-progress-value {
     @apply bg-slate-600;
     border-radius: var(--rounded-box, 1rem);
 }
-.progress::-moz-progress-bar{
+.progressAchievement::-moz-progress-bar{
     @apply bg-slate-600;
 }
+.progressAchievement {
+    @apply left-[unset];
+}
+
 progress {
     left: calc(50% - 112px);
 }
@@ -355,6 +430,20 @@ progress {
     display: table;
 }
 
+/* Link underline */
+.custom-border {
+    @apply w-fit relative cursor-pointer leading-none text-[#3060c5] flex items-center gap-2.5;
+}
+.custom-border::after {
+    @apply absolute left-0 -bottom-1 w-0 h-[2px] bg-[#3060c5];
+    content: "";
+    transition: width .1s ease-in-out;
+
+}
+.custom-border:hover::after {
+    @apply w-[calc(100%+3px)] ml-[-0.2px];
+}
+
 /* Sidebar */
 @media (min-width: 1024px) {
     .drawer-mobile {
@@ -378,5 +467,10 @@ progress {
     .drawer-mobile > .drawer-toggle ~ .drawer-side > .drawer-overlay + * {
         --tw-translate-x: 0px;
         transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+}
+@media (max-width: 768px) {
+    .text-2xl {
+        @apply text-[1.8rem];
     }
 }

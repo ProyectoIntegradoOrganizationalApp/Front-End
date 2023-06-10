@@ -74,11 +74,10 @@ export function Sidebar( props: { children: ReactNode } ) {
                     </div>
 
                     <div className="flex-1 flex flex-col justify-end">
-                        <div className="w-full flex justify-between items-center px-6 pb-6">
+                        <div className="w-full flex justify-between items-center px-6 pb-5">
                             <ProfileBadge
                                 user={user}
                                 logout={logout}
-                                position={"dropdown dropdown-top"}
                             />
                         </div>
                     </div>

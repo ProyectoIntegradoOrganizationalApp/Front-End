@@ -8,7 +8,7 @@ import { DescriptionTop } from "./DescriptionTop";
 interface ItemInfo {
     name: string,
     description?: string,
-    icon: string
+    icon?: string
 }
 
 /**
@@ -22,9 +22,9 @@ export function MainItem( props: { item: ItemInfo, descriptionBottom?: boolean, 
     // Comprobamos que tipo de caja hay que renderizar
     let description: ReactNode;
     if( props.item.description && props.descriptionBottom == true ) {
-        description = <DescriptionBottom title={props.item.name} description={props.item.description} icon={props.item.icon}/>
+        description = <DescriptionBottom title={props.item.name} description={props.item.description} icon={props.item.icon ? props.item.icon : ""}/>
     } else {
-        description = <DescriptionTop title={props.item.name} description={props.item.description} icon={props.item.icon} />
+        description = <DescriptionTop title={props.item.name} description={props.item.description} icon={props.item.icon ? props.item.icon : ""} />
     }
 
     return (

@@ -1,52 +1,50 @@
-// React
-import React, { MouseEventHandler } from "react";
-
 import { Link } from "react-router-dom";
-
 import { Tabs } from "../domain/UI/Tabs.interface";
 
 export function Tabs(props: { tab: string, setTab: Function, icon?: string, title?: string, links?: Array<Tabs> }) {
 
-    const handleClick = ( tabName: string ) => {
+    const handleClick = (tabName: string) => {
         console.log(tabName)
         props.setTab(tabName);
     }
 
     return (
-        <div className={`h-fit ${props.links ? "md:px-3" : "px-3"} py-0 flex justify-between items-center rounded-xl`}>
+        <div className={`h-fit ${props.links ? "md:px-3" : "px-3"} ${props.title ? "md:!px-3" : "!px-0"} py-0 flex justify-between items-center rounded-xl`}>
             <div className={`flex flex-col md:flex-row items-start gap-4 max-[500px]:gap-2 md:gap-7 h-full`}>
                 {/* Header */}
-                <div className={`items-center gap-4 max-[500px]:gap-2 ${props.links ? "hidden md:flex" : "flex"} py-[0.73rem]`}>
-                    <i className={props.icon + " text-black dark:text-white"}></i>
-                    <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
-                </div>
                 {
-                    props.links &&
+                    props.title &&
+                    <div className={`items-center gap-4 max-[500px]:gap-2 ${props.links ? "hidden md:flex" : "flex"} py-[0.73rem]`}>
+                        <i className={props.icon + " text-black dark:text-white"}></i>
+                        <p className="leading-none text-black dark:text-white text-base">{props.title}</p>
+                    </div>
+                } {
+                    props.links && props.title &&
                     <div className="h-10 w-[1.7px] bg-gray-400 dark:bg-slate-500 hidden md:block"></div>
                 }
 
                 {/* Tabs */}
-                { props.links &&
+                {props.links &&
                     <div className="flex justify-center items-center">
-                        { props.links?.map((link) =>
+                        {props.links?.map((link) =>
                             link.url ? (
                                 <Link
-                                    key={link.name} 
+                                    key={link.name}
                                     to={link.url}
-                                    className={"btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"}    
+                                    className={"btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"}
                                 >
-                                        {link.name}
+                                    {link.name}
                                 </Link>
-                            ): (
+                            ) : (
                                 <button
                                     key={link.name}
                                     className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"
-                                    onClick={() => handleClick(link.name)}  
+                                    onClick={() => handleClick(link.name)}
                                 >
-                                        {link.name}
+                                    {link.name}
                                 </button>
                             )
-                            
+
                         )}
                     </div>
                 }

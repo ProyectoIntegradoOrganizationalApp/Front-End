@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { ModalInterface } from "../../domain/UI/ModalInterface.interface";
 import CrudProjectForm from "../forms/CrudProjectForm";
 import CrudConfirmation from '../forms/CrudConfirmation';
+import { NotificationsModal } from './components/NotificationsModal';
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
@@ -23,7 +24,7 @@ export function CustomModal(props: { isOpen: boolean, closeModal: () => void, at
             style={{ content: { all: "unset" } }}
         >
             <label htmlFor="modalbox" className="modal modalcontainer">
-                <label className={`modal-box relative flex flex-col ${props.atts?.type == "settings" ? "bg-slate-700" : props.atts?.type.includes("crud") ? "bg-white dark:bg-slate-800" : "!w-fit"}`} htmlFor="">
+                <label className={`modal-box relative flex flex-col overflow-hidden ${props.atts?.type == "settings" ? "bg-slate-700" : props.atts?.type.includes("crud") ? "bg-white dark:bg-slate-800" : "!w-fit"}`} htmlFor="">
                     <div onClick={props.closeModal} className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-transparent text-xl absolute top-6 right-5 hover:!bg-transparent">
                         <i className="fa-solid fa-xmark scale-150 text-black dark:text-white hover:text-black/50 dark:hover:text-white/50 transition-all"></i>
                     </div>
@@ -62,12 +63,13 @@ export function CustomModal(props: { isOpen: boolean, closeModal: () => void, at
                             close={props.closeModal}
                             submit={props.atts.submitAction}
                         />
+                    ) : props.atts?.type == "notifications" ? (
+                        <NotificationsModal content={props.atts.content}/>
                     ) : (
                         <>
                             <h1>Error</h1>
                         </>
                     )}
-
                 </label>
             </label>
         </Modal>

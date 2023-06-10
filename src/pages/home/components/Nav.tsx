@@ -21,7 +21,7 @@ export function Nav() {
     const { user, logout } = useAuth();
 
     return (
-        <div className=" navbar px-12 bg-gray-300 dark:bg-cyan-800 dark:bg-transparent rounded-full">
+        <div className="navbar px-12 max-[768px]:px-5 bg-gray-100 dark:bg-cyan-800 dark:bg-transparent">
 
             <div className="navbar-start">
                 <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">
@@ -51,7 +51,7 @@ export function Nav() {
 
                 { !user && (
                     <Link to="/login">
-                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
+                        <button className="btn btn-third !px-7 min-h-fit h-fit py-3">
                             Log In
                         </button>
                     </Link>

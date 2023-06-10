@@ -7,7 +7,6 @@ import { useState } from 'react';
  * @returns React.FC
  */
 export function MyAccount() {
-    const [tab, setTab] = useState<string>("account");
     const [email, setEmail] = useState<string>('pablo@pablo.es');
     const [name, setName] = useState<string>('Pablo');
     const [last_name, setLastName] = useState<string>('Valderas');
@@ -20,7 +19,7 @@ export function MyAccount() {
             <div id="scrollbar" className="flex-1 flex flex-wrap items-start content-start gap-5 text-black dark:text-white">
                 <div className="flex-1 basis-full flex flex-col gap-2 h-fit">
                     <label htmlFor="avatar">Avatar</label>
-                    <input type="file" name="avatar" className="file-input !outline-none bg-gray-300 dark:bg-slate-700 !border-none w-full h-fit" />
+                    <input type="file" name="avatar" accept=".png, .jpeg, .jpg" className="file-input !outline-none bg-gray-300 dark:bg-slate-700 !border-none w-full h-fit" />
                 </div>
                 <div className="flex-1 flex flex-col gap-2">
                     <label htmlFor="firstname">First Name</label>

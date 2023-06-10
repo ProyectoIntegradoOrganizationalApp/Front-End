@@ -27,7 +27,7 @@ export function AchievementItem(props: { tab?: string, orderBy?: string, icon: s
                         </div>
                         <div className="text-white leading-none flex items-end max-[745px]:flex-row max-[745px]:items-center max-[745px]:mt-3.5 flex-col max-[745px]:gap-3 gap-2 max-[745px]:w-full w-5/12">
                             <p className="text-base max-[745px]:order-1 text-black dark:text-white">{props.percentage.number + "%"}</p>
-                            <progress className="progress progress-primary w-full left-0 !rounded-full dark:bg-slate-700" value={props.percentage.number} max="100"></progress>
+                            <progress className="progressAchievement progress progress-primary w-full left-0 !rounded-full dark:bg-slate-700" value={props.percentage.number} max="100"></progress>
                         </div>
                     </div>
                 </div>

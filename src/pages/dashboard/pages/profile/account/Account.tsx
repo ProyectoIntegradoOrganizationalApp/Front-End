@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { MyAccount } from './account/MyAccount';
 import { Security } from './account/Security';
-import { Preferences } from './account/Preferences';
 import { Notifications } from './account/Notifications';
 
 /**
@@ -21,10 +20,9 @@ export function Account() {
                     <p className="text-xl leading-none text-black dark:text-white">Firebloh</p>
                 </div>
                 <ul className="w-full flex flex-col justify-around select-none">
-                    <li onClick={() => setTab("account")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "account" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-house"></i>My Account</li>
-                    <li onClick={() => setTab("security")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "security" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-key"></i>Security</li>
-                    <li onClick={() => setTab("preferences")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "preferences" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-cog"></i>Preferences</li>
-                    <li onClick={() => setTab("notifications")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "notifications" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-envelope"></i>Notifications</li>
+                    <li onClick={() => setTab("account")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "account" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-house w-4"></i>My Account</li>
+                    <li onClick={() => setTab("security")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "security" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-key w-4"></i>Security</li>
+                    <li onClick={() => setTab("notifications")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "notifications" ? "bg-white dark:bg-slate-700 text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-slate-700/30 text-slate-500 dark:text-slate-400"}`}><i className="fa-solid fa-envelope w-4"></i>Notifications</li>
                 </ul>
             </div>
             <div className="bg-gray-200 dark:bg-slate-800 flex-[4] h-full min-[500px]:rounded-xl flex flex-col w-full p-8">
@@ -35,9 +33,6 @@ export function Account() {
                 } {
                     tab == "security" &&
                     <Security/>
-                } {
-                    tab == "preferences" &&
-                    <Preferences/>
                 } {
                     tab == "notifications" &&
                     <Notifications/>
