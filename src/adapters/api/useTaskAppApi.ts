@@ -9,9 +9,9 @@ import { ApiError } from "../../domain/ApiError.interface";
 import { RequestParams } from "../../domain/RequestParams.interface";
 
 interface TaskAppInfo {
-    boards: Board[],
-    columns: Column[],
-    tasks: Task[],
+    boards: Board[] | undefined,
+    columns: Column[] | undefined,
+    tasks: Task[] | undefined,
 }
 
 interface Board {
@@ -70,9 +70,14 @@ export const useTaskApp = () => {
         }
 
         useAxios(props)
-            .then(data => {
+            .then(res => {
                 // Creamos el nuevo estado
-                setData({boards: data.data})
+                console.log(res)
+                setData({
+                    boards: res.data,
+                    columns: data?.columns,
+                    tasks: data?.tasks
+                })
             })
 
     }
@@ -96,7 +101,7 @@ export const useTaskApp = () => {
                 title: title,
                 description: description,
                 idProyect: idProyect,
-                photo: "https://images.unsplash.com/photo-1682687982167-d7fb3ed8541d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
+                photo: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/639x960/8bcdfaee9ea0002ce6163822d51db7bd/photo-1679464349885-f6603194a0bf.jpg"
             }
         }
 
