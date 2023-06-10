@@ -33,8 +33,6 @@ export const useAccountApi = ( fetch: boolean ) => {
         if( fetch ) {
             fetchData();
         }
-
-
     }, [])
 
     /**

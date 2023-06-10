@@ -22,7 +22,6 @@ export const SaveImage: React.FC<{cb: (url: string) => void}> = ({ cb }) => {
             urlEndpoint="https://ik.imagekit.io/iqaq9l86z/"
             authenticationEndpoint="http://localhost:3001/auth"
         >
-            // Simple file upload and response handling
             <IKUpload
                 onError={onError}
                 onSuccess={onSuccess}
@@ -32,12 +31,12 @@ export const SaveImage: React.FC<{cb: (url: string) => void}> = ({ cb }) => {
 
             { uploadRef && (
                 <button
-                    className="btn btn-primary rounded-md"
+                    className="file-input"
                     onClick={() => {
                         uploadRef.current.click()
                     }}
                 >
-                    Upload
+                    Upload Image
                 </button>
             )}
 

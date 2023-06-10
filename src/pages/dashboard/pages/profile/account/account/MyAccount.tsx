@@ -1,9 +1,11 @@
 // React
-import { useState } from 'react';
-import { Profile } from '../../../../../../domain/profile/Profile.interface';
-import React from 'react';
-import { Account } from '../../../../../../domain/account/Account.interface';
+import React, { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import { SaveImage } from '../../../../../../components/image-kit/SaveImage';
+
+import { Account } from '../../../../../../domain/account/Account.interface';
 
 interface MyAccountProps {
     data: Account | undefined,
@@ -18,6 +20,8 @@ interface MyAccountProps {
 export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
 
     const [tab, setTab] = useState<string>("account");
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState<string>('');
     const [name, setName] = useState<string>('');
@@ -51,11 +55,13 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
             iduser: "",
             name: name,
             lastname: last_name,
-            phone: phone_number,
+            phone: prefix + phone_number,
             photo: photo
         }
 
         update(acc);
+
+        navigate(0);
     }
 
     const photoUpdate = ( url: string ) => {
@@ -69,8 +75,8 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                     <SaveImage 
                         cb={photoUpdate}
                     />
-                    <label htmlFor="avatar">Avatar</label>
-                    <input type="file" name="avatar" accept=".png, .jpeg, .jpg" className="file-input !outline-none bg-gray-300 dark:bg-slate-700 !border-none w-full h-fit" />
+                    {/* <label htmlFor="avatar">Avatar</label>
+                    <input type="file" name="avatar" accept=".png, .jpeg, .jpg" className="file-input !outline-none bg-gray-300 dark:bg-slate-700 !border-none w-full h-fit" /> */}
                 </div>
                 <div className="flex-1 flex flex-col gap-2">
                     <label htmlFor="firstname">First Name</label>
