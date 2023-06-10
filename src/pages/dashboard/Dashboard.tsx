@@ -34,7 +34,7 @@ export const Dashboard = () => {
     }
 
     return (
-        <Sidebar>
+        <Sidebar profile={data}>
             <DashboardBox>
                 { data && (
                     <Outlet context={data} />

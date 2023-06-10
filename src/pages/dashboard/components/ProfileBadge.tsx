@@ -1,37 +1,60 @@
+import { useEffect, useState } from "react";
+
 import { NavLink, useLocation } from "react-router-dom"
 
-import foto from "../../../assets/foto.png";
-import { User } from "../../../domain/user/User.interface";
+import { toast } from "react-toastify";
+
+import { useNotificationApi } from "../../../adapters/api/useNotificationApi";
+
+import { useNavigate } from "react-router-dom";
+
 import { useModal } from "../../../hooks/useModal";
 import { MainItem } from "../../../components/list-items/MainItem";
-import { InfoTooltip } from "../../../components/InfoTooltip";
 import { State } from "../../../components/State";
+import AddButton from "../../../components/buttons/AddButton";
+import RemoveButton from "../../../components/buttons/RemoveButton";
+
+import { Profile } from "../../../domain/profile/Profile.interface";
 
 interface ProfileBadgeProps {
-    user: User | null,
+    profile: Profile | undefined,
     logout: () => void,
 }
 
-export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
+export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) => {
     // Con esto haciendo un .pathname() puedes sacar si es / y renderizar una cosa u otra
     let location = useLocation();
 
     const { openModal } = useModal();
 
-    // Notifications
-    const removeNotification = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const notification = event.currentTarget.parentElement?.parentElement?.parentElement;
-        notification?.remove();
+    const { data, error, loading, triggerRequest, refreshData } = useNotificationApi(true);
 
-        // Borrar de la bd
-    }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Mensaje de error
+        if( error && error.error ) {
+            toast.error(error.message)
+        }
+
+        // Mensaje de información
+        if( error && !error.error ) {
+            toast.info(error?.message)
+        }
+        
+    }, [error?.error])
 
     return (
         <div className="w-full relative">
             {/* Account */}
             <div className={'dropdown dropdown-top h-fit hover:bg-grey flex'} >
                 <button className="btn !p-0 !bg-transparent border-none flex flex-nowrap justify-start items-center gap-2.5 normal-case flex-1 !h-[unset] !min-h-[unset]">
-                    <img src={foto} className="!w-11 !aspect-square !h-[unset] !min-h-[unset]" />
+                    { profile && (
+                        <img 
+                            src={profile.user.photo}
+                            className="!w-11 !aspect-square object-cover !h-[unset] !min-h-[unset]" 
+                        />
+                    )}
                 </button>
                 <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-slate-900 w-full !z-[99999999999999] text-black dark:text-white gap-1">
                     <li>
@@ -50,26 +73,84 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
                 type: "notifications",
                 content:
                     <div id="scrollbar" className="flex flex-col bg-white dark:bg-slate-800 p-7 max-[500px]:p-4 gap-2 max-h-[1000px]">
-                        {
-                            true &&
+                        { data && (
                             <>
-                                {/* FOREACH NOTIFICATION */}
-                                <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
-                                    <MainItem item={{
-                                        name: "19:45 - Created Task",
-                                        description: "Pablo Valderas has created one task in 'ptoelquelolea' project"
-                                    }} descriptionBottom={true} children={
-                                        <i onClick={removeNotification} className="fa-solid fa-xmark  text-black dark:text-white hover:text-black/50 dark:hover:text-white/50 transition-all cursor-pointer pl-3 pr-1 pt-1.5"></i>
-                                    } />
-                                </div>
-                                {/* ENDFOREACH */}
+                                <h1>Friends</h1>
+                                {  data.friends.map( noti => {
+                                        return(
+                                            <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
+                                                <MainItem 
+                                                    item={{
+                                                        name: noti.title,
+                                                        description: noti.message
+                                                    }} 
+                                                    descriptionBottom={true} 
+                                                >
+                                                    <AddButton 
+                                                        cb={() => {
+                                                            triggerRequest({
+                                                                type: "friend",
+                                                                userId: noti.idUser,
+                                                                action: "accept"
+                                                            });
+                                                        }}
+                                                    />
+
+                                                    <RemoveButton
+                                                        cb={() => {
+                                                            triggerRequest({
+                                                                type: "friend",
+                                                                userId: noti.idUser,
+                                                                action: "deny"
+                                                            }); 
+                                                        }}
+                                                    />
+                                                </MainItem> 
+                                            </div>
+                                        )
+                                    })
+                                }
+                                <h1>Projects</h1>
+                                {  data.projects.map( noti => {
+                                        return(
+                                            <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
+                                                <MainItem 
+                                                    item={{
+                                                        name: noti.title,
+                                                        description: noti.message
+                                                    }} 
+                                                    descriptionBottom={true} 
+                                                >
+                                                    <AddButton 
+                                                        cb={() => {
+                                                            triggerRequest({
+                                                                type: "Project",
+                                                                userId: noti.idUser,
+                                                                projectId: noti.idProject,
+                                                                action: "accept"
+                                                            })
+                                                        }}
+                                                    />
+
+                                                    <RemoveButton
+                                                        cb={() => {
+                                                            triggerRequest({
+                                                                type: "Project",
+                                                                userId: noti.idUser,
+                                                                projectId: noti.idProject,
+                                                                action: "deny"
+                                                            });
+                                                        }}
+                                                    />
+                                                </MainItem> 
+                                            </div>
+                                        )
+                                    })
+                                
+                                }
                             </>
-                        } {
-                            false &&
-                            <div>
-                                There are no notifications currently...
-                            </div>
-                        }
+                            
+                        )}
                     </div>
                 ,
                 submitText: "",

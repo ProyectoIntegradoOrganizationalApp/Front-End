@@ -6,10 +6,11 @@ import logo from "../../../assets/svg/logo.svg";
 
 import { Routes } from "../../../hooks/routes";
 import { useAuth } from '../../../hooks/useAuth';
+import { Profile } from "../../../domain/profile/Profile.interface";
 
-export function Sidebar( props: { children: ReactNode } ) {
+export function Sidebar( props: { children: ReactNode, profile: Profile | undefined } ) {
 
-    const { user, logout } = useAuth();
+    const { logout } = useAuth();
 
     const location = useLocation();
 
@@ -76,7 +77,7 @@ export function Sidebar( props: { children: ReactNode } ) {
                     <div className="flex-1 flex flex-col justify-end">
                         <div className="w-full flex justify-between items-center px-6 pb-5">
                             <ProfileBadge
-                                user={user}
+                                profile={props.profile}
                                 logout={logout}
                             />
                         </div>
