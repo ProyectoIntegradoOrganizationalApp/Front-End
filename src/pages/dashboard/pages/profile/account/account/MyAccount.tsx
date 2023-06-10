@@ -2,32 +2,47 @@
 import { useState } from 'react';
 import { Profile } from '../../../../../../domain/profile/Profile.interface';
 import React from 'react';
+import { Account } from '../../../../../../domain/account/Account.interface';
 
 /**
  * Componente Account, que representa la ruta /account en la cual podremos
  * ver y configurar nuestra cuenta
  * @returns React.FC
  */
-export const MyAccount: React.FC<{data: Profile}> = ({data}) => {
+export const MyAccount: React.FC<{data: Account | undefined}> = ({data}) => {
 
     const [tab, setTab] = useState<string>("account");
 
     const [email, setEmail] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [last_name, setLastName] = useState<string>('');
-    const [prefix, setPrefix] = useState<string>('+34');
+    const [prefix, setPrefix] = useState<string>('');
     const [phone_number, setPhoneNumber] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
+    /**
+     *  Carga inicial de datos
+     */
     React.useEffect(() => {
         if ( data ) {
-            setEmail(data.user.email);
-            setName(data.user.name);
-            setPhoneNumber("");
+            setEmail(data.email);
+            setName(data.name);
+            setLastName(data.lastname);
+            setPrefix(data.phone.slice(0, 3));
+            setPhoneNumber(data.phone.slice(3));
         }
         
 
-    }, [data?.user.id])
+    }, [data?.iduser]);
+
+    /**
+     *  Función que recoge los datos del formulario y ejecuta
+     *  la función del hook de account para actualizar.
+     * 
+     */
+    const handleUpdate = () => {
+
+    }
 
     return (
         <div className="flex-1 flex flex-col justify-between min-[811px]:mt-9 gap-5">
@@ -114,23 +129,12 @@ export const MyAccount: React.FC<{data: Profile}> = ({data}) => {
                         />
                     </div>
                 </div>
-                <div className="flex-1 basis-full flex flex-col gap-2">
-                    <label htmlFor="description">Description</label>
-                    <input
-                        type="text"
-                        name="description"
-                        placeholder="Enter description"
-                        maxLength={60}
-                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4 resize-none`}
-                        value={description}
-                        onChange={event => {
-                            setDescription(event.target.value);
-                        }}
-                    />
-                </div>
             </div>
             <div className="flex justify-between gap-2">
-                <button className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-800">
+                <button 
+                    className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-800"
+                    onClick={() => handleUpdate()}
+                >
                     Update
                 </button>
                 <button className="btn btn-primary w-fit">

@@ -6,32 +6,39 @@ import { Preferences } from './account/Preferences';
 import { Notifications } from './account/Notifications';
 import { useOutletContext } from 'react-router-dom';
 import { Profile } from '../../../../../domain/profile/Profile.interface';
+import { useAccountApi } from '../../../../../adapters/api/useAccountApi';
 
 /**
  * Componente Account, que representa la ruta /account en la cual podremos
  * ver y configurar nuestra cuenta
  * @returns React.FC
  */
-export function Account() {
+export const Account: React.FC = () => {
 
     const [tab, setTab] = useState<string>("account");
 
     const context: Profile = useOutletContext();
 
+    const { data, loading, error, updateUser } = useAccountApi(true);
+
+    const update = () => {
+        console.log("hi")
+    }
+
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <div className="bg-gray-200 dark:bg-slate-800 min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-8 py-8 min-w-[260px]">
                 <div className="flex flex-col items-center gap-5 px-4">
-                    { context && context.user.photo ? (
-                        <img src={context.user.photo} />
+                    { data && data.iduser ? (
+                        <img src={data.iduser} />
                     ): (    
                         <div className="bg-green-600 w-28 aspect-square rounded-full">
                         
                         </div>
                     )}
-                    { context && context.user.name && (
+                    { data && data.name && (
                         <p className="text-xl leading-none text-black dark:text-white">
-                        { context.user.name}
+                        { data.name}
                         </p>
                     )}
                     
@@ -45,19 +52,20 @@ export function Account() {
             </div>
             <div className="bg-gray-200 dark:bg-slate-800 flex-[4] h-full min-[500px]:rounded-xl flex flex-col w-full p-8">
                 <p className="capitalize text-2xl text-black dark:text-white leading-none max-[811px]:hidden">{tab} Settings</p>
-                {
-                    tab == "account" &&
-                    <MyAccount data={context}/>
-                } {
-                    tab == "security" &&
+                {  tab == "account" ? (
+                    <MyAccount
+                        data={data}
+                    /> 
+                ): tab == "security" ? (
                     <Security/>
-                } {
-                    tab == "preferences" &&
+                ): tab == "preferences" ? (
                     <Preferences/>
-                } {
-                    tab == "notifications" &&
+                ): tab == "notifications" ? (
                     <Notifications/>
-                }
+                ): <></>
+                
+                } 
+                
             </div>
         </div>
     )

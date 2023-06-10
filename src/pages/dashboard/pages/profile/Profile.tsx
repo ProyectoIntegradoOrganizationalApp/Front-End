@@ -36,18 +36,19 @@ export function Profile() {
     const navigate = useNavigate();
 
     const profileData: Profile = useOutletContext();
-    const { data, error, loading, refreshData } = useProjectsApi(true);
+     const { data, error, loading, refreshData } = useProjectsApi(true);
 
     // Use effect con el que calculamos el trabajo realizado.
-    useEffect(() => {        
-        if( data ) {
-            const { getUserWork } = useUtils();
-            const {commitsDaily, commitsWeekly} = getUserWork(profileData?.activity);
-    
-            setDaily(commitsDaily);
-            setWeekly(commitsWeekly);
-        }
-    }, [profileData?.user.id]);
+    useEffect(() => {
+        
+        profileData.activity = [];
+        const { getUserWork } = useUtils();
+        const {commitsDaily, commitsWeekly} = getUserWork(profileData?.activity);
+
+        setDaily(commitsDaily);
+        setWeekly(commitsWeekly);
+
+    }, []);
 
     const handleCreateProject = () => {
         refreshData();
@@ -55,6 +56,7 @@ export function Profile() {
 
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
+            
             <AchievementsInfo
                 data={profileData}
             />

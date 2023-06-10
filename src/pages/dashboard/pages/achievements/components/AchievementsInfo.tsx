@@ -6,7 +6,7 @@ import { AchievementsLevel } from "./AchievementsLevel";
 import { AchievementsList } from "./AchievementsList";
 
 import { Profile } from "../../../../../domain/profile/Profile.interface";
-import { useAchievementsApi } from "../../../../../adapters/api/useAchievementsApi";
+import { useOutletContext } from "react-router-dom";
 
 /**
  *  Componente de Achievement Info para ver el conjunto de Level y List de logros del usuario
@@ -14,14 +14,11 @@ import { useAchievementsApi } from "../../../../../adapters/api/useAchievementsA
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-export function AchievementsInfo( props: { data: Profile | undefined } ) {
+export const AchievementsInfo: React.FC<{data: Profile}> = ({ data }) => {
 
     let rank: string = "Newbie";
-    let level: number = 1;
-
-    if ( props.data ) {
-        level = props.data.user.level;
-    }
+    let level: number = data.user.level;
+    
 
     switch( true ) {
         case (level > 1 && level < 10): {
@@ -40,7 +37,7 @@ export function AchievementsInfo( props: { data: Profile | undefined } ) {
                 </div>
                 <AchievementsLevel level={level} rank={rank}/>
                 <AchievementsList
-                    data={props.data}
+                    data={data}
                 />
             </div>
         </>
