@@ -88,15 +88,6 @@ export function Profile() {
                                 <Activity
                                     title="Monthly Activity"
                                     data={profileData}
-                                    chartConf={{
-                                        type: "line",
-                                        labels: getMonths(),
-                                        data: {
-                                            data: profileData.commitsPerMonth,
-                                            borderColor: 'white',
-                                            backgroundColor: 'cyan'
-                                        }
-                                    }}
                                 />
                             )}
                         </div>
