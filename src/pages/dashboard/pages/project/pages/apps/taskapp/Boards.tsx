@@ -8,7 +8,7 @@ import { Tabs } from '../../../../../../../components/Tabs';
 import { useModal } from '../../../../../../../hooks/useModal';
 import { useTaskApp } from '../../../../../../../adapters/api/useTaskAppApi';
 
-export function Boards(props: { icon: string, app: string }) {
+export const Boards: React.FC<{ app: string }> = ({ app }) => {
 
     const [tab, setTab] = useState<string>("dashboard");
     const { openModal } = useModal();
@@ -23,12 +23,10 @@ export function Boards(props: { icon: string, app: string }) {
     }, [idapp]);
 
     const handleCreateBoard = ( valor1?: string, valor2?: string ) => {
-
         if( valor1 && valor2 && idapp ) {
             createBoard(valor1, valor2, idapp);
             refreshData(idapp);
         }
-
     }
 
     return (
@@ -45,10 +43,6 @@ export function Boards(props: { icon: string, app: string }) {
                         name: "ptoelquelolea",
                         link: "/project/ptoelquelolea"
                     },
-                    {
-                        icon: props.icon,
-                        name: props.app
-                    }
                 ]} />
             </div>
             <div className="bg-gray-200 dark:bg-slate-800 w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
@@ -64,7 +58,9 @@ export function Boards(props: { icon: string, app: string }) {
                                     className={`bg-[url(${board?.photo})] bg-cover bg-no-repeat bg-center box-border board rounded-xl min-[839.50px]:flex-1 basis-[33%] min-w-fit min-[839.50px]:max-w-sm h-1/4 cursor-pointer`}
                                     >
                                     <Link 
-                                        state={{icon: props.icon, app: props.app}} to='./front-end' className="w-full h-full relative">
+                                        to={`${board.id}`} 
+                                        className="w-full h-full relative"
+                                    >
                                         <div className="bg-black/30 w-full h-full rounded-xl transition-all"></div>
                                         <p className="absolute top-3 left-3 text-white"><b className="text-white">{board?.title}</b></p>
                                     </Link>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Column from './Column';
 import { Breadcrumb } from '../../../../../../../../components/Breadcrumb';
-import { Link, useBeforeUnload, useLocation } from 'react-router-dom';
+import { Link, useBeforeUnload, useParams } from 'react-router-dom';
 import { useModal } from '../../../../../../../../hooks/useModal';
 import { useBoard } from '../../../../../../../../hooks/useBoard';
 import { Tabs } from '../../../../../../../../components/Tabs';
@@ -11,11 +11,20 @@ import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from
 import "gantt-task-react/dist/index.css";
 import CustomGantt from './Gantt/CustomGantt';
 
-export function Board() {
+export const Board: React.FC = () => {
     const [tab, setTab] = useState<string>("todo");
     const { openModal } = useModal();
     const { onDragEnd, columnOrder, columnsData } = useBoard();
-    const { state } = useLocation();
+
+    const [application, setApplication] = useState<string>('');
+
+    const { appname } = useParams();
+
+    useEffect(() => {
+        if( appname ) {
+            setApplication(appname);
+        }
+    }, [appname])
 
     let tasks: Task[] = [
         {
@@ -102,11 +111,6 @@ export function Board() {
                             link: "/project/ptoelquelolea"
                         },
                         {
-                            icon: state.icon,
-                            name: state.app,
-                            link: "/project/ptoelquelolea/app/" + state.app.toLowerCase()
-                        },
-                        {
                             icon: "fa-solid fa-chess-board",
                             name: "front-End"
                         },
@@ -116,9 +120,9 @@ export function Board() {
                     <div className="bg-gray-200 dark:bg-slate-800 w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
                         <div className="flex gap-3">
                             <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
-                            {state.app == "Taskman" &&
+                            { application === "taskman" &&
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
-                            } {state.app == "Timeline" &&
+                            } { application === "Timeline" &&
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols"
                                     links={[
                                         {
@@ -152,7 +156,7 @@ export function Board() {
                             })}
                             className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                     </div>
-                    {state.app == "Taskman" &&
+                    { application == "taskman" &&
                         <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
                             {(provided) => (
                                 <div id="scrollbarx"
@@ -179,7 +183,7 @@ export function Board() {
                                 </div>
                             )}
                         </StrictDroppable>
-                    } {state.app == "Timeline" &&
+                    } { application == "Timeline" &&
                         <>
                             <CustomGantt column={tab} />
                         </>

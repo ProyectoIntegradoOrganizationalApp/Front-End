@@ -139,9 +139,9 @@ export function App() {
                                     </Route>
 
                                     <Route path="project/:name/store" element={ <Store project={''} /> }/>
-                                    <Route path="project/:name/app/taskman/:idapp" element={ <Boards icon="fa-solid fa-table-columns" app="Taskman"/> }/>
-                                    <Route path="project/:name/app/timeline/:idapp" element={ <Boards icon="fa-solid fa-chart-gantt" app="Timeline"/> }/>
-                                    <Route path="project/:name/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
+                                    <Route path="project/:name/app/taskman/:idapp" element={ <Boards app="Taskman"/> }/>
+                                    <Route path="project/:name/app/timeline/:idapp" element={ <Boards app="Timeline"/> }/>
+                                    <Route path="project/:name/app/:appname/:idapp/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
                                     <Route path="friends/dashboard" element={ <Friends /> } />
                                     <Route path="friend/:name" element={ <Friend />} />
                                 </Route>

@@ -18,6 +18,7 @@ interface Board {
     title: string,
     photo: string,
     updated_at: string,
+    id: string,
     iduser: string,
     idproject: string,
     idapp: string
