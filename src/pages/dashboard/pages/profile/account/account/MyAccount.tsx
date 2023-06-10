@@ -3,13 +3,19 @@ import { useState } from 'react';
 import { Profile } from '../../../../../../domain/profile/Profile.interface';
 import React from 'react';
 import { Account } from '../../../../../../domain/account/Account.interface';
+import { SaveImage } from '../../../../../../components/image-kit/SaveImage';
+
+interface MyAccountProps {
+    data: Account | undefined,
+    update: ( acc: Account ) => void
+}
 
 /**
  * Componente Account, que representa la ruta /account en la cual podremos
  * ver y configurar nuestra cuenta
  * @returns React.FC
  */
-export const MyAccount: React.FC<{data: Account | undefined}> = ({data}) => {
+export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
 
     const [tab, setTab] = useState<string>("account");
 
@@ -18,7 +24,7 @@ export const MyAccount: React.FC<{data: Account | undefined}> = ({data}) => {
     const [last_name, setLastName] = useState<string>('');
     const [prefix, setPrefix] = useState<string>('');
     const [phone_number, setPhoneNumber] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
+    const [photo, setPhoto] = useState<string>('');
 
     /**
      *  Carga inicial de datos
@@ -30,9 +36,8 @@ export const MyAccount: React.FC<{data: Account | undefined}> = ({data}) => {
             setLastName(data.lastname);
             setPrefix(data.phone.slice(0, 3));
             setPhoneNumber(data.phone.slice(3));
+            setPhoto(data.photo)
         }
-        
-
     }, [data?.iduser]);
 
     /**
@@ -41,13 +46,29 @@ export const MyAccount: React.FC<{data: Account | undefined}> = ({data}) => {
      * 
      */
     const handleUpdate = () => {
+        const acc: Account = {
+            email: email,
+            iduser: "",
+            name: name,
+            lastname: last_name,
+            phone: phone_number,
+            photo: photo
+        }
 
+        update(acc);
+    }
+
+    const photoUpdate = ( url: string ) => {
+        setPhoto(url);
     }
 
     return (
         <div className="flex-1 flex flex-col justify-between min-[811px]:mt-9 gap-5">
             <div id="scrollbar" className="flex-1 flex flex-wrap items-start content-start gap-5 text-black dark:text-white">
                 <div className="flex-1 basis-full flex flex-col gap-2 h-fit">
+                    <SaveImage 
+                        cb={photoUpdate}
+                    />
                     <label htmlFor="avatar">Avatar</label>
                     <input type="file" name="avatar" className="file-input !outline-none bg-gray-300 dark:bg-slate-700 !border-none w-full h-fit" />
                 </div>

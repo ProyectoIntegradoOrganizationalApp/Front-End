@@ -6,7 +6,6 @@ import { AchievementsLevel } from "./AchievementsLevel";
 import { AchievementsList } from "./AchievementsList";
 
 import { Profile } from "../../../../../domain/profile/Profile.interface";
-import { useOutletContext } from "react-router-dom";
 
 /**
  *  Componente de Achievement Info para ver el conjunto de Level y List de logros del usuario
@@ -19,7 +18,6 @@ export const AchievementsInfo: React.FC<{data: Profile}> = ({ data }) => {
     let rank: string = "Newbie";
     let level: number = data.user.level;
     
-
     switch( true ) {
         case (level > 1 && level < 10): {
             rank = "newbie"

@@ -74,7 +74,7 @@ export const useAccountApi = ( fetch: boolean ) => {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${user?._token}`
             }),
-            data: data
+            data: AccountMapper.prototype.mapFrom(data)
         }
 
         useAxios(props)

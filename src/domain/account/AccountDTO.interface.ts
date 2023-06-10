@@ -4,5 +4,6 @@ export interface AccountDTO {
     iduser: string,
     name: string,
     lastname: string,
-    phone: string
+    phone: string,
+    photo: string
 }

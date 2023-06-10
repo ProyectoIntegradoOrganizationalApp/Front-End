@@ -10,7 +10,8 @@ export class AccountMapper extends Mapper<Account, AccountDTO> {
             iduser: data.iduser,
             name: data.name,
             lastname: data.lastname,
-            phone: data.phone
+            phone: data.phone,
+            photo: data.photo
         }
     }
 
@@ -20,7 +21,8 @@ export class AccountMapper extends Mapper<Account, AccountDTO> {
             iduser: data.iduser,
             name: data.name,
             lastname: data.lastname,
-            phone: data.phone
+            phone: data.phone,
+            photo: data.photo
         }
     }
 }

@@ -1,10 +1,16 @@
 // React
 import { useState } from 'react';
+
+import { useOutletContext } from 'react-router-dom';
+
 import { MyAccount } from './account/MyAccount';
 import { Security } from './account/Security';
 import { Preferences } from './account/Preferences';
 import { Notifications } from './account/Notifications';
-import { useOutletContext } from 'react-router-dom';
+
+import { Account as IAccount } from '../../../../../domain/account/Account.interface';
+import { AccountDTO as IAccountDTO } from '../../../../../domain/account/AccountDTO.interface';
+
 import { Profile } from '../../../../../domain/profile/Profile.interface';
 import { useAccountApi } from '../../../../../adapters/api/useAccountApi';
 
@@ -21,16 +27,24 @@ export const Account: React.FC = () => {
 
     const { data, loading, error, updateUser } = useAccountApi(true);
 
-    const update = () => {
-        console.log("hi")
+    /**
+     *  Función que se le pasa al componente a modo de Callback
+     *  para que actualice los datos.
+     * 
+     *  @param data 
+     */
+    const update = ( data: IAccount ) => {
+        data.iduser = context.user.id;
+        console.log(data)
+        updateUser(data);
     }
 
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <div className="bg-gray-200 dark:bg-slate-800 min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-8 py-8 min-w-[260px]">
                 <div className="flex flex-col items-center gap-5 px-4">
-                    { data && data.iduser ? (
-                        <img src={data.iduser} />
+                    { data && data.photo ? (
+                        <img src={data.photo} />
                     ): (    
                         <div className="bg-green-600 w-28 aspect-square rounded-full">
                         
@@ -55,6 +69,7 @@ export const Account: React.FC = () => {
                 {  tab == "account" ? (
                     <MyAccount
                         data={data}
+                        update={update}
                     /> 
                 ): tab == "security" ? (
                     <Security/>

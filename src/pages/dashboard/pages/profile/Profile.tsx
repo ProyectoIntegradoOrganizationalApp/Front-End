@@ -41,7 +41,10 @@ export function Profile() {
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
         
+        // TODO => CAMBIAR INTERFACES CUANDO CHRISTIAN TERMINE
+        // LA ACTIVITY
         profileData.activity = [];
+
         const { getUserWork } = useUtils();
         const {commitsDaily, commitsWeekly} = getUserWork(profileData?.activity);
 
@@ -50,6 +53,10 @@ export function Profile() {
 
     }, []);
 
+    /**
+     *  Función que refresca los datos para que se recargue la IU
+     *  y así poder ver los cambios.
+     */
     const handleCreateProject = () => {
         refreshData();
     }
