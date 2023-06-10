@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import axios, { AxiosHeaders } from 'axios';
+import { AxiosHeaders } from 'axios';
 import { useAxios } from "./useAxios";
 
 import { ApiError } from "../../domain/ApiError.interface";

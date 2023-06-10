@@ -3,9 +3,6 @@ import { Link, Outlet, useParams } from 'react-router-dom';
 
 import { Breadcrumb } from '../../../../components/Breadcrumb';
 import { Tabs } from '../../../../components/Tabs';
-import { ProjectApps } from './components/ProjectApps';
-import { ProjectDashboard } from './components/ProjectDashboard';
-import { ProjectMembers } from './components/ProjectMembers';
 
 import { Project } from '../../../../domain/projects/Project.interface';
 import { useProjectApi } from '../../../../adapters/api/useProjectApi';
@@ -15,7 +12,7 @@ export function Project() {
     const [project, setProject] = React.useState<Project>();
     const [tab, setTab] = React.useState<string>("dashboard");
 
-    const { data, error, loading, fetchProject } = useProjectApi(false);
+    const { data, error, loading, fetchProject } = useProjectApi();
 
     let { name } = useParams();
     React.useEffect(() => {

@@ -1,8 +1,14 @@
 import { UserActivity } from "../domain/user/UserActivity.interface";
 
-export const useUtils = (activity?: Array<UserActivity>) => {
-
-    const getUserWork = (): { commitsWeekly: number, commitsDaily: number } => {
+export const useUtils = ( ) => {
+    
+    /**
+     *  Función que devuelve la actividad de un usuario, tanto
+     *  semanal como mensual.
+     * 
+     *  @returns 
+     */
+    const getUserWork = ( activity: Array<UserActivity> ): { commitsWeekly: number, commitsDaily: number} => {
         // Contadores en los que vamos sumando la cantidad de commits realizados
         let commitsWeekly: number = 0;
         let commitsDaily: number = 0;
@@ -31,30 +37,30 @@ export const useUtils = (activity?: Array<UserActivity>) => {
         return { commitsWeekly, commitsDaily };
     }
 
-    // Get months from January to actual
-    const getMonths = (): string[] => {
-        const months: string[] = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
-        ];
-
-        const currentDate = new Date();
-        const currentMonthIndex = currentDate.getMonth();
-
-        return months.slice(0, currentMonthIndex + 1);
+    /**
+     *  Función que devuelve un array con el nombre de 
+     *  todos los meses para generar charts.
+     * 
+     *  @returns 
+     */
+    const getMonths = (): Array<string> => {
+        return [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
     }
 
-    return { getUserWork, getMonths };
+    return { getUserWork, getMonths };    
 
 }
 

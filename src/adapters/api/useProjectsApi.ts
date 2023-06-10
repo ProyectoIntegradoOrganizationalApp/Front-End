@@ -18,7 +18,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
 
     const { user } = useAuth();
 
-    const [data, setData] = useState<Array<Project> | Project>();
+    const [data, setData] = useState<Array<Project>>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -74,9 +74,7 @@ export const useProjectsApi = ( fetch: boolean ) => {
      *  Función para controlar la petición sobre múltiple proyectos
      *  @param info 
      */
-    const handleData = ( info: ProjectWrapper | ProjectDTO | ApiError ) => {
-
-        console.log(info)
+    const handleData = ( info: ProjectWrapper | ApiError ) => {
 
         /**
          * Hay Error

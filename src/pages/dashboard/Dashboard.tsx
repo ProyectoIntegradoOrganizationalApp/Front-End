@@ -36,7 +36,9 @@ export const Dashboard = () => {
     return (
         <Sidebar>
             <DashboardBox>
-                <Outlet context={data} />
+                { data && (
+                    <Outlet context={data} />
+                )}
             </DashboardBox>
         </Sidebar>
     )

@@ -36,27 +36,36 @@ export function Profile() {
     const navigate = useNavigate();
 
     const profileData: Profile = useOutletContext();
-    const { data, error, loading, refreshData } = useProjectsApi(true);
+     const { data, error, loading, refreshData } = useProjectsApi(true);
 
     const { getMonths } = useUtils();
 
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
-        if (data) {
-            const getUserWork = useUtils(profileData?.activity);
-            const { commitsDaily, commitsWeekly } = getUserWork.getUserWork();
+        
+        // TODO => CAMBIAR INTERFACES CUANDO CHRISTIAN TERMINE
+        // LA ACTIVITY
+        profileData.activity = [];
 
-            setDaily(commitsDaily);
-            setWeekly(commitsWeekly);
-        }
-    }, [profileData?.user.id]);
+        const { getUserWork } = useUtils();
+        const {commitsDaily, commitsWeekly} = getUserWork(profileData?.activity);
 
+        setDaily(commitsDaily);
+        setWeekly(commitsWeekly);
+
+    }, []);
+
+    /**
+     *  Función que refresca los datos para que se recargue la IU
+     *  y así poder ver los cambios.
+     */
     const handleCreateProject = () => {
         refreshData();
     }
 
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
+            
             <AchievementsInfo
                 data={profileData}
             />
@@ -130,7 +139,7 @@ export function Profile() {
                                 >
                                     <ShowButton
                                         cb={() => {
-                                            navigate(`/project/${project.idProject}`)
+                                            navigate(`/project/${project.idProject}/dashboard`)
                                         }}
                                     />
                                 </MainItem>

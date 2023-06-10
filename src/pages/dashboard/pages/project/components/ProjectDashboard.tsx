@@ -1,18 +1,52 @@
+import { useEffect, useState } from "react";
+
 import { InfoTooltip } from "../../../../../components/InfoTooltip"
 import { TaskLog } from "../../../../../components/TaskLog"
 import { Statistics } from "../../profile/components/Statistics"
 
 import foto from "../../../../../assets/foto.png";
-import { TotalTasks } from "./dashboard/TotalTasks";
-import { TasksPerMonth } from "./dashboard/TasksPerMonth";
-import { useUtils } from "../../../../../hooks/useUtils";
+import { Project } from "../../../../../domain/projects/Project.interface";
+import { useOutletContext } from "react-router";
+import { Pie, Bar } from "react-chartjs-2";
+import useChart from "../../../../../hooks/useChart";
 
+/**
+ *  Componente que es la vista del dashboard de un proyecto.
+ *  Muestra información acerca de ese proyecto.
+ * 
+ *  @returns React.FC
+ */
 export const ProjectDashboard: React.FC = () => {
-    const { getMonths } = useUtils();
 
-    // ignorar (cambiar por logs de verdad de la bd)
-    const logs = [1]
-    
+    // Recogemos las props que nos llegan desde el router
+    const project: Project = useOutletContext();
+
+    // Recogemos las charts
+    const { pieChart, barChart } = useChart();
+    const { pieChartData, pieChartOptions } = pieChart({ completed: 5, uncompleted: 2});
+    const { barChartData, barChartOptions } = barChart([12, 19, 3, 5, 2, 13]);
+
+    const logs = [];
+
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        setIsDarkMode(mediaQuery.matches);
+
+        const handleChange = (e: MediaQueryListEvent) => {
+            setIsDarkMode(e.matches);
+        };
+
+        mediaQuery.addEventListener("change", handleChange)
+
+        return () => {
+            mediaQuery.removeEventListener("change", handleChange);
+        };
+    }, []);
+
+    const tickColor = isDarkMode ? 'white' : 'black';
+
     return (
         <>
             <div className="flex-1 flex flex-wrap gap-4 max-[500px]:gap-2">
@@ -23,28 +57,22 @@ export const ProjectDashboard: React.FC = () => {
                             amount={132}
                         />
                     </div>
-                    <div className="w-[13rem] aspect-square">
-                        <TotalTasks chartConf={{
-                            type: "pie",
-                            labels: ['Completed', 'Incompleted'],
-                            data: {
-                                data: [300, 50],
-                                backgroundColor: ['#19c37d', '#FF6384'],
-                                hoverBackgroundColor: ['#19c37d', '#FF6384']
-                            }
-                        }} />
+                    <div className="w-[9rem] aspect-square">
+                        { pieChartData && (
+                            <Pie
+                                data={pieChartData}
+                                options={pieChartOptions}
+                            />
+                        )}
                     </div>
                 </div>
-                <div className="bg-white dark:bg-slate-800 rounded-xl flex-[6] p-4 w-full">
-                    <TasksPerMonth chartConf={{
-                        type: "bar",
-                        labels: getMonths(),
-                        data: {
-                            data: [12, 19, 3, 5, 2, 13],
-                            backgroundColor: 'rgb(0, 202, 247)',
-                            borderColor: 'rgb(0, 202, 247)'
-                        }
-                    }} />
+                <div className="bg-white dark:bg-slate-800 rounded-xl flex-[7] p-4 w-full">
+                    { barChartData && (
+                        <Bar 
+                            data={barChartData}
+                            options={barChartOptions}
+                        />
+                    )}
                 </div>
                 <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[1] min-w-fit flex flex-col items-center justify-center p-4 py-7 gap-12 relative">
                     <div className="absolute top-4 left-4">

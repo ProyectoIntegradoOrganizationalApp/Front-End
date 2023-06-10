@@ -1,6 +1,9 @@
+
 import { useState } from "react";
 
-import { useProjectApi } from "../../adapters/api/useProjectApi";
+import { useParams } from "react-router-dom";
+
+import useTaskApp from '../../adapters/api/useTaskAppApi';
 
 interface ProjectFormProps {
     title: string | undefined,
@@ -9,21 +12,26 @@ interface ProjectFormProps {
     submit: () => void
 }
 
-const CrudProjectForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
+const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
 
     /** 
      * Hook de la API de proyectos, le pasamos un false para que no realice la query.
      */
-    const { createProject } = useProjectApi();
+    const { createBoard } = useTaskApp();
 
     const [projectTitle, setProjectTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
     const handleSubmit = ( event: React.FormEvent ) => {
         event.preventDefault();
-        createProject(projectTitle, description);
-        close();
-        submit();
+
+        const { name } = useParams();
+        if( name ) {
+            createBoard(projectTitle, description, name);
+            close();
+            submit();
+        }
+        
     }
 
     return (
@@ -75,4 +83,4 @@ const CrudProjectForm: React.FC<ProjectFormProps> = ({ title, submitText, close,
     )
 }
 
-export default CrudProjectForm;
+export default CrudBoardForm;

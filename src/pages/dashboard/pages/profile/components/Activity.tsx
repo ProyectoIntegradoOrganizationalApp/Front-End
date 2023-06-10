@@ -11,15 +11,21 @@ import useChart from '../../../../../hooks/useChart';
 import { Profile } from "../../../../../domain/profile/Profile.interface";
 import { ChartConf } from "../../../../../domain/UI/ChartConf.interface";
 
+interface ActivityProps {
+    title: string,
+    data: Profile
+}
+
 /**
  *  Componente de Actividad del usuario para ver cuando ha hecho commits
  *  
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
+export const Activity: React.FC<ActivityProps> = ({ title, data }) => {
 
-export function Activity(props: { title: string, data: Profile, chartConf: ChartConf }) {
-    const { data, options } = useChart(props.chartConf);
+    const { lineChart } = useChart();
+    const { chartData, options } = lineChart(data);
 
     return (
         <>
@@ -28,12 +34,12 @@ export function Activity(props: { title: string, data: Profile, chartConf: Chart
                     <div className="absolute top-3 left-4">
                         <InfoTooltip title="Commits done per day" position="left" />
                     </div>
-                    <p className="w-full flex justify-center text-black dark:text-white leading-none text-base">{props.title}</p>
+                    <p className="w-full flex justify-center text-black dark:text-white leading-none text-base">{title}</p>
                 </div>
-                {props.data.activity.length > 0 ? (
+                { data.activity.length > 0 ? (
                     <div className="h-full">
                         <Line
-                            data={data}
+                            data={chartData}
                             options={options}
                         />
                     </div>

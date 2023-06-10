@@ -14,7 +14,7 @@ import { ProjectDTO } from '../../domain/projects/ProjectDTO.interface';
  * Hook para la conexión con los endpoints del back-end que se
  * encargan de hacer las peticiones sobre proyectos.
  */
-export const useProjectApi = ( fetch: boolean ) => {
+export const useProjectApi = () => {
 
     const { user } = useAuth();
 
@@ -22,46 +22,7 @@ export const useProjectApi = ( fetch: boolean ) => {
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
-    /**
-     *  Efecto que maneja el ciclo de vida de la API
-     */
-    useEffect(() => {
-        // Para así poder usar el hook sin realizar otra query.
-        if( fetch ) {
-            fetchData();
-        }
-    }, [])
-
     const API = import.meta.env.VITE_API_URL;
-
-    /**
-     *  Función que fetchea los datos de los proyectos, se debe de llamar desde un 
-     *  efecto, para que el objeto de usuario ya haya cargado.
-     */
-    const fetchData = () => {
-        setLoading(true);
-
-        /**
-         * Props de la petición
-         */
-        const props: RequestParams = {
-            url: `${API}/user/${user?.id}/projects`,
-            method: "GET",
-            headers: new AxiosHeaders({
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user?._token}`
-            }),
-        }
-        
-        useAxios(props)
-            .then( data => handleData(data.data))
-            .catch( err => {
-                handleData({error: true, message: err});
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }
 
     /**
      *  Función que recibe un ID y busca el proyecto concreto
@@ -178,8 +139,8 @@ export const useProjectApi = ( fetch: boolean ) => {
     /**
      *  Función que llama a fetchData para actualizar la información de los proyectos.
      */
-    const refreshData = () => {
-        fetchData();
+    const refreshData = ( id: string ) => {
+        fetchProject(id);
     }
 
 
@@ -204,6 +165,7 @@ export const useProjectApi = ( fetch: boolean ) => {
             setError(undefined);
 
             let project: Project = ProjectMapper.prototype.mapTo(info);
+            console.log(project)
             setData(project);
         }
 
