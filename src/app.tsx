@@ -19,8 +19,6 @@ import { Projects } from './pages/dashboard/pages/projects/Projects';
 import { Achievements } from './pages/dashboard/pages/achievements/Achievements';
 import { Friends } from './pages/dashboard/pages/friends/Friends';
 import { Friend } from './pages/dashboard/pages/friends/pages/friend/Friend';
-import Login from './pages/signIn/Login';
-import Register from './pages/signIn/Register';
 import { Error } from './pages/Error';
 
 // Componentes
@@ -143,11 +141,11 @@ export function App() {
                                     </Route>
 
                                     <Route path="project/:name/store" element={ <Store project={''} /> }/>
-                                    <Route path="project/:name/app/taskman/:idapp" element={ <Boards app="Taskman"/> }/>
-                                    <Route path="project/:name/app/timeline/:idapp" element={ <Boards app="Timeline"/> }/>
-                                    <Route path="project/:name/app/:appname/:idapp/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
+                                    <Route path="project/:projectId/app/taskman/:idApp" element={ <Boards app="Taskman"/> }/>
+                                    <Route path="project/:projectId/app/timeline/:idApp" element={ <Boards app="Timeline"/> }/>
+                                    <Route path="project/:projectId/app/:appName/:idApp/:idBoard" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
                                     <Route path="friends/dashboard" element={ <Friends /> } />
-                                    <Route path="friend/:name" element={ <Friend />} />
+                                    <Route path="friend/:friendName" element={ <Friend />} />
                                 </Route>
                             </Route>
 

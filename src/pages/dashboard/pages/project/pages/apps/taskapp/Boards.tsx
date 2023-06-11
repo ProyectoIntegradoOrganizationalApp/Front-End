@@ -18,20 +18,21 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
     const { openModal } = useModal();
 
     // Hooks de peticiones
-    const { data, error, loading, getProyectInfo, refreshData, createBoard } = useTaskAppApi();
-    const { data: ProjectData, fetchProject} = useProjectApi();
+    const { data, error, loading, getAppInfo, BoardCrud } = useTaskAppApi();
+    const { data: ProjectData, fetchProject } = useProjectApi();
     
     // Variables Reactivas
     const [projectName, setProjectName] = useState<string>('');
 
     // Recogida de parámetros de la URL y su Efecto
-    let { idapp, name } = useParams();
+    let { idApp, projectId } = useParams();
     React.useEffect(() => {
-        if ( idapp && name ) {
-            getProyectInfo(idapp);
-            fetchProject(name);
+        console.log(idApp, projectId)
+        if ( idApp && projectId ) {
+            getAppInfo(idApp);
+            fetchProject(projectId);
         }
-    }, [idapp]);
+    }, [idApp]);
 
     // Efecto para cambiar el nombre del proyecto
     React.useEffect(() => {
@@ -43,10 +44,9 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
     }, [ProjectData?.name])
 
     // Función de creación de tabla
-    const handleCreateBoard = ( valor1?: string, valor2?: string ) => {
-        if( valor1 && valor2 && idapp ) {
-            createBoard(valor1, valor2, idapp);
-            refreshData(idapp);
+    const handleCreateBoard = ( title?: string, description?: string ) => {
+        if( title && description && idApp && projectId ) {
+            BoardCrud().createBoard(title, description, projectId, idApp);
         }
     }
 
@@ -62,7 +62,7 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                     {
                         icon: "fa-solid fa-list-check",
                         name: `${projectName}`,
-                        link: `/project/${name}`
+                        link: `/project/${projectId}`
                     },
                 ]} />
             </div>
@@ -71,7 +71,7 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                 <ul id="scrollbar" className="flex min-[839.50px]:flex-wrap max-[839.50px]:flex-col justify-start content-start gap-4 h-full overflow-y-hidden bg-white dark:bg-[#28292d] rounded-xl p-4 max-[500px]:p-2 select-none">
                     {/* Foreach (Board) */}
                     
-                    { data && data.boards && (
+                    { data && data.boards && Array.isArray(data.boards) && (
                         data.boards.map(( board, index ) => {
                             return (
                                 <li 

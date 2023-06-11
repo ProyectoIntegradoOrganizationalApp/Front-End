@@ -1,31 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColumnData } from "../domain/apps/taskman/ColumnData.interface";
 import { DropResult } from "react-beautiful-dnd";
+import { Column, TaskAppInfo } from "../adapters/api/useTaskAppApi";
 
-export const useBoard = () => {
-    const [ columnOrder, setColumnOrder ] = useState<string[]>(['column-0', 'column-1', 'column-2', 'column-3']);
-    const [ columnsData, setColumnsData ] = useState<ColumnData>({
-        "column-0": {
-            id: "column-0",
-            title: 'To Do',
-            taskIds: ['task-1', 'task-2', 'task-3']
-        },
-        "column-1": {
-            id: "column-1",
-            title: 'In Progress',
-            taskIds: ['task-4', 'task-5']
-        },
-        "column-2": {
-            id: "column-2",
-            title: 'Done',
-            taskIds: ['task-6']
-        },
-        "column-3": {
-            id: "column-3",
-            title: 'sergioesBobo',
-            taskIds: ['task-7', 'task-8']
+export const useBoard = ( data: TaskAppInfo | undefined ) => {
+    const [ columnOrder, setColumnOrder ] = useState<string[]>([]);
+    const [ columnsData, setColumnsData ] = useState<ColumnData>({});
+
+    useEffect(() => {
+        if( data && data.columns ) {
+            setColumnOrder([]);
+            setColumnsData({});
+
+            console.log(data)
+
+            data.columns.map(( col: Column ) => {
+                setColumnOrder([...columnOrder, col.id]);
+
+                const cols: ColumnData = { } 
+                cols[col.id] = {
+                    id: col.id,
+                    title: col.title,
+                    taskIds: col.tasks.map( task => {
+                        return task.id
+                    })
+                }
+
+                setColumnsData({...columnsData, ...cols})
+
+            })
         }
-    });
+        
+    }, [data?.columns])
     
     const moveIndex = (list: string[], from: number, to: number) => {
         list.splice(to, 0, list.splice(from, 1)[0]);

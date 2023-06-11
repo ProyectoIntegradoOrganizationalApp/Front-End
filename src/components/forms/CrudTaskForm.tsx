@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 interface ProjectFormProps {
@@ -8,14 +7,14 @@ interface ProjectFormProps {
     submit: (value1?: string, value2?:string) => void
 }
 
-const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
+const CrudTaskForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
 
-    const [projectTitle, setProjectTitle] = useState<string>("");
+    const [taskTitle, setTaskTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
     const handleSubmit = ( event: React.FormEvent ) => {
         event.preventDefault();
-        submit(projectTitle, description);
+        submit(taskTitle, description);
         close();
     }
 
@@ -36,20 +35,20 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
                 >
                     <input 
                         type="text"
-                        name="Board Name" 
-                        placeholder="Insert your board name"
+                        name="Task Name" 
+                        placeholder="Insert your task name"
                         minLength={3}
                         maxLength={20} 
                         className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-[#28292d] p-4`} 
                         required={true}
-                        value={projectTitle}
+                        value={taskTitle}
                         onChange={ event => {
-                            setProjectTitle(event.target.value);
+                            setTaskTitle(event.target.value);
                         }}
                     />
                     <textarea 
-                        name="Board Description"
-                        placeholder="Insert board Description"
+                        name="Task Description"
+                        placeholder="Insert task Description"
                         minLength={10} 
                         maxLength={50}
                         className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-[#28292d]`} 
@@ -68,4 +67,4 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
     )
 }
 
-export default CrudBoardForm;
+export default CrudTaskForm;
