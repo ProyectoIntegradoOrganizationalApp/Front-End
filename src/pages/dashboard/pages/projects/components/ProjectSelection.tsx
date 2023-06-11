@@ -21,7 +21,7 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
     }
 
     return (
-        <div className="bg-white dark:bg-slate-700 flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
+        <div className="bg-white dark:bg-[#28292d] flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
             <div className="absolute top-5 right-4">
                 <Share link="url_proyecto_invitación" />
             </div>
@@ -29,7 +29,7 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
 
                 {/* Icon (comprobar si tiene icono, si no tiene, dejar el div de abajo) */}
                 { props.selection ? (
-                    <div className="bg-gray-200 dark:bg-slate-800 w-32 aspect-square rounded-full flex justify-center items-center">
+                    <div className="bg-gray-200 dark:bg-[#202124] w-32 aspect-square rounded-full flex justify-center items-center">
                         <i className="fa-solid fa-diagram-project text-black dark:text-white text-3xl"></i>
                     </div>
                 ) :(
@@ -45,7 +45,7 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
                 {/* ProjectMembers */}
                 <div className="flex flex-col w-full gap-1">
                     {/* Admin */}
-                    <div className="bg-gray-200 dark:bg-slate-800 w-full flex flex-col items-center gap-3 p-4 pt-5 rounded-t-xl">
+                    <div className="bg-gray-200 dark:bg-[#202124] w-full flex flex-col items-center gap-3 p-4 pt-5 rounded-t-xl">
                         { admin && (
 
                             <InfoTooltip 
@@ -61,7 +61,7 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
                         <p className="text-black dark:text-white leading-none">Members</p>
                     </div>
                     {/* Members */}
-                    <div className="bg-gray-200 dark:bg-slate-800 w-full flex flex-wrap justify-center items-center p-4 gap-2 rounded-b-xl">
+                    <div className="bg-gray-200 dark:bg-[#202124] w-full flex flex-wrap justify-center items-center p-4 gap-2 rounded-b-xl">
                         { props.selection.members && (
                             props.selection.members.map( member => {
                                 return (

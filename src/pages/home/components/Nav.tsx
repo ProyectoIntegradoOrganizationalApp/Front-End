@@ -21,41 +21,53 @@ export function Nav() {
     const { user, logout } = useAuth();
 
     return (
-        <div className="navbar px-12 max-[768px]:px-5 bg-gray-100 dark:bg-cyan-800 dark:bg-transparent">
+        <div className="navbar !min-h-[unset] !py-0 px-16 max-[768px]:px-5 bg-transparent">
 
             <div className="navbar-start">
-                <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">
+                <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent !1min-h-[unset] !h-fit">
                     <img className="mr-3" src={logo}></img>
-                    Teamer    
+                    Teamer
                 </Link>
             </div>
 
-            { user && (
-                <div className="navbar-center">
+            <div className="navbar-center flex gap-3">
+                {user && (
                     <Link to="/profile/dashboard">
                         <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
                             Profile
                         </button>
                     </Link>
-                </div>
-            )}
+                )}
+                <Link to="/" className={`nav-item ${location.pathname == "/" ? "nav-active" : ""}`}>
+                    Home
+                </Link>
+                {user && (
+                    <Link to="/profile/dashboard" className="nav-item">
+                        Profile
+                    </Link>
+                )} {!user &&
+                    <Link to="/login" className="nav-item">
+                        Profile
+                    </Link>
+                }
+            </div>
 
             <div className="navbar-end">
 
-                { user && (
+                {user && (
                     <ProfileBadge
                         user={user}
                         logout={logout}
                     />
                 )}
 
-                { !user && (
+                {!user && (
                     <Link to="/login">
-                        <button className="btn btn-third !px-7 min-h-fit h-fit py-3">
+                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
                             Log In
                         </button>
                     </Link>
-                )} 
+                )}
 
             </div>
         </div>

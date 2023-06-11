@@ -31,7 +31,7 @@ export function Store(props: { project: string }) {
                         }
                     ]} />
                 </div>
-                <div className="flex-1 bg-gray-200 dark:bg-slate-800 w-full h-fit min-[1085px]:rounded-xl flex flex-col gap-2 min-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3">
+                <div className="flex-1 bg-gray-200 dark:bg-[#202124] w-full h-fit min-[1085px]:rounded-xl flex flex-col gap-2 min-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3">
                     <div className="flex items-center justify-between pr-2">
                         <div className="h-fit px-3 min-[500px]:pb-1 flex justify-between items-center rounded-xl max-[500px]:my-0">
                             <div className="flex items-center gap-6 h-full">

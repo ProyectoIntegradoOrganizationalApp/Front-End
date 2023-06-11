@@ -45,9 +45,9 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                     },
                 ]} />
             </div>
-            <div className="bg-gray-200 dark:bg-slate-800 w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
+            <div className="bg-gray-200 dark:bg-[#202124] w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chess-board" title="Boards" />
-                <ul id="scrollbar" className="flex min-[839.50px]:flex-wrap max-[839.50px]:flex-col justify-start content-start gap-4 h-full overflow-y-hidden bg-white dark:bg-slate-700 rounded-xl p-4 max-[500px]:p-2 select-none">
+                <ul id="scrollbar" className="flex min-[839.50px]:flex-wrap max-[839.50px]:flex-col justify-start content-start gap-4 h-full overflow-y-hidden bg-white dark:bg-[#28292d] rounded-xl p-4 max-[500px]:p-2 select-none">
                     {/* Foreach (Board) */}
                     
                     { data && data.boards && (
@@ -68,6 +68,15 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                             )
                         })
                     )}
+                    <li 
+                                    className={`bg-[url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/639x960/8bcdfaee9ea0002ce6163822d51db7bd/photo-1679464349885-f6603194a0bf.jpg)] bg-cover bg-no-repeat bg-center box-border board rounded-xl min-[839.50px]:flex-1 basis-[33%] min-w-fit min-[839.50px]:max-w-sm h-1/4 cursor-pointer`}
+                                    >
+                                    <Link 
+                                        state={{icon: props.icon, app: props.app}} to='./front-end' className="w-full h-full relative">
+                                        <div className="bg-black/30 w-full h-full rounded-xl transition-all"></div>
+                                        <p className="absolute top-3 left-3 text-white"><b className="text-white">front-End</b></p>
+                                    </Link>
+                                </li>
                     {/* EndForeach */}
                     <li className="newBoard rounded-xl min-w-fit h-1/4 cursor-pointer relative">
                         <section

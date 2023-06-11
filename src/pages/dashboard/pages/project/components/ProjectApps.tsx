@@ -9,8 +9,6 @@ import { useAppApi } from "../../../../../adapters/api/useAppApi";
 import RemoveButton from "../../../../../components/buttons/RemoveButton";
 
 export const ProjectApps: React.FC = () => {
-    
-    const project: Project = useOutletContext();
 
     const { data, error, loading, fetchApps } = useAppApi();
 
@@ -34,7 +32,7 @@ export const ProjectApps: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 max-[500px]:p-2 gap-2 h-full min-[500px]:rounded-xl content-start overflow-y-auto">
+        <div className="flex flex-wrap flex-[4] gap-2 h-full min-[500px]:rounded-xl content-start overflow-y-auto">
             {/* Foreach (Apps) */}
             { data && data.length > 0 && data.map(( app, index) => {
                 return (

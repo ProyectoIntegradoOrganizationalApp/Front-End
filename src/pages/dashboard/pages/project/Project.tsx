@@ -8,7 +8,6 @@ import { Project } from '../../../../domain/projects/Project.interface';
 import { useProjectApi } from '../../../../adapters/api/useProjectApi';
 
 export function Project() {
-
     const [project, setProject] = React.useState<Project>();
     const [tab, setTab] = React.useState<string>("dashboard");
 
@@ -42,7 +41,7 @@ export function Project() {
                     }
                 ]} />
             </div>
-            <div className="bg-gray-200 dark:bg-slate-800 w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
+            <div className="bg-gray-200 dark:bg-[#202124] w-full h-full rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
                 <div className="flex items-center justify-between pr-2 gap-2">
                     <Tabs
                         tab={tab}
@@ -66,7 +65,7 @@ export function Project() {
                     />
 
                     <div className="flex gap-2 justify-end max-[450px]:w-full max-[500px]:absolute bottom-5 right-5">
-                        {tab == "apps" &&
+                        {tab == "Apps" &&
                             <Link to={`/project/${project?.idProject}/store`}>
                                 <div
                                     className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-blue-700 dark:text-white hover:bg-blue-800">
@@ -74,13 +73,11 @@ export function Project() {
                                 </div>
                             </Link>
                         }
-
                     </div>
                 </div>
-                <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 gap-4 w-full h-full rounded-xl flex flex-col overflow-y-scroll">
+                <div className="bg-gray-300 dark:bg-[#28292d] p-4 pr-2.5 max-[500px]:p-2 gap-4 w-full h-full rounded-xl flex flex-col overflow-y-scroll">
                     <Outlet context={project} />
                 </div>
-                
             </div>
         </div >
     )

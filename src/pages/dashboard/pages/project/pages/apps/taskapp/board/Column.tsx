@@ -55,7 +55,7 @@ export function Column(props: ColumnProps) {
         <Draggable draggableId={column.id} index={index}>
             {(provided) => (
                 <div
-                    className="bg-gray-200 dark:bg-slate-900 pt-3 rounded-xl min-w-[320px] w-[320px] mr-4 !cursor-grab"
+                    className="bg-gray-200 dark:bg-[#141416] pt-3 rounded-xl min-w-[320px] w-[320px] mr-4 !cursor-grab"
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef} id={column.id}
@@ -64,7 +64,7 @@ export function Column(props: ColumnProps) {
                         {!toInput ? (
                             <h2 className="text-black dark:text-white font-bold select-none">{inputValue}</h2>
                         ) : (
-                            <input value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown} minLength={1} maxLength={22} className="input input-bordered border-none text-black max dark:text-white bg-gray-300 dark:bg-slate-700 p-2 h-6" onClick={() => setToInput(true)} type="text" />
+                            <input value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown} minLength={1} maxLength={22} className="input input-bordered border-none text-black max dark:text-white bg-gray-300 dark:bg-[#28292d] p-2 h-6" onClick={() => setToInput(true)} type="text" />
                         )}
 
                         <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export function Column(props: ColumnProps) {
                     <StrictDroppable droppableId={column.id}>
                         {(provided) => (
                             <div id="scrollbar"
-                                className="bg-gray-100 dark:bg-slate-800 p-4 rounded-b-xl h-[calc(100%-35px)] overflow-x-hidden"
+                                className="bg-gray-100 dark:bg-[#202124] p-4 rounded-b-xl h-[calc(100%-35px)] overflow-x-hidden"
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                             >

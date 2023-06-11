@@ -17,20 +17,38 @@
     @apply w-0 sm:w-2;
 }
 *::-webkit-scrollbar-thumb {
-    @apply bg-clip-padding border-[2px] border-solid bg-gray-400 border-transparent dark:bg-slate-900;
+    @apply bg-clip-padding border-[2px] border-solid bg-gray-400 border-transparent dark:bg-[#414149];
     border-right: none;
 }
 #scrollbarx::-webkit-scrollbar {
     @apply h-0 sm:h-[.6rem];
 }
 #scrollbarx::-webkit-scrollbar-thumb {
-    @apply bg-clip-padding border-[.2px] border-solid bg-gray-400 border-transparent dark:bg-slate-900;
+    @apply bg-clip-padding border-[.2px] border-solid bg-gray-400 border-transparent dark:bg-[#414149];
     border-right: none;
 }
 
 html, body {
     height: 100%;
-    @apply !bg-white dark:!bg-slate-800;
+    @apply !bg-white dark:!bg-[#202124];
+}
+
+/* Dark */
+.bg-slate-700 {
+    @apply !bg-[#28292d];
+}
+
+/* Nav */
+.nav-item {
+    @apply relative py-5 px-4;
+}
+.nav-item::after {
+    @apply absolute w-0 h-1 bg-black dark:bg-white bottom-1 left-1/2 transition-all;
+    content: "";
+}
+.nav-active::after {
+    @apply absolute w-full h-1 bg-black dark:bg-white bottom-1 left-0 transition-all;
+    content: "";
 }
 
 /* Home */
@@ -83,11 +101,8 @@ html, body {
     @apply bg-black dark:bg-white w-3 aspect-square h-[unset];
 }
 .progressVideo::-webkit-progress-value {
-    @apply bg-gray-400 dark:bg-slate-900;
+    @apply bg-gray-400 dark:bg-[#414149];
     border-radius: var(--rounded-box, 1rem);
-}
-.progressVideo::-moz-progress-bar{
-    @apply bg-gray-400 dark:bg-slate-900;
 }
 .progressVideo {
     @apply left-[unset];
@@ -116,26 +131,13 @@ b {
 /* Buttons */
 .btn.btn-primary {
     @apply 
-    /* Common */ px-12 capitalize rounded-none transition-all text-white border-none text-base
-    /* Light */ bg-slate-800 hover:bg-slate-900
-    /* Dark */ dark:bg-slate-600/50 dark:hover:bg-slate-500/50;
+    /* Common */ px-12 capitalize rounded-none transition-all text-white border-none text-base bg-blue-700 hover:bg-blue-800;
 }
 .btn.btn-secondary {
     @apply 
     /* Common */ px-12 capitalize rounded-none transition-all text-white border-none text-base
     /* Light */ bg-slate-700 hover:bg-slate-800
     /* Dark */ dark:bg-slate-600 dark:hover:bg-slate-500/50;
-}
-.btn.btn-third {
-    @apply 
-    /* Common */ px-12 capitalize rounded-none transition-all text-black dark:text-white border-none text-base
-    /* Light */ bg-gray-300 hover:bg-gray-400
-    /* Dark */ dark:bg-slate-600 dark:hover:bg-slate-500/50;
-}
-.btn.btn-special {
-    @apply 
-    /* Common */ px-12 capitalize rounded-none transition-all text-white border-none text-base
-    /* Light */ bg-blue-600 hover:bg-blue-700;
 }
 
 /* Inputs */
@@ -148,10 +150,10 @@ textarea {
 
 /* Or login */
 .divider::before {
-    @apply bg-slate-700
+    @apply bg-[#414149]
 }
 .divider::after {
-    @apply bg-slate-700
+    @apply bg-[#414149]
 }
 
 /* Tailwind not working */
@@ -213,11 +215,8 @@ textarea {
     border-width: .9em;
 }
 .progressAchievement::-webkit-progress-value {
-    @apply bg-slate-600;
+    @apply bg-[#414149];
     border-radius: var(--rounded-box, 1rem);
-}
-.progressAchievement::-moz-progress-bar{
-    @apply bg-slate-600;
 }
 .progressAchievement {
     @apply left-[unset];
@@ -252,10 +251,10 @@ progress {
     @apply cursor-pointer transition-all select-none;
 }
 .selectElement > div > div:hover {
-    @apply bg-gray-200 dark:bg-slate-900;
+    @apply bg-gray-200 dark:bg-[#191a1c];
 }
 .selectedElement > div {
-    @apply bg-gray-200 dark:bg-slate-900;
+    @apply bg-gray-200 dark:bg-[#191a1c];
 }
 .rotate-35 {
     --tw-rotate: 35deg;
@@ -264,7 +263,7 @@ progress {
 
 /* Alert */
 .Toastify__toast {
-    @apply bg-white dark:bg-slate-900;
+    @apply bg-white dark:bg-[#161618];
 }
 .Toastify__toast-body {
     @apply text-base text-black dark:text-white;
@@ -335,10 +334,10 @@ progress {
 
 /* Timeline */
 ._35nLX {
-    @apply fill-gray-200 dark:fill-slate-700 h-[40px];
+    @apply fill-gray-200 dark:fill-[#28292d] h-[40px];
 }
 ._1nBOt {
-    @apply bg-gray-200 dark:bg-slate-700 !h-[50px];
+    @apply bg-gray-200 dark:bg-[#28292d] !h-[50px];
 }
 ._1nBOt ._2eZzQ {
     @apply mx-0 hidden;
@@ -353,16 +352,16 @@ progress {
     @apply pl-[12px];
 }
 ._2dZTy {
-    @apply fill-white dark:fill-slate-800;
+    @apply fill-white dark:fill-[#202124];
 }
 ._3lLk3 {
     @apply text-black dark:text-white;
 }
 ._34SS0:nth-of-type(odd), ._2dZTy:nth-child(even) {
-    @apply bg-white dark:bg-slate-800 fill-gray-200 dark:fill-slate-700;
+    @apply bg-white dark:bg-[#202124] fill-gray-200 dark:fill-[#28292d];
 }
 ._34SS0:nth-of-type(even) {
-    @apply bg-gray-200 dark:bg-slate-700;
+    @apply bg-gray-200 dark:bg-[#28292d];
 }
 ._3ZbQT, ._3_ygE {
     @apply border-none;
@@ -374,7 +373,7 @@ progress {
     @apply -translate-y-[2.2px];
 }
 ._31ERP {
-    @apply fill-gray-300 dark:fill-slate-500 text-black;
+    @apply fill-gray-300 dark:fill-[#414149] text-black;
 }
 ._KxSXS > g > rect:last-child {
     @apply fill-green-400/70;
@@ -406,18 +405,18 @@ progress {
     @apply !rounded-tr-none;
 }
 .table :where(thead, tfoot) :where(th, td) {
-    @apply !bg-gray-200 dark:!bg-slate-900/[.85];
+    @apply !bg-gray-200 dark:!bg-[#202124]/90;
 }
 .table-zebra tbody tr:nth-child(odd) th,
       .table-zebra tbody tr:nth-child(odd) td {
-    @apply !bg-white dark:!bg-slate-800;
+    @apply !bg-white dark:!bg-[#28292d];
 }
 .table-zebra tbody tr:nth-child(even) th,
       .table-zebra tbody tr:nth-child(even) td {
-    @apply !bg-gray-200 dark:!bg-slate-900/[.85];
+    @apply !bg-gray-200 dark:!bg-[#202124]/90;
 }
 .table-zebra {
-    @apply block w-full flex-1;
+    @apply block w-full flex-1 bg-[#414149];
 }
 .table-zebra thead {
     @apply block w-full;
@@ -438,7 +437,6 @@ progress {
     @apply absolute left-0 -bottom-1 w-0 h-[2px] bg-[#3060c5];
     content: "";
     transition: width .1s ease-in-out;
-
 }
 .custom-border:hover::after {
     @apply w-[calc(100%+3px)] ml-[-0.2px];

@@ -20,7 +20,7 @@ const useChart = () => {
      *  @param data 
      *  @returns 
      */
-    const lineChart = ( data: Profile ) => {
+    const lineChart = (data: Profile) => {
         // Opciones para la tabla
         const options = {
             responsive: true,
@@ -31,41 +31,41 @@ const useChart = () => {
 
         // Este array define las etiquetas del eje x en este caso serían las fechas
         const chartLabels: Array<string> = [
-            
+
         ];
 
         // Estos serían los datos de las labels.
-        const chartData: { labels: Array<string>, datasets: Array<{ label: string, data: Array<number>, borderColor: string, backgroundColor: string}> } = {
+        const chartData: { labels: Array<string>, datasets: Array<{ label: string, data: Array<number>, borderColor: string, backgroundColor: string }> } = {
             labels: chartLabels,
             datasets: []
         }
 
         // Rellenamos de datos
-        if( data?.activity ) {
+        if (data?.activity) {
             ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-            for( let activity of data?.activity ) {
+            for (let activity of data?.activity) {
 
-                const projectName: string | undefined = data.projects.find( elem => elem.idProject == activity.idProject)?.name;
+                const projectName: string | undefined = data.projects.find(elem => elem.idProject == activity.idProject)?.name;
                 const dataLabel: string = projectName ? projectName : "Proyecto";
 
                 chartLabels.push(new Date(activity.date).getUTCDate().toString());
 
-                if( !chartData.datasets.find(elem => elem.label === dataLabel) ) {
+                if (!chartData.datasets.find(elem => elem.label === dataLabel)) {
                     chartData.datasets.push({
                         label: dataLabel,
                         data: [
-                            
+
                         ],
                         borderColor: 'white',
                         backgroundColor: 'cyan'
                     })
 
-                } 
+                }
 
-                let item = chartData.datasets.find( elem => elem.label === dataLabel);
+                let item = chartData.datasets.find(elem => elem.label === dataLabel);
                 item?.data.push(activity.commits)
-                
+
             }
         }
 
@@ -79,11 +79,12 @@ const useChart = () => {
      *  @param data 
      *  @returns 
      */
-    const barChart = ( data: Array<number> ) => {
-    
+    const barChart = (data: Array<number>) => {
+
         // Configuración del BarChart
         const barChartOptions = {
             responsive: true,
+            indexAsis: 'y',
             elements: {
                 arc: {
                     borderWidth: 0
@@ -117,8 +118,8 @@ const useChart = () => {
                     label: "Completed",
                     data: [...data],
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235)',
+                        '#046cb2',
                     ]
                 },
             ]
@@ -134,10 +135,10 @@ const useChart = () => {
      *  @param data 
      *  @returns 
      */
-    const pieChart = ( data: { completed: number, uncompleted: number } ) => {
+    const pieChart = (data: { completed: number, uncompleted: number }) => {
 
         // Configuración del PieChart
-        const pieChartOptions = { 
+        const pieChartOptions = {
             responsive: true,
             elements: {
                 arc: {
@@ -147,8 +148,8 @@ const useChart = () => {
             plugins: {
                 legend: {
                     display: false
-                },  
-            }        
+                },
+            }
         };
 
         // Labels del Pie Chart
@@ -171,8 +172,8 @@ const useChart = () => {
                         data.uncompleted
                     ],
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 99, 132, 0.6)',
+                        '#3ea665',
+                        'rgba(255, 99, 132)',
                     ]
                 },
             ]
@@ -181,7 +182,7 @@ const useChart = () => {
         return { pieChartOptions, pieChartData };
 
     }
-    
+
     return { lineChart, pieChart, barChart };
 }
 

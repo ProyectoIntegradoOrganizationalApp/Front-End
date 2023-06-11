@@ -14,7 +14,7 @@ export const DescriptionTop = (props: { icon: string, title: string, description
             </div>
             <div className="items-center hidden min-[715px]:flex">
                 {/* Separator */}
-                <div className="w-[0.1rem] bg-gray-400 dark:bg-slate-500 h-9 mx-7"></div>
+                <div className="w-[0.1rem] bg-gray-400 dark:bg-[#28292d] h-9 mx-7"></div>
                 {/* Description */}
                 <p className="leading-none text-black dark:text-white/50 text-base">{props.description}</p>
             </div>

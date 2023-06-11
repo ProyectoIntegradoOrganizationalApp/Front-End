@@ -8,7 +8,7 @@ export const ProjectMembers: React.FC = () => {
     const project: Project = useOutletContext();
 
     return (
-        <div className="bg-gray-300 dark:bg-slate-700 p-4 max-[500px]:p-2 flex flex-col gap-2 w-full h-full min-[500px]:rounded-xl">
+        <div className="flex flex-col gap-2 w-full h-full min-[500px]:rounded-xl">
             { project && project.members.map(( elem ) => {
                 return (
                     <MainItem 

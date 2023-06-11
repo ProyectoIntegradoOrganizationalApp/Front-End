@@ -32,7 +32,7 @@ export function CookieModal(props: { isOpen: boolean }) {
     return (
         <Modal isOpen={props.isOpen} style={{ content: { all: "unset" } }}>
             <label htmlFor="modalbox" className="modal modalcontainer" id="cookiemodal">
-                <label className="modal-box bg-white dark:bg-slate-700" htmlFor="">
+                <label className="modal-box bg-white dark:bg-[#202124]" htmlFor="">
                     <div className="flex-1 flex flex-wrap items-center justify-between p-7 gap-7">
                         <div className="flex-1 flex flex-col gap-5 sm:min-w-[400px] !max-w-[800px]">
                             <p className="text-2xl leading-none w-fit">We Use Cookies</p>
@@ -44,7 +44,7 @@ export function CookieModal(props: { isOpen: boolean }) {
                         </div>
                         <div className="flex flex-wrap gap-4 w-full sm:w-fit">
                             <div className="flex-1 sm:flex-none btn btn-primary !bg-green-700 hover:!bg-green-800 min-w-fit" onClick={() => {handleClickAccept(); closeModal()}}>Accept Cookies</div>
-                            <div className="flex-1 sm:flex-none btn btn-secondary min-w-fit" onClick={() => {handleClickReject(); closeModal()}}>Reject Cookies</div>
+                            <div className="flex-1 sm:flex-none btn btn-primary !bg-red-700 hover:!bg-red-800 min-w-fit" onClick={() => {handleClickReject(); closeModal()}}>Reject Cookies</div>
                         </div>
                     </div>
                 </label>

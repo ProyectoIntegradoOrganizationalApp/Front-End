@@ -56,14 +56,14 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                         />
                     )}
                 </button>
-                <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-slate-900 w-full !z-[99999999999999] text-black dark:text-white gap-1">
+                <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-[#28292d] w-full !z-[99999999999999] text-black dark:text-white gap-1">
                     <li>
-                        <NavLink to="/profile/account" className={`justify-between !rounded-none px-2.5 py-2 text-black dark:text-white ${location.pathname != "/profile/account" ? "hover:bg-gray-300 dark:hover:bg-slate-800 active:!bg-slate-800" : "bg-white dark:bg-slate-800"}`}>
+                        <NavLink to="/profile/account" className={`justify-between !rounded-none px-2.5 py-2 text-black dark:text-white ${location.pathname != "/profile/account" ? "hover:bg-gray-300 dark:hover:bg-[#414149] active:!bg-[#414149]" : "bg-white dark:bg-[#414149]"}`}>
                             My Account
                         </NavLink>
                     </li>
                     <li>
-                        <button onClick={logout} className="flex justify-between !rounded-none px-2.5 py-2 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-slate-800 active:!bg-slate-800">Logout <i className="fa-solid fa-right-from-bracket"></i></button>
+                        <button onClick={logout} className="flex justify-between !rounded-none px-2.5 py-2 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-[#414149] active:!bg-[#414149]">Logout <i className="fa-solid fa-right-from-bracket"></i></button>
                     </li>
                 </ul>
             </div>
@@ -165,7 +165,7 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                 submitText: "",
                 submitAction: () => { }
             }
-            )} className="btn border-none w-fit px-[1.1rem] bg-white/70 hover:bg-white dark:bg-slate-900/70 dark:hover:bg-slate-900 absolute right-0 -bottom-0.5">
+            )} className="btn border-none w-fit px-[1.1rem] bg-white/70 hover:bg-white dark:bg-[#414149]/40 dark:hover:bg-[#28292d] absolute right-0 -bottom-0.5">
                 <i className="fa-solid fa-bell text-black dark:text-white"></i>
                 <div className="absolute -top-0.5 -right-1">
                     <State color="bg-red-700" hide />
