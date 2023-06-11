@@ -12,7 +12,7 @@ export function Security() {
     const [confirmpass, setConfirmPass] = useState<string>('');
 
     return (
-        <div className="flex-1 flex flex-col justify-between mt-9">
+        <div className="flex-1 flex flex-col justify-between min-[811px]:mt-9">
             <div className="flex flex-wrap gap-5 text-black dark:text-white">
                 <div className="flex-1 basis-full flex flex-col gap-2">
                     <label htmlFor="oldpassword">Old Password</label>
@@ -30,7 +30,7 @@ export function Security() {
                         }}
                     />
                 </div>
-                <div className="flex-1 flex gap-5">
+                <div className="flex-1 flex flex-wrap gap-5">
                     <div className="flex-1 flex flex-col gap-2">
                         <label htmlFor="password">New Password</label>
                         <input

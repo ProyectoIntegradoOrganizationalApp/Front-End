@@ -33,15 +33,15 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
 
     useEffect(() => {
         // Mensaje de error
-        if( error && error.error ) {
+        if (error && error.error) {
             toast.error(error.message)
         }
 
         // Mensaje de información
-        if( error && !error.error ) {
+        if (error && !error.error) {
             toast.info(error?.message)
         }
-        
+
     }, [error?.error])
 
     return (
@@ -49,21 +49,21 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
             {/* Account */}
             <div className={'dropdown dropdown-top h-fit hover:bg-grey flex'} >
                 <button className="btn !p-0 !bg-transparent border-none flex flex-nowrap justify-start items-center gap-2.5 normal-case flex-1 !h-[unset] !min-h-[unset]">
-                    { profile && (
-                        <img 
+                    {profile && (
+                        <img
                             src={profile.user.photo}
-                            className="!w-11 !aspect-square object-cover !h-[unset] !min-h-[unset]" 
+                            className="!w-11 !aspect-square object-cover !h-[unset] !min-h-[unset]"
                         />
                     )}
                 </button>
                 <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-[#28292d] w-full !z-[99999999999999] text-black dark:text-white gap-1">
                     <li>
-                        <NavLink to="/profile/account" className={`justify-between !rounded-none px-2.5 py-2 text-black dark:text-white ${location.pathname != "/profile/account" ? "hover:bg-gray-300 dark:hover:bg-[#414149] active:!bg-[#414149]" : "bg-white dark:bg-[#414149]"}`}>
+                        <NavLink to="/profile/account" className={`justify-between !rounded-none px-2.5 py-2 text-black dark:text-white ${location.pathname != "/profile/account" ? "hover:bg-gray-300 dark:hover:bg-[#414149]/30 active:dark:!bg-[#414149]" : "bg-white dark:bg-[#414149]"}`}>
                             My Account
                         </NavLink>
                     </li>
                     <li>
-                        <button onClick={logout} className="flex justify-between !rounded-none px-2.5 py-2 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-[#414149] active:!bg-[#414149]">Logout <i className="fa-solid fa-right-from-bracket"></i></button>
+                        <button onClick={logout} className="flex justify-between !rounded-none px-2.5 py-2 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-[#414149]/30 active:dark:!bg-[#414149]">Logout <i className="fa-solid fa-right-from-bracket"></i></button>
                     </li>
                 </ul>
             </div>
@@ -72,94 +72,97 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
                 isOpen: true,
                 type: "notifications",
                 content:
-                    <div id="scrollbar" className="flex flex-col bg-white dark:bg-slate-800 p-7 max-[500px]:p-4 gap-2 max-h-[1000px]">
-                        { data && (
+                    <div id="scrollbar" className="flex flex-col bg-white dark:bg-[#202124] p-7 max-[500px]:p-4 gap-2 max-h-[1000px]">
+                        {data && (
                             <>
                                 <h1>Friends</h1>
-                                {  data.friends.map(( noti, index ) => {
-                                        return(
-                                            <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
-                                                <MainItem 
-                                                    item={{
-                                                        name: noti.title,
-                                                        description: noti.message
-                                                    }} 
-                                                    descriptionBottom={true} 
-                                                >
-                                                    <AddButton 
-                                                        cb={() => {
-                                                            triggerRequest({
-                                                                type: "friend",
-                                                                userId: noti.idUser,
-                                                                action: "accept"
-                                                            });
+                                {data.friends.map((noti, index) => {
+                                    return (
+                                        <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-[#28292d] [&_div]:items-start [&_div]:p-1.5">
+                                            <MainItem
+                                                item={{
+                                                    name: noti.title,
+                                                    description: noti.message
+                                                }}
+                                                descriptionBottom={true}
+                                            >
+                                                <AddButton
+                                                    cb={() => {
+                                                        triggerRequest({
+                                                            type: "friend",
+                                                            userId: noti.idUser,
+                                                            action: "accept"
+                                                        });
 
-                                                            data.friends.splice(index, index + 1);
-                                                            
-                                                        }}
-                                                    />
+                                                        data.friends.splice(index, index + 1);
 
-                                                    <RemoveButton
-                                                        cb={() => {
-                                                            triggerRequest({
-                                                                type: "friend",
-                                                                userId: noti.idUser,
-                                                                action: "deny"
-                                                            });
-                                                            
-                                                            data.friends.splice(index, index + 1);
-                                                        }}
-                                                    />
-                                                </MainItem> 
-                                            </div>
-                                        )
-                                    })
+                                                    }}
+                                                />
+
+                                                <RemoveButton
+                                                    cb={() => {
+                                                        triggerRequest({
+                                                            type: "friend",
+                                                            userId: noti.idUser,
+                                                            action: "deny"
+                                                        });
+
+                                                        data.friends.splice(index, index + 1);
+                                                    }}
+                                                />
+                                            </MainItem>
+                                        </div>
+                                    )
+                                })
                                 }
                                 <h1>Projects</h1>
-                                {  data.projects.map(( noti, index ) => {
-                                        return(
-                                            <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
-                                                <MainItem 
-                                                    item={{
-                                                        name: noti.title,
-                                                        description: noti.message
-                                                    }} 
-                                                    descriptionBottom={true} 
-                                                >
-                                                    <AddButton 
-                                                        cb={() => {
-                                                            triggerRequest({
-                                                                type: "Project",
-                                                                userId: noti.idUser,
-                                                                projectId: noti.idProject,
-                                                                action: "accept"
-                                                            })
+                                {data.projects.map((noti, index) => {
+                                    return (
+                                        <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
+                                            <MainItem
+                                                item={{
+                                                    name: noti.title,
+                                                    description: noti.message
+                                                }}
+                                                descriptionBottom={true}
+                                            >
+                                                <AddButton
+                                                    cb={() => {
+                                                        triggerRequest({
+                                                            type: "Project",
+                                                            userId: noti.idUser,
+                                                            projectId: noti.idProject,
+                                                            action: "accept"
+                                                        })
 
-                                                            data.friends.splice(index, index + 1);
-                                                        }}
-                                                    />
+                                                        data.friends.splice(index, index + 1);
+                                                    }}
+                                                />
 
-                                                    <RemoveButton
-                                                        cb={() => {
-                                                            triggerRequest({
-                                                                type: "Project",
-                                                                userId: noti.idUser,
-                                                                projectId: noti.idProject,
-                                                                action: "deny"
-                                                            });
+                                                <RemoveButton
+                                                    cb={() => {
+                                                        triggerRequest({
+                                                            type: "Project",
+                                                            userId: noti.idUser,
+                                                            projectId: noti.idProject,
+                                                            action: "deny"
+                                                        });
 
-                                                            data.friends.splice(index, index + 1);
-                                                        }}
-                                                    />
-                                                </MainItem> 
-                                            </div>
-                                        )
-                                    })
-                                
+                                                        data.friends.splice(index, index + 1);
+                                                    }}
+                                                />
+                                            </MainItem>
+                                        </div>
+                                    )
+                                })
+
                                 }
                             </>
-                            
-                        )}
+
+                        )} {
+                            !data &&
+                            "No notifications yet..."
+                        }
                     </div>
                 ,
                 submitText: "",
@@ -168,7 +171,11 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
             )} className="btn border-none w-fit px-[1.1rem] bg-white/70 hover:bg-white dark:bg-[#414149]/40 dark:hover:bg-[#28292d] absolute right-0 -bottom-0.5">
                 <i className="fa-solid fa-bell text-black dark:text-white"></i>
                 <div className="absolute -top-0.5 -right-1">
-                    <State color="bg-red-700" hide />
+                    {data &&
+                        <State color="bg-red-700" />
+                    } {!data &&
+                        <State color="bg-red-700" hide/>
+                    }
                 </div>
             </button>
         </div>

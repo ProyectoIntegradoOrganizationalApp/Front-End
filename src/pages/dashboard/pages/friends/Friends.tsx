@@ -19,7 +19,7 @@ import { useWebsocket } from '../../../../adapters/useWebsocket';
 
 export function Friends() {
 
-    const [tab, setTab] = useState<string>("all");
+    const [tab, setTab] = useState<string>("All");
 
     const { send } = useWebsocket("ws://localhost:9001");
 

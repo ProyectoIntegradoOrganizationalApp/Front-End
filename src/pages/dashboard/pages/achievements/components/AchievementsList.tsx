@@ -27,7 +27,7 @@ export function AchievementsList(props: { data: Profile | undefined }) {
     }
 
     return (
-        <div id="scrollbar" className="w-full flex flex-col items-center py-4 gap-6 bg-[#28292d] rounded-xl flex-1 px-4 max-[500px]:px-2 max-h-auto">
+        <div id="scrollbar" className="w-full flex flex-col items-center py-4 gap-6 bg-white dark:bg-[#28292d] rounded-xl flex-1 px-4 max-[500px]:px-2 max-h-auto">
             <h1 className="text-xl text-black dark:text-white leading-none">Completed</h1>
             {obtained.length > 0 &&
                 <div className="w-full flex flex-col gap-3">
@@ -47,7 +47,7 @@ export function AchievementsList(props: { data: Profile | undefined }) {
                     })}
                 </div>
             }
-            <div className="divider my-0 h-fit" />
+            <div className="divider my-0 h-fit"/>
             <h1 className="text-xl text-black dark:text-white leading-none">Uncompleted</h1>
             {notObtained.length == 0 &&
                 <div className="w-full flex flex-col gap-3">

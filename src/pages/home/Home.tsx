@@ -91,7 +91,7 @@ export function Home() {
 
     return (
         <>
-            <div className="text-black dark:text-white overflow-x-hidden">
+            <div className="text-black dark:text-white overflow-x-hidden bg-white dark:!bg-[#202124]">
                 <Nav />
 
                 <div className="separator max-[768px]:h-[40px]"></div>

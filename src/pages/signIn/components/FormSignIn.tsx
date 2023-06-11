@@ -83,7 +83,7 @@ export const FormSignIn = (props: { type: "log in" | "sign up" }) => {
                         fetchUser={fetchUser}
                     />
                     <div className="flex flex-col w-full border-opacity-50">
-                        <div className="divider text-base">or</div>
+                        <div className="divider text-base text-black dark:text-white">or</div>
                     </div>
                     <div className="flex justify-between w-full gap-8">
                         <button className="btn border-none shadow-lg bg-white hover:bg-white flex-1 rounded-none"><img src={google} className="w-5" /></button>

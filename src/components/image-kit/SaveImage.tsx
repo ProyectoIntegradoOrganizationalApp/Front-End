@@ -31,7 +31,7 @@ export const SaveImage: React.FC<{cb: (url: string) => void}> = ({ cb }) => {
 
             { uploadRef && (
                 <button
-                    className="file-input"
+                    className="file-input bg-gray-300 dark:bg-[#28292d]"
                     onClick={() => {
                         uploadRef.current.click()
                     }}

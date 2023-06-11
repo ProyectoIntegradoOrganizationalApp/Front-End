@@ -5,9 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-    @apply text-slate-900 dark:text-slate-400;
+    @apply text-black dark:text-white;
 }
 
 * {
@@ -20,6 +19,9 @@
     @apply bg-clip-padding border-[2px] border-solid bg-gray-400 border-transparent dark:bg-[#414149];
     border-right: none;
 }
+*::-webkit-scrollbar-track {
+    @apply bg-white dark:bg-[#202124];
+}
 #scrollbarx::-webkit-scrollbar {
     @apply h-0 sm:h-[.6rem];
 }
@@ -30,7 +32,7 @@
 
 html, body {
     height: 100%;
-    @apply !bg-white dark:!bg-[#202124];
+    @apply bg-white dark:!bg-[#202124];
 }
 
 /* Dark */
@@ -150,10 +152,10 @@ textarea {
 
 /* Or login */
 .divider::before {
-    @apply bg-[#414149]
+    @apply bg-gray-200 dark:bg-[#414149]
 }
 .divider::after {
-    @apply bg-[#414149]
+    @apply bg-gray-200 dark:bg-[#414149]
 }
 
 /* Tailwind not working */
@@ -455,7 +457,7 @@ progress {
         transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     }
 }
-@media (min-width: 1085px) {
+@media (min-width: 1086px) {
     .drawer-mobile {
         grid-auto-columns: max-content auto;
     }
