@@ -1,8 +1,6 @@
-// React
-import React, { useState } from "react";
 
 // Links para el router
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Tipado de las rutas
 import { useAuth } from '../../../hooks/useAuth';
@@ -23,37 +21,55 @@ export function Nav() {
     const { user, logout } = useAuth();
 
     return (
-        <>
-            
-            <div className="navbar px-12 bg-gray-300 dark:bg-slate-800 dark:bg-transparent">
+        <div className="navbar !min-h-[unset] !py-0 px-16 max-[768px]:px-5 bg-transparent">
 
-                <div className="navbar-start">
-                    <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent text-black dark:text-white">
-                        <img className="mr-3" src={logo}></img>
-                        Teamer    
-                    </Link>
-                </div>
-
-                <div className="navbar-end">
-
-                    { user && (
-                        <ProfileBadge
-                            user={user}
-                            logout={logout}
-                            position={"dropdown dropdown-end"}
-                        />
-                    )}
-
-                    { !user && (
-                        
-                        <Link to="/login">
-                            <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">Log In</button>
-                        </Link>
-                    )} 
-
-                </div>
+            <div className="navbar-start">
+                <Link to="/" className="btn btn-ghost normal-case text-xl p-0 hover:bg-transparent !1min-h-[unset] !h-fit">
+                    <img className="mr-3" src={logo}></img>
+                    Teamer
+                </Link>
             </div>
 
-        </>
+            <div className="navbar-center flex gap-3">
+                {user && (
+                    <Link to="/profile/dashboard">
+                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
+                            Profile
+                        </button>
+                    </Link>
+                )}
+                <Link to="/" className={`nav-item ${location.pathname == "/" ? "nav-active" : ""}`}>
+                    Home
+                </Link>
+                {user && (
+                    <Link to="/profile/dashboard" className="nav-item">
+                        Profile
+                    </Link>
+                )} {!user &&
+                    <Link to="/login" className="nav-item">
+                        Profile
+                    </Link>
+                }
+            </div>
+
+            <div className="navbar-end">
+
+                {user && (
+                    <ProfileBadge
+                        user={user}
+                        logout={logout}
+                    />
+                )}
+
+                {!user && (
+                    <Link to="/login">
+                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
+                            Log In
+                        </button>
+                    </Link>
+                )}
+
+            </div>
+        </div>
     )
 }

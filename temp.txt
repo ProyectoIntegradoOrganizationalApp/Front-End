@@ -1,0 +1,8 @@
+Hola curioso, si estas viendo esto es porque la curiosidad te ha podido,
+lamento la decepcion pero es solo una lista de interfaces y mappers que
+tengo que hacer:
+
+· Friends, aquí también hace falta trabajar el UX
+· Apps, todo lo que tenga que ver con las peticiones de 
+aplicaciones y tableros y tasks, lo hago clean para implementar
+mas tarde todas las interfaces.

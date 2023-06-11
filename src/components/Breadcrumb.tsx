@@ -1,6 +1,5 @@
 // React
-import React, { useState } from "react";
-import { DropdownInterface } from "../domain/UI/DropdownInterface.interface";
+import React from "react";
 import { BreadcrumbInterface } from "../domain/UI/BreadcrumbInterface.interface";
 import { Link } from "react-router-dom";
 
@@ -15,7 +14,7 @@ export function Breadcrumb(props: { breadcrumbs: BreadcrumbInterface[] }) {
     return (
         <>
             <div className="text-sm breadcrumbs max-[1085px]:mt-4 max-[1085px]:ml-5 !w-fit">
-                <ul>
+                <ul className="flex flex-wrap gap-2.5">
                     {
                         props.breadcrumbs.map((breadcrumb, index) => {
                             return (

@@ -1,102 +1,669 @@
 import { Nav } from './components/Nav';
 
+import foto from '../../assets/foto.png';
+import logo from "../../assets/svg/logo.svg";
+// Hero
 import hero from '../../assets/svg/home/hero.svg';
 import logoApps from '../../assets/svg/home/logoApps.svg';
-import apps from '../../assets/svg/home/apps.svg';
+// Mobile
+import mobile from '../../assets/svg/home/mobile.svg';
+import mobiledark from '../../assets/svg/home/mobiledark.svg';
+import windows10 from '../../assets/images/home/windows10.png';
+import googleplay from '../../assets/images/home/googleplay.png';
+// Review
+import review1 from '../../assets/images/home/review1.jpg';
+import review2 from '../../assets/images/home/review2.jpg';
+import review3 from '../../assets/images/home/review3.jpg';
+// Partners
+import github from '../../assets/images/home/github.png';
+import teams from '../../assets/images/home/teams.png';
+import trello from '../../assets/images/home/trello.png';
+import figma from '../../assets/images/home/figma.png';
+import amazon from '../../assets/images/home/amazon.png';
+import twitter from '../../assets/images/home/twitter.png';
+import discord from '../../assets/images/home/discord.png';
+
+// Swiper
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { useEffect, useState } from 'react';
+import { useInterfaceMode } from '../../hooks/useInterfaceMode';
+import { Link } from 'react-router-dom';
+
+// ScrollReveal
+import ScrollReveal from 'scrollreveal';
+import { Tabs } from '../../components/Tabs';
 
 export function Home() {
+    const [appswork, setAppsWork] = useState("Our Apps");
+    const [slideVideo, setSlideVideo] = useState(1);
+    const [slideReviews, setSlideReviews] = useState(1);
+    const { isDarkMode } = useInterfaceMode();
 
+    // Swiper
+    const handleSlideVideoChange = (swiper: SwiperClass) => {
+        setSlideVideo(swiper.activeIndex + 1);
+    };
+    const handleSlideReviewsChange = (swiper: SwiperClass) => {
+        setSlideReviews(swiper.activeIndex + 1);
+    };
+
+    // ScrollReveal
+    useEffect(() => {
+        const sr = ScrollReveal();
+        sr.reveal('.srl', {
+            duration: 1100,
+            distance: '50px',
+            origin: 'left'
+        });
+        sr.reveal('.srr', {
+            duration: 1100,
+            distance: '50px',
+            origin: 'right'
+        });
+        sr.reveal('.srb', {
+            duration: 1100,
+            delay: 225,
+            distance: '50px',
+            origin: 'bottom'
+        });
+        sr.reveal('.srb1', {
+            duration: 1100,
+            delay: 400,
+            distance: '50px',
+            origin: 'bottom'
+        });
+        sr.reveal('.srb2', {
+            duration: 1100,
+            delay: 725,
+            distance: '50px',
+            origin: 'bottom'
+        });
+        sr.reveal('.srt', {
+            duration: 1100,
+            distance: '50px',
+            origin: 'top'
+        });
+    }, []);
 
     return (
         <>
-            <Nav />
+            <div className="text-black dark:text-white overflow-x-hidden">
+                <Nav />
 
-            <div className="separator"></div>
+                <div className="separator max-[768px]:h-[40px]"></div>
 
-            {/* Hero Section */}
-            <div className="hero flex flex-col justify-center">
+                {/* Hero Section */}
+                <div className="hero flex flex-col justify-center">
 
-                <div className="flex items-center flex-col lg:flex-row-reverse w-4/5 mx-auto gap-28">
-                    <div className="flex-1">
-                        <img src={hero} className="select-none" />
-                    </div>
-                    <div className="flex-1">
-                        <h1 className="text-2xl">The <b>open source platform</b> for cohesive and <b>organized development</b></h1>
-                        <p className="py-7 text-base">Teamer Software will help you <b>organize with your team</b> or alone those tasks that need it. With all the functionality that we include you will be satisfied.</p>
-                        <a href='https://github.com/orgs/ProyectoIntegradoOrganizationalApp/repositories' target="_blank" className="btn btn-primary">Our Repository</a>
+                    <div className="flex items-center flex-col lg:flex-row-reverse w-4/5 mx-auto max-[768px]:mx-5 max-[768px]:w-auto gap-28 max-[1024px]:gap-10">
+                        <div className="srr flex-1">
+                            <img src={hero} className="select-none" />
+                        </div>
+                        <div className="flex-1 flex flex-col gap-8">
+                            <h1 className="srb text-5xl min-w-fit leading-none"><b>Teamer Software</b></h1>
+                            <p className="srb1 text-xl w-10/12 max-[1024px]:w-full">The <b>open source platform</b> for cohesive and organized development will help you organize with your team or alone those tasks that need it. With all the functionality that we include <b>you will be satisfied</b>.</p>
+                            <div className="srb2">
+                                <Link to='https://github.com/orgs/ProyectoIntegradoOrganizationalApp/repositories' target="_blank" className="btn btn-primary min-w-fit max-w-fit">Our Repository</Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="separator"></div>
+                <div className="separator"></div>
 
-            {/* Apps */}
-            <div className="flex w-4/5 mx-auto gap-10 flex-col lg:flex-row">
-                <div className="flex-1 bg-slate-500 aspect-video"></div>
-                <div className="flex-1">
-                    <div className="mb-12 flex gap-5">
-                        <button className="btn btn-primary">Our Apps</button>
-                        <button className="btn btn-secondary">Work Management</button>
+                {/* Apps */}
+                <div className="flex w-4/5 mx-auto max-[768px]:mx-5 max-[768px]:w-auto gap-10 max-[1024px]:gap-5 flex-col lg:flex-row">
+                    <div className="srl flex-1 aspect-video bg-[url()] bg-red-200 bg-no-repeat bg-cover min-w-[300px]"></div>
+                    <div className="srr flex-1 flex flex-col gap-6 h-fit min-w-[425px] max-[768px]:min-w-[unset]">
+                        <div className="flex-1 flex max-[1024px]:flex-wrap gap-4">
+                            <Tabs tab={appswork} setTab={setAppsWork} links={[{ name: "Our Apps" }, { name: "Work Management" }]} />
+                        </div>
+                        {
+                            appswork == "Our Apps" &&
+                            <div>
+                                <h1 className="text-2xl flex items-center gap-4"><img src={logoApps} className="ourApps select-none" /> Our Apps</h1>
+                                <p className="pt-7 pb-6">
+                                    Teamer Software is <b>dedicated to empowering your team</b> by offering a comprehensive
+                                    suite of tools and applications designed to facilitate seamless project collaboration.
+                                    <br /><br />
+                                    Our platform ensures that you can work on your projects <b>effortlessly and comfortably</b>,
+                                    fostering efficient communication and task management among team members. With Teamer,
+                                    you can <b>streamline your workflows</b>, stay organized, and achieve project success with ease.
+                                </p>
+                                <Link to="/profile/dashboard" className="btn btn-primary">Create Project</Link>
+                            </div>
+                        } {
+                            appswork == "Work Management" &&
+                            <div>
+                                <h1 className="text-2xl flex items-center gap-4"><i className="fa-solid fa-gear text-yellow-600"></i> Work Management</h1>
+                                <p className="py-7">
+                                    Work management is a critical aspect of <b>modern businesses</b>, enabling efficient
+                                    organization, prioritization, and tracking of tasks, projects, and workflows.
+                                    <br /><br />
+                                    Platforms like <b>Teamer</b> have revolutionized work management, providing companies
+                                    with robust tools to streamline processes, enhance productivity, and foster
+                                    collaboration. This section explores the concept of <b>work management</b> and how
+                                    Teamer facilitates seamless task management and <b>team coordination</b>.
+                                </p>
+                                <Link to="/login" className="btn btn-primary">Start Now</Link>
+                            </div>
+                        }
                     </div>
-                    <h1 className="text-2xl flex gap-4"><img src={logoApps} className="ourApps select-none" /> Our Apps</h1>
-                    <p className="py-7 fs-m">Teamer Software will provide you with all the <b>necessary tools</b> and applications to be able to work on your project in the <b>easiest</b> and most comfortable way between you and your team.</p>
-                    <svg width="602" height="148" viewBox="0 0 602 148" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M61.6506 36.3917C61.6506 36.9439 62.0983 37.3917 62.6506 37.3917H102.355C102.908 37.3917 103.355 36.9439 103.355 36.3917V32.9188C103.355 29.8812 100.893 27.4188 97.8554 27.4188H62.6506C62.0983 27.4188 61.6506 27.8665 61.6506 28.4188V36.3917Z" fill="#E2E8F0" />
-                        <path d="M497.738 37.3916H541.256V27.4187H503.238C500.2 27.4187 497.738 29.8811 497.738 32.9187V37.3916Z" fill="#E2E8F0" />
-                        <path d="M363.557 116.208C363.557 119.245 366.02 121.708 369.057 121.708H502.211C505.248 121.708 507.711 119.245 507.711 116.208V111.735H363.557V116.208Z" fill="#E2E8F0" />
-                        <rect width="74.3434" height="9.97289" transform="matrix(-4.65094e-08 -1 -1 4.10817e-08 507.711 111.735)" fill="#E2E8F0" />
-                        <rect width="78" height="9.97289" transform="matrix(-4.86574e-08 -1 -1 3.92681e-08 373.53 111.735)" fill="#E2E8F0" />
-                        <rect width="74.3434" height="9.97289" transform="matrix(-4.62397e-08 -1 -1 4.13213e-08 103.355 111.735)" fill="#E2E8F0" />
-                        <path d="M93.3825 116.208C93.3825 119.245 95.845 121.708 98.8825 121.708H232.036C235.074 121.708 237.536 119.245 237.536 116.208V111.735H93.3825V116.208Z" fill="#E2E8F0" />
-                        <path d="M373.53 32.7922C373.53 29.7546 371.068 27.2922 368.03 27.2922L233.063 27.2922C230.026 27.2922 227.563 29.7546 227.563 32.7922L227.563 37.2651L373.53 37.2651L373.53 32.7922Z" fill="#E2E8F0" />
-                        <rect width="78" height="9.97289" transform="matrix(-4.73981e-08 -1 -1 4.03114e-08 237.536 111.735)" fill="#E2E8F0" />
-                        {/* Yesse */}
-                        <rect width="61.6506" height="61.6506" rx="11" transform="matrix(1 0 0 -1 0 61.8705)" fill="#E25E5E" />
-                        <path d="M30.545 49.18C28.775 49.18 27.155 48.79 25.685 48.01C24.125 47.26 23.045 46.195 22.445 44.815C22.235 44.395 22.13 43.87 22.13 43.24C22.13 42.01 22.565 40.915 23.435 39.955C24.335 38.965 25.4 38.47 26.63 38.47C27.44 38.47 28.28 38.725 29.15 39.235C29.33 39.355 29.42 39.46 29.42 39.55C29.42 39.58 29.39 39.595 29.33 39.595C29.21 39.595 29.12 39.565 29.06 39.505C28.4 39.115 27.755 38.92 27.125 38.92C26.075 38.92 25.13 39.385 24.29 40.315C23.51 41.185 23.12 42.175 23.12 43.285C23.12 43.795 23.21 44.275 23.39 44.725C24.32 46.825 26.105 47.875 28.745 47.875C29.945 47.875 31.13 47.635 32.3 47.155C34.79 46.105 36.65 44.38 37.88 41.98C39.02 39.88 39.59 37.42 39.59 34.6C39.59 33.85 39.545 33.115 39.455 32.395L39.32 31.315C39.29 30.895 39.2 30.25 39.05 29.38L38.78 29.83C38.72 29.95 38.69 30.01 38.69 30.01C37.31 32.35 35.705 34.075 33.875 35.185C32.255 36.265 30.635 36.805 29.015 36.805C27.665 36.805 26.57 36.43 25.73 35.68C24.86 34.96 24.425 33.985 24.425 32.755C24.425 30.625 25.61 28.33 27.98 25.87C28.79 25.06 29.465 24.085 30.005 22.945C30.575 21.775 30.86 20.575 30.86 19.345C30.86 18.355 30.605 17.425 30.095 16.555C29.165 15.175 27.815 14.485 26.045 14.485C24.935 14.485 23.9 14.875 22.94 15.655C21.74 16.765 21.14 17.86 21.14 18.94C21.14 19.69 21.455 20.365 22.085 20.965C22.415 21.295 22.865 21.46 23.435 21.46C23.765 21.46 24.125 21.415 24.515 21.325C24.845 21.235 25.04 21.19 25.1 21.19C24.83 21.61 24.215 21.82 23.255 21.82C22.715 21.82 22.31 21.73 22.04 21.55C20.99 20.95 20.465 20.02 20.465 18.76C20.465 17.53 20.885 16.45 21.725 15.52C22.895 14.23 24.32 13.585 26 13.585C27.71 13.585 29.12 14.125 30.23 15.205C31.4 16.285 31.985 17.8 31.985 19.75C31.985 21.07 31.715 22.405 31.175 23.755C30.635 25.075 29.96 26.185 29.15 27.085C27.59 28.735 26.81 30.415 26.81 32.125C26.81 33.205 27.14 34.06 27.8 34.69C28.43 35.35 29.27 35.68 30.32 35.68C31.55 35.68 32.81 35.215 34.1 34.285C35.57 33.205 36.89 31.66 38.06 29.65L38.42 29.02C38.51 28.9 38.585 28.78 38.645 28.66C38.735 28.51 38.825 28.36 38.915 28.21C38.855 27.64 38.81 27.1 38.78 26.59C38.75 26.08 38.735 25.6 38.735 25.15C38.735 24.82 38.735 24.52 38.735 24.25C38.765 23.95 38.795 23.68 38.825 23.44C38.975 22.3 39.275 21.46 39.725 20.92C40.145 20.41 40.595 20.155 41.075 20.155C41.405 20.155 41.675 20.29 41.885 20.56C42.155 20.83 42.29 21.235 42.29 21.775C42.29 22.165 42.17 22.69 41.93 23.35C41.75 23.86 41.45 24.535 41.03 25.375C40.64 26.215 40.145 27.235 39.545 28.435C39.545 28.825 39.68 30.04 39.95 32.08C40.01 32.71 40.055 33.34 40.085 33.97C40.115 34.57 40.13 35.17 40.13 35.77C40.13 42.58 37.97 46.87 33.65 48.64C32.75 49 31.715 49.18 30.545 49.18ZM39.455 27.22C39.785 26.53 40.07 25.93 40.31 25.42C40.58 24.88 40.79 24.415 40.94 24.025C41.27 23.215 41.48 22.615 41.57 22.225V21.955C41.57 21.325 41.345 21.01 40.895 21.01C40.505 21.01 40.19 21.28 39.95 21.82C39.77 22.21 39.635 22.69 39.545 23.26C39.455 23.8 39.41 24.505 39.41 25.375C39.41 25.645 39.41 25.945 39.41 26.275C39.41 26.575 39.425 26.89 39.455 27.22Z" fill="white" />
-                        {/* Pinsave */}
-                        <rect width="62.5572" height="62.5572" rx="11" transform="matrix(1 0 0 -1 134.181 148)" fill="black" />
-                        <path d="M149.5 89.5001H181.5V99.5001C181.5 105.023 177.023 109.5 171.5 109.5H159.5C153.977 109.5 149.5 105.023 149.5 99.5001V89.5001Z" fill="white" stroke="black" />
-                        <path d="M148.5 113.5H182.5C186.918 113.5 190.5 117.082 190.5 121.5V134.5C190.5 138.918 186.918 142.5 182.5 142.5H148.5C144.082 142.5 140.5 138.918 140.5 134.5V121.5C140.5 117.082 144.082 113.5 148.5 113.5Z" fill="white" stroke="black" />
-                        <path d="M156 123C156 121.895 156.895 121 158 121H173C174.105 121 175 121.895 175 123V125H156V123Z" fill="black" />
-                        <rect x="167" y="92.0001" width="5" height="14" rx="2.5" fill="black" />
-                        <rect x="159" y="92.0001" width="5" height="14" rx="2.5" fill="black" />
-                        {/* Taskman */}
-                        <rect x="272.205" y="3.5" width="57.5572" height="57.5572" rx="8.5" fill="#FFD771" stroke="#C4AA68" strokeWidth="5" />
-                        <rect opacity="0.1" x="290.243" y="19.1325" width="29.012" height="5.43976" fill="#B18C2C" />
-                        <rect opacity="0.1" x="290.243" y="30.012" width="29.012" height="4.53313" fill="#B18C2C" />
-                        <rect opacity="0.1" x="290.243" y="40.8915" width="29.012" height="4.53313" fill="#B18C2C" />
-                        <rect opacity="0.1" x="282.99" y="19.1325" width="5.43976" height="5.43976" rx="2.71988" fill="#B18C2C" />
-                        <rect opacity="0.1" x="282.99" y="30.012" width="5.43976" height="4.53313" rx="2.26657" fill="#B18C2C" />
-                        <path d="M316.145 15.7707C317.04 15.1238 318.29 15.3252 318.937 16.2205L321.318 19.5161C321.965 20.4114 321.764 21.6616 320.869 22.3085L288.605 45.6214L283.881 39.0836L316.145 15.7707Z" fill="url(#paint0_linear_402_195)" />
-                        <path d="M280.642 46.4685L283.971 38.9963L288.781 45.6543L280.642 46.4685Z" fill="url(#paint1_linear_402_195)" />
-                        {/* Engroup */}
-                        <rect width="62.5572" height="62.5572" rx="11" transform="matrix(1 0 0 -1 404 147.557)" fill="#94A3B8" />
-                        <path d="M414 99C414 96.7909 415.791 95 418 95V95V138V138C415.791 138 414 136.209 414 134V99Z" fill="white" />
-                        <path d="M456 134C456 136.209 454.209 138 452 138V138L452 95V95C454.209 95 456 96.7909 456 99L456 134Z" fill="white" />
-                        <path d="M447 95L447 99L423 99L423 95L447 95Z" fill="white" />
-                        <path d="M423 138L423 134L447 134L447 138L423 138Z" fill="white" />
-                        <circle cx="441" cy="122" r="4" fill="#FFDB59" />
-                        <circle cx="429" cy="111" r="4" fill="#48C8FF" />
-                        {/* BNP */}
-                        <rect width="62.5572" height="62.5572" rx="11" transform="matrix(1 0 0 -1 539.443 62.7772)" fill="#87AED2" />
-                        <path d="M556.7 35.5C556.887 35.5533 557.127 35.5933 557.42 35.62C557.713 35.6333 557.993 35.64 558.26 35.64C558.793 35.64 559.233 35.5333 559.58 35.32C559.94 35.0933 560.12 34.7467 560.12 34.28C560.12 33.84 559.973 33.5267 559.68 33.34C559.387 33.1533 558.94 33.06 558.34 33.06H556.7V35.5ZM556.7 30.62H558.16C558.733 30.62 559.147 30.5133 559.4 30.3C559.667 30.0867 559.8 29.7733 559.8 29.36C559.8 29 559.647 28.7133 559.34 28.5C559.047 28.2867 558.6 28.18 558 28.18C557.8 28.18 557.567 28.1867 557.3 28.2C557.047 28.2133 556.847 28.2333 556.7 28.26V30.62ZM558 38.32C557.773 38.32 557.507 38.3133 557.2 38.3C556.893 38.2867 556.573 38.26 556.24 38.22C555.92 38.18 555.6 38.1267 555.28 38.06C554.96 38.0067 554.667 37.9267 554.4 37.82C553.667 37.54 553.3 37.0533 553.3 36.36V27.02C553.3 26.74 553.373 26.5267 553.52 26.38C553.68 26.22 553.893 26.0933 554.16 26C554.613 25.84 555.18 25.7267 555.86 25.66C556.54 25.58 557.24 25.54 557.96 25.54C559.667 25.54 560.98 25.8267 561.9 26.4C562.82 26.9733 563.28 27.86 563.28 29.06C563.28 29.66 563.107 30.18 562.76 30.62C562.413 31.0467 561.947 31.36 561.36 31.56C562.027 31.7467 562.58 32.0867 563.02 32.58C563.473 33.0733 563.7 33.6933 563.7 34.44C563.7 35.76 563.207 36.74 562.22 37.38C561.247 38.0067 559.84 38.32 558 38.32ZM576.663 37.58C576.476 37.7667 576.203 37.9067 575.843 38C575.496 38.1067 575.076 38.16 574.583 38.16C574.089 38.16 573.623 38.0867 573.183 37.94C572.743 37.7933 572.383 37.44 572.103 36.88L570.123 32.84C569.923 32.4267 569.743 32.04 569.583 31.68C569.423 31.3067 569.249 30.88 569.063 30.4L568.943 30.42C568.996 31.14 569.023 31.8733 569.023 32.62C569.036 33.3667 569.043 34.1 569.043 34.82V37.92C568.896 37.96 568.669 38 568.363 38.04C568.069 38.08 567.776 38.1 567.483 38.1C567.189 38.1 566.929 38.08 566.703 38.04C566.476 38 566.289 37.92 566.143 37.8C565.996 37.68 565.883 37.52 565.803 37.32C565.723 37.1067 565.683 36.8333 565.683 36.5V26.5C565.869 26.2333 566.156 26.0333 566.543 25.9C566.929 25.7667 567.343 25.7 567.783 25.7C568.276 25.7 568.743 25.78 569.183 25.94C569.636 26.0867 569.996 26.4333 570.263 26.98L572.263 31.02C572.463 31.4333 572.643 31.8267 572.803 32.2C572.963 32.56 573.136 32.98 573.323 33.46L573.423 33.44C573.369 32.72 573.336 32 573.323 31.28C573.309 30.56 573.303 29.84 573.303 29.12V25.88C573.449 25.84 573.669 25.8 573.963 25.76C574.269 25.72 574.569 25.7 574.863 25.7C575.449 25.7 575.896 25.8067 576.203 26.02C576.509 26.22 576.663 26.6467 576.663 27.3V37.58ZM583.797 31.5C584.357 31.5 584.784 31.3733 585.077 31.12C585.384 30.8533 585.537 30.4533 585.537 29.92C585.537 29.4133 585.377 29.0267 585.057 28.76C584.75 28.48 584.297 28.34 583.697 28.34C583.484 28.34 583.304 28.3467 583.157 28.36C583.024 28.36 582.884 28.3733 582.737 28.4V31.5H583.797ZM582.757 37.92C582.61 37.96 582.377 38 582.057 38.04C581.75 38.08 581.444 38.1 581.137 38.1C580.83 38.1 580.557 38.0733 580.317 38.02C580.09 37.98 579.897 37.9 579.737 37.78C579.577 37.66 579.457 37.4933 579.377 37.28C579.297 37.0667 579.257 36.7867 579.257 36.44V27.02C579.257 26.74 579.33 26.5267 579.477 26.38C579.637 26.22 579.85 26.0933 580.117 26C580.57 25.84 581.084 25.7267 581.657 25.66C582.244 25.58 582.83 25.54 583.417 25.54C585.257 25.54 586.664 25.9333 587.637 26.72C588.61 27.5067 589.097 28.5733 589.097 29.92C589.097 30.5733 588.99 31.1667 588.777 31.7C588.577 32.22 588.27 32.6733 587.857 33.06C587.457 33.4333 586.944 33.7267 586.317 33.94C585.704 34.14 584.99 34.24 584.177 34.24H582.757V37.92Z" fill="white" />
-                        <path d="M565.68 35H569.038V41.3C569.038 42.2389 568.277 43 567.338 43H565.68V35Z" fill="white" />
-                        <path d="M567 40L567 43L551.7 43C550.761 43 550 42.2389 550 41.3L550 40L567 40Z" fill="white" />
-                        <path d="M576.65 29L573.292 29L573.292 22.7C573.292 21.7611 574.053 21 574.992 21L576.65 21L576.65 29Z" fill="white" />
-                        <path d="M575 24L575 21L590.3 21C591.239 21 592 21.7611 592 22.7L592 24L575 24Z" fill="white" />
-                        <defs>
-                            <linearGradient id="paint0_linear_402_195" x1="286.576" y1="43.2605" x2="288.413" y2="45.8019" gradientUnits="userSpaceOnUse">
-                                <stop stopColor="white" />
-                                <stop offset="0.9999" stopColor="white" stopOpacity="0.171875" />
-                                <stop offset="1" stopColor="white" stopOpacity="0" />
-                            </linearGradient>
-                            <linearGradient id="paint1_linear_402_195" x1="280.642" y1="46.4685" x2="282.483" y2="50.0865" gradientUnits="userSpaceOnUse">
-                                <stop stopColor="white" />
-                                <stop offset="1" stopColor="white" stopOpacity="0" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
                 </div>
+
+                <div className="separator"></div>
+
+                {/* Installation */}
+                <div className="flex flex-col items-center justify-center gap-12 max-[768px]:gap-8 py-[3.2rem] px-14 max-[768px]:px-5 bg-slate-200 dark:bg-[#28292d]">
+                    {/* Progress */}
+                    <div className="w-2/5 min-w-fit flex flex-col justify-center items-center gap-5 max-[768px]:gap-4 max-[580px]:w-full">
+                        <h1 className="leading-none text-2xl px-10 max-[580px]:px-0">Teamer <span className="max-[500px]:hidden">Software</span> <b>installation</b></h1>
+                        <progress className="progressVideo progress w-full h-3 bg-gray-200 dark:bg-[#202124]" value={slideVideo} max="3"></progress>
+                    </div>
+                    {/* Video Slider */}
+                    <div className="lg:w-7/12 w-full relative">
+                        <Swiper onSlideChange={handleSlideVideoChange}
+                            navigation={{
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev'
+                            }}
+                            modules={[Pagination, Navigation]}
+                            className="mySwiper"
+                        >
+                            <SwiperSlide className="!cursor-grab active:!cursor-grabbing">
+                                <div className='bg-red-500 w-full aspect-video'></div>
+                            </SwiperSlide>
+                            <SwiperSlide className="!cursor-grab active:!cursor-grabbing">
+                                <div className='bg-blue-500 w-full aspect-video'></div>
+                            </SwiperSlide>
+                            <SwiperSlide className="!cursor-grab active:!cursor-grabbing">
+                                <div className='bg-green-500 w-full aspect-video'></div>
+                            </SwiperSlide>
+                        </Swiper>
+                        <div className="swiper-button-next !hidden lg:!flex"></div>
+                        <div className="swiper-button-prev !hidden lg:!flex"></div>
+                    </div>
+                </div>
+
+                {/* Download App */}
+                <div className="flex flex-wrap-reverse justify-between ml-[10%] max-[768px]:ml-5 gap-14">
+                    {/* Left */}
+                    <div className="srl flex-1 flex flex-col gap-8 justify-center min-w-[400px] max-[768px]:min-w-[unset] mr-14 max-[768px]:mr-5 max-[1285px]:mt-10 max-[1021px]:mt-0">
+                        <p className="text-2xl leading-[1.3]"><b>Download<br />Our App</b></p>
+                        <p>
+                            Download our <b>application</b> to enjoy a unique and complete experience
+                            anytime, anywhere. Get immediate access to <b>exclusive content</b>, real-time
+                            updates and an interface optimized to give you maximum speed on your
+                            devices.
+                        </p>
+                        <ul className="!list-disc p-[1.1rem] leading-none flex flex-col gap-2">
+                            <li>Faster services</li>
+                            <li>Easy and intuitive handling</li>
+                            <li>Better error handling</li>
+                        </ul>
+                        <div className="flex gap-4 select-none">
+                            <img src={windows10} className="btn cursor-pointer bg-transparent hover:bg-transparent active:bg-transparent border-none p-0" />
+                            <img src={googleplay} className="btn cursor-pointer bg-transparent hover:bg-transparent active:bg-transparent border-none p-0" />
+                        </div>
+                    </div>
+                    {/* Right */}
+                    <div className="srr flex-[1.7]">
+                        <img src={isDarkMode ? mobiledark : mobile} className="min-w-[400px] max-[768px]:min-w-[300px] ml-auto" />
+                    </div>
+                </div>
+
+                <div className="separator"></div>
+
+                {/* Features */}
+                <div className="flex flex-wrap gap-12">
+                    {/* Left */}
+                    <div className="flex-1 aspect-[1/.85] bg-slate-200 min-w-[200px]"></div>
+                    {/* Right */}
+                    <div className="flex-1 flex flex-col gap-10 min-w-[470px] max-[768px]:min-w-[unset] mx-8 max-[768px]:mx-5">
+                        <div className="srl">
+                            {
+                                isDarkMode &&
+                                <svg className="w-32" xmlns="http://www.w3.org/2000/svg" width="165" height="77" viewBox="0 0 165 77" fill="none">
+                                    <path d="M165 38.5C165 17.237 147.763 0 126.5 0H0V77H126.5C147.763 77 165 59.763 165 38.5Z" fill="url(#paint0_linear_76_123)" />
+                                    <rect x="62" y="21" width="8" height="37" fill="white" />
+                                    <rect x="77" y="21" width="8" height="37" fill="white" />
+                                    <rect x="55" y="37" width="8" height="37" transform="rotate(-90 55 37)" fill="white" />
+                                    <rect x="101.676" y="32.0488" width="10.8074" height="8.8483" transform="rotate(-98.9222 101.676 32.0488)" fill="white" />
+                                    <rect x="119" y="58" width="11" height="38" transform="rotate(180 119 58)" fill="white" />
+                                    <rect x="55" y="50" width="8" height="37" transform="rotate(-90 55 50)" fill="white" />
+                                    <defs>
+                                        <linearGradient id="paint0_linear_76_123" x1="148.755" y1="77" x2="5.55477e-06" y2="77" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#28292D" />
+                                            <stop offset="0.784224" stop-color="#28292D" stop-opacity="0.171256" />
+                                            <stop offset="1" stop-color="#28292D" stop-opacity="0" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            } {
+                                !isDarkMode &&
+                                <svg className="w-32" viewBox="0 0 165 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M165 38.5C165 17.237 147.763 0 126.5 0H0V77H126.5C147.763 77 165 59.763 165 38.5Z" fill="url(#paint0_linear_76_123)" />
+                                    <rect x="62" y="21" width="8" height="37" fill="#94A3B8" />
+                                    <rect x="77" y="21" width="8" height="37" fill="#94A3B8" />
+                                    <rect x="55" y="37" width="8" height="37" transform="rotate(-90 55 37)" fill="#94A3B8" />
+                                    <rect x="101.676" y="32.0488" width="10.8074" height="8.8483" transform="rotate(-98.9222 101.676 32.0488)" fill="#94A3B8" />
+                                    <rect x="119" y="58" width="11" height="38" transform="rotate(180 119 58)" fill="#94A3B8" />
+                                    <rect x="55" y="50" width="8" height="37" transform="rotate(-90 55 50)" fill="#94A3B8" />
+                                    <defs>
+                                        <linearGradient id="paint0_linear_76_123" x1="148.755" y1="77" x2="5.55477e-06" y2="77" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#CBD5E1" />
+                                            <stop offset="0.784224" stopColor="#CBD5E1" stopOpacity="0.171256" />
+                                            <stop offset="1" stopColor="#CBD5E1" stopOpacity="0" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            }
+                        </div>
+                        <div className="flex flex-col gap-5">
+                            <div className="flex items-center gap-5 text-2xl">
+                                <i className="fa-solid fa-book"></i>
+                                <p className="leading-none">Features</p>
+                            </div>
+                            <p>
+                                We are the <b>top</b> provider of web or app-based task management solutions,
+                                empowering our clients to seamlessly coordinate and streamline their work,
+                                while enhancing <b>team collaboration</b> and productivity
+                            </p>
+                        </div>
+                        <div className="flex flex-col gap-7">
+                            <div className="srl flex items-center gap-5 shadow-lg">
+                                <div className="text-2xl min-w-[94.35px] aspect-square flex justify-center items-center bg-slate-200 dark:bg-[#28292d]">
+                                    <i className="fa-solid fa-lightbulb"></i>
+                                </div>
+                                <p className="p-3">
+                                    <b>Simple and intuitive</b> user interface that allows you to <b>efficiently manage</b> tasks and projects
+                                </p>
+                            </div>
+                            <div className="srr flex items-center gap-5 shadow-lg">
+                                <div className="text-2xl min-w-[94.35px] aspect-square flex justify-center items-center bg-slate-200 dark:bg-[#28292d]">
+                                    <i className="fa-solid fa-people-arrows"></i>
+                                </div>
+                                <p className="p-3">
+                                    <b>Advanced collaboration functionality</b> that enables users to assign tasks, share files, add comments and much more
+                                </p>
+                            </div>
+                            <div className="srl flex items-center gap-5 shadow-lg">
+                                <div className="text-2xl min-w-[94.35px] aspect-square flex justify-center items-center bg-slate-200 dark:bg-[#28292d]">
+                                    <i className="fa-solid fa-gear"></i>
+                                </div>
+                                <p className="p-3">
+                                    Great deal of <b>customization and flexibility options</b> that allow clients to tailor the platform to their specific needs
+                                </p>
+                            </div>
+                            <div className="srr flex items-center gap-5 shadow-lg">
+                                <div className="text-2xl min-w-[94.35px] aspect-square flex justify-center items-center bg-slate-200 dark:bg-[#28292d]">
+                                    <i className="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <p className="p-3">
+                                    We take the <b>security</b> of our clients' data very seriously, and therefore implement <b>top-tier security</b> measures
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="separator"></div>
+
+                {/* Reviews */}
+                <div className="block md:flex flex-wrap justify-center">
+                    {
+                        slideReviews == 1 &&
+                        <div className="max-[908px]:w-full relative max-[908px]:mb-10 my-9 max-[908px]:my-0">
+                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl -z-10 max-[908px]:hidden"></div>
+                            <div className="bg-slate-200 dark:bg-[#414149] flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
+                                <div className="w-36 aspect-square rounded-full">
+                                    <img src={review1} className="rounded-full" />
+                                </div>
+                                <p className="leading-none">Tobey Maguire</p>
+                            </div>
+                        </div>
+                    } {
+                        slideReviews == 2 &&
+                        <div className="max-[908px]:w-full relative max-[908px]:mb-10 my-9 max-[908px]:my-0">
+                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl -z-10 max-[908px]:hidden"></div>
+                            <div className="bg-slate-200 dark:bg-[#414149] flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
+                                <div className="w-36 aspect-square rounded-full">
+                                    <img src={review2} className="rounded-full" />
+                                </div>
+                                <p className="leading-none">Lauren Johnson</p>
+                            </div>
+                        </div>
+                    } {
+                        slideReviews == 3 &&
+                        <div className="max-[908px]:w-full relative max-[908px]:mb-10 my-9 max-[908px]:my-0">
+                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl -z-10 max-[908px]:hidden"></div>
+                            <div className="bg-slate-200 dark:bg-[#414149] flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
+                                <div className="w-36 aspect-square rounded-full">
+                                    <img src={review3} className="rounded-full" />
+                                </div>
+                                <p className="leading-none">Maiki Tauren</p>
+                            </div>
+                        </div>
+                    }
+                    <div className="max-[768px]:flex-1 flex flex-col">
+                        <hr className="srl bg-slate-300 dark:bg-[#28292d] border-slate-300 dark:border-slate-900 h-4 mb-6 mt-0 md:mt-9 w-[23.8rem] max-[908px]:hidden relative -z-20" />
+                        <p className="leading-none text-2xl ml-5 md:ml-9 mb-8">Customers Reviews</p>
+                        <div className="md:max-w-[600px] mx-5 md:ml-9 block md:flex gap-12 mb-10">
+                            <div className="srb text-5xl -translate-y-4 hidden md:block">
+                                <i className="fa-solid fa-quote-left leading-none"></i>
+                            </div>
+                            <div className="w-full md:w-4/6 relative">
+                                <Swiper onSlideChange={handleSlideReviewsChange}
+                                    slidesPerView={1}
+                                    pagination={{ clickable: true }}
+                                    modules={[Pagination, Navigation]}
+                                    spaceBetween={40} className="static select-none"
+                                >
+                                    <SwiperSlide className="!cursor-grab active:!cursor-grabbing !items-start !bg-transparent !text-left !text-base">
+                                        This tool is exactly what I was looking for to efficiently manage my projects.
+                                        I love the user-friendly interface that makes it easy to use.
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!cursor-grab active:!cursor-grabbing !items-start !bg-transparent !text-left !text-base">
+                                        I've finally found the perfect solution to streamline my project management tasks.
+                                        This tool has exceeded my expectations with its intuitive interface and seamless functionality.
+                                    </SwiperSlide>
+                                    <SwiperSlide className="!cursor-grab active:!cursor-grabbing !items-start !bg-transparent !text-left !text-base">
+                                        Managing my projects has never been this effortless. This remarkable tool ticks all the boxes
+                                        with its exceptional features and polished user interface.
+                                    </SwiperSlide>
+                                </Swiper>
+                            </div>
+                            <div className="srt text-5xl translate-y-3/4 hidden md:block">
+                                <i className="fa-solid fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="separator"></div>
+
+                {/* Information */}
+                <div className="bg-slate-200 dark:bg-[#28292d]">
+                    <div className="flex flex-wrap max-[939px]:gap-10 gap-20 py-[3.2rem] px-14 max-[768px]:px-5 max-[768px]:justify-center items-center w-fit mx-auto">
+                        <div className="srl flex flex-col gap-4 min-w-[220px] max-[768px]:min-w-full max-[768px]:max-w-[unset] max-w-[350px] flex-1">
+                            <div className="text-5xl">
+                                <i className="fa-solid fa-gears"></i>
+                            </div>
+                            <p className="text-xl"><b>Troubleshooting Assistance</b></p>
+                            <p>
+                                Our technical support team is available to help you with any issues
+                            </p>
+                            <Link target="_blank" to="https://en.wikipedia.org/wiki/Troubleshooting" className="custom-border">More Information <i className="fa-solid fa-arrow-right"></i></Link>
+                        </div>
+                        <div className="srt flex flex-col gap-4 min-w-[220px] max-[768px]:min-w-full max-[768px]:max-w-[unset] max-w-[350px] flex-1">
+                            <div className="text-5xl">
+                                <i className="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <p className="text-xl"><b>Product Knowledge and Training</b></p>
+                            <p>
+                                We believe that knowledge is power, which is why we offer a comprehensive training
+                            </p>
+                            <Link target="_blank" to="https://en.wikipedia.org/wiki/Training_and_development" className="custom-border">More Information <i className="fa-solid fa-arrow-right"></i></Link>
+                        </div>
+                        <div className="srr flex flex-col gap-4 min-w-[220px] max-[768px]:min-w-full max-[768px]:max-w-[unset] max-w-[350px] flex-1">
+                            <div className="text-5xl">
+                                <i className="fa-solid fa-gauge-high"></i>
+                            </div>
+                            <p className="text-xl"><b>Proactive Monitoring and Maintenance</b></p>
+                            <p>
+                                We take the security and performance of our platform seriously
+                            </p>
+                            <Link target="_blank" to="https://en.wikipedia.org/wiki/Proactive_maintenance" className="custom-border">More Information <i className="fa-solid fa-arrow-right"></i></Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="separator block min-[1417px]:hidden max-[717px]:h-[85px]"></div>
+
+                {/* Partners */}
+                <div className="flex flex-wrap-reverse justify-between max-[1417px]:ml-0 ml-[10%] gap-14 max-[910px]:gap-5">
+                    {/* Left */}
+                    <div className="srl flex-1 flex flex-col gap-8 justify-center max-[1417px]:justify-start max-[1417px]:mt-0 my-10 max-[717px]:mb-0 min-w-[300px] mr-14 max-[1417px]:ml-10 max-[768px]:mx-5">
+                        <p className="text-2xl leading-[1.3]"><b>Our<br />Partners</b></p>
+                        <p>
+                            At Teamer, we believe in the <b>power of collaboration</b> and strategic
+                            partnerships to drive innovation and create sustainable growth.
+                            Our partners are an essential part of our <b>ecosystem</b>, and we work closely
+                            with them to co-create solutions that meet the unique needs of our customers
+                        </p>
+                        <div className="btn btn-primary w-fit">Find More</div>
+                    </div>
+                    {/* Right */}
+                    <div className="srr flex-[1] min-w-[350px] max-[1417px]:flex-1 max-[1416px]:justify-center items-center">
+                        <svg className="min-[1417px]:!ml-auto max-[1417px]:w-full mr-16 max-[1417px]:h-fit" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="791" height="509" viewBox="0 0 791 509" fill="none">
+                            <path className="max-[1416px]:hidden" d="M370 0.0667651L706.952 327.322L600.308 444.63C568.462 479.661 513.971 481.467 479.875 448.621L14.2565 0.0670298L370 0.0667651Z" fill={`${isDarkMode ? "#414149" : "#cbd5e1"}`} />
+                            <g filter="url(#filter0_d_1146_456)">
+                                <rect x="58.7068" y="54.9702" width="89" height="89" rx="11" fill="white" />
+                            </g>
+                            <g filter="url(#filter1_d_1146_456)">
+                                <rect x="293" y="79.0698" width="121" height="121" rx="11" fill="white" />
+                            </g>
+                            <g filter="url(#filter2_d_1146_456)">
+                                <rect x="528" y="243.07" width="59" height="59" rx="11" fill="white" />
+                            </g>
+                            <g filter="url(#filter3_d_1146_456)">
+                                <rect x="651" y="319.07" width="115" height="115" rx="11" fill="white" />
+                            </g>
+                            <g filter="url(#filter4_d_1146_456)">
+                                <rect width="97" height="97" rx="11" transform="matrix(1 0 0 -1 414 473.07)" fill="white" />
+                            </g>
+                            <Link to="https://www.amazon.com" target="_blank" className="hover:scale-125 hover:-translate-x-[8.68rem] hover:-translate-y-[4.3rem] transition-all">
+                                <rect x="540" y="263" width="34" height="21" fill="url(#pattern0)" />
+                            </Link>
+                            <Link to="https://www.trello.com" target="_blank" className="hover:scale-125 hover:-translate-x-[8.12rem] hover:-translate-y-[1.8rem] transition-all">
+                                <g filter="url(#filter5_d_1146_456)">
+                                    <rect x="484" y="79" width="74" height="74" fill="url(#pattern1)" shapeRendering="crispEdges" />
+                                </g>
+                            </Link>
+                            <Link to="https://www.github.com" target="_blank" className="hover:scale-125 hover:-translate-x-[1.62rem] hover:-translate-y-[1.5rem] transition-all">
+                                <rect x="74" y="69" width="59" height="59" fill="url(#pattern2)" />
+                            </Link>
+                            <Link to="https://www.microsoft.com/en-us/microsoft-teams/log-in" target="_blank" className="hover:scale-125 hover:-translate-x-[5.55rem] hover:-translate-y-[2.2rem] transition-all">
+                                <rect x="315" y="100" width="78" height="80" fill="url(#pattern3)" />
+                            </Link>
+                            <Link to="https://www.figma.com" target="_blank" className="hover:scale-125 hover:-translate-x-[4.2rem] hover:-translate-y-[4.7rem] transition-all">
+                                <g filter="url(#filter6_d_1146_456)">
+                                    <rect x="217" y="241" width="110" height="110" fill="url(#pattern4)" shapeRendering="crispEdges" />
+                                </g>
+                            </Link>
+                            <Link to="https://www.twitter.com" target="_blank" className="hover:scale-125 hover:-translate-x-[7.2rem] hover:-translate-y-[6.65rem] transition-all">
+                                <rect x="435" y="403" width="56" height="47" fill="url(#pattern5)" />
+                            </Link>
+                            <Link to="https://www.discord.com" target="_blank" className="hover:scale-125 hover:-translate-x-[11.09rem] hover:-translate-y-[5.9rem] transition-all">
+                                <rect x="674" y="351" width="69" height="52" fill="url(#pattern6)" />
+                            </Link>
+                            <defs>
+                                <filter id="filter0_d_1146_456" x="33.7068" y="29.9702" width="139" height="139" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <filter id="filter1_d_1146_456" x="268" y="54.0698" width="171" height="171" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <filter id="filter2_d_1146_456" x="503" y="218.07" width="109" height="109" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <filter id="filter3_d_1146_456" x="626" y="294.07" width="165" height="165" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <filter id="filter4_d_1146_456" x="389" y="351.07" width="147" height="147" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image0_1146_456" transform="matrix(0.00100758 0 0 0.00163132 -0.0158814 0)" />
+                                </pattern>
+                                <filter id="filter5_d_1146_456" x="459" y="54" width="124" height="124" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image1_1146_456" transform="scale(0.00195312)" />
+                                </pattern>
+                                <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image2_1146_456" transform="scale(0.00195312)" />
+                                </pattern>
+                                <pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image3_1146_456" transform="matrix(0.000474834 0 0 0.000462963 -0.411681 0)" />
+                                </pattern>
+                                <filter id="filter6_d_1146_456" x="195" y="219" width="154" height="154" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feMorphology radius="2" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_1146_456" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1146_456" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1146_456" result="shape" />
+                                </filter>
+                                <pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image4_1146_456" transform="scale(0.002)" />
+                                </pattern>
+                                <pattern id="pattern5" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image5_1146_456" transform="matrix(0.000491098 0 0 0.000585138 -0.0156524 0)" />
+                                </pattern>
+                                <pattern id="pattern6" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlinkHref="#image6_1146_456" transform="matrix(0.00161551 0 0 0.00214366 0 -0.00375916)" />
+                                </pattern>
+                                <image id="image0_1146_456" width="1024" height="613" xlinkHref={amazon} />
+                                <image id="image1_1146_456" width="512" height="512" xlinkHref={trello} />
+                                <image id="image2_1146_456" width="512" height="512" xlinkHref={github} />
+                                <image id="image3_1146_456" width="3840" height="2160" xlinkHref={teams} />
+                                <image id="image4_1146_456" width="500" height="500" xlinkHref={figma} />
+                                <image id="image5_1146_456" width="2100" height="1709" xlinkHref={twitter} />
+                                <image id="image6_1146_456" width="619" height="470" xlinkHref={discord} />
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <div className="separator"></div>
+
+                {/* Footer */}
+                <footer className="bg-slate-200 dark:bg-[#28292d] text-black dark:text-white pt-10 pb-5">
+                    <div className="srb container mx-auto flex flex-wrap justify-between gap-14 mb-10 px-5">
+                        <div className="flex-initial max-w-fit mb-4 md:mb-0">
+                            <Link to="/" className="flex items-center mb-2 gap-3 text-xl cursor-pointer">
+                                <img src={logo} className="w-9 aspect-square" />
+                                <p>Teamer</p>
+                            </Link>
+                        </div>
+                        <div className="flex-1 max-w-fit mb-4 md:mb-0">
+                            <h4 className="font-bold mb-3">REFERENCES</h4>
+                            <ul className="flex flex-col gap-1">
+                                <li><Link to="/" className="hover:opacity-50 transition-all">Teamer Software</Link></li>
+                                <li><Link to="https://www.atlassian.com/es/software/jira" target="_blank" className="hover:opacity-50 transition-all">Jira Software</Link></li>
+                                <li><Link to="https://www.trello.com/" target="_blank" className="hover:opacity-50 transition-all">Trello</Link></li>
+                                <li><Link to="https://react.dev/" target="_blank" className="hover:opacity-50 transition-all">React JS</Link></li>
+                                <li><Link to="https://reactnative.dev/" target="_blank" className="hover:opacity-50 transition-all">React Native</Link></li>
+                                <li><Link to="https://www.rust-lang.org/" target="_blank" className="hover:opacity-50 transition-all">Rust</Link></li>
+                                <li><Link to="https://www.postgresql.org/" target="_blank" className="hover:opacity-50 transition-all">PostgreSQL</Link></li>
+                                <li><Link to="https://www.figma.com/" target="_blank" className="hover:opacity-50 transition-all">Figma</Link></li>
+                            </ul>
+                        </div>
+                        <div className="flex-1 max-w-fit mb-4 md:mb-0">
+                            <h4 className="font-bold mb-3">RESOURCES</h4>
+                            <ul className="flex flex-col gap-1">
+                                <li><Link to="/profile/dashboard" target="_blank" className="hover:opacity-50 transition-all">Dashboard</Link></li>
+                                <li><Link to="/" className="hover:opacity-50 transition-all">Home</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">About Us</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Our Prices</Link></li>
+                                <li><Link to="/profile/account" target="_blank" className="hover:opacity-50 transition-all">My Account</Link></li>
+                                <li><Link to="/friends/dashboard" target="_blank" className="hover:opacity-50 transition-all">Friends</Link></li>
+                                <li><Link to="/projects/dashboard" target="_blank" className="hover:opacity-50 transition-all">Projects</Link></li>
+                            </ul>
+                        </div>
+                        <div className="flex-1 max-w-fit mb-4 md:mb-0">
+                            <h4 className="font-bold mb-3">LEARN AND MANAGE</h4>
+                            <ul className="flex flex-col gap-1">
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Teamer Courses</Link></li>
+                                <li><Link to="https://openwebinars.net/" target="_blank" className="hover:opacity-50 transition-all">OpenWebinars</Link></li>
+                                <li><Link to="https://www.udemy.com/" target="_blank" className="hover:opacity-50 transition-all">Udemy</Link></li>
+                                <li><Link to="https://www.coursera.org/" target="_blank" className="hover:opacity-50 transition-all">Coursera</Link></li>
+                                <li><Link to="https://chat.openai.com/" target="_blank" className="hover:opacity-50 transition-all">ChatGPT OpenAI</Link></li>
+                            </ul>
+                        </div>
+                        <div className="flex-1 max-w-fit mb-4 md:mb-0">
+                            <h4 className="font-bold mb-3">ABOUT TEAMER</h4>
+                            <ul className="flex flex-col gap-1">
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Company</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Events</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Summary</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Our History</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Confidence and Security</Link></li>
+                                <li><Link to="#" className="hover:opacity-50 transition-all">Frequently Asked Questions</Link></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr className="bg-white dark:bg-[#202124] border-white dark:border-[#202124]" />
+                    <div className="container mx-auto flex items-center justify-between flex-wrap mt-5 gap-4 px-5">
+                        <div className="srl">
+                            <p className="text-center leading-none">Copyright © 2023 Teamer Software</p>
+                        </div>
+                        <div className="srr">
+                            <div className="flex gap-3 text-xl">
+                                <Link to="#" className="hover:opacity-50 transition-all"><i className="fab fa-facebook"></i></Link>
+                                <Link to="#" className="hover:opacity-50 transition-all"><i className="fab fa-twitter"></i></Link>
+                                <Link to="#" className="hover:opacity-50 transition-all"><i className="fab fa-instagram"></i></Link>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </>
     )

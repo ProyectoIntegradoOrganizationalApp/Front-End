@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Breadcrumb } from '../../../../components/Breadcrumb';
-import { Item } from '../../../../components/Item';
+import { MainItem } from '../../../../components/list-items/MainItem';
 import { Dropdown } from '../../../../components/Dropdown';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,9 +31,9 @@ export function Store(props: { project: string }) {
                         }
                     ]} />
                 </div>
-                <div className="flex-1 bg-gray-200 dark:bg-slate-800 w-full h-fit rounded-xl flex flex-col gap-3 p-4 pt-3">
+                <div className="flex-1 bg-gray-200 dark:bg-[#202124] w-full h-fit min-[1085px]:rounded-xl flex flex-col gap-2 min-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3">
                     <div className="flex items-center justify-between pr-2">
-                        <div className="h-fit px-3 py-0 flex justify-between items-center rounded-xl">
+                        <div className="h-fit px-3 min-[500px]:pb-1 flex justify-between items-center rounded-xl max-[500px]:my-0">
                             <div className="flex items-center gap-6 h-full">
                                 <div onClick={(e) => navigate(-1)} className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Back</div>
                                 {/* Header */}
@@ -69,54 +69,58 @@ export function Store(props: { project: string }) {
                         </div>
                     </div>
                     <div className="flex flex-wrap h-full gap-6">
-                        <div className={`flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 gap-2 h-auto rounded-xl content-start ${selectedElement == "none" ? "!w-full" : "w-9/12 order-2 lg:order-none"}`}>
+                        <div className={`flex flex-wrap bg-gray-300 dark:bg-slate-700 flex-[4] p-4 max-[500px]:p-2 gap-2 h-auto min-[500px]:rounded-xl content-start ${selectedElement == "none" ? "!w-full" : "w-9/12 order-2 lg:order-none"}`}>
                             {/* Foreach (Store Apps) */}
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
-                                        {
-                                            type: "button",
-                                            action: "add",
-                                            icon: "fa-solid fa-plus",
-                                            target: "add/app"
-                                        }
-                                    ]} descriptionBottom={true} />
+                                    <MainItem item={{
+                                        name: "Timeline",
+                                        description: "Work Management",
+                                        icon: "fawd"
+                                    }} children={
+                                        <div className="btn btn-primary !bg-red-700 hover:!bg-red-800 flex justify-center items-center !rounded-xl !px-[1.1rem]">
+                                            <i className="fa-solid fa-trash"></i>
+                                        </div>
+                                    } descriptionBottom={true} />
                                 </div>
                             </div>
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
-                                        {
-                                            type: "button",
-                                            action: "remove",
-                                            icon: "fa-solid fa-trash",
-                                            target: "remove/app"
-                                        }
-                                    ]} descriptionBottom={true} />
+                                    <MainItem item={{
+                                        name: "Timeline",
+                                        description: "Work Management",
+                                        icon: "fawd"
+                                    }} children={
+                                        <div className="btn btn-primary !bg-red-700 hover:!bg-red-800 flex justify-center items-center !rounded-xl !px-[1.1rem]">
+                                            <i className="fa-solid fa-trash"></i>
+                                        </div>
+                                    } descriptionBottom={true} />
                                 </div>
                             </div>
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
-                                        {
-                                            type: "button",
-                                            action: "add",
-                                            icon: "fa-solid fa-plus",
-                                            target: "add/app"
-                                        }
-                                    ]} descriptionBottom={true} />
+                                    <MainItem item={{
+                                        name: "Timeline",
+                                        description: "Work Management",
+                                        icon: "fawd"
+                                    }} children={
+                                        <div className="btn btn-primary !bg-red-700 hover:!bg-red-800 flex justify-center items-center !rounded-xl !px-[1.1rem]">
+                                            <i className="fa-solid fa-trash"></i>
+                                        </div>
+                                    } descriptionBottom={true} />
                                 </div>
                             </div>
                             <div className="selectElement !min-w-none w-full lg:!min-w-[max(30%,300px)] xl:max-w-[33%] lg:flex-1 cursor-pointer" onClick={(event: React.MouseEvent<HTMLElement>) => { selectApp("Taskman") }}>
                                 <div className={selectedApp == "Taskman" ? "selectedElement" : undefined}>
-                                    <Item title="Taskman" description="Work Management" tools={[
-                                        {
-                                            type: "button",
-                                            action: "add",
-                                            icon: "fa-solid fa-plus",
-                                            target: "add/app"
-                                        }
-                                    ]} descriptionBottom={true} />
+                                    <MainItem item={{
+                                        name: "Timeline",
+                                        description: "Work Management",
+                                        icon: "fawd"
+                                    }} children={
+                                        <div className="btn btn-primary !bg-red-700 hover:!bg-red-800 flex justify-center items-center !rounded-xl !px-[1.1rem]">
+                                            <i className="fa-solid fa-trash"></i>
+                                        </div>
+                                    } descriptionBottom={true} />
                                 </div>
                             </div>
                             {/* EndForeach */}

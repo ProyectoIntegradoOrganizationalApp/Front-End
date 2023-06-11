@@ -4,5 +4,7 @@ export interface UserAchievementDTO {
     description: string,
     icon: string,
     progress: number,
+    percentage: string,
+    current_state: number,
     completed: boolean
 }

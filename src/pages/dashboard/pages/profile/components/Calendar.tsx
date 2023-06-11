@@ -38,8 +38,8 @@ export function Calendar(props: { monthYear: string, calendar: MyCalendar }) {
 
     return (
         <>
-            <div className="bg-white dark:bg-slate-700 w-full h-full flex flex-col rounded-xl">
-                <div className="relative border-b-4 border-gray-200 dark:border-slate-600 py-4">
+            <div className="bg-white dark:bg-[#28292d] w-full h-full flex flex-col rounded-xl">
+                <div className="relative border-b-4 border-gray-200 dark:border-[#202124] py-4">
                     <p className="w-full flex justify-center text-black dark:text-white leading-none">{props.monthYear}</p>
                 </div>
                 <div className="p-4 max-[500px]:p-2 justify-end grid grid-cols-7 justify-items-center">

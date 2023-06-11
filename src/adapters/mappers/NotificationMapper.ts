@@ -12,7 +12,8 @@ export class NotificationMapper extends Mapper<Notification, NotificationDTO> {
             idguest: data.idGuest,
             iduser: data.idUser,
             title: data.title,
-            message: data.message
+            message: data.message,
+            idproject: data.idProject
         }
     }
 
@@ -21,7 +22,8 @@ export class NotificationMapper extends Mapper<Notification, NotificationDTO> {
             idGuest: data.idguest,
             idUser: data.iduser,
             title: data.title,
-            message: data.message 
+            message: data.message,
+            idProject: data.idproject 
         }
     }
 }

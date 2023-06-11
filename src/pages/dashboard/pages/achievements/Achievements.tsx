@@ -11,10 +11,11 @@ import { Dropdown } from '../../../../components/Dropdown';
 // Modelos
 import { Profile } from '../../../../domain/profile/Profile.interface';
 import { useAchievementsApi } from '../../../../adapters/api/useAchievementsApi';
+import { UserAchievementInfo } from '../../../../domain/achievement/UserAchievementInfo.interface';
 
 export function Achievements() {
 
-    const [tab, setTab] = useState<string>("all");
+    const [tab, setTab] = useState<string>("All");
     const [selectedElement, selectElement] = useState<string>("Order By");
 
     const API = import.meta.env.VITE_API_URL;
@@ -22,12 +23,15 @@ export function Achievements() {
     /** Datos del Usuario */
     const userData: Profile = useOutletContext();
 
+    /** Datos de los achievements en general */
+    const { data, error, loading } = useAchievementsApi(true);
+
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo
                 data={userData}
             />
-            <div className="bg-gray-200 dark:bg-slate-800 flex-1 basis-[820px] h-full rounded-xl flex flex-col w-full p-4 pt-0">
+            <div className="bg-gray-200 dark:bg-[#202124] flex-1 basis-[820px] h-full min-[1085px]:rounded-xl flex flex-col w-full p-4 pt-0">
                 <div className="py-3 flex flex-wrap-reverse justify-between items-center gap-2">
                     <Tabs
                         tab={tab}
@@ -36,15 +40,15 @@ export function Achievements() {
                         title="Achievements"
                         links={[
                             {
-                                url: "all",
+                                url: "",
                                 name: "All"
                             },
                             {
-                                url: "projects",
+                                url: "",
                                 name: "Projects"
                             },
                             {
-                                url: "friends",
+                                url: "",
                                 name: "Friends"
                             },
                         ]}
@@ -74,9 +78,9 @@ export function Achievements() {
                         />
                     </div>
                 </div>
-                <div className="bg-white dark:bg-slate-700 w-full h-full rounded-xl p-4">
-                    { userData?.achievements && tab === "all" ? (
-                        userData?.achievements.map( ach => {
+                <div className="flex flex-col gap-6 bg-white dark:bg-[#28292d] w-full h-full rounded-xl p-4">
+                    {data && tab === "All" ? (
+                        data.map(ach => {
                             return (
                                 <AchievementItem
                                     key={ach.id}
@@ -87,14 +91,48 @@ export function Achievements() {
                                     description={ach.description}
                                     percentage={{
                                         type: "progress",
-                                        number: 0
+                                        number: ach.percentage
                                     }}
                                 />
                             )
                         })
-
-                    ) : tab === "projects" ? (
-                        <h1>Projects</h1>
+                    ) : data && tab === "Projects" ? (
+                        //.filter antes del map para filtar las categorías
+                        data.filter((elem: UserAchievementInfo) => elem.category === 'project')
+                            .map(ach => {
+                                return (
+                                    <AchievementItem
+                                        key={ach.id}
+                                        tab={tab}
+                                        orderBy={selectedElement}
+                                        icon={ach.icon}
+                                        title={ach.title}
+                                        description={ach.description}
+                                        percentage={{
+                                            type: "progress",
+                                            number: ach.percentage
+                                        }}
+                                    />
+                                )
+                            })
+                    ) : data && tab === "Friends" ? (
+                        data.filter((elem: UserAchievementInfo) => elem.category === 'friend')
+                            .map(ach => {
+                                return (
+                                    <AchievementItem
+                                        key={ach.id}
+                                        tab={tab}
+                                        orderBy={selectedElement}
+                                        icon={ach.icon}
+                                        title={ach.title}
+                                        description={ach.description}
+                                        percentage={{
+                                            type: "progress",
+                                            number: ach.percentage
+                                        }}
+                                    />
+                                )
+                            })
                     ) : (
                         <h1>Soon</h1>
                     )}

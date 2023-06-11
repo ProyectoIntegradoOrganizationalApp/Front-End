@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import axios, { AxiosHeaders } from 'axios';
+import { AxiosHeaders } from 'axios';
 
 import { useAuth } from "../../hooks/useAuth";
 
@@ -62,11 +62,15 @@ export const useProfileApi = () => {
 
     /**
      *  Función que maneja los datos que salen de la API.
+     * 
+     *  TODO => CAMBIAR EL TIPO A DTO Y MAPEARLO CUANDO EL MODELO
+     *  DEL BACK ESTE TERMINADO
+     * 
      *  @param info 
      */
-    const handleData = ( info: ProfileDTO | ApiError ) => {
+    const handleData = ( info: Profile | ApiError ) => {
 
-        console.log(info)
+        // console.log(info)
 
         /**
          * Hay Error
@@ -82,9 +86,8 @@ export const useProfileApi = () => {
             // Quitamos los errores en caso de que los halla
             setError(undefined);
 
-            // Transformamos el objecto que nos llega con los mappers a algo que nuestra app entiende
-            let userData: Profile = ProfileMapper.prototype.mapTo(info);
-            setData(userData);
+            // Transformamos el objecto que nos llega con los mappers a algo que nuestra app entiendo
+            setData(info);
         }
 
         setLoading(false);

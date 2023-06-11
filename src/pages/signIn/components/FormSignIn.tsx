@@ -30,16 +30,17 @@ import { Form } from "./Form";
  * @param props 
  * @returns 
  */
-export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
+
+export const FormSignIn = (props: { type: "log in" | "sign up" }) => {
 
     // Contexto de la app
     const { user } = useContext(AuthContext);
 
     // Redirect si el usuario ya está logueado
-    if( user ) {
+    if (user) {
         return <Navigate to="/profile/dashboard" />
     }
-    
+
     // Hook de la Autenticación
     const { login } = useAuth();
 
@@ -53,8 +54,8 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
      * Ciclo de vida que detecta cambios en el modelo para realizar acciones.
      */
     useEffect(() => {
-        if( !error?.error && data && "_token" in data && !user ) {
-            const user: User = UserMapper.prototype.mapTo(data);            
+        if (!error?.error && data && "_token" in data && !user) {
+            const user: User = UserMapper.prototype.mapTo(data);
             login(user);
         }
     }, [data?.id])
@@ -64,12 +65,11 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
      */
     useEffect(() => {
         // Comprobamos si hay errores y sacamos mensajito si los hay
-        if( error && error.message != '' ) {
+        if (error && error.message != '') {
             toast.error(error.message);
         }
     }, [error?.message]);
 
-    
     return (
         <>
             <article className="!w-full flex-1 flex items-center justify-center">
@@ -77,24 +77,20 @@ export const FormSignIn = ( props: { type: "log in" | "sign up" }) => {
                     state={loading}
                 />
                 <div className="w-full flex flex-col justify-center items-center">
-                    
                     <Form
                         type={props.type}
                         registerUser={registerUser}
                         fetchUser={fetchUser}
                     />
-
                     <div className="flex flex-col w-full border-opacity-50">
                         <div className="divider text-base">or</div>
                     </div>
-
                     <div className="flex justify-between w-full gap-8">
-                        <button className="btn bg-white hover:bg-gray-300 flex-1 rounded-none"><img src={google} className="w-5"/></button>
-                        <button className="btn flex-1 rounded-none"><img src={github} className="w-5"/></button>
+                        <button className="btn border-none shadow-lg bg-white hover:bg-white flex-1 rounded-none"><img src={google} className="w-5" /></button>
+                        <button className="btn border-none shadow-lg bg-[#161b22] hover:bg-[#161b22] flex-1 rounded-none"><img src={github} className="w-5" /></button>
                     </div>
-
                 </div>
             </article>
         </>
-    ) 
+    )
 }

@@ -8,10 +8,13 @@ import React, { MouseEventHandler } from "react";
  *  @returns 
  */
 
-export function State(props: { color: string }) {
+export function State(props: { color: string, hide?: boolean }) {
     return (
         <>
-            <div className={"w-5 dark:border-slate-800 border-4 aspect-square rounded-full cursor-default " + props.color}></div>
+            {
+                !props.hide &&
+                <div className={"w-5 border-gray-300 dark:border-slate-800 border-4 aspect-square rounded-full cursor-default " + props.color}></div>
+            }
         </>
     )
 }

@@ -2,5 +2,6 @@ export interface Notification {
     idGuest: string,
     idUser: string,
     title: string,
-    message: string
+    message: string,
+    idProject?: string
 }

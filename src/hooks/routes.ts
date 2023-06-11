@@ -33,10 +33,6 @@ export const Routes: Array<Route> = [
             {
                 name: "Projects",
                 url: "/projects/dashboard"
-            },
-            {
-                name: "Settings",
-                url: "/projects/settings"
             }
         ]
     },
@@ -46,16 +42,12 @@ export const Routes: Array<Route> = [
         url: "/friends/dashboard",
         children: [
             {
-                name: "Your Friends",
+                name: "Friends",
                 url: "/friends/dashboard"
             },
             {
                 name: "Add Friend",
                 url: "/users"
-            },
-            {
-                name: "Friends Settings",
-                url: "/friends/settings"
             }
         ]
     }

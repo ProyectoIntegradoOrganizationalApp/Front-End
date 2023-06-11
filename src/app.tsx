@@ -19,20 +19,26 @@ import { Projects } from './pages/dashboard/pages/projects/Projects';
 import { Achievements } from './pages/dashboard/pages/achievements/Achievements';
 import { Friends } from './pages/dashboard/pages/friends/Friends';
 import { Friend } from './pages/dashboard/pages/friends/pages/friend/Friend';
-import Login from './pages/signIn/Login';
-import Register from './pages/signIn/Register';
 import { Error } from './pages/Error';
 
 // Componentes
 import { ModalInterface } from './domain/UI/ModalInterface.interface';
 import { ModalContext } from './domain/context/ModalContext';
-import { CustomModal } from './components/CustomModal';
+import { CustomModal } from './components/modals/CustomModal';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Project } from './pages/dashboard/pages/project/Project';
-import { Store } from './pages/dashboard/pages/project/Store';
-import { CookieModal } from './components/CookieModal';
-import { Taskman } from './pages/dashboard/pages/project/pages/apps/Taskman';
+import { Store } from './pages/dashboard/pages/project/pages/apps/Store';
+import { CookieModal } from './components/modals/CookieModal';
+import { Boards } from './pages/dashboard/pages/project/pages/apps/taskapp/Boards';
+import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
+import { DragDropContext } from 'react-beautiful-dnd';
+import { useAuth } from './hooks/useAuth';
+import { Account } from './pages/dashboard/pages/profile/account/Account';
+import { ProjectDashboard } from './pages/dashboard/pages/project/components/ProjectDashboard';
+import { ProjectApps } from './pages/dashboard/pages/project/components/ProjectApps';
+import { ProjectMembers } from './pages/dashboard/pages/project/components/ProjectMembers';
+import ContainerSwitcher from './pages/signIn/ContainerSwitcher';
 
 /**
  *  Aplicación principal.
@@ -42,7 +48,7 @@ import { Taskman } from './pages/dashboard/pages/project/pages/apps/Taskman';
  */
 
 export function App() {
-    const [user, setUser] = useState<User | null>(null);
+    const [contextUser, setUser] = useState<User | null>(null);
     const [modal, setModal] = useState<ModalInterface | null>(null);
 
     const [cookiesAccepted, setCookiesAccepted] = useState<string | null>(null);
@@ -50,6 +56,7 @@ export function App() {
 
     useEffect(() => {
         const cookiesAcceptedStatus = localStorage.getItem('cookiesAccepted');
+
         if (cookiesAcceptedStatus == 'true') {
             setCookiesAccepted('true');
             setCookiesIsOpen(false);
@@ -59,7 +66,16 @@ export function App() {
         } else {
             setCookiesIsOpen(true);
         }
+
     }, [cookiesAccepted]);
+
+    useEffect(() => {
+
+    }, [modal?.isOpen])
+
+    const closeModal = () => {
+        setModal(null);
+    }
 
     return (
         <>
@@ -75,71 +91,66 @@ export function App() {
                 pauseOnHover
                 theme="dark"
             />
-            <AuthContext.Provider value={{ user, setUser }}>
+            <AuthContext.Provider value={{ user: contextUser, setUser }}>
                 <ModalContext.Provider value={{ modal, setModal }}>
-                    {
-                        cookiesAccepted == null &&
+
+                    {/* Modal de las coockies */}
+                    {cookiesAccepted == null && (
                         <CookieModal isOpen={cookiesIsOpen} />
-                    }
-                    <CustomModal isOpen={modal?.isOpen ? true : false} closeModal={() => { setModal(null) }} atts={modal} />
+                    )}
+
+                    {/* Modal custom que sirve para multiples cosas */}
+                    {modal && (
+                        <CustomModal
+                            isOpen={modal?.isOpen ? true : false}
+                            closeModal={closeModal}
+                            atts={modal}
+                        />
+                    )}
+
                     <BrowserRouter basename='/'>
                         <Routes>
+                            <Route>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/aboutus" element={<Home />} />
+                            </Route>
+                            <Route element={<ProtectedRoute></ProtectedRoute>}>
+                                <Route element={<Dashboard />}>
+                                    <Route path="profile/dashboard" element={<Profile />} />
+                                    <Route path="profile/achievements" element={<Achievements />} />
+                                    <Route path="profile/account" element={<Account />} />
+                                    <Route path="projects/dashboard" element={<Projects />} />
 
-                            <Route path="/home" element={<Home />} />
+                                    {/* Project */}
+                                    <Route path="project/:name" element={<Project />}>
+                                        {/* Dashboard */}
+                                        <Route
+                                            path="dashboard"
+                                            element={<ProjectDashboard />}
+                                        />
+                                        {/* Apps */}
+                                        <Route
+                                            path="apps"
+                                            element={<ProjectApps />}
+                                        />
+                                        {/* Members */}
+                                        <Route
+                                            path="members"
+                                            element={<ProjectMembers />}
+                                        />
+                                    </Route>
 
-                            <Route path="/" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>}>
-
-                                <Route path="profile/dashboard"
-                                    element={
-                                        <Profile />
-                                    }
-                                />
-
-                                <Route path="profile/achievements"
-                                    element={
-                                        <Achievements />
-                                    }
-                                />
-
-                                <Route path="projects/dashboard"
-                                    element={
-                                        <Projects />
-                                    }
-                                />
-
-                                <Route path="project/:name"
-                                    element={
-                                        <Project />
-                                    }
-                                />
-
-                                <Route path="project/:name/store"
-                                    element={
-                                        <Store project={''} />
-                                    }
-                                />
-
-                                <Route path="project/:project/app/:name"
-                                    element={
-                                        <Taskman />
-                                    }
-                                />
-
-                                <Route path="friends/dashboard"
-                                    element={
-                                        <Friends />
-                                    }
-                                />
-                                <Route path="friend/:name"
-                                    element={
-                                        <Friend />
-                                    }
-                                />
-
+                                    <Route path="project/:name/store" element={ <Store project={''} /> }/>
+                                    <Route path="project/:projectId/app/taskman/:idApp" element={ <Boards app="Taskman"/> }/>
+                                    <Route path="project/:projectId/app/timeline/:idApp" element={ <Boards app="Timeline"/> }/>
+                                    <Route path="project/:projectId/app/:appName/:idApp/:idBoard" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
+                                    <Route path="friends/dashboard" element={ <Friends /> } />
+                                    <Route path="friend/:friendName" element={ <Friend />} />
+                                </Route>
                             </Route>
 
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
+                            <Route path="/login" element={<ContainerSwitcher />} />
+                            <Route path="/register" element={<ContainerSwitcher />} />
                             <Route path="*" element={<Error />} />
                         </Routes>
                     </BrowserRouter>

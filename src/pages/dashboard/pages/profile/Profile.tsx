@@ -10,13 +10,16 @@ import { Activity } from './components/Activity';
 import { Calendar } from './components/Calendar';
 import { InfoTooltip } from '../../../../components/InfoTooltip';
 import { AchievementsInfo } from '../achievements/components/AchievementsInfo';
-import { Item } from '../../../../components/Item';
-import { useOutletContext } from 'react-router-dom';
+import { MainItem } from '../../../../components/list-items/MainItem';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 // Hooks
 import { useModal } from '../../../../hooks/useModal';
 import { useProfile } from '../../../../hooks/useProfile';
 import { useUtils } from '../../../../hooks/useUtils';
+import ShowButton from '../../../../components/buttons/ShowButton';
+import { Project } from '../../../../domain/projects/Project.interface';
+import { useProjectsApi } from '../../../../adapters/api/useProjectsApi';
 
 /**
  * Componente Profile, que representa la ruta /profile/{id_user} en la cual podremos
@@ -26,29 +29,46 @@ import { useUtils } from '../../../../hooks/useUtils';
 export function Profile() {
     const [daily, setDaily] = useState<number>(0);
     const [weekly, setWeekly] = useState<number>(0);
-    
+
     const { openModal } = useModal();
     const { GenerateMonthYear, GenerateCalendar } = useProfile();
 
-    const data: Profile = useOutletContext();
+    const navigate = useNavigate();
+
+    const profileData: Profile = useOutletContext();
+    const { data, error, loading, refreshData } = useProjectsApi(true);
+
+    const { getMonths } = useUtils();
 
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
-        if( data ) {
-            const getUserWork = useUtils(data?.activity);
-            const {commitsDaily, commitsWeekly} = getUserWork.getUserWork();
-    
-            setDaily(commitsDaily);
-            setWeekly(commitsWeekly);
-        }
-    }, [data?.user.id]);
+
+        // TODO => CAMBIAR INTERFACES CUANDO CHRISTIAN TERMINE
+        // LA ACTIVITY
+        profileData.activity = [];
+
+        const { getUserWork } = useUtils();
+        const { commitsDaily, commitsWeekly } = getUserWork(profileData?.activity);
+
+        setDaily(commitsDaily);
+        setWeekly(commitsWeekly);
+
+    }, []);
+
+    /**
+     *  Función que refresca los datos para que se recargue la IU
+     *  y así poder ver los cambios.
+     */
+    const handleCreateProject = () => {
+        refreshData();
+    }
 
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
             <AchievementsInfo
-                data={data}
+                data={profileData}
             />
-            
+
             <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 max-[500px]:gap-2 w-full">
                 <div className="flex flex-col lg:flex-row flex-wrap gap-4 max-[500px]:gap-2">
                     <div className="flex-[1.8] basis-[80px] flex flex-col gap-4 max-[500px]:gap-2">
@@ -62,55 +82,57 @@ export function Profile() {
                         />
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4 max-[500px]:gap-2">
-                        <div className="flex-[3] bg-gray-200 dark:bg-slate-800 rounded-xl p-4 max-[500px]:p-2">
-                            { data?.activity && (
+                        <div className="flex-[3] bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-xl p-4 max-[500px]:p-2">
+                            {profileData?.activity && (
                                 <Activity
                                     title="Monthly Activity"
-                                    data={data}
+                                    data={profileData}
                                 />
                             )}
                         </div>
-                        <div className="flex-[2] bg-gray-200 dark:bg-slate-800 rounded-xl p-4">
-                            <Calendar 
-                                monthYear={GenerateMonthYear()} 
-                                calendar={GenerateCalendar()} 
+                        <div className="flex-[2] bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-xl p-4">
+                            <Calendar
+                                monthYear={GenerateMonthYear()}
+                                calendar={GenerateCalendar()}
                             />
                         </div>
                     </div>
                 </div>
 
                 {/* TODO => Dividir esto en componentes */}
-                <div className="flex-1 rounded-xl bg-gray-200 dark:bg-slate-700 flex flex-col min-h-[20rem]">
-                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-slate-800 flex items-center justify-between w-full rounded-t-xl relative text-black dark:text-white text-base p-4 max-[500px]:p-2">
+                <div className="flex-1 min-[1085px]:rounded-xl bg-gray-200 dark:bg-[#28292d] flex flex-col min-h-[20rem]">
+                    <div className="border-b-4 dark:border-b-0 border-white dark:bg-[#202124] flex items-center justify-between w-full min-[500px]:rounded-t-xl relative text-black dark:text-white text-base p-4">
                         <InfoTooltip title="All your projects" />
                         Your Projects
                         {/* Create Project */}
-                        <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all" onClick={() => openModal({
-                            isOpen: true,
-                            type: "crudProject",
-                            title: "Create Project",
-                            content: [],
-                            submitText: "Create Project",
-                            submitAction: ""
-                        })}>
-                            
+                        <i
+                            className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"
+                            onClick={() => openModal({
+                                isOpen: true,
+                                type: "crudProject",
+                                title: "Create Project",
+                                content: [],
+                                submitText: "Create Project",
+                                submitAction: handleCreateProject
+                            }
+                            )}>
+
                         </i>
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
-                        {data?.projects.map(project => {
+                        {data && Array.isArray(data) && data.map((project: Project) => {
                             return (
-                                <Item 
-                                    key={project.id} 
-                                    title={project.name} 
-                                    description={project.name} 
-                                    tools={[
-                                    {
-                                        type: "button",
-                                        action: "view",
-                                        icon: "fa-solid fa-eye",
-                                        target: `/project/${project.id}`
-                                    },
-                                ]} />
+                                <MainItem
+                                    key={project.idProject}
+                                    item={project}
+                                    descriptionBottom={false}
+                                >
+                                    <ShowButton
+                                        cb={() => {
+                                            navigate(`/project/${project.idProject}/dashboard`)
+                                        }}
+                                    />
+                                </MainItem>
                             )
                         })}
                     </div>

@@ -3,4 +3,5 @@ export interface NotificationDTO {
     iduser: string,
     title: string,
     message: string
+    idproject?: string
 }

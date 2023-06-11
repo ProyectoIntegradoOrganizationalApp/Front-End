@@ -1,14 +1,20 @@
 import { UserActivity } from "../domain/user/UserActivity.interface";
 
-export const useUtils = ( activity: Array<UserActivity>) => {
+export const useUtils = ( ) => {
     
-    const getUserWork = (): { commitsWeekly: number, commitsDaily: number} => {
+    /**
+     *  Función que devuelve la actividad de un usuario, tanto
+     *  semanal como mensual.
+     * 
+     *  @returns 
+     */
+    const getUserWork = ( activity: Array<UserActivity> ): { commitsWeekly: number, commitsDaily: number} => {
         // Contadores en los que vamos sumando la cantidad de commits realizados
         let commitsWeekly: number = 0;
         let commitsDaily: number = 0;
 
         // Bucle en el que recorremos las actividades y calculamos si se han realizado durante la semana y/o día 
-        activity.map((act: UserActivity) => {
+        activity?.map((act: UserActivity) => {
             let fechaActual = new Date();
 
             let primerDiaSemana = new Date(fechaActual);
@@ -31,7 +37,30 @@ export const useUtils = ( activity: Array<UserActivity>) => {
         return { commitsWeekly, commitsDaily };
     }
 
-    return { getUserWork };    
+    /**
+     *  Función que devuelve un array con el nombre de 
+     *  todos los meses para generar charts.
+     * 
+     *  @returns 
+     */
+    const getMonths = (): Array<string> => {
+        return [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
+    }
+
+    return { getUserWork, getMonths };    
 
 }
 

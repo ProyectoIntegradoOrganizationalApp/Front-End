@@ -2,6 +2,6 @@
  *  Interfaz de Tabs
  */
 export interface Tabs {
-    url: string,
+    url?: string,
     name: string
 }

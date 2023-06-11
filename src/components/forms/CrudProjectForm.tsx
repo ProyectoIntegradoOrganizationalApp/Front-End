@@ -1,23 +1,37 @@
 import { useState } from "react";
-import { useProjectsApi } from "../../adapters/api/useProjectsApi";
 
+import { useProjectApi } from "../../adapters/api/useProjectApi";
 
-const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, close: () => void}> = ( props: { title: string | undefined, submitText: string, close: () => void } ) => {
+interface ProjectFormProps {
+    title: string | undefined,
+    submitText: string,
+    close: () => void,
+    submit: () => void
+}
+
+const CrudProjectForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
 
     /** 
      * Hook de la API de proyectos, le pasamos un false para que no realice la query.
      */
-    const { createProject } = useProjectsApi(false);
+    const { createProject } = useProjectApi();
 
-    const [title, setName] = useState<string>("");
+    const [projectTitle, setProjectTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+
+    const handleSubmit = ( event: React.FormEvent ) => {
+        event.preventDefault();
+        createProject(projectTitle, description);
+        close();
+        submit();
+    }
 
     return (
         <>
             {/* Titulo */}
-            <div className="w-full flex flex-col w-5/5 bg-white dark:bg-slate-800 p-7 border-b-2 border-gray-300 dark:border-white/20">
+            <div className="w-full flex flex-col w-5/5 bg-white dark:bg-[#202124] p-7 border-b-2 border-gray-300 dark:border-white/20">
                 <div className="flex gap-4">
-                    <p className="leading-none text-2xl">{props.title}</p>
+                    <p className="leading-none text-2xl">{title}</p>
                 </div>
             </div>
 
@@ -25,11 +39,7 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
             <div className="flex flex-col bg-transparent p-7 gap-5">
                 <form id="crudForm" 
                     className="flex flex-col gap-6 w-full"
-                    onSubmit={ event => {
-                        event.preventDefault();
-                        createProject(title, description);
-                        props.close();
-                    }}
+                    onSubmit={event => handleSubmit(event)}
                 >
                     <input 
                         type="text"
@@ -37,11 +47,11 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
                         placeholder="Insert your project name"
                         minLength={3}
                         maxLength={20} 
-                        className={`flex-1 input input-bordered bg-slate-700 p-4`} 
+                        className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-[#28292d] p-4`} 
                         required={true}
-                        value={title}
+                        value={projectTitle}
                         onChange={ event => {
-                            setName(event.target.value);
+                            setProjectTitle(event.target.value);
                         }}
                     />
                     <textarea 
@@ -49,15 +59,15 @@ const CrudProjectForm: React.FC<{title: string | undefined, submitText: string, 
                         placeholder="Insert Your Project Description"
                         minLength={10} 
                         maxLength={50}
-                        className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none bg-slate-700`} 
+                        className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-[#28292d]`} 
                         required={true}
                         value={description}
                         onChange={ event => {
                             setDescription(event.target.value);
                         }}
                     />
-                    <button className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-700/50">
-                        {props.submitText}
+                    <button className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-800">
+                        {submitText}
                     </button>                                    
                 </form>
             </div>  

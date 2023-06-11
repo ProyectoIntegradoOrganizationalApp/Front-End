@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { RequestParams } from '../../domain/RequestParams.interface';
 import { Project } from '../../domain/projects/Project.interface';
 import { ApiError } from "../../domain/ApiError.interface";
-import { ProjectMapper } from '../mappers/ProjectsMapper';
+import { ProjectMapper } from '../mappers/ProjectMapper';
 import { ProjectDTO } from '../../domain/projects/ProjectDTO.interface';
 
 /**
@@ -64,60 +64,17 @@ export const useProjectsApi = ( fetch: boolean ) => {
     }
 
     /**
-     *  Función que recibe los parámetros necesarios para hacer la petición al back y crear un
-     *  proyecto.
-     *  @param name     
-     *  @param description 
+     *  Función que llama a fetchData para actualizar la información de los proyectos.
      */
-    const createProject = ( name: string, description: string ) => {
-        setLoading(true);
-
-        /**
-         * Props de la petición
-         */
-        const props: RequestParams = {
-            url: `${API}/project`,
-            method: "POST",
-            headers: new AxiosHeaders({
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user?._token}`
-            }),
-            data: {
-                name: name,
-                description: description
-            }
-        }
-        
-        /**
-         *  Petición usando el Hook de Axios
-         */
-        useAxios(props)
-            .then( data => console.log(data))
-            .catch( err => {
-                const error: ApiError = {error: true, message: err};
-                handleData(error);
-            })
-            .finally(() => {
-                setLoading(false)
-            });
-
-    }
-
-    const leaveProject = () => {
-
-    }
-
-    const editProject = () => {
-
+    const refreshData = () => {
+        fetchData();
     }
 
     /**
-     *  Función que maneja los datos que salen de la API.
+     *  Función para controlar la petición sobre múltiple proyectos
      *  @param info 
      */
     const handleData = ( info: ProjectWrapper | ApiError ) => {
-
-        console.log(info)
 
         /**
          * Hay Error
@@ -141,10 +98,14 @@ export const useProjectsApi = ( fetch: boolean ) => {
         setLoading(false);
     }
 
-    return { data, error, loading, createProject, leaveProject, editProject };
+
+    return { data, error, loading, refreshData };
 
 }
 
+/**
+ *  Envoltorio de una propiedad que es un array. Esta es la respuesta del back-end.
+ */
 interface ProjectWrapper {
-    projects: Array<Project>
+    projects: Array<ProjectDTO>
 }

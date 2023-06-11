@@ -17,25 +17,38 @@ export const Dashboard = () => {
 
     const { logout } = useAuth();
 
-    const {data, error, loading} = useProfileApi();
+    const { data, error, loading } = useProfileApi();
 
     /**
      * Ciclo de vida para comprobar si el token está en condiciones
      */
     useEffect(() => {
-        if( error?.error && error.message === 'The token provided is expired' ) {
+        if (error?.error && error.message === 'The token provided is expired') {
             logout();
         }
+
     }, [error?.error]);
 
-    if( location.pathname === '/') {
+    if (location.pathname === '/') {
         return <Navigate to='/home' />
     }
 
+    // const data = {
+    //     user: {
+    //         id: "string",
+    //         name: "string",
+    //         email: "string",
+    //         level: 2,
+    //         photo: "string"
+    //     }
+    // }
+
     return (
-        <Sidebar>
+        <Sidebar profile={data}>
             <DashboardBox>
-                <Outlet context={data} />
+                {data && (
+                    <Outlet context={data} />
+                )}
             </DashboardBox>
         </Sidebar>
     )
