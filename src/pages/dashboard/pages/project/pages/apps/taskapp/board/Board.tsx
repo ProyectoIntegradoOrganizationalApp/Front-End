@@ -119,7 +119,7 @@ export const Board: React.FC = () => {
                 <div className="bg-gray-200 dark:bg-[#202124] w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
                     <div className="w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
                         <div className="flex gap-3">
-                            <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
+                            <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-white !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
                             { application === "taskman" &&
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
                             } { application === "Timeline" &&

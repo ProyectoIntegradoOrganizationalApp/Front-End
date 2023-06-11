@@ -103,7 +103,7 @@ html, body {
     @apply bg-black dark:bg-white w-3 aspect-square h-[unset];
 }
 .progressVideo::-webkit-progress-value {
-    @apply bg-gray-400 dark:bg-[#414149];
+    @apply !bg-[#414149];
     border-radius: var(--rounded-box, 1rem);
 }
 .progressVideo {
@@ -442,6 +442,82 @@ progress {
 }
 .custom-border:hover::after {
     @apply w-[calc(100%+3px)] ml-[-0.2px];
+}
+
+/* Features */
+.st0 {
+    @apply fill-none stroke-[#E4E4E4] stroke-[4];
+    stroke-miterlimit: 10;
+    stroke-dasharray: 32.0882,32.0882;
+}
+.st1 {
+    @apply fill-slate-200 dark:fill-[#28292d];
+}
+.st2 {
+    @apply fill-slate-300 dark:fill-[#9ca3af];
+}
+.st3 {
+    @apply fill-[#E4E4E4];
+}
+ellipse.st4 {
+    @apply dark:fill-[#202124];
+}
+.st4 {
+    @apply fill-[#FFFFFF];
+}
+.st5 {
+    @apply fill-[#708CD5];
+}
+.st6 {
+    @apply fill-[#D3DFFF];
+}
+.st7 {
+    @apply fill-[#FFFFFF] stroke-[#708CD5] stroke-[6]; 
+    stroke-miterlimit: 10;
+}
+.st8 {
+    @apply fill-[#EE6F57];
+}
+.st9 {
+    @apply fill-[#F9B384];
+}
+.st10 {
+    @apply fill-[#1F3C88];
+}
+.st11 {
+    @apply fill-[#E28B6D];
+}
+.st12 {
+    @apply fill-[#102048];
+}
+.st13 {
+    @apply opacity-[0.6] fill-[#102048];
+}
+.st14 {
+    @apply opacity-[0.3] fill-[#1F3C88];
+}
+.st15 {
+    @apply opacity-[0.6] fill-[#E28B6D];
+}
+.st16 {
+    @apply fill-[#6F3428];
+}
+.st17 {
+    @apply fill-[#FBC343];
+}
+.st18 {
+    @apply opacity-[0.3] fill-none stroke-[#6F3428] stroke-[8];
+    stroke-miterlimit: 10;
+}
+.st19 {
+    @apply opacity-[0.4] fill-[#FC8879];
+}
+.st20 {
+    @apply opacity-[0.6] fill-[#6F3428];
+}
+.st21 {
+    @apply fill-none stroke-[#102048] stroke-[8];
+    stroke-miterlimit: 10;
 }
 
 /* Sidebar */
