@@ -17,24 +17,24 @@ interface ItemInfo {
  *  @param props Contiene las props que le pasa el elemento superior 
  *  @returns 
  */
-export function MainItem( props: { item: ItemInfo, descriptionBottom?: boolean, children: ReactNode } ) {
+export function MainItem(props: { item: ItemInfo, descriptionBottom?: boolean, children: ReactNode }) {
 
     // Comprobamos que tipo de caja hay que renderizar
     let description: ReactNode;
-    if( props.item.description && props.descriptionBottom == true ) {
-        description = <DescriptionBottom title={props.item.name} description={props.item.description} icon={props.item.icon ? props.item.icon : ""}/>
+    if (props.item.description && props.descriptionBottom == true) {
+        description = <DescriptionBottom title={props.item.name} description={props.item.description} icon={props.item.icon ? props.item.icon : ""} />
     } else {
         description = <DescriptionTop title={props.item.name} description={props.item.description} icon={props.item.icon ? props.item.icon : ""} />
     }
 
     return (
-        <div className="bg-white dark:bg-slate-800 w-full h-fit px-4 py-3 flex max-[499px]:flex-wrap justify-between items-center rounded-xl gap-2.5">
+        <div className="bg-white dark:bg-[#202124] w-full h-fit px-4 py-3 flex max-[499px]:flex-wrap justify-between items-center rounded-xl gap-2.5">
             {/* Info */}
-            { description }
+            {description}
 
             {/* Buttons */}
             <div className="flex items-center gap-2">
-                { props.children }
+                {props.children}
             </div>
         </div>
     )

@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import { Tabs } from "../domain/UI/Tabs.interface";
 
 export function Tabs(props: { tab: string, setTab: Function, icon?: string, title?: string, links?: Array<Tabs> }) {
-
     const handleClick = (tabName: string) => {
-        console.log(tabName)
         props.setTab(tabName);
     }
 
@@ -20,25 +18,26 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                     </div>
                 } {
                     props.links && props.title &&
-                    <div className="h-10 w-[1.7px] bg-gray-400 dark:bg-slate-500 hidden md:block"></div>
+                    <div className="h-10 w-[1.7px] bg-gray-400 dark:bg-[#414149] hidden md:block"></div>
                 }
 
                 {/* Tabs */}
                 {props.links &&
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center gap-1.5">
                         {props.links?.map((link) =>
                             link.url ? (
                                 <Link
                                     key={link.name}
                                     to={link.url}
-                                    className={"btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"}
+                                    className={`btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-[#28292d] ${props.tab == link.name || props.tab == link.url ? "!bg-gray-300 dark:!bg-[#28292d]" : ""}`}
+                                    onClick={() => handleClick(link.name)}
                                 >
                                     {link.name}
                                 </Link>
                             ) : (
                                 <button
                                     key={link.name}
-                                    className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-slate-600"
+                                    className={`btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-[#28292d] ${props.tab == link.name || props.tab == link.url ? "!bg-gray-300 dark:!bg-[#28292d]" : ""}`}
                                     onClick={() => handleClick(link.name)}
                                 >
                                     {link.name}

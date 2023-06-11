@@ -37,7 +37,7 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
     return (
         <>
             {/* Titulo */}
-            <div className="w-full flex flex-col w-5/5 bg-white dark:bg-slate-800 p-7 border-b-2 border-gray-300 dark:border-white/20">
+            <div className="w-full flex flex-col w-5/5 bg-white dark:bg-[#202124] p-7 border-b-2 border-gray-300 dark:border-white/20">
                 <div className="flex gap-4">
                     <p className="leading-none text-2xl">{title}</p>
                 </div>
@@ -55,7 +55,7 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
                         placeholder="Insert your project name"
                         minLength={3}
                         maxLength={20} 
-                        className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-slate-700 p-4`} 
+                        className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-[#28292d] p-4`} 
                         required={true}
                         value={projectTitle}
                         onChange={ event => {
@@ -67,7 +67,7 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
                         placeholder="Insert Your Project Description"
                         minLength={10} 
                         maxLength={50}
-                        className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-slate-700`} 
+                        className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-[#28292d]`} 
                         required={true}
                         value={description}
                         onChange={ event => {

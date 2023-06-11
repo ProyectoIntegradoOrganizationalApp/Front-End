@@ -29,8 +29,8 @@ export const Activity: React.FC<ActivityProps> = ({ title, data }) => {
 
     return (
         <>
-            <div className="bg-white dark:bg-slate-700 w-full h-full flex flex-col rounded-xl">
-                <div className="relative border-b-4 border-gray-200 dark:border-slate-600 py-4">
+            <div className="bg-white dark:bg-[#28292d] w-full h-full flex flex-col rounded-xl">
+                <div className="relative border-b-4 border-gray-200 dark:border-[#202124] py-4">
                     <div className="absolute top-3 left-4">
                         <InfoTooltip title="Commits done per day" position="left" />
                     </div>
@@ -44,8 +44,8 @@ export const Activity: React.FC<ActivityProps> = ({ title, data }) => {
                         />
                     </div>
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                        <h1 className="text-2xl"> No Data </h1>
+                    <div className="w-full h-full flex items-center justify-center text-black dark:text-white">
+                        <h1 className="text-xl">No Data</h1>
                     </div>
                 )}
 

@@ -112,32 +112,15 @@ export function Board() {
                         },
                     ]} />
                 </div>
-                <div className="bg-gray-200 dark:bg-slate-800 w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
-                    <div className="bg-gray-200 dark:bg-slate-800 w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
+                <div className="bg-gray-200 dark:bg-[#202124] w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
+                    <div className="w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
                         <div className="flex gap-3">
-                            <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-black dark:!text-white !bg-white dark:!bg-slate-700 !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
+                            <Link to={`/project/ptoelquelolea/app/${state.app}`} className="btn btn-primary flex justify-center items-center text-white !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
                             {state.app == "Taskman" &&
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
                             } {state.app == "Timeline" &&
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols"
-                                    links={[
-                                        {
-                                            url: "todo",
-                                            name: "To Do"
-                                        },
-                                        {
-                                            url: "inprogress",
-                                            name: "In Progress"
-                                        },
-                                        {
-                                            url: "done",
-                                            name: "Done"
-                                        },
-                                        {
-                                            url: "sergioesbobo",
-                                            name: "sergioesBobo"
-                                        }
-                                    ]}
+                                    links={[ { name: "To Do" }, { name: "In Progress" }, { name: "Done" }, { name: "sergioesBobo" } ]}
                                 />
                             }
                         </div>
@@ -156,7 +139,7 @@ export function Board() {
                         <StrictDroppable droppableId="1" type="COLUMN" direction="horizontal">
                             {(provided) => (
                                 <div id="scrollbarx"
-                                    className="flex-1 rounded-xl bg-gray-300 dark:bg-slate-700 flex p-4 max-[500px]:p-2 overflow-x-auto"
+                                    className="flex-1 rounded-xl bg-gray-300 dark:bg-[#28292d] flex p-4 max-[500px]:p-2 overflow-x-auto"
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >

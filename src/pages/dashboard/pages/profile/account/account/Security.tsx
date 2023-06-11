@@ -22,7 +22,7 @@ export function Security() {
                         placeholder="Enter old password"
                         minLength={8}
                         maxLength={80}
-                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4`}
+                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4`}
                         required={true}
                         value={oldPassword}
                         onChange={event => {
@@ -39,7 +39,7 @@ export function Security() {
                             placeholder="Enter new password"
                             minLength={8}
                             maxLength={80}
-                            className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4`}
+                            className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4`}
                             required={true}
                             value={password}
                             onChange={event => {
@@ -55,7 +55,7 @@ export function Security() {
                             placeholder="Enter old password"
                             minLength={8}
                             maxLength={80}
-                            className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4`}
+                            className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4`}
                             required={true}
                             value={confirmpass}
                             onChange={event => {

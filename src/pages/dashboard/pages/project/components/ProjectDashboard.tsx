@@ -50,8 +50,8 @@ export const ProjectDashboard: React.FC = () => {
     return (
         <>
             <div className="flex-1 flex flex-wrap gap-4 max-[500px]:gap-2">
-                <div className="flex-1 flex flex-col items-center justify-start min-w-fit bg-white dark:!bg-slate-800 !rounded-xl pb-5">
-                    <div className="[&_div]:bg-white [&_div]:dark:bg-slate-800">
+                <div className="flex-1 flex flex-col items-center justify-start min-w-fit bg-white dark:!bg-[#202124] !rounded-xl pb-5">
+                    <div className="[&_div]:bg-white [&_div]:dark:bg-[#202124]">
                         <Statistics
                             title="Total Tasks"
                             amount={132}
@@ -66,7 +66,7 @@ export const ProjectDashboard: React.FC = () => {
                         )}
                     </div>
                 </div>
-                <div className="bg-white dark:bg-slate-800 rounded-xl flex-[7] p-4 w-full">
+                <div className="bg-white dark:bg-[#202124] rounded-xl flex-[7] p-4 w-full">
                     { barChartData && (
                         <Bar 
                             data={barChartData}
@@ -74,7 +74,7 @@ export const ProjectDashboard: React.FC = () => {
                         />
                     )}
                 </div>
-                <div className="bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl flex-[1] min-w-fit flex flex-col items-center justify-center p-4 py-7 gap-12 relative">
+                <div className="bg-white dark:bg-[#202124] text-black dark:text-white rounded-xl flex-[1] min-w-fit flex flex-col items-center justify-center p-4 py-7 gap-12 relative">
                     <div className="absolute top-4 left-4">
                         <InfoTooltip position="left" title="Most Valuable Member (most tasks done this month)" />
                     </div>
@@ -90,7 +90,7 @@ export const ProjectDashboard: React.FC = () => {
                 </div>
             </div>
             <div className={`${logs.length > 0 ? "flex-1" : "flex-0"} bg-white dark:bg-slate-700 rounded-xl relative flex flex-col`}>
-                <div className="bg-white dark:bg-slate-800 flex items-center justify-center w-full h-14 rounded-t-xl relative text-black dark:text-white text-base">
+                <div className="bg-white dark:bg-[#202124] flex items-center justify-center w-full h-14 rounded-t-xl relative text-black dark:text-white text-base">
                     <div className="absolute top-[1.09rem] left-4">
                         <InfoTooltip position="right" title="Task history displaying the latest tasks" />
                     </div>

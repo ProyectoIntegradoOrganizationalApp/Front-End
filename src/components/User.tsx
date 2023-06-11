@@ -29,11 +29,11 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                 <Link to={"/friend/" + props.name} className="min-w-[calc(210px)]">
                     {
                         props.selected == true &&
-                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 bg-white dark:bg-slate-700 transition-all">
+                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 bg-white dark:bg-[#28292d] transition-all">
                             {/* Picture */}
                             <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                                 <div className="absolute -top-0.5 -right-1">
-                                    <InfoTooltip title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
+                                    <InfoTooltip position="right" title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
                                         <State color={stateColor(props.state)} />
                                     } />
                                 </div>
@@ -41,11 +41,11 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                             <p className="text-black dark:text-white text-base">{props.name}</p>
                         </div>
                     } {props.selected == false &&
-                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-white dark:hover:bg-slate-700 transition-all">
+                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-white dark:hover:bg-[#28292d] transition-all">
                             {/* Picture */}
                             <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                                 <div className="absolute -top-0.5 -right-1">
-                                    <InfoTooltip title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
+                                    <InfoTooltip position="right" title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
                                         <State color={stateColor(props.state)} />
                                     } />
                                 </div>
@@ -54,11 +54,11 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                         </div>
                     } {
                         props.selected === undefined &&
-                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-white dark:hover:bg-slate-700 transition-all">
+                        <div className="flex items-center gap-4 rounded-xl select-none cursor-pointer py-2 px-2 hover:bg-white dark:hover:bg-[#28292d] transition-all">
                             {/* Picture */}
                             <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                                 <div className="absolute -top-0.5 -right-1">
-                                    <InfoTooltip title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
+                                    <InfoTooltip position="right" title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
                                         <State color={stateColor(props.state)} />
                                     } />
                                 </div>
@@ -73,7 +73,7 @@ export function User(props: { dm: boolean, selected?: boolean, picture: string, 
                     {/* Picture */}
                     <div className="w-12 aspect-square bg-red-800 rounded-full relative">
                         <div className="absolute -top-0.5 -right-1">
-                            <InfoTooltip title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
+                            <InfoTooltip position="right" title={props.state.charAt(0).toUpperCase() + props.state.substring(1)} target={
                                 <State color={stateColor(props.state)} />
                             } />
                         </div>

@@ -7,7 +7,7 @@ import { SaveImage } from '../../../../../../components/image-kit/SaveImage';
 
 interface MyAccountProps {
     data: Account | undefined,
-    update: ( acc: Account ) => void
+    update: (acc: Account) => void
 }
 
 /**
@@ -30,7 +30,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
      *  Carga inicial de datos
      */
     React.useEffect(() => {
-        if ( data ) {
+        if (data) {
             setEmail(data.email);
             setName(data.name);
             setLastName(data.lastname);
@@ -58,7 +58,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
         update(acc);
     }
 
-    const photoUpdate = ( url: string ) => {
+    const photoUpdate = (url: string) => {
         setPhoto(url);
     }
 
@@ -66,11 +66,11 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
         <div className="flex-1 flex flex-col justify-between min-[811px]:mt-9 gap-5">
             <div id="scrollbar" className="flex-1 flex flex-wrap items-start content-start gap-5 text-black dark:text-white">
                 <div className="flex-1 basis-full flex flex-col gap-2 h-fit">
-                    <SaveImage 
+                    <SaveImage
                         cb={photoUpdate}
                     />
                     <label htmlFor="avatar">Avatar</label>
-                    <input type="file" name="avatar" accept=".png, .jpeg, .jpg" className="file-input !outline-none bg-gray-300 dark:bg-slate-700 !border-none w-full h-fit" />
+                    <input type="file" name="avatar" accept=".png, .jpeg, .jpg" className="file-input !outline-none bg-gray-300 dark:bg-[#28292d] !border-none w-full h-fit" />
                 </div>
                 <div className="flex-1 flex flex-col gap-2">
                     <label htmlFor="firstname">First Name</label>
@@ -80,7 +80,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                         placeholder="Enter first name"
                         minLength={3}
                         maxLength={20}
-                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4`}
+                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4`}
                         required={true}
                         value={name}
                         onChange={event => {
@@ -96,7 +96,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                         placeholder="Enter last name"
                         minLength={3}
                         maxLength={20}
-                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4`}
+                        className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4`}
                         required={true}
                         value={last_name}
                         onChange={event => {
@@ -110,7 +110,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                         <div className="flex gap-5">
                             <input
                                 type="text"
-                                className="input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4 w-16 h-fit"
+                                className="input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4 w-16 h-fit"
                                 minLength={3}
                                 maxLength={3}
                                 value={prefix}
@@ -128,7 +128,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                                 onChange={event => {
                                     setPhoneNumber(event.target.value);
                                 }}
-                                className="flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4 h-fit"
+                                className="flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4 h-fit"
                                 required
                             />
                         </div>
@@ -141,7 +141,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                             placeholder="Enter email"
                             minLength={10}
                             maxLength={80}
-                            className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-slate-700 p-4`}
+                            className={`flex-1 input input-bordered border-none bg-gray-300 dark:bg-[#28292d] p-4`}
                             required={true}
                             value={email}
                             onChange={event => {
@@ -152,7 +152,7 @@ export const MyAccount: React.FC<MyAccountProps> = ({ data, update }) => {
                 </div>
             </div>
             <div className="flex justify-between gap-2">
-                <button 
+                <button
                     className="btn btn-primary w-fit !bg-green-700 hover:!bg-green-800"
                     onClick={() => handleUpdate()}
                 >

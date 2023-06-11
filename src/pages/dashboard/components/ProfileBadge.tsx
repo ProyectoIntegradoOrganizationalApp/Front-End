@@ -33,14 +33,14 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
                 <button className="btn !p-0 !bg-transparent border-none flex flex-nowrap justify-start items-center gap-2.5 normal-case flex-1 !h-[unset] !min-h-[unset]">
                     <img src={foto} className="!w-11 !aspect-square !h-[unset] !min-h-[unset]" />
                 </button>
-                <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-slate-900 w-full !z-[99999999999999] text-black dark:text-white gap-1">
+                <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-[#28292d] w-full !z-[99999999999999] text-black dark:text-white gap-1">
                     <li>
-                        <NavLink to="/profile/account" className={`justify-between !rounded-none px-2.5 py-2 text-black dark:text-white ${location.pathname != "/profile/account" ? "hover:bg-gray-300 dark:hover:bg-slate-800 active:!bg-slate-800" : "bg-white dark:bg-slate-800"}`}>
+                        <NavLink to="/profile/account" className={`justify-between !rounded-none px-2.5 py-2 text-black dark:text-white ${location.pathname != "/profile/account" ? "hover:bg-gray-300 dark:hover:bg-[#414149] active:!bg-[#414149]" : "bg-white dark:bg-[#414149]"}`}>
                             My Account
                         </NavLink>
                     </li>
                     <li>
-                        <button onClick={logout} className="flex justify-between !rounded-none px-2.5 py-2 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-slate-800 active:!bg-slate-800">Logout <i className="fa-solid fa-right-from-bracket"></i></button>
+                        <button onClick={logout} className="flex justify-between !rounded-none px-2.5 py-2 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-[#414149] active:!bg-[#414149]">Logout <i className="fa-solid fa-right-from-bracket"></i></button>
                     </li>
                 </ul>
             </div>
@@ -49,12 +49,12 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
                 isOpen: true,
                 type: "notifications",
                 content:
-                    <div id="scrollbar" className="flex flex-col bg-white dark:bg-slate-800 p-7 max-[500px]:p-4 gap-2 max-h-[1000px]">
+                    <div id="scrollbar" className="flex flex-col bg-white dark:bg-[#202124] p-7 max-[500px]:p-4 gap-2 max-h-[1000px]">
                         {
                             true &&
                             <>
                                 {/* FOREACH NOTIFICATION */}
-                                <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-slate-900 [&_div]:items-start [&_div]:p-1.5">
+                                <div className="[&_div]:bg-gray-200 [&_div]:dark:bg-[#28292d] [&_div]:items-start [&_div]:p-1.5">
                                     <MainItem item={{
                                         name: "19:45 - Created Task",
                                         description: "Pablo Valderas has created one task in 'ptoelquelolea' project"
@@ -75,7 +75,7 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ user, logout }) => {
                 submitText: "",
                 submitAction: () => { }
             }
-            )} className="btn border-none w-fit px-[1.1rem] bg-white/70 hover:bg-white dark:bg-slate-900/70 dark:hover:bg-slate-900 absolute right-0 -bottom-0.5">
+            )} className="btn border-none w-fit px-[1.1rem] bg-white/70 hover:bg-white dark:bg-[#414149]/40 dark:hover:bg-[#28292d] absolute right-0 -bottom-0.5">
                 <i className="fa-solid fa-bell text-black dark:text-white"></i>
                 <div className="absolute -top-0.5 -right-1">
                     <State color="bg-red-700" hide />

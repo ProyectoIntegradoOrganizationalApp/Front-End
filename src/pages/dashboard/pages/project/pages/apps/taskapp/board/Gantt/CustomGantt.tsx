@@ -56,7 +56,7 @@ const CustomGantt = (props: { column: string }) => {
 	};
 
 	return (
-		<div id="scrollbar" className="bg-gray-200 dark:bg-slate-700 rounded-xl h-full flex flex-col justify-between">
+		<div id="scrollbar" className="bg-gray-200 dark:bg-[#28292d] rounded-xl h-full flex flex-col justify-between">
 			<div>
 				<ViewSwitcher
 					onViewListChange={setIsChecked}

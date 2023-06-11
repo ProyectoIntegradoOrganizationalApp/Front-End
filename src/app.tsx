@@ -40,6 +40,7 @@ import { Account } from './pages/dashboard/pages/profile/account/Account';
 import { ProjectDashboard } from './pages/dashboard/pages/project/components/ProjectDashboard';
 import { ProjectApps } from './pages/dashboard/pages/project/components/ProjectApps';
 import { ProjectMembers } from './pages/dashboard/pages/project/components/ProjectMembers';
+import ContainerSwitcher from './pages/signIn/ContainerSwitcher';
 
 /**
  *  Aplicación principal.
@@ -71,7 +72,7 @@ export function App() {
     }, [cookiesAccepted]);
 
     useEffect(() => {
-        
+
     }, [modal?.isOpen])
 
     const closeModal = () => {
@@ -96,59 +97,62 @@ export function App() {
                 <ModalContext.Provider value={{ modal, setModal }}>
 
                     {/* Modal de las coockies */}
-                    {  cookiesAccepted == null && (
+                    {cookiesAccepted == null && (
                         <CookieModal isOpen={cookiesIsOpen} />
                     )}
 
                     {/* Modal custom que sirve para multiples cosas */}
-                    { modal && (
-                        <CustomModal 
-                            isOpen={modal?.isOpen ? true : false} 
-                            closeModal={closeModal} 
-                            atts={modal} 
+                    {modal && (
+                        <CustomModal
+                            isOpen={modal?.isOpen ? true : false}
+                            closeModal={closeModal}
+                            atts={modal}
                         />
                     )}
-                    
+
                     <BrowserRouter basename='/'>
                         <Routes>
-                            <Route path="/" element={<Home />} />
+                            <Route>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/aboutus" element={<Home />} />
+                            </Route>
                             <Route element={<ProtectedRoute></ProtectedRoute>}>
                                 <Route element={<Dashboard />}>
                                     <Route path="profile/dashboard" element={<Profile />} />
                                     <Route path="profile/achievements" element={<Achievements />} />
                                     <Route path="profile/account" element={<Account />} />
-                                    <Route path="projects/dashboard" element={ <Projects /> }/>
+                                    <Route path="projects/dashboard" element={<Projects />} />
 
                                     {/* Project */}
-                                    <Route path="project/:name" element={ <Project /> }>
-                                            {/* Dashboard */}
-                                            <Route
-                                                path="dashboard"
-                                                element={ <ProjectDashboard />}
-                                            />
-                                            {/* Apps */}
-                                            <Route
-                                                path="apps"
-                                                element={ <ProjectApps />}
-                                            />
-                                            {/* Members */}
-                                            <Route
-                                                path="members"
-                                                element={ <ProjectMembers />}
-                                            />
+                                    <Route path="project/:name" element={<Project />}>
+                                        {/* Dashboard */}
+                                        <Route
+                                            path="dashboard"
+                                            element={<ProjectDashboard />}
+                                        />
+                                        {/* Apps */}
+                                        <Route
+                                            path="apps"
+                                            element={<ProjectApps />}
+                                        />
+                                        {/* Members */}
+                                        <Route
+                                            path="members"
+                                            element={<ProjectMembers />}
+                                        />
                                     </Route>
 
-                                    <Route path="project/:name/store" element={ <Store project={''} /> }/>
-                                    <Route path="project/:name/app/taskman" element={ <Boards icon="fa-solid fa-table-columns" app="Taskman"/> }/>
-                                    <Route path="project/:name/app/timeline" element={ <Boards icon="fa-solid fa-chart-gantt" app="Timeline"/> }/>
-                                    <Route path="project/:name/app/:name/:board" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
-                                    <Route path="friends/dashboard" element={ <Friends /> } />
-                                    <Route path="friend/:name" element={ <Friend />} />
+                                    <Route path="project/:name/store" element={<Store project={''} />} />
+                                    <Route path="project/:name/app/taskman" element={<Boards icon="fa-solid fa-table-columns" app="Taskman" />} />
+                                    <Route path="project/:name/app/timeline" element={<Boards icon="fa-solid fa-chart-gantt" app="Timeline" />} />
+                                    <Route path="project/:name/app/:name/:board" element={<DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext>} />
+                                    <Route path="friends/dashboard" element={<Friends />} />
+                                    <Route path="friend/:name" element={<Friend />} />
                                 </Route>
                             </Route>
 
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
+                            <Route path="/login" element={<ContainerSwitcher />} />
+                            <Route path="/register" element={<ContainerSwitcher />} />
                             <Route path="*" element={<Error />} />
                         </Routes>
                     </BrowserRouter>

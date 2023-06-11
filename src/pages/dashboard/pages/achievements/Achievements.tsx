@@ -31,7 +31,7 @@ export function Achievements() {
             <AchievementsInfo
                 data={userData}
             />
-            <div className="bg-gray-200 dark:bg-slate-800 flex-1 basis-[820px] h-full min-[500px]:rounded-xl flex flex-col w-full p-4 pt-0">
+            <div className="bg-gray-200 dark:bg-[#202124] flex-1 basis-[820px] h-full min-[1085px]:rounded-xl flex flex-col w-full p-4 pt-0">
                 <div className="py-3 flex flex-wrap-reverse justify-between items-center gap-2">
                     <Tabs
                         tab={tab}
@@ -78,9 +78,9 @@ export function Achievements() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-col gap-6 bg-white dark:bg-slate-700 w-full h-full rounded-xl p-4">
-                    { data && tab === "All" ? (
-                        data.map( ach => {
+                <div className="flex flex-col gap-6 bg-white dark:bg-[#28292d] w-full h-full rounded-xl p-4">
+                    {data && tab === "All" ? (
+                        data.map(ach => {
                             return (
                                 <AchievementItem
                                     key={ach.id}
@@ -96,10 +96,10 @@ export function Achievements() {
                                 />
                             )
                         })
-                    ): data && tab === "Projects" ? (
+                    ) : data && tab === "Projects" ? (
                         //.filter antes del map para filtar las categorías
-                        data.filter(( elem: UserAchievementInfo ) => elem.category === 'project' )
-                            .map( ach => {    
+                        data.filter((elem: UserAchievementInfo) => elem.category === 'project')
+                            .map(ach => {
                                 return (
                                     <AchievementItem
                                         key={ach.id}
@@ -115,10 +115,10 @@ export function Achievements() {
                                     />
                                 )
                             })
-                    ): data && tab === "Friends" ? (
-                        data.filter(( elem: UserAchievementInfo ) => elem.category === 'friend' )
-                            .map( ach => {
-                                return(
+                    ) : data && tab === "Friends" ? (
+                        data.filter((elem: UserAchievementInfo) => elem.category === 'friend')
+                            .map(ach => {
+                                return (
                                     <AchievementItem
                                         key={ach.id}
                                         tab={tab}
@@ -133,7 +133,7 @@ export function Achievements() {
                                     />
                                 )
                             })
-                    ): (
+                    ) : (
                         <h1>Soon</h1>
                     )}
                 </div>
