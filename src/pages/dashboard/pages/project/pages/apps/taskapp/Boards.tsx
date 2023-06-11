@@ -6,22 +6,43 @@ import { Breadcrumb } from '../../../../../../../components/Breadcrumb';
 import { Tabs } from '../../../../../../../components/Tabs';
 
 import { useModal } from '../../../../../../../hooks/useModal';
-import { useTaskApp } from '../../../../../../../adapters/api/useTaskAppApi';
+import { useTaskAppApi } from '../../../../../../../adapters/api/useTaskAppApi';
+import { useProjectApi } from '../../../../../../../adapters/api/useProjectApi';
 
 export const Boards: React.FC<{ app: string }> = ({ app }) => {
 
+    // Tabs
     const [tab, setTab] = useState<string>("dashboard");
+
+    // Modal
     const { openModal } = useModal();
 
-    const { data, error, loading, getProyectInfo, refreshData, createBoard } = useTaskApp();
+    // Hooks de peticiones
+    const { data, error, loading, getProyectInfo, refreshData, createBoard } = useTaskAppApi();
+    const { data: ProjectData, fetchProject} = useProjectApi();
+    
+    // Variables Reactivas
+    const [projectName, setProjectName] = useState<string>('');
 
-    let { idapp } = useParams();
+    // Recogida de parámetros de la URL y su Efecto
+    let { idapp, name } = useParams();
     React.useEffect(() => {
-        if (idapp) {
+        if ( idapp && name ) {
             getProyectInfo(idapp);
+            fetchProject(name);
         }
     }, [idapp]);
 
+    // Efecto para cambiar el nombre del proyecto
+    React.useEffect(() => {
+        if( ProjectData ) {
+            console.log(ProjectData)
+            setProjectName(ProjectData.name);
+        }
+        
+    }, [ProjectData?.name])
+
+    // Función de creación de tabla
     const handleCreateBoard = ( valor1?: string, valor2?: string ) => {
         if( valor1 && valor2 && idapp ) {
             createBoard(valor1, valor2, idapp);
@@ -40,8 +61,8 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                     },
                     {
                         icon: "fa-solid fa-list-check",
-                        name: "ptoelquelolea",
-                        link: "/project/ptoelquelolea"
+                        name: `${projectName}`,
+                        link: `/project/${name}`
                     },
                 ]} />
             </div>
@@ -68,15 +89,7 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                             )
                         })
                     )}
-                    <li 
-                                    className={`bg-[url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/639x960/8bcdfaee9ea0002ce6163822d51db7bd/photo-1679464349885-f6603194a0bf.jpg)] bg-cover bg-no-repeat bg-center box-border board rounded-xl min-[839.50px]:flex-1 basis-[33%] min-w-fit min-[839.50px]:max-w-sm h-1/4 cursor-pointer`}
-                                    >
-                                    <Link 
-                                        state={{icon: props.icon, app: props.app}} to='./front-end' className="w-full h-full relative">
-                                        <div className="bg-black/30 w-full h-full rounded-xl transition-all"></div>
-                                        <p className="absolute top-3 left-3 text-white"><b className="text-white">front-End</b></p>
-                                    </Link>
-                                </li>
+                    
                     {/* EndForeach */}
                     <li className="newBoard rounded-xl min-w-fit h-1/4 cursor-pointer relative">
                         <section

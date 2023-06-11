@@ -10,21 +10,46 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
 import "gantt-task-react/dist/index.css";
 import CustomGantt from './Gantt/CustomGantt';
+import { useTaskAppApi } from '../../../../../../../../adapters/api/useTaskAppApi';
+import { useProjectApi } from '../../../../../../../../adapters/api/useProjectApi';
 
 export const Board: React.FC = () => {
+
+    // Peticiones
+    const { data, error, loading } = useTaskAppApi();
+    const { data: ProjectData, fetchProject} = useProjectApi();
+
+    // Tabs
     const [tab, setTab] = useState<string>("todo");
+
+    // Modal
     const { openModal } = useModal();
+
+    // Hook de utilidad para la app
     const { onDragEnd, columnOrder, columnsData } = useBoard();
 
+    // Variable reactiva para setear el tipo de app que es
     const [application, setApplication] = useState<string>('');
+    const [projectName, setProjectName] = useState<string>('');
 
-    const { appname } = useParams();
+    // Recoger el tipo de aplicación de los parámetros ( Taskman / Timeline )
+    const { appname, idapp, name } = useParams();
 
+    // Efecto para recoger los parámetros de las url porque por algún motivo es asíncrono
     useEffect(() => {
-        if( appname ) {
+        if( appname && name ) {
             setApplication(appname);
+            fetchProject(name);
         }
-    }, [appname])
+    }, [appname]);
+
+    // Efecto para recoger los datos del proyecto
+    useEffect(() => {
+        if( ProjectData?.name ) {
+            setProjectName(ProjectData.name);
+        }
+        
+    }, [ProjectData?.name]);
 
     let tasks: Task[] = [
         {
@@ -107,13 +132,17 @@ export const Board: React.FC = () => {
                         },
                         {
                             icon: "fa-solid fa-list-check",
-                            name: "ptoelquelolea",
-                            link: "/project/ptoelquelolea"
+                            name: `${projectName}`,
+                            link: `/project/${name}`
                         },
                         {
                             icon: "fa-solid fa-chess-board",
-                            name: "front-End"
+                            name: `${appname}`
                         },
+                        {
+                            icon: "fa-solid fa-chess-board",
+                            name: ``
+                        }
                     ]} />
                 </div>
                 <div className="bg-gray-200 dark:bg-[#202124] w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">

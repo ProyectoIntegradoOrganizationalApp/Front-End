@@ -18,7 +18,7 @@ export const useProjectApi = () => {
 
     const { user } = useAuth();
 
-    const [data, setData] = useState<Array<Project> | Project>();
+    const [data, setData] = useState<Project>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -165,7 +165,6 @@ export const useProjectApi = () => {
             setError(undefined);
 
             let project: Project = ProjectMapper.prototype.mapTo(info);
-            console.log(project)
             setData(project);
         }
 

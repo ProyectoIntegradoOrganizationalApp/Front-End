@@ -11,7 +11,6 @@ import { RequestParams } from "../../domain/RequestParams.interface";
 interface TaskAppInfo {
     boards: Board[] | undefined,
     columns: Column[] | undefined,
-    tasks: Task[] | undefined,
 }
 
 interface Board {
@@ -25,14 +24,38 @@ interface Board {
 }
 
 interface Column {
-
+    id: string,
+    title: string,
+    tasks: Array<Task>
 }
 
 interface Task {
-
+    id: string,
+    idcolumn: string,
+    iduser: string,
+    idproject: string,
+    title: string,
+    description: string,
+    state: number,
+    completed_at: string,
+    created_at: string,
+    updated_at: string
 }
 
-export const useTaskApp = () => {
+interface BoardWrapper {
+    boards: Array<Board>
+}
+
+interface ColumnWrapper {
+    columns: Array<Column>
+}
+
+/**
+ *  Hook para recoger los datos de la aplicación, tanto las tablas, columnas y tasks.
+ *  
+ *  @returns 
+ */
+export const useTaskAppApi = () => {
 
     // Recogida del Usuario
     const { user } = useAuth();
@@ -59,7 +82,8 @@ export const useTaskApp = () => {
      *  @param idApp 
      */
     const getBoards = ( idApp: string ): void => {
-        const boards: Array<Board> = [];
+
+        setLoading(true);
 
         const props: RequestParams = {
             url: `${API}/${idApp}/task_app/boards`,
@@ -72,15 +96,45 @@ export const useTaskApp = () => {
 
         useAxios(props)
             .then(res => {
-                // Creamos el nuevo estado
-                console.log(res)
-                setData({
-                    boards: res.data,
-                    columns: data?.columns,
-                    tasks: data?.tasks
-                })
+                const wrap: Array<Board> = res.data;
+                handleData({ boards: wrap });
+            })
+            .catch( err => {
+                handleData({ error: true, message: err.message });
+            })
+            .finally(() => {
+                setLoading(false);
             })
 
+    }
+
+    /**
+     *  Función que recoge 
+     *  @param idBoard 
+     */
+    const getColumns = ( idBoard: string ): void => {
+        setLoading(true);
+
+        const props: RequestParams = {
+            url: `${API}/${idApp}/task_app/boards`,
+            method: "GET",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user?._token}`
+            }),
+        }
+
+        useAxios(props)
+            .then(res => {
+                const wrap: Array<Board> = res.data;
+                handleData({ boards: wrap });
+            })
+            .catch( err => {
+                handleData({ error: true, message: err.message });
+            })
+            .finally(() => {
+                setLoading(false);
+            })
     }
 
     /**
@@ -122,6 +176,38 @@ export const useTaskApp = () => {
      */
     const refreshData = ( idProject: string ): void => {
         getProyectInfo(idProject);
+    }
+
+    /**
+     *  Función que sirve para manejar los datos que vienen del back end
+     *  @param info 
+     */
+    const handleData = ( info: BoardWrapper | ColumnWrapper | ApiError ) => {
+
+        // Borramos lo errores antes de manejar los datos
+        setError(undefined);
+
+        // Si hay error
+        if( "error" in info ) {
+            setError({ error: info.error, message: info.message })
+        }
+
+        // Si no hay error y es de tipo boards
+        if( "boards" in info ) {
+            setData({
+                boards: info.boards,
+                columns: data?.columns,
+            });
+        }
+
+        // Si no hay error y es de tipo 
+        if( "columns" in info ) {
+            setData({
+                boards: data?.boards,
+                columns: info.columns,
+            });
+        }
+
     }
 
     return { data, loading, error, getProyectInfo, refreshData, createBoard };
