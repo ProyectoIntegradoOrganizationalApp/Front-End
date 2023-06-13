@@ -5,7 +5,7 @@ export const DescriptionBottom = (props: { icon: string, title: string, descript
             {
                 props.icon &&
                 <div className="rounded-full w-12 aspect-square">
-                    <img src={`${props.icon}`} />
+                    <img src={`${props.icon}`} className="rounded-full"/>
                 </div>
             }
             {/* Title */}

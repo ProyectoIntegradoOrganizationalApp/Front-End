@@ -9,7 +9,7 @@ import { useProjectApi } from "../../../../../adapters/api/useProjectApi"
 
 export const ProjectSelection = ( props: { selection: Project } ) => {
 
-    const { leaveProject } = useProjectApi(false);
+    const { leaveProject } = useProjectApi();
 
     const navigate = useNavigate();
 

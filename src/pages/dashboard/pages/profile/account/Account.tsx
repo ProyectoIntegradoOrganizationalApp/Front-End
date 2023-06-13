@@ -12,6 +12,8 @@ import { Account as IAccount } from '../../../../../domain/account/Account.inter
 import { Profile } from '../../../../../domain/profile/Profile.interface';
 import { useAccountApi } from '../../../../../adapters/api/useAccountApi';
 
+import defaultpic from "../../../../../assets/foto.png"
+
 /**
  * Componente Account, que representa la ruta /account en la cual podremos
  * ver y configurar nuestra cuenta
@@ -42,18 +44,15 @@ export const Account: React.FC = () => {
             <div className="bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-8 py-8 min-w-[260px]">
                 <div className="flex flex-col items-center gap-5 px-4">
                     {data && data.photo ? (
-                        <img src={data.photo} />
+                        <img src={data.photo} className="w-28 aspect-square rounded-full"/>
                     ) : (
-                        <div className="bg-green-600 w-28 aspect-square rounded-full">
-
-                        </div>
+                        <img src={defaultpic} className="w-28 aspect-square rounded-full"/>
                     )}
                     {data && data.name && (
                         <p className="text-xl leading-none text-black dark:text-white">
                             {data.name}
                         </p>
                     )}
-
                 </div>
                 <ul className="w-full flex flex-col justify-around select-none">
                     <li onClick={() => setTab("account")} className={`cursor-pointer flex gap-4 items-center p-3.5 px-[1.7rem] ${tab == "account" ? "bg-white dark:bg-[#28292d] text-black dark:text-white" : "hover:bg-gray-300 dark:hover:bg-[#28292d]/60 text-black dark:text-white"}`}><i className="fa-solid fa-house w-4"></i>My Account</li>

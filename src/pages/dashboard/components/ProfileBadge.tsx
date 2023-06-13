@@ -16,6 +16,8 @@ import RemoveButton from "../../../components/buttons/RemoveButton";
 
 import { Profile } from "../../../domain/profile/Profile.interface";
 
+import defaultpic from "../../../assets/foto.png"
+
 interface ProfileBadgeProps {
     profile: Profile | undefined,
     logout: () => void,
@@ -26,9 +28,7 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
     let location = useLocation();
 
     const { openModal } = useModal();
-
     const { data, error, loading, triggerRequest, refreshData } = useNotificationApi(true);
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -49,12 +49,12 @@ export const ProfileBadge: React.FC<ProfileBadgeProps> = ({ profile, logout }) =
             {/* Account */}
             <div className={'dropdown dropdown-top h-fit hover:bg-grey flex'} >
                 <button className="btn !p-0 !bg-transparent border-none flex flex-nowrap justify-start items-center gap-2.5 normal-case flex-1 !h-[unset] !min-h-[unset]">
-                    {profile && (
+                    {profile &&
                         <img
-                            src={profile.user.photo}
-                            className="!w-11 !aspect-square object-cover !h-[unset] !min-h-[unset]"
+                            src={profile.user.photo != "" && profile.user.photo ? profile.user.photo : defaultpic}
+                            className="!w-11 !aspect-square object-cover !h-[unset] !min-h-[unset] rounded-full"
                         />
-                    )}
+                    }
                 </button>
                 <ul tabIndex={0} className="menu menu-compact dropdown-content mb-4 p-2 bg-gray-200 dark:bg-[#28292d] w-full !z-[99999999999999] text-black dark:text-white gap-1">
                     <li>

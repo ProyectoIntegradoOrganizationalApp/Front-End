@@ -7,9 +7,11 @@ import logo from "../../../assets/svg/logo.svg";
 import { Routes } from "../../../hooks/routes";
 import { useAuth } from '../../../hooks/useAuth';
 import { Profile } from "../../../domain/profile/Profile.interface";
+import { useModal } from "../../../hooks/useModal";
+
 
 export function Sidebar( props: { children: ReactNode, profile: Profile | undefined } ) {
-
+    const { openModal } = useModal();
     const { logout } = useAuth();
 
     const location = useLocation();
@@ -52,7 +54,18 @@ export function Sidebar( props: { children: ReactNode, profile: Profile | undefi
                                                         <ul className="menu shadow hover:bg-transparent w-full py-3 px-[1.7rem] flex flex-col gap-[0.3rem]" tabIndex={0}>
                                                             {link.children && link.children.map(child =>
                                                                 <li key={child.name}>
-                                                                    <NavLink to={child.url} className={({ isActive, isPending }) => isActive ? `text-black dark:text-white hover:bg-transparent ${btnStyles}` : `text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</NavLink>
+                                                                    {
+                                                                        child.url != "" &&
+                                                                        <NavLink to={child.url} className={({ isActive, isPending }) => isActive ? `text-black dark:text-white hover:bg-transparent ${btnStyles}` : `text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</NavLink>
+                                                                    } {
+                                                                        child.url == "" && child.onclick &&
+                                                                        <p onClick={
+                                                                            eval(child.onclick)
+                                                                        } className={`text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</p>
+                                                                    } {
+                                                                        child.url == "" && !child.onclick &&
+                                                                        <p className={`text-slate-400 dark:text-white/50 ${btnStyles}`}>{child.name}</p>
+                                                                    }
                                                                 </li>
                                                             )}
                                                         </ul>

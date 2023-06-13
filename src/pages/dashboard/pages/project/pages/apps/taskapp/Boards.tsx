@@ -36,12 +36,12 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                     {
                         icon: "fa-solid fa-diagram-project",
                         name: "Projects",
-                        link: "/projects/dashboard"
+                        link: "/projects"
                     },
                     {
                         icon: "fa-solid fa-list-check",
                         name: "ptoelquelolea",
-                        link: "/project/ptoelquelolea"
+                        link: "/projects/p/ptoelquelolea"
                     },
                 ]} />
             </div>

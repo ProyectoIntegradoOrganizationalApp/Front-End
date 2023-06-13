@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { Breadcrumb } from '../../../../components/Breadcrumb';
 import { Tabs } from '../../../../components/Tabs';
@@ -9,12 +9,18 @@ import { useProjectApi } from '../../../../adapters/api/useProjectApi';
 
 export function Project() {
     const [project, setProject] = React.useState<Project>();
-    const [tab, setTab] = React.useState<string>("dashboard");
-
+    const [tab, setTab] = React.useState<string>("Dashboard");
+    
     const { data, error, loading, fetchProject } = useProjectApi();
-
+    const navigate = useNavigate();
+    
     let { name } = useParams();
     React.useEffect(() => {
+        if (location.pathname.split('/').length <= 4) {
+            navigate("dashboard"); 
+            setTab("Dashboard");
+        } else  setTab(location.pathname.split('/')[location.pathname.split('/').length-1]);
+        
         if (name) {
             fetchProject(name);
         }
@@ -33,7 +39,7 @@ export function Project() {
                     {
                         icon: "fa-solid fa-diagram-project",
                         name: "Projects",
-                        link: "/projects/dashboard"
+                        link: "/projects"
                     },
                     {
                         icon: "fa-solid fa-list-check",
@@ -65,13 +71,13 @@ export function Project() {
                     />
 
                     <div className="flex gap-2 justify-end max-[450px]:w-full max-[500px]:absolute bottom-5 right-5">
-                        {tab == "Apps" &&
-                            <Link to={`/project/${project?.idProject}/store`}>
+                        {tab.toLowerCase() == "apps" &&
+                            <NavLink to={`/projects/p/${project?.idProject}/store`}>
                                 <div
                                     className="btn flex justify-center items-center !w-10 min-h-fit h-fit rounded-xl !aspect-square border-none bg-blue-700 dark:text-white hover:bg-blue-800">
                                     <i className="fa-solid fa-bag-shopping text-white"></i>
                                 </div>
-                            </Link>
+                            </NavLink>
                         }
                     </div>
                 </div>

@@ -98,7 +98,7 @@ export const Form = (props: { type: string, registerUser: (props: FormProps) => 
                         <input
                             type="number"
                             minLength={9}
-                            maxLength={9}
+                            maxLength={15}
                             placeholder="Enter phone number"
                             value={phone_number}
                             onChange={event => {

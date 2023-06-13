@@ -38,11 +38,8 @@ export function Profile() {
     const profileData: Profile = useOutletContext();
     const { data, error, loading, refreshData } = useProjectsApi(true);
 
-    const { getMonths } = useUtils();
-
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
-
         // TODO => CAMBIAR INTERFACES CUANDO CHRISTIAN TERMINE
         // LA ACTIVITY
         profileData.activity = [];

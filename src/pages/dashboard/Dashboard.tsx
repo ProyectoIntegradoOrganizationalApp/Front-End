@@ -39,7 +39,7 @@ export const Dashboard = () => {
             name: "string",
             email: "string",
             level: 2,
-            photo: "string"
+            photo: ""
         }
     }
 

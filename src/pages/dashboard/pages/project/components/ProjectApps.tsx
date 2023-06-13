@@ -4,7 +4,6 @@ import { useNavigate, useOutletContext, useParams } from "react-router-dom"
 
 import { MainItem } from "../../../../../components/list-items/MainItem"
 
-import { Project } from "../../../../../domain/projects/Project.interface";
 import { useAppApi } from "../../../../../adapters/api/useAppApi";
 import RemoveButton from "../../../../../components/buttons/RemoveButton";
 

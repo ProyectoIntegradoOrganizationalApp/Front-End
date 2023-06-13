@@ -7,6 +7,7 @@ import { NotificationsModal } from './components/NotificationsModal';
 import CrudBoardForm from '../forms/CrudBoardForm';
 
 import { ModalInterface } from "../../domain/UI/ModalInterface.interface";
+import { SearchUserModal } from './components/SearchUserModal';
 
 /**
  *  Componente Item para mostrar información de un proyecto, usuario, etc. y posibles botones para editar, borrar, etc.
@@ -67,6 +68,8 @@ export function CustomModal(props: { isOpen: boolean, closeModal: () => void, at
                         />
                     ) : props.atts?.type == "notifications" ? (
                         <NotificationsModal content={props.atts.content}/>
+                    ) : props.atts?.type == "searchuser" ? (
+                        <SearchUserModal content={props.atts.content}/>
                     ) : props.atts?.type === "crudBoard" ? (
                         <CrudBoardForm
                             title={props?.atts.title}

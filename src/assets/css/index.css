@@ -424,7 +424,7 @@ progress {
     @apply block w-full;
 }
 .table-zebra tbody {
-    @apply block w-full overflow-auto absolute min-[1640px]:top-[3em] bottom-0 left-0 right-0 rounded-b-xl max-[1639px]:relative max-[1639px]:max-h-[200px];
+    @apply block w-full overflow-auto absolute top-[3em] bottom-0 left-0 right-0 rounded-b-xl min-h-[200px] bg-[#202124]/90;
 }
 .table-zebra thead tr, .table-zebra tbody tr {
     @apply w-full table-fixed;

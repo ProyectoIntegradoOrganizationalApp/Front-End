@@ -127,10 +127,10 @@ export function App() {
                                         <Route path="profile/dashboard" element={<Profile />} />
                                         <Route path="profile/achievements" element={<Achievements />} />
                                         <Route path="profile/account" element={<Account />} />
-                                        <Route path="projects/dashboard" element={<Projects />} />
+                                        <Route path="projects" element={<Projects />} />
 
                                         {/* Project */}
-                                        <Route path="project/:name" element={<Project />}>
+                                        <Route path="/projects/p/:name" element={<Project />}>
                                             {/* Dashboard */}
                                             <Route
                                                 path="dashboard"
@@ -148,12 +148,12 @@ export function App() {
                                             />
                                         </Route>
 
-                                        <Route path="project/:name/store" element={<Store project={''} />} />
-                                        <Route path="project/:name/app/taskman/:idapp" element={<Boards app="Taskman" />} />
-                                        <Route path="project/:name/app/timeline/:idapp" element={<Boards app="Timeline" />} />
-                                        <Route path="project/:name/app/:appname/:idapp/:board" element={<DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext>} />
-                                        <Route path="friends/dashboard" element={<Friends />} />
-                                        <Route path="friend/:name" element={<Friend />} />
+                                        <Route path="/projects/p/:name/store" element={<Store />} />
+                                        <Route path="/projects/p/:name/app/taskman/:idapp" element={<Boards app="Taskman" />} />
+                                        <Route path="/projects/p/:name/app/timeline/:idapp" element={<Boards app="Timeline" />} />
+                                        <Route path="/projects/p/:name/app/:appname/:idapp/:board" element={<DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext>} />
+                                        <Route path="friends" element={<Friends />} />
+                                        <Route path="friends/u/:name" element={<Friend />} />
                                     </Route>
                                 </Route>
 

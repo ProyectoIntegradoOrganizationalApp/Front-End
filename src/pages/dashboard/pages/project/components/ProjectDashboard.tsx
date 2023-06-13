@@ -89,7 +89,7 @@ export const ProjectDashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className={`${logs.length > 0 ? "flex-1" : "flex-0"} bg-white dark:bg-slate-700 rounded-xl relative flex flex-col`}>
+            <div className={`flex-1 bg-white dark:bg-slate-700 rounded-xl relative flex flex-col`}>
                 <div className="bg-white dark:bg-[#202124] flex items-center justify-center w-full h-14 rounded-t-xl relative text-black dark:text-white text-base">
                     <div className="absolute top-[1.09rem] left-4">
                         <InfoTooltip position="right" title="Task history displaying the latest tasks" />
@@ -121,70 +121,6 @@ export const ProjectDashboard: React.FC = () => {
                             />
                         </tr>
                         {/* ENDFOREACH */}
-                        <tr>
-                            <TaskLog
-                                task="finished"
-                                title={"Task 2"}
-                                user="Sergio Parejo"
-                                date={new Date("2023-01-31")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="workingon"
-                                title={"Task 1"}
-                                user="Pablo Valderas"
-                                date={new Date("2022-02-02")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="finished"
-                                title={"Task 2"}
-                                user="Sergio Parejo"
-                                date={new Date("2023-01-31")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="workingon"
-                                title={"Task 1"}
-                                user="Pablo Valderas"
-                                date={new Date("2022-02-02")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="finished"
-                                title={"Task 2"}
-                                user="Sergio Parejo"
-                                date={new Date("2023-01-31")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="workingon"
-                                title={"Task 1"}
-                                user="Pablo Valderas"
-                                date={new Date("2022-02-02")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="finished"
-                                title={"Task 2"}
-                                user="Sergio Parejo"
-                                date={new Date("2023-01-31")}
-                            />
-                        </tr>
-                        <tr>
-                            <TaskLog
-                                task="workingon"
-                                title={"Task 1"}
-                                user="Pablo Valderas"
-                                date={new Date("2022-02-02")}
-                            />
-                        </tr>
                         <tr>
                             <TaskLog
                                 task="finished"

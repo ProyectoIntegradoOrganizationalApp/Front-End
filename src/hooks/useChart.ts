@@ -83,6 +83,7 @@ const useChart = () => {
 
         // Configuración del BarChart
         const barChartOptions = {
+            maintainAspectRatio: false,
             responsive: true,
             indexAsis: 'y',
             elements: {
