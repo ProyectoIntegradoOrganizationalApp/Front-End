@@ -8,8 +8,8 @@ const CrudConfirmation: React.FC<{ action: string | undefined, target: string | 
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        close();
         submit();
+        close();
     }
 
     return (

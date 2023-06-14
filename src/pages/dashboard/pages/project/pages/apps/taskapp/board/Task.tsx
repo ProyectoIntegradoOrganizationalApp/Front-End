@@ -1,20 +1,24 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+
 import { Draggable } from 'react-beautiful-dnd';
 import { useModal } from '../../../../../../../../hooks/useModal';
 
+import { Task as ITask } from '../../../../../../../../adapters/api/useTaskAppApi';
+
 interface TaskProps {
-    task: {
-        id: string;
-        content: string;
-    };
-    index: number;
+    task: ITask,
+    index: number,
+    delete: ( task: ITask ) => void
 }
 
-export function Task(props: TaskProps) {
+export const Task = (props: TaskProps) => {
+
     const { task, index } = props;
+
     const [toInput, setToInput] = useState(false);
-    const [inputValue, setInputValue] = useState(task.content);
+    const [inputValue, setInputValue] = useState(task.description);
     const [icon, setIcon] = useState('fa-edit');
+
     const { openModal } = useModal();
 
     const handleInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,7 +41,7 @@ export function Task(props: TaskProps) {
         if (!toInput) {
             setIcon('fa-xmark scale-125');
         } else {
-            setInputValue(task.content);
+            setInputValue(task.description);
             setToInput(false);
             setIcon('fa-edit');
         }
@@ -53,6 +57,10 @@ export function Task(props: TaskProps) {
         }
     }, [toInput]);
 
+    const handleDelete = () => {
+        props.delete(task);
+    }
+
     return (
         <Draggable draggableId={task.id} index={index}>
             {(provided) => (
@@ -65,16 +73,24 @@ export function Task(props: TaskProps) {
                     {!toInput ? (
                         inputValue
                     ) : (
-                        <textarea id="textareaTask" value={inputValue} onChange={handleInput} onKeyDown={handleKeyDown} minLength={1} className="input input-bordered border-none w-[80%] text-black bg-transparent p-0 h-5 leading-[1.2rem] resize-none overflow-y-hidden" onClick={() => setToInput(true)}></textarea>
+                        <textarea 
+                            id="textareaTask" 
+                            value={inputValue} 
+                            onChange={handleInput} 
+                            onKeyDown={handleKeyDown} 
+                            minLength={1} className="input input-bordered border-none w-[80%] text-black bg-transparent p-0 h-5 leading-[1.2rem] resize-none overflow-y-hidden" 
+                            onClick={() => setToInput(true)}
+                        >
+                        </textarea>
                     )}
                     <div className="items-center gap-2 hidden mt-0.5">
                         <i onClick={() => openModal({
                             isOpen: true,
                             type: "confirmation",
                             action: "remove",
-                            target: task.content,
+                            target: task.description,
                             submitText: "Remove Task",
-                            submitAction: () => {}
+                            submitAction: handleDelete
                         })} className="fa-solid fa-trash cursor-pointer text-red-700 hover:text-red-800"></i>
                         <i id="editButton" className={`fa-solid ${icon} cursor-pointer text-green-700 hover:text-green-800`} onClick={changeIcon}></i>
                     </div>

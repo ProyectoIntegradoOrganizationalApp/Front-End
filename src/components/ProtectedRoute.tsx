@@ -33,9 +33,9 @@ export const ProtectedRoute: React.FC<{}> = () => {
         }, 2000);
     }, [])
 
-    // if( loaded && user == null ) {
-    //     return <Navigate to="/login" />;
-    // }
+    if( loaded && user == null ) {
+        return <Navigate to="/login" />;
+    }
 
     // Si ha cargado y el usuario 
     if( loaded ) {

@@ -19,8 +19,6 @@ import { Projects } from './pages/dashboard/pages/projects/Projects';
 import { Achievements } from './pages/dashboard/pages/achievements/Achievements';
 import { Friends } from './pages/dashboard/pages/friends/Friends';
 import { Friend } from './pages/dashboard/pages/friends/pages/friend/Friend';
-import Login from './pages/signIn/Login';
-import Register from './pages/signIn/Register';
 import { Error } from './pages/Error';
 
 // Componentes
@@ -33,7 +31,7 @@ import { Project } from './pages/dashboard/pages/project/Project';
 import { Store } from './pages/dashboard/pages/project/pages/apps/Store';
 import { CookieModal } from './components/modals/CookieModal';
 import { Boards } from './pages/dashboard/pages/project/pages/apps/taskapp/Boards';
-import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
+import { Board } from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
 import { Account } from './pages/dashboard/pages/profile/account/Account';
@@ -116,47 +114,46 @@ export function App() {
                             />
                         )}
 
-                        <BrowserRouter basename='/'>
-                            <Routes>
-                                <Route>
-                                    <Route path="/" element={<Home />} />
-                                    <Route path="/aboutus" element={<Home />} />
-                                </Route>
-                                <Route element={<ProtectedRoute></ProtectedRoute>}>
-                                    <Route element={<Dashboard />}>
-                                        <Route path="profile/dashboard" element={<Profile />} />
-                                        <Route path="profile/achievements" element={<Achievements />} />
-                                        <Route path="profile/account" element={<Account />} />
-                                        <Route path="projects" element={<Projects />} />
+                    <BrowserRouter basename='/'>
+                        <Routes>
+                            <Route>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/aboutus" element={<Home />} />
+                            </Route>
+                            <Route element={<ProtectedRoute></ProtectedRoute>}>
+                                <Route element={<Dashboard />}>
+                                    <Route path="profile/dashboard" element={<Profile />} />
+                                    <Route path="profile/achievements" element={<Achievements />} />
+                                    <Route path="profile/account" element={<Account />} />
+                                    <Route path="projects/dashboard" element={<Projects />} />
 
-                                        {/* Project */}
-                                        <Route path="/projects/p/:name" element={<Project />}>
-                                            {/* Dashboard */}
-                                            <Route
-                                                path="dashboard"
-                                                element={<ProjectDashboard />}
-                                            />
-                                            {/* Apps */}
-                                            <Route
-                                                path="apps"
-                                                element={<ProjectApps />}
-                                            />
-                                            {/* Members */}
-                                            <Route
-                                                path="members"
-                                                element={<ProjectMembers />}
-                                            />
-                                        </Route>
-
-                                        <Route path="/projects/p/:name/store" element={<Store />} />
-                                        <Route path="/projects/p/:name/app/taskman/:idapp" element={<Boards app="Taskman" />} />
-                                        <Route path="/projects/p/:name/app/timeline/:idapp" element={<Boards app="Timeline" />} />
-                                        <Route path="/projects/p/:name/app/:appname/:idapp/:board" element={<DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext>} />
-                                        <Route path="friends" element={<Friends />} />
-                                        <Route path="friends/u/:name" element={<Friend />} />
+                                    {/* Project */}
+                                    <Route path="project/:projectId" element={<Project />}>
+                                        {/* Dashboard */}
+                                        <Route
+                                            path="dashboard"
+                                            element={<ProjectDashboard />}
+                                        />
+                                        {/* Apps */}
+                                        <Route
+                                            path="apps"
+                                            element={<ProjectApps />}
+                                        />
+                                        {/* Members */}
+                                        <Route
+                                            path="members"
+                                            element={<ProjectMembers />}
+                                        />
                                     </Route>
-                                </Route>
 
+                                    <Route path="project/:projectId/store" element={ <Store /> }/>
+                                    <Route path="project/:projectId/app/taskman/:idApp" element={ <Boards app="Taskman"/> }/>
+                                    <Route path="project/:projectId/app/timeline/:idApp" element={ <Boards app="Timeline"/> }/>
+                                    <Route path="project/:projectId/app/:appName/:idApp/:idBoard" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
+                                    <Route path="friends/dashboard" element={ <Friends /> } />
+                                    <Route path="friend/:friendName" element={ <Friend />} />
+                                </Route>
+                            </Route>
                                 <Route path="/login" element={<ContainerSwitcher />} />
                                 <Route path="/register" element={<ContainerSwitcher />} />
                                 <Route path="*" element={<Error />} />

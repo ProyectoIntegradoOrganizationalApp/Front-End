@@ -11,10 +11,10 @@ export const ProjectApps: React.FC = () => {
 
     const { data, error, loading, fetchApps } = useAppApi();
 
-    let { name } = useParams();
+    let { projectId } = useParams();
     useEffect(() => {
-        if (name) {
-            fetchApps(name);
+        if (projectId) {
+            fetchApps(projectId);
         }
     }, []);
 
@@ -23,7 +23,7 @@ export const ProjectApps: React.FC = () => {
     const openApp = ( idapp: string, tasktype: string ) => {
         let tipo = tasktype === "kanban" ? 'taskman' : "timeline";
 
-        navigate(`/projects/p/${name}/app/${tipo}/${idapp}`);
+        navigate(`/project/${projectId}/app/${tipo}/${idapp}`);
     }
 
     const removeApp = () => {

@@ -1,27 +1,21 @@
-
 import { useState } from "react";
-import { SaveImage } from "../image-kit/SaveImage";
 
 interface ProjectFormProps {
     title: string | undefined,
     submitText: string,
     close: () => void,
-    submit: (value1?: string, value2?:string, value3?: string) => void
+    submit: (value1?: string, value2?:string) => void
 }
 
-const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
-    const [projectTitle, setProjectTitle] = useState<string>("");
+const CrudColumnForm: React.FC<ProjectFormProps> = ({ title, submitText, close, submit }) => {
+
+    const [columnTitle, setColumnTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [photo, setPhoto] = useState<string>('');
 
     const handleSubmit = ( event: React.FormEvent ) => {
         event.preventDefault();
-        submit(projectTitle, description);
+        submit(columnTitle, description);
         close();
-    }
-
-    const photoUpdate = (url: string) => {
-        setPhoto(url);
     }
 
     return (
@@ -34,30 +28,27 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
             </div>
 
             {/* Form */}
-            <div className="flex flex-col bg-transparent p-7">
+            <div className="flex flex-col bg-transparent p-7 gap-5">
                 <form id="crudForm" 
-                    className="flex flex-col gap-4 w-full"
+                    className="flex flex-col gap-6 w-full"
                     onSubmit={event => handleSubmit(event)}
                 >
-                    <SaveImage
-                        cb={photoUpdate}
-                    />
                     <input 
                         type="text"
-                        name="Board Name" 
-                        placeholder="Insert your board name"
+                        name="Column Name" 
+                        placeholder="Insert your column name"
                         minLength={3}
                         maxLength={20} 
                         className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-[#28292d] p-4`} 
                         required={true}
-                        value={projectTitle}
+                        value={columnTitle}
                         onChange={ event => {
-                            setProjectTitle(event.target.value);
+                            setColumnTitle(event.target.value);
                         }}
                     />
                     <textarea 
-                        name="Board Description"
-                        placeholder="Insert board Description"
+                        name="Column Description"
+                        placeholder="Insert column Description"
                         minLength={10} 
                         maxLength={50}
                         className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-[#28292d]`} 
@@ -76,4 +67,4 @@ const CrudBoardForm: React.FC<ProjectFormProps> = ({ title, submitText, close, s
     )
 }
 
-export default CrudBoardForm;
+export default CrudColumnForm;

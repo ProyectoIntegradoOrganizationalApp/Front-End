@@ -27,7 +27,7 @@ export const Routes: Array<Route> = [
     {
         icon: "fa-solid fa-diagram-project",
         name: "Projects",
-        url: "/projects",
+        url: "/projects/dashboard",
         children: [
             {
                 name: "Projects",

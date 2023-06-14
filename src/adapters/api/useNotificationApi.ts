@@ -73,8 +73,6 @@ export const useNotificationApi = ( fetch: boolean ) => {
      */
     const handleData = ( data: NotificationsDTO | ApiError ) => {
         
-        console.log(data)
-
         if( "error" in data ) {
             setError({error: data.error, message: data.message})
         }
