@@ -7,6 +7,7 @@ import { useAuth } from '../../../hooks/useAuth';
 
 import logo from "../../../assets/svg/logo.svg";
 import { ProfileBadge } from "../../dashboard/components/ProfileBadge";
+import { useProfileApi } from "../../../adapters/api/useProfileApi";
 
 /**
  *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
@@ -18,7 +19,9 @@ import { ProfileBadge } from "../../dashboard/components/ProfileBadge";
  */
 export function Nav() {
 
-    const { user, logout } = useAuth();
+    const { logout } = useAuth();
+
+    const { data: user, error, loading } = useProfileApi();
 
     return (
         <div className="navbar !min-h-[unset] !py-0 px-16 max-[768px]:px-5 bg-transparent">
@@ -56,7 +59,7 @@ export function Nav() {
 
                 {user && (
                     <ProfileBadge
-                        user={user}
+                        profile={user}
                         logout={logout}
                     />
                 )}

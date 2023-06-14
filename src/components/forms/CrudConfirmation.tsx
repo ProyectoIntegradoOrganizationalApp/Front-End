@@ -3,18 +3,11 @@ import { useProjectsApi } from "../../adapters/api/useProjectsApi";
 
 const CrudConfirmation: React.FC<{ action: string | undefined, target: string | undefined, submitText: string, close: () => void, submit: () => void }> = ({ action, target, submitText, close, submit }) => {
 
-    /** 
-     * Hook de la API de proyectos, le pasamos un false para que no realice la query.
-     */
-    const { createProject } = useProjectsApi(false);
-
-
     const [projectTitle, setProjectTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        createProject(projectTitle, description);
         close();
         submit();
     }

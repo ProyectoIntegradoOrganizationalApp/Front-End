@@ -17,7 +17,7 @@ export const Dashboard = () => {
 
     const { logout } = useAuth();
 
-    const { error, loading } = useProfileApi();
+    const { data, error, loading } = useProfileApi();
 
     /**
      * Ciclo de vida para comprobar si el token está en condiciones
@@ -33,15 +33,15 @@ export const Dashboard = () => {
         return <Navigate to='/home' />
     }
 
-    const data = {
-        user: {
-            id: "string",
-            name: "string",
-            email: "string",
-            level: 2,
-            photo: ""
-        }
-    }
+    // const data = {
+    //     user: {
+    //         id: "string",
+    //         name: "string",
+    //         email: "string",
+    //         level: 2,
+    //         photo: ""
+    //     }
+    // }
 
     return (
         <Sidebar profile={data}>
