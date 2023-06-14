@@ -49,7 +49,7 @@ export const useTaskApp = () => {
      *  Función de recoger datos de la bbdd.
      *  @param idProject 
      */
-    const getProyectInfo = ( idProject: string ): void => {
+    const getProyectInfo = (idProject: string): void => {
         getBoards(idProject);
     }
 
@@ -58,7 +58,7 @@ export const useTaskApp = () => {
      * 
      *  @param idApp 
      */
-    const getBoards = ( idApp: string ): void => {
+    const getBoards = (idApp: string): void => {
         const boards: Array<Board> = [];
 
         const props: RequestParams = {
@@ -71,15 +71,15 @@ export const useTaskApp = () => {
         }
 
         useAxios(props)
-            .then(res => {
-                // Creamos el nuevo estado
-                console.log(res)
-                setData({
-                    boards: res.data,
-                    columns: data?.columns,
-                    tasks: data?.tasks
-                })
+        .then(res => {
+            // Creamos el nuevo estado
+            console.log(res)
+            setData({
+                boards: res.data,
+                columns: data?.columns,
+                tasks: data?.tasks
             })
+        })
 
     }
 
@@ -90,7 +90,7 @@ export const useTaskApp = () => {
      *  @param description 
      *  @param idProyect 
      */
-    const createBoard = ( title: string, description: string, idProyect: string ) => {
+    const createBoard = (photo: string, title: string, description: string, idProyect: string) => {
         const props: RequestParams = {
             url: `${API}/${idProyect}/task_app/board`,
             method: "POST",
@@ -102,7 +102,7 @@ export const useTaskApp = () => {
                 title: title,
                 description: description,
                 idProyect: idProyect,
-                photo: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/639x960/8bcdfaee9ea0002ce6163822d51db7bd/photo-1679464349885-f6603194a0bf.jpg"
+                photo: photo
             }
         }
 
@@ -110,7 +110,7 @@ export const useTaskApp = () => {
             .then(data => {
                 console.log(data.data)
             })
-            .catch( err => {
+            .catch(err => {
                 console.log(err)
             })
     }
@@ -120,7 +120,7 @@ export const useTaskApp = () => {
      * 
      *  @param idProject 
      */
-    const refreshData = ( idProject: string ): void => {
+    const refreshData = (idProject: string): void => {
         getProyectInfo(idProject);
     }
 

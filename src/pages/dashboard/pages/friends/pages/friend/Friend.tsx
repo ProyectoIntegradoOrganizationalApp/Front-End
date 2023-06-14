@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 // Componentes
 import { DirectMessages } from '../../components/DirectMessages';
 import { Chat } from '../../components/Chat';
+import { useEffect } from 'react';
 
 function toggleMessages() {
     document.getElementById("directMessages")?.classList.toggle("max-[839.50px]:hidden");
@@ -12,7 +13,6 @@ function toggleMessages() {
 }
 
 export function Friend() {
-
     const friend = useParams();
 
     return (

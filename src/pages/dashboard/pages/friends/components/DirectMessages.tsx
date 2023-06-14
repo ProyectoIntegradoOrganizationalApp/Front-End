@@ -1,5 +1,5 @@
 // React
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useEffect } from "react";
 
 import { User } from "../../../../../components/User";
 
@@ -13,8 +13,11 @@ import { useLocation } from "react-router-dom";
  */
 
 export function DirectMessages(props: { selected?: string }) {
-
     const location = useLocation();
+
+    useEffect(() => {
+        document.title = 'Friend - ' + props.selected + ' | Teamer 2023';
+    }, [props.selected])
 
     return (
         <>

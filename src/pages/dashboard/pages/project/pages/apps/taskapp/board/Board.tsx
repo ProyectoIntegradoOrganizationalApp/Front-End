@@ -18,10 +18,11 @@ export const Board: React.FC = () => {
 
     const [application, setApplication] = useState<string>('');
 
-    const { appname } = useParams();
-
+    const { name, idapp, appname } = useParams();
+    console.log(useParams())
     useEffect(() => {
         if( appname ) {
+            document.title = appname?.charAt(0).toUpperCase() + appname?.substring(1) + ' - ' + name + ' | Teamer 2023';
             setApplication(appname);
         }
     }, [appname])
@@ -103,12 +104,17 @@ export const Board: React.FC = () => {
                         {
                             icon: "fa-solid fa-diagram-project",
                             name: "Projects",
-                            link: "/projects/dashboard"
+                            link: "/projects"
                         },
                         {
                             icon: "fa-solid fa-list-check",
-                            name: "ptoelquelolea",
-                            link: "/project/ptoelquelolea"
+                            name: name ? name : "",
+                            link: "/projects/p/" + name
+                        },
+                        {
+                            icon: appname ? appname?.charAt(0).toUpperCase() + appname?.substring(1) == "Taskman" ? "fa-solid fa-note-sticky" : "fa-solid fa-chart-gantt" : "",
+                            name: appname ? appname?.charAt(0).toUpperCase() + appname?.substring(1) : "",
+                            link: "/projects/p/" + name + "/app/" + appname + "/" + idapp
                         },
                         {
                             icon: "fa-solid fa-chess-board",
@@ -119,10 +125,11 @@ export const Board: React.FC = () => {
                 <div className="bg-gray-200 dark:bg-[#202124] w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">
                     <div className="w-full px-3 min-[1085px]:rounded-tr-xl max-[500px]:px-3 flex justify-between items-center gap-2">
                         <div className="flex gap-3">
-                            <Link to="/project/ptoelquelolea/app/taskman" className="btn btn-primary flex justify-center items-center !text-white !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
+                            <Link to={`/projects/p/${name}/app/${application}/${idapp}`} className="btn btn-primary flex justify-center items-center !text-white !px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0">Boards</Link>
                             { application === "taskman" &&
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols" />
-                            } { application === "Timeline" &&
+                            } { application === "timeline" &&
+                                // Columns name
                                 <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-chart-simple" title="Cols"
                                     links={[ { name: "To Do" }, { name: "In Progress" }, { name: "Done" }, { name: "sergioesBobo" } ]}
                                 />

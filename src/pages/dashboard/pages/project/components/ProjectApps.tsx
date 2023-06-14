@@ -23,7 +23,7 @@ export const ProjectApps: React.FC = () => {
     const openApp = ( idapp: string, tasktype: string ) => {
         let tipo = tasktype === "kanban" ? 'taskman' : "timeline";
 
-        navigate(`/project/${name}/app/${tipo}/${idapp}`);
+        navigate(`/projects/p/${name}/app/${tipo}/${idapp}`);
     }
 
     const removeApp = () => {

@@ -25,6 +25,10 @@ export function Friends() {
     const { friendData, userData, error, loading, addFriend, removeFriend, fetchUsers } = useFriendApi(true);
 
     useEffect(() => {
+        document.title = 'Friends | Teamer 2023';
+    }, [])
+
+    useEffect(() => {
         if (error?.error) {
             toast.error(error?.message)
         }

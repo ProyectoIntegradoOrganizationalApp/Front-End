@@ -28,7 +28,7 @@ export function Store() {
                     },
                     {
                         icon: "fa-solid fa-list-check",
-                        name: "ptoelquelolea",
+                        name: idProject ? idProject : "",
                         link: "/projects/p/" + idProject
                     },
                     {

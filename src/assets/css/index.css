@@ -327,6 +327,15 @@ progress {
 .board:hover div {
     @apply bg-black/50 dark:bg-black/50;
 }
+.board:hover section:last-child {
+    @apply flex;
+}
+.board:hover aside {
+    @apply flex;
+}
+.board section:last-child button {
+    @apply !px-3.5;
+}
 .newBoard:hover div {
     @apply bg-gray-400 dark:bg-black/50;
 }

@@ -16,6 +16,8 @@ export function Project() {
     
     let { name } = useParams();
     React.useEffect(() => {
+        document.title = 'Project - ' + name + ' | Teamer 2023';
+
         if (location.pathname.split('/').length <= 4) {
             navigate("dashboard"); 
             setTab("Dashboard");

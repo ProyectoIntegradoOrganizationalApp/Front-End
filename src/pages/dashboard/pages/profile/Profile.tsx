@@ -40,6 +40,8 @@ export function Profile() {
 
     // Use effect con el que calculamos el trabajo realizado.
     useEffect(() => {
+        document.title = 'Profile | Teamer 2023';
+
         // TODO => CAMBIAR INTERFACES CUANDO CHRISTIAN TERMINE
         // LA ACTIVITY
         profileData.activity = [];
@@ -49,7 +51,6 @@ export function Profile() {
 
         setDaily(commitsDaily);
         setWeekly(commitsWeekly);
-
     }, []);
 
     /**

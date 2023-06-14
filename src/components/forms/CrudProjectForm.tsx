@@ -36,15 +36,15 @@ const CrudProjectForm: React.FC<ProjectFormProps> = ({ title, submitText, close,
             </div>
 
             {/* Form */}
-            <div className="flex flex-col bg-transparent p-7 gap-5">
+            <div className="flex flex-col bg-transparent p-7">
                 <form id="crudForm" 
-                    className="flex flex-col gap-6 w-full"
+                    className="flex flex-col gap-4 w-full"
                     onSubmit={event => handleSubmit(event)}
                 >
                     <input 
                         type="text"
                         name="Project Name" 
-                        placeholder="Insert your project name"
+                        placeholder="Enter project name"
                         minLength={3}
                         maxLength={20} 
                         className={`flex-1 input input-bordered border-none bg-gray-200 dark:bg-[#28292d] p-4`} 
@@ -56,7 +56,7 @@ const CrudProjectForm: React.FC<ProjectFormProps> = ({ title, submitText, close,
                     />
                     <textarea 
                         name="Project Description"
-                        placeholder="Insert Your Project Description"
+                        placeholder="Enter project description"
                         minLength={10} 
                         maxLength={50}
                         className={`flex-1 input input-bordered max-h-28 min-h-28 resize-none border-none bg-gray-200 dark:bg-[#28292d]`} 

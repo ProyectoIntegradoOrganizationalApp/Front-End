@@ -55,6 +55,8 @@ export function Home() {
 
     // ScrollReveal
     useEffect(() => {
+        document.title = 'Projects and more | Teamer 2023';
+
         const sr = ScrollReveal();
         sr.reveal('.srl', {
             duration: 1100,
@@ -486,8 +488,8 @@ export function Home() {
                     {
                         slideReviews == 1 &&
                         <div className="max-[908px]:w-full relative max-[908px]:mb-10 my-9 max-[908px]:my-0">
-                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl -z-10 max-[908px]:hidden"></div>
-                            <div className="bg-slate-200 dark:bg-[#414149] flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
+                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl max-[908px]:hidden"></div>
+                            <div className="bg-slate-200 dark:bg-[#414149] relative z-0 flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
                                 <div className="w-36 aspect-square rounded-full">
                                     <img src={review1} className="rounded-full" />
                                 </div>
@@ -497,8 +499,8 @@ export function Home() {
                     } {
                         slideReviews == 2 &&
                         <div className="max-[908px]:w-full relative max-[908px]:mb-10 my-9 max-[908px]:my-0">
-                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl -z-10 max-[908px]:hidden"></div>
-                            <div className="bg-slate-200 dark:bg-[#414149] flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
+                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl max-[908px]:hidden"></div>
+                            <div className="bg-slate-200 dark:bg-[#414149] relative z-0 flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
                                 <div className="w-36 aspect-square rounded-full">
                                     <img src={review2} className="rounded-full" />
                                 </div>
@@ -508,8 +510,8 @@ export function Home() {
                     } {
                         slideReviews == 3 &&
                         <div className="max-[908px]:w-full relative max-[908px]:mb-10 my-9 max-[908px]:my-0">
-                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl -z-10 max-[908px]:hidden"></div>
-                            <div className="bg-slate-200 dark:bg-[#414149] flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
+                            <div className="bg-slate-300 dark:bg-[#28292d] absolute -top-[2.1rem] left-8 w-44 h-[21.5rem] rounded-xl max-[908px]:hidden"></div>
+                            <div className="bg-slate-200 dark:bg-[#414149] relative z-0 flex flex-col justify-center items-center gap-5 p-12 max-[908px]:p-9 max-[908px]:w-full">
                                 <div className="w-36 aspect-square rounded-full">
                                     <img src={review3} className="rounded-full" />
                                 </div>
@@ -593,9 +595,9 @@ export function Home() {
                 <div className="separator block min-[1417px]:hidden max-[717px]:h-[85px]"></div>
 
                 {/* Partners */}
-                <div className="flex flex-wrap-reverse justify-between max-[1417px]:ml-0 ml-[10%] gap-14 max-[910px]:gap-5">
+                <div className="flex items-center flex-wrap-reverse justify-between max-[1417px]:ml-0 ml-[10%] gap-14 max-[910px]:gap-5">
                     {/* Left */}
-                    <div className="srl flex-1 flex flex-col gap-8 justify-center max-[1417px]:justify-start max-[1417px]:mt-0 my-10 max-[717px]:mb-0 min-w-[300px] mr-14 max-[1417px]:ml-10 max-[768px]:mx-5">
+                    <div className="srl flex-1 flex flex-col gap-8 justify-center max-[1417px]:justify-start max-[1417px]:mt-0 mt-10 max-[717px]:mb-0 min-w-[300px] mr-14 max-[1417px]:ml-10 max-[768px]:mx-5">
                         <p className="text-2xl leading-[1.3]"><b>Our<br />Partners</b></p>
                         <p>
                             At Teamer, we believe in the <b>power of collaboration</b> and strategic
@@ -606,7 +608,7 @@ export function Home() {
                         <div className="btn btn-primary w-fit">Find More</div>
                     </div>
                     {/* Right */}
-                    <div className="srr flex-[1] min-w-[350px] max-[1417px]:flex-1 max-[1416px]:justify-center items-center">
+                    <div className="srr flex-[1] max-[768px]:min-w-[350px] max-[1417px]:flex-1 max-[1416px]:justify-center items-center">
                         <svg className="min-[1417px]:!ml-auto max-[1417px]:w-full mr-16 max-[1417px]:h-fit" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="791" height="509" viewBox="0 0 791 509" fill="none">
                             <path className="max-[1416px]:hidden" d="M370 0.0667651L706.952 327.322L600.308 444.63C568.462 479.661 513.971 481.467 479.875 448.621L14.2565 0.0670298L370 0.0667651Z" fill={`${isDarkMode ? "#414149" : "#cbd5e1"}`} />
                             <g filter="url(#filter0_d_1146_456)">

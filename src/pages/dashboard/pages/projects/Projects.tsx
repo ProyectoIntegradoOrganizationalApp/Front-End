@@ -41,6 +41,10 @@ export function Projects() {
     const [selectedOrder, setSelectedOrder] = useState<string>("Order By");
 
     useEffect(() => {
+        document.title = 'Projects | Teamer 2023';
+    }, [])
+
+    useEffect(() => {
         if (error?.error) {
             logout();
         }
