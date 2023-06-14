@@ -186,7 +186,7 @@ export const useTaskAppApi = () => {
      *  @param description 
      *  @param idProyect 
      */
-    const createBoard = ( title: string, description: string, idProyect: string, idApp: string ) => {
+    const createBoard = ( photo: string, title: string, description: string, idProyect: string, idApp: string ) => {
 
         setLoading(true);
 
@@ -201,7 +201,7 @@ export const useTaskAppApi = () => {
                 title: title,
                 description: description,
                 idProyect: idProyect,
-                photo: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/639x960/8bcdfaee9ea0002ce6163822d51db7bd/photo-1679464349885-f6603194a0bf.jpg"
+                photo: photo
             }
         }
 

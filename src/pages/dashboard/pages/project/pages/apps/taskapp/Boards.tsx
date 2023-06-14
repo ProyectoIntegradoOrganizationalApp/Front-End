@@ -46,7 +46,7 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
     // Función de creación de tabla
     const handleCreateBoard = ( title?: string, description?: string ) => {
         if( title && description && idApp && projectId ) {
-            BoardCrud().createBoard(title, description, projectId, idApp);
+            BoardCrud().createBoard("",title, description, projectId, idApp);
         }
     }
 
@@ -57,13 +57,17 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                     {
                         icon: "fa-solid fa-diagram-project",
                         name: "Projects",
-                        link: "/projects/dashboard"
+                        link: "/projects"
                     },
                     {
                         icon: "fa-solid fa-list-check",
                         name: `${projectName}`,
                         link: `/project/${projectId}`
                     },
+                    {
+                        icon: app == "Taskman" ? "fa-solid fa-note-sticky" : "fa-solid fa-chart-gantt",
+                        name: app ? app : ""
+                    }
                 ]} />
             </div>
             <div className="bg-gray-200 dark:bg-[#202124] w-full h-full min-[500px]:rounded-xl flex flex-col gap-3 max-[500px]:gap-2 p-4 max-[500px]:p-2 pt-3 overflow-y-hidden">

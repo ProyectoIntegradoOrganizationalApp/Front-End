@@ -13,7 +13,7 @@ export function State(props: { color: string, hide?: boolean }) {
         <>
             {
                 !props.hide &&
-                <div className={"w-5 border-gray-300 dark:border-slate-800 border-4 aspect-square rounded-full cursor-default " + props.color}></div>
+                <div className={"w-5 border-gray-300 dark:border-[#202124] border-4 aspect-square rounded-full cursor-default " + props.color}></div>
             }
         </>
     )

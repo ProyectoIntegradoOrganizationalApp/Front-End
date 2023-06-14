@@ -29,7 +29,7 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                                 <Link
                                     key={link.name}
                                     to={link.url}
-                                    className={`btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-[#28292d] ${props.tab == link.name || props.tab == link.url ? "!bg-gray-300 dark:!bg-[#28292d]" : ""}`}
+                                    className={`btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 hover:!bg-gray-300 dark:hover:!bg-[#28292d] ${props.tab == link.name || props.tab == link.url ? "!bg-gray-300 dark:!bg-[#28292d]" : "!bg-transparent"}`}
                                     onClick={() => handleClick(link.name)}
                                 >
                                     {link.name}
@@ -37,7 +37,7 @@ export function Tabs(props: { tab: string, setTab: Function, icon?: string, titl
                             ) : (
                                 <button
                                     key={link.name}
-                                    className={`btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 !bg-transparent hover:!bg-gray-300 dark:hover:!bg-[#28292d] ${props.tab == link.name || props.tab == link.url ? "!bg-gray-300 dark:!bg-[#28292d]" : ""}`}
+                                    className={`btn btn-primary flex justify-center items-center !text-black dark:!text-white !px-3.5 md:!px-5 !py-3 !max-h-none border-none leading-none h-fit min-h-0 hover:!bg-gray-300 dark:hover:!bg-[#28292d] ${props.tab == link.name || props.tab == link.url ? "!bg-gray-300 dark:!bg-[#28292d]" : "!bg-transparent"}`}
                                     onClick={() => handleClick(link.name)}
                                 >
                                     {link.name}

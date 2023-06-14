@@ -98,7 +98,7 @@ export const Form = (props: { type: string, registerUser: (props: FormProps) => 
                         <input
                             type="number"
                             minLength={9}
-                            maxLength={9}
+                            maxLength={15}
                             placeholder="Enter phone number"
                             value={phone_number}
                             onChange={event => {
@@ -149,7 +149,9 @@ export const Form = (props: { type: string, registerUser: (props: FormProps) => 
                 />
             )}
 
-            <Link to="/recovery" className="mt-5 cursor-pointer select-none mx-auto text-base w-fit text-black dark:text-white">Recovery password</Link>
+            {props.type === "log in" &&
+                <Link to="/recovery" className="mt-5 cursor-pointer select-none mx-auto text-base w-fit text-black dark:text-white hover:opacity-50 transition-all">Recovery password</Link>
+            }
             <button
                 type="submit"
                 onClick={(event) => {

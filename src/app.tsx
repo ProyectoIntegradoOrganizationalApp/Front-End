@@ -31,7 +31,7 @@ import { Project } from './pages/dashboard/pages/project/Project';
 import { Store } from './pages/dashboard/pages/project/pages/apps/Store';
 import { CookieModal } from './components/modals/CookieModal';
 import { Boards } from './pages/dashboard/pages/project/pages/apps/taskapp/Boards';
-import Board from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
+import { Board } from './pages/dashboard/pages/project/pages/apps/taskapp/board/Board';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useAuth } from './hooks/useAuth';
 import { Account } from './pages/dashboard/pages/profile/account/Account';
@@ -39,6 +39,7 @@ import { ProjectDashboard } from './pages/dashboard/pages/project/components/Pro
 import { ProjectApps } from './pages/dashboard/pages/project/components/ProjectApps';
 import { ProjectMembers } from './pages/dashboard/pages/project/components/ProjectMembers';
 import ContainerSwitcher from './pages/signIn/ContainerSwitcher';
+import { ThemeContext } from './domain/context/ThemeContext';
 
 /**
  *  Aplicación principal.
@@ -48,6 +49,8 @@ import ContainerSwitcher from './pages/signIn/ContainerSwitcher';
  */
 
 export function App() {
+    const currentTheme = localStorage.getItem('color-theme');
+    const [darkMode, setDarkMode] = useState(currentTheme == "dark" ? true : false);
     const [contextUser, setUser] = useState<User | null>(null);
     const [modal, setModal] = useState<ModalInterface | null>(null);
 
@@ -67,11 +70,13 @@ export function App() {
             setCookiesIsOpen(true);
         }
 
-    }, [cookiesAccepted]);
-
-    useEffect(() => {
-
-    }, [modal?.isOpen])
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        localStorage.setItem('color-theme', darkMode ? "dark" : "");
+    }, [cookiesAccepted, darkMode]);
 
     const closeModal = () => {
         setModal(null);
@@ -79,34 +84,35 @@ export function App() {
 
     return (
         <>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
-            <AuthContext.Provider value={{ user: contextUser, setUser }}>
-                <ModalContext.Provider value={{ modal, setModal }}>
+            <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                />
+                <AuthContext.Provider value={{ user: contextUser, setUser }}>
+                    <ModalContext.Provider value={{ modal, setModal }}>
 
-                    {/* Modal de las coockies */}
-                    {cookiesAccepted == null && (
-                        <CookieModal isOpen={cookiesIsOpen} />
-                    )}
+                        {/* Modal de las coockies */}
+                        {cookiesAccepted == null && (
+                            <CookieModal isOpen={cookiesIsOpen} />
+                        )}
 
-                    {/* Modal custom que sirve para multiples cosas */}
-                    {modal && (
-                        <CustomModal
-                            isOpen={modal?.isOpen ? true : false}
-                            closeModal={closeModal}
-                            atts={modal}
-                        />
-                    )}
+                        {/* Modal custom que sirve para multiples cosas */}
+                        {modal && (
+                            <CustomModal
+                                isOpen={modal?.isOpen ? true : false}
+                                closeModal={closeModal}
+                                atts={modal}
+                            />
+                        )}
 
                     <BrowserRouter basename='/'>
                         <Routes>
@@ -122,7 +128,7 @@ export function App() {
                                     <Route path="projects/dashboard" element={<Projects />} />
 
                                     {/* Project */}
-                                    <Route path="project/:name" element={<Project />}>
+                                    <Route path="project/:projectId" element={<Project />}>
                                         {/* Dashboard */}
                                         <Route
                                             path="dashboard"
@@ -140,7 +146,7 @@ export function App() {
                                         />
                                     </Route>
 
-                                    <Route path="project/:name/store" element={ <Store project={''} /> }/>
+                                    <Route path="project/:projectId/store" element={ <Store /> }/>
                                     <Route path="project/:projectId/app/taskman/:idApp" element={ <Boards app="Taskman"/> }/>
                                     <Route path="project/:projectId/app/timeline/:idApp" element={ <Boards app="Timeline"/> }/>
                                     <Route path="project/:projectId/app/:appName/:idApp/:idBoard" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
@@ -148,14 +154,14 @@ export function App() {
                                     <Route path="friend/:friendName" element={ <Friend />} />
                                 </Route>
                             </Route>
-
-                            <Route path="/login" element={<ContainerSwitcher />} />
-                            <Route path="/register" element={<ContainerSwitcher />} />
-                            <Route path="*" element={<Error />} />
-                        </Routes>
-                    </BrowserRouter>
-                </ModalContext.Provider>
-            </AuthContext.Provider>
+                                <Route path="/login" element={<ContainerSwitcher />} />
+                                <Route path="/register" element={<ContainerSwitcher />} />
+                                <Route path="*" element={<Error />} />
+                            </Routes>
+                        </BrowserRouter>
+                    </ModalContext.Provider>
+                </AuthContext.Provider>
+            </ThemeContext.Provider>
         </>
     )
 }

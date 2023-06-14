@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-import { Route } from "../domain/Route.interface"
+import { Route } from "../domain/Route.interface";
 
 const Route = () => {
-
     const [parent, setParent] = useState<string>();
 
-    return {parent};
+    return { parent };
 }
 
 export const Routes: Array<Route> = [
@@ -32,22 +31,29 @@ export const Routes: Array<Route> = [
         children: [
             {
                 name: "Projects",
-                url: "/projects/dashboard"
+                url: "/projects"
             }
         ]
     },
     {
         icon: "fa-solid fa-user-group",
         name: "Friends",
-        url: "/friends/dashboard",
+        url: "/friends",
         children: [
             {
                 name: "Friends",
-                url: "/friends/dashboard"
+                url: "/friends"
             },
             {
                 name: "Add Friend",
-                url: "/users"
+                url: "",
+                onclick: `() => openModal({
+                    isOpen: true,
+                    type: "searchuser",
+                    submitText: "",
+                    submitAction: () => { }
+                }
+                )`
             }
         ]
     }

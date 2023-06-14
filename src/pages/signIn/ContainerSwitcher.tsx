@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
@@ -17,11 +17,17 @@ const ContainerSwitcher: React.FC = () => {
     const navigate = useNavigate();
 
     const handleSwitchContainer = () => {
+        document.title = isRegisterPage ? 'Login | Teamer 2023' : 'Register | Teamer 2023';
+
         const newPath = showLogin ? '/register' : '/login';
         setShowLogin((prevShowLogin) => !prevShowLogin);
-        
+
         setTimeout(() => navigate(newPath), 180)
     };
+
+    useEffect(() => {
+        document.title = isRegisterPage ? 'Register | Teamer 2023' : 'Login | Teamer 2023';
+    }, []);
 
     return (
         <>

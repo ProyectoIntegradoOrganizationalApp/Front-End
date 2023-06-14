@@ -16,21 +16,24 @@ import AddButton from '../../../../components/buttons/AddButton';
 import { toast } from "react-toastify";
 import MessageButton from '../../../../components/buttons/MessageButton';
 import { useWebsocket } from '../../../../adapters/useWebsocket';
+import { useModal } from '../../../../hooks/useModal';
 
 export function Friends() {
-
-    const [tab, setTab] = useState<string>("all");
-
+    const { openModal } = useModal();
+    const [tab, setTab] = useState<string>("All");
     const { send } = useWebsocket("ws://localhost:9001");
-
     const { friendData, userData, error, loading, addFriend, removeFriend, fetchUsers } = useFriendApi(true);
 
     useEffect(() => {
-        if( error?.error ) {
+        document.title = 'Friends | Teamer 2023';
+    }, [])
+
+    useEffect(() => {
+        if (error?.error) {
             toast.error(error?.message)
         }
 
-        if( !error?.error ) {
+        if (!error?.error) {
             toast.info(error?.message);
         }
     }, [error?.error]);
@@ -45,60 +48,45 @@ export function Friends() {
                     <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-user-group" title="Friends" links={[
                         { name: "All" }, { name: "Online" }, { name: "Pending" }
                     ]} />
-                    <i className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
+                    <i onClick={() => openModal({
+                        isOpen: true,
+                        type: "searchuser",
+                        submitText: "",
+                        submitAction: () => { }
+                    }
+                    )} className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
                 </div>
                 <div className="m-4 max-[500px]:m-2 flex flex-col gap-4 max-[500px]:gap-2">
-                    <Searcher 
-                        bg="bg-white dark:bg-[#202124]" 
-                        placeholder="Search users..." 
+                    <Searcher
+                        bg="bg-white dark:bg-[#202124]"
+                        placeholder="Search friend..."
                         cb={fetchUsers}
                     />
 
-                    { userData && userData.length > 0 && (
-                        userData.map( user => {
-                            return (
-                                <MainItem
-                                    key={user.id}
-                                    item={{
-                                        name: user.name+" "+user.lastname,
-                                        description: "Level "+user.level, 
-                                        icon: user.photo
-                                    }}
-                                >
-                                    <AddButton 
-                                        cb={() => {
-                                            addFriend(user.id);
-                                        }}
-                                    /> 
-                                </MainItem>
-                            )
-                        })
-                    )}
-
                     <div className="flex flex-col gap-3">
-                        { friendData && (
-                            friendData.map( (friend, index) => {
+                        {friendData && (
+                            friendData.map((friend, index) => {
                                 return (
                                     <MainItem
                                         key={index}
                                         item={{
-                                            name: friend.name, 
+                                            name: friend.name,
                                             icon: friend.photo
                                         }}
                                     >
 
-                                        <MessageButton 
+                                        <MessageButton
                                             cb={() => {
                                                 // Crear mensaje
                                                 // Redirigir al mensaje
                                             }}
                                         />
-                                        
-                                        <RemoveButton 
+
+                                        <RemoveButton
                                             cb={() => {
                                                 removeFriend(friend.idfriend);
                                             }}
-                                        /> 
+                                        />
                                     </MainItem>
                                 )
                             })

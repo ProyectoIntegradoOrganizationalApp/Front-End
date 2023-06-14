@@ -32,7 +32,7 @@ export const Activity: React.FC<ActivityProps> = ({ title, data }) => {
             <div className="bg-white dark:bg-[#28292d] w-full h-full flex flex-col rounded-xl">
                 <div className="relative border-b-4 border-gray-200 dark:border-[#202124] py-4">
                     <div className="absolute top-3 left-4">
-                        <InfoTooltip title="Commits done per day" position="left" />
+                        <InfoTooltip title="Commits done per month" position="left" />
                     </div>
                     <p className="w-full flex justify-center text-black dark:text-white leading-none text-base">{title}</p>
                 </div>

@@ -5,9 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-    @apply text-slate-900 dark:text-slate-400;
+    @apply text-black dark:text-white;
 }
 
 * {
@@ -20,6 +19,9 @@
     @apply bg-clip-padding border-[2px] border-solid bg-gray-400 border-transparent dark:bg-[#414149];
     border-right: none;
 }
+*::-webkit-scrollbar-track {
+    @apply bg-white dark:bg-[#202124];
+}
 #scrollbarx::-webkit-scrollbar {
     @apply h-0 sm:h-[.6rem];
 }
@@ -30,7 +32,7 @@
 
 html, body {
     height: 100%;
-    @apply !bg-white dark:!bg-[#202124];
+    @apply bg-white dark:!bg-[#202124];
 }
 
 /* Dark */
@@ -101,7 +103,7 @@ html, body {
     @apply bg-black dark:bg-white w-3 aspect-square h-[unset];
 }
 .progressVideo::-webkit-progress-value {
-    @apply bg-gray-400 dark:bg-[#414149];
+    @apply !bg-[#414149];
     border-radius: var(--rounded-box, 1rem);
 }
 .progressVideo {
@@ -150,10 +152,10 @@ textarea {
 
 /* Or login */
 .divider::before {
-    @apply bg-[#414149]
+    @apply bg-gray-200 dark:bg-[#414149]
 }
 .divider::after {
-    @apply bg-[#414149]
+    @apply bg-gray-200 dark:bg-[#414149]
 }
 
 /* Tailwind not working */
@@ -325,6 +327,15 @@ progress {
 .board:hover div {
     @apply bg-black/50 dark:bg-black/50;
 }
+.board:hover section:last-child {
+    @apply flex;
+}
+.board:hover aside {
+    @apply flex;
+}
+.board section:last-child button {
+    @apply !px-3.5;
+}
 .newBoard:hover div {
     @apply bg-gray-400 dark:bg-black/50;
 }
@@ -422,7 +433,7 @@ progress {
     @apply block w-full;
 }
 .table-zebra tbody {
-    @apply block w-full overflow-auto absolute min-[1640px]:top-[3em] bottom-0 left-0 right-0 rounded-b-xl max-[1639px]:relative max-[1639px]:max-h-[200px];
+    @apply block w-full overflow-auto absolute top-[3em] bottom-0 left-0 right-0 rounded-b-xl min-h-[200px] bg-[#202124]/90;
 }
 .table-zebra thead tr, .table-zebra tbody tr {
     @apply w-full table-fixed;
@@ -442,6 +453,82 @@ progress {
     @apply w-[calc(100%+3px)] ml-[-0.2px];
 }
 
+/* Features */
+.st0 {
+    @apply fill-none stroke-[#E4E4E4] stroke-[4];
+    stroke-miterlimit: 10;
+    stroke-dasharray: 32.0882,32.0882;
+}
+.st1 {
+    @apply fill-slate-200 dark:fill-[#28292d];
+}
+.st2 {
+    @apply fill-slate-300 dark:fill-[#9ca3af];
+}
+.st3 {
+    @apply fill-[#E4E4E4];
+}
+ellipse.st4 {
+    @apply dark:fill-[#202124];
+}
+.st4 {
+    @apply fill-[#FFFFFF];
+}
+.st5 {
+    @apply fill-[#708CD5];
+}
+.st6 {
+    @apply fill-[#D3DFFF];
+}
+.st7 {
+    @apply fill-[#FFFFFF] stroke-[#708CD5] stroke-[6]; 
+    stroke-miterlimit: 10;
+}
+.st8 {
+    @apply fill-[#EE6F57];
+}
+.st9 {
+    @apply fill-[#F9B384];
+}
+.st10 {
+    @apply fill-[#1F3C88];
+}
+.st11 {
+    @apply fill-[#E28B6D];
+}
+.st12 {
+    @apply fill-[#102048];
+}
+.st13 {
+    @apply opacity-[0.6] fill-[#102048];
+}
+.st14 {
+    @apply opacity-[0.3] fill-[#1F3C88];
+}
+.st15 {
+    @apply opacity-[0.6] fill-[#E28B6D];
+}
+.st16 {
+    @apply fill-[#6F3428];
+}
+.st17 {
+    @apply fill-[#FBC343];
+}
+.st18 {
+    @apply opacity-[0.3] fill-none stroke-[#6F3428] stroke-[8];
+    stroke-miterlimit: 10;
+}
+.st19 {
+    @apply opacity-[0.4] fill-[#FC8879];
+}
+.st20 {
+    @apply opacity-[0.6] fill-[#6F3428];
+}
+.st21 {
+    @apply fill-none stroke-[#102048] stroke-[8];
+    stroke-miterlimit: 10;
+}
+
 /* Sidebar */
 @media (min-width: 1024px) {
     .drawer-mobile {
@@ -455,7 +542,7 @@ progress {
         transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     }
 }
-@media (min-width: 1085px) {
+@media (min-width: 1086px) {
     .drawer-mobile {
         grid-auto-columns: max-content auto;
     }

@@ -2,9 +2,9 @@ import { useRef } from "react";
 
 import { IKContext, IKUpload } from "imagekitio-react"
 
-export const SaveImage: React.FC<{cb: (url: string) => void}> = ({ cb }) => {
+export const SaveImage: React.FC<{cb: (url: string) => void, title?: string, blue?: boolean}> = ({ cb, title, blue }) => {
 
-    const uploadRef = useRef(null);
+    const uploadRef = useRef<HTMLInputElement>(null);
 
     const AUTH = import.meta.env.VITE_IMG_AUTH_URL;
 
@@ -31,12 +31,16 @@ export const SaveImage: React.FC<{cb: (url: string) => void}> = ({ cb }) => {
 
             { uploadRef && (
                 <button
-                    className="file-input"
+                    className={`file-input transition-all ${blue ? "bg-blue-700 text-white" : "bg-gray-300"} ${blue ? "bg-blue-700" : "dark:bg-[#28292d]"} ${blue ? "hover:bg-blue-800" : "hover:bg-gray-400"} ${blue ? "hover:bg-blue-800" : "dark:hover:bg-[#272729]"}`}
                     onClick={() => {
-                        uploadRef.current.click()
+                        if( uploadRef.current ){
+                            uploadRef.current.click()
+                        }
+                        
                     }}
                 >
-                    Upload Image
+                    { title && title } 
+                    { !title && "Upload Image" }
                 </button>
             )}
 
