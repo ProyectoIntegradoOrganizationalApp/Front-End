@@ -27,6 +27,7 @@ interface Board {
 export interface Column {
     id: string,
     title: string,
+    order: number,
     tasks: Array<Task>
 }
 
@@ -40,7 +41,8 @@ export interface Task {
     state: number,
     completed_at: string,
     created_at: string,
-    updated_at: string
+    updated_at: string,
+    ordering: number,
 }
 
 interface BoardWrapper {
@@ -295,6 +297,44 @@ export const useTaskAppApi = () => {
     }
 
     /**
+     *  Función de edición de columnas
+     * 
+     *  @param idApp 
+     *  @param idBoard 
+     *  @param column 
+     */
+    const editColumn = ( idApp: string, idBoard: string, column: Column ) => {
+
+        setLoading(true);
+
+        const props: RequestParams = {
+            url: `${API}/${idApp}/task_app/column/${column.id}`,
+            method: "PUT",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user?._token}`
+            }),
+            data: {
+                idboard: column.id,
+                order: column.order,
+                title: column.title
+            }
+        }
+
+        useAxios(props)
+            .then( res => {
+                setError({ error: false, message: "Task Created Successfully" });
+            })
+            .catch( err => {
+                handleData({error: true, message: err.message});
+            })
+            .finally(() => {       
+                refreshData(idApp, idBoard);      
+                setLoading(false);
+            })
+    }
+
+    /**
      *  Función de creación de tareas.
      *  Endpoint: POST /{idApp}/task_app/task
      * 
@@ -320,6 +360,46 @@ export const useTaskAppApi = () => {
                 title: title,
                 description: description,
                 state: 0
+            }
+        }
+
+        useAxios(props)
+            .then( res => {
+                setError({ error: false, message: "Task Created Successfully" });
+            })
+            .catch( err => {
+                handleData({error: true, message: err.message});
+            })
+            .finally(() => {       
+                refreshData(idApp, idBoard);      
+                setLoading(false);
+            })
+    }
+
+    /**
+     *  Función de edición de task
+     * 
+     *  @param idApp 
+     *  @param idBoard 
+     *  @param task 
+     */
+    const editTask = ( idApp: string, idBoard: string, task: Task ) => {
+
+        setLoading(true);
+
+        const props: RequestParams = {
+            url: `${API}/${idApp}/task_app/task/${task.id}`,
+            method: "PUT",
+            headers: new AxiosHeaders({
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user?._token}`
+            }),
+            data: {
+                idcolumn: task.idcolumn,
+                title: task.title,
+                description: task.description,
+                order: task.ordering,
+                state: task.state
             }
         }
 
@@ -379,11 +459,11 @@ export const useTaskAppApi = () => {
     }
 
     const TaskCrud = () => {
-        return { createTask, removeTask };
+        return { createTask, removeTask, editTask };
     }
 
     const ColumnCrud = () => {
-        return { createColumn, removeColumn };
+        return { createColumn, removeColumn, editColumn };
     }
 
     /**

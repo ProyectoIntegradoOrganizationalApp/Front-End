@@ -9,7 +9,7 @@ import { Task } from './Task';
 import { Column as IColumn, Task as ITask } from '../../../../../../../../adapters/api/useTaskAppApi';
 
 interface ColumnProps {
-    column: IColumn,
+    column: any,
     index: number,
     deleteColumn: any,
     createTask: ( title: string, description: string, column: IColumn ) => void,
@@ -105,7 +105,7 @@ export const Column: React.FC<ColumnProps> = ({ column, index, createTask, delet
                                             })} className="bg-gray-300 dark:bg-black/30 hover:bg-gray-400/80 dark:hover:bg-black/50 transition-all cursor-pointer text-black dark:text-white p-3 rounded-lg mb-2.5 select-none break-all w-full leading-[1.2rem] flex gap-2 justify-center items-center">
                                             <b><p className="leading-none">New Task</p></b><i className="fa-solid fa-plus"></i>
                                         </div>
-                                        { column.tasks.map((task, index) => {
+                                        { column.tasks.map((task: any, index: number) => {
                                             if (task) {
                                                 return (
                                                     <Task 

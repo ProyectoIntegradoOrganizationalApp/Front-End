@@ -34,9 +34,6 @@ export const Board: React.FC = () => {
     // Modal
     const { openModal } = useModal();
 
-    // Hook de utilidad para la app
-    const { onDragEnd, columnOrder, columnsData } = useBoard(data);
-
     // Variable reactiva para configuración de la APP
     const [application, setApplication] = useState<string>('');
     const [projectName, setProjectName] = useState<string>('');
@@ -70,6 +67,7 @@ export const Board: React.FC = () => {
         }
     }, [ProjectData?.name]);
 
+    // Para el manejo de errores/mensajes
     useEffect(() => {
 
         // Si hay error
@@ -82,7 +80,22 @@ export const Board: React.FC = () => {
             toast.success(error.message);
         }
 
-    }, [error?.error])
+    }, [error?.error]);
+
+    const editTask = ( task: ITask ) => {
+        if( idBoard && idApp ) {
+            TaskCrud().editTask(idApp, idBoard, task);
+        }
+    }
+
+    const editColumn = ( column: IColumn ) => {
+        if( idBoard && idApp ) {
+            ColumnCrud().editColumn(idApp, idBoard, column);
+        }
+    }
+    
+    // Hook de utilidad para la app
+    const { onDragEnd, columnOrder, columnsData } = useBoard({ data, editColumn, editTask });
 
     useBeforeUnload((e: BeforeUnloadEvent) => {
         e.preventDefault();
@@ -151,7 +164,7 @@ export const Board: React.FC = () => {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        { columns && columns.map(( column, index ) => {
+                                        { columnsData && columnsData.map(( column, index ) => {
                                                 return (
                                                     <Column
                                                         key={column.id}
