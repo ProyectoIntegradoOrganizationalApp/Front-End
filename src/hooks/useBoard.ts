@@ -4,34 +4,58 @@ import { DropResult } from "react-beautiful-dnd";
 import { Column, TaskAppInfo } from "../adapters/api/useTaskAppApi";
 
 export const useBoard = ( data: TaskAppInfo | undefined ) => {
+
     const [ columnOrder, setColumnOrder ] = useState<string[]>([]);
-    const [ columnsData, setColumnsData ] = useState<ColumnData>({});
+    const [ columnsData, setColumnsData ] = useState<ColumnData[]>([]);
 
     useEffect(() => {
+
+        // Si hay datos y columnas generamos los estados
         if( data && data.columns ) {
-            setColumnOrder([]);
-            setColumnsData({});
 
-            console.log(data)
+            // Creamos copias de las columnas actuales
+            const newColList = [...columnsData];
+            const newColOrder = [...columnOrder];
 
+            // Recorremos las columnas que nos vienen del back para generar nuestra lista
             data.columns.map(( col: Column ) => {
-                setColumnOrder([...columnOrder, col.id]);
 
-                const cols: ColumnData = { } 
-                cols[col.id] = {
-                    id: col.id,
-                    title: col.title,
-                    taskIds: col.tasks.map( task => {
-                        return task.id
-                    })
-                }
+                // Si no existe se añade, si existe no se añade
+                if ( !columnsData.find( value => value.id === col.id) ) {
 
-                setColumnsData({...columnsData, ...cols})
+                    // Creamos una lista para las tasks
+                    /**
+                     * Esto me revienta la cabeza y esque le añade la task al siguiente de la 
+                     * lista y no entiendo nada
+                     */
+                    const taskIds: string[] = [];
+                    col.tasks.map( task => taskIds.push(task.id));
 
-            })
+                    // Creamos la columna
+                    const newCol = {
+                        id: col.id,
+                        title: col.title,
+                        taskIds: taskIds
+                    };
+
+                    // Añadimos la columna
+                    newColList.push(newCol);
+                    newColOrder.push(newCol.id);
+                };
+
+                
+            });
+
+            // Seteamos los estados
+            setColumnsData(newColList);
+            setColumnOrder(newColOrder);
         }
+    }, [data?.columns]);
+
+    const loadColumns = () => {
         
-    }, [data?.columns])
+        
+    }
     
     const moveIndex = (list: string[], from: number, to: number) => {
         list.splice(to, 0, list.splice(from, 1)[0]);
@@ -47,29 +71,46 @@ export const useBoard = ( data: TaskAppInfo | undefined ) => {
     }
 
     const onDragEnd = (result: DropResult) => {
+
         const { destination, source, draggableId } = result;
 
         if (!destination) {
             return;
         }
 
+        // Comprobamos si se mueve una columna
         if (result.type == "COLUMN") {
             const columnOrderCopy = [...columnOrder];
             moveIndex(columnOrderCopy, source.index, destination.index);
             setColumnOrder(columnOrderCopy);
-        } else {
-            const columnsCopy = structuredClone(columnsData);
-            const sourceColumn = columnsCopy[source.droppableId];
-            const destinationColumn = columnsCopy[destination.droppableId];
-            const task = sourceColumn.taskIds[source.index];
+        }
+
+        // Comprobamos si se mueve una task
+        if ( result.type != "COLUMN") {
+            // Copiamos el objeto
+            const columnsCopy = [...columnsData];
+
+            // Recojemos la colummna de origen
+            console.log(columnsData)
+            const sourceColumn = columnsCopy.find( value => value.id === result.source.droppableId);
+
+            // Recogemos la columna de destino
+            const destinationColumn = columnsCopy.find( value => value.id === result.destination!.droppableId);
+
+            // Recogemos la task
+            const task = sourceColumn!.taskIds[result.source.index];
             
-            if (source.droppableId === destination.droppableId) {
+            // Comprobamos si se mueve dentro de la misma columna
+            if ( source.droppableId === destination.droppableId && sourceColumn ) {
                 moveIndex(sourceColumn.taskIds, source.index, destination.index);
                 setColumnsData(columnsCopy);
-            } else {
+            } 
+
+            // Comprobamos si se mueve hacia otra columna
+            if ( source.droppableId != destination.droppableId && sourceColumn && destinationColumn ) {
                 changeTaskToColumn(destinationColumn.taskIds, destination.index, task);
                 removeTaskFromColumn(sourceColumn.taskIds, task);
-                setColumnsData(columnsCopy)
+                setColumnsData(columnsCopy);
             }
         }
     };
