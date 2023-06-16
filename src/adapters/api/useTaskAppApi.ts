@@ -250,7 +250,7 @@ export const useTaskAppApi = () => {
         }
 
         useAxios(props)
-            .then(data => {
+            .then( data => {
                 setError({ error: false, message: "Columna Creada" })
             })
             .catch( err => {
@@ -285,7 +285,7 @@ export const useTaskAppApi = () => {
 
         useAxios(props)
             .then( data => {
-                setError(data.data)
+                setError({ error: false, message: "Columna Borrada"})
             })
             .catch( err => {
                 handleData({error: true, message: err.message});
@@ -307,6 +307,7 @@ export const useTaskAppApi = () => {
 
         setLoading(true);
 
+        // El put me parece que está mal en el back-end
         const props: RequestParams = {
             url: `${API}/${idApp}/task_app/column/${column.id}`,
             method: "PUT",
@@ -315,7 +316,7 @@ export const useTaskAppApi = () => {
                 Authorization: `Bearer ${user?._token}`
             }),
             data: {
-                idboard: column.id,
+                idboard: idBoard,
                 order: column.order,
                 title: column.title
             }
@@ -323,7 +324,7 @@ export const useTaskAppApi = () => {
 
         useAxios(props)
             .then( res => {
-                setError({ error: false, message: "Task Created Successfully" });
+                setError({ error: false, message: "Columna Editada" });
             })
             .catch( err => {
                 handleData({error: true, message: err.message});
@@ -365,7 +366,7 @@ export const useTaskAppApi = () => {
 
         useAxios(props)
             .then( res => {
-                setError({ error: false, message: "Task Created Successfully" });
+                setError({ error: false, message: "Tarea creada" });
             })
             .catch( err => {
                 handleData({error: true, message: err.message});
@@ -405,7 +406,7 @@ export const useTaskAppApi = () => {
 
         useAxios(props)
             .then( res => {
-                setError({ error: false, message: "Task Created Successfully" });
+                setError({ error: false, message: "Tarea editada" });
             })
             .catch( err => {
                 handleData({error: true, message: err.message});
@@ -426,7 +427,7 @@ export const useTaskAppApi = () => {
     const removeTask = ( idApp: string, idBoard: string, task: Task ) => {
 
         setLoading(true);
-
+         
         const props: RequestParams = {
             url: `${API}/${idApp}/task_app/task/${task.id}`,
             method: "DELETE",
@@ -438,7 +439,7 @@ export const useTaskAppApi = () => {
 
         useAxios(props)
             .then( res => {
-                setError({ error: false, message: "Task Deleted Successfully" });
+                setError({ error: false, message: "Tarea eliminada" });
             })
             .catch( err => {
                 handleData({error: true, message: err.message});
@@ -472,14 +473,14 @@ export const useTaskAppApi = () => {
      *  @param idProject 
      */
     const refreshData = ( idApp: string, idBoard?: string ): void => {
-
+        
         // Comprobamos si es un array para refrescar las tablas
         if( idApp && !idBoard ) {
             getAppInfo(idApp);
         }
 
         // Si no es un array refrescamos las columnas y tasks
-        if( idApp && idBoard && data?.boards && !Array.isArray(data.boards) ) {
+        if( idApp && idBoard ) {
             getBoardInfo(idApp, idBoard);
         }
         
@@ -501,16 +502,22 @@ export const useTaskAppApi = () => {
 
         // Si no hay error y es de tipo boards
         if( "boards" in info ) {
+
+            let columns = data?.columns ? [...data.columns] : undefined;
+
             setData({
                 boards: info.boards,
-                columns: data?.columns,
+                columns: columns,
             });
         }
 
         // Si no hay error y es de tipo 
         if( "columns" in info ) {
+
+            let board = data?.boards ? {...data.boards} : undefined;
+
             setData({
-                boards: data?.boards,
+                boards: board,
                 columns: info.columns,
             });
         }

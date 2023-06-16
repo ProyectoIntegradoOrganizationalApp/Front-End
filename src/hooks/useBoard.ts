@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { ColumnData } from "../domain/apps/taskman/ColumnData.interface";
+
+import { useListState } from "@mantine/hooks";
+
 import { DropResult } from "react-beautiful-dnd";
+
 import { Column, Task, TaskAppInfo } from "../adapters/api/useTaskAppApi";
 
 interface UseBoardProps {
@@ -10,12 +13,11 @@ interface UseBoardProps {
 }
 
 export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
-
     // Lista con las id de las columnas
     const [ columnOrder, setColumnOrder ] = useState<string[]>([]);
 
     // Lista con las columnas
-    const [ columnsData, setColumnsData ] = useState<Column[]>([]);
+    const [ columnsData, setColumnsData ] = useListState<Column>([]);
 
     // Efecto para cargar las columnas
     useEffect(() => {
@@ -24,8 +26,8 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
         if( data && data.columns ) {
 
             // Creamos copias de las columnas actuales
-            const newColList = [...columnsData];
             const newColOrder = [...columnOrder];
+            const newColList = [...columnsData]
 
             // Recorremos las columnas que nos vienen del back para generar nuestra lista
             data.columns.map(( col: Column ) => {
@@ -43,12 +45,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
                 };
             });
 
-            newColList.sort(( colA: Column, colB: Column) => {
-                return colA.order - colB.order;
-            })
-
-            // Seteamos los estados
-            setColumnsData(newColList);
+            setColumnsData.setState([...newColList])
             setColumnOrder(newColOrder);
         }
     }, [data?.columns]);
@@ -94,6 +91,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
                     setColumnOrder(columnOrderCopy);
                 }
             }
+
         }
 
         // Comprobamos si se mueve una task
@@ -119,7 +117,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
                     editTask(task);
 
                     moveIndex(sourceColumn.tasks, source.index, destination.index);
-                    setColumnsData(columnsCopy);
+                    setColumnsData.setState([...columnsCopy]);
                 }
             } 
 
@@ -135,7 +133,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
 
                     changeTaskToColumn(destinationColumn.tasks, destination.index, task);
                     removeTaskFromColumn(sourceColumn.tasks, task);
-                    setColumnsData(columnsCopy);
+                    setColumnsData.setState([...columnsCopy]);
                 }
             }
         }

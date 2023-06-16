@@ -39,8 +39,6 @@ export const Board: React.FC = () => {
     const [projectName, setProjectName] = useState<string>('');
     const [boardName, setBoardName] = useState<string>('');
 
-    const [columns, setColumns] = useState<IColumn[]>();
-
     // Recoger el tipo de aplicación de los parámetros ( Taskman / Timeline )
     const { appName, idApp, projectId, idBoard } = useParams();
 
@@ -53,12 +51,6 @@ export const Board: React.FC = () => {
             getBoardInfo(idApp, idBoard);
         }
     }, [appName]);
-
-    useEffect(() => {
-        if( data && data.columns && data.columns.length >= 0 ) {
-            setColumns(data.columns);
-        }
-    }, [data?.columns])
 
     // Efecto para recoger los datos del proyecto
     useEffect(() => {
@@ -164,14 +156,16 @@ export const Board: React.FC = () => {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        { columnsData && columnsData.map(( column, index ) => {
+                                        { columnsData && columnsData.map(( column ) => {
+                                            
+                                            let index = columnOrder.indexOf(column.id);
+
                                                 return (
                                                     <Column
                                                         key={column.id}
                                                         column={column}
                                                         index={index}
                                                         createTask={( title: string, description: string, column: IColumn ) => {
-                                                            console.log(title, description)
                                                             if( idApp && idBoard ) {
                                                                 TaskCrud().createTask( idApp, idBoard, column.id, title, description );
                                                             }
@@ -179,7 +173,7 @@ export const Board: React.FC = () => {
                                                         }}
                                                         deleteTask={( task: ITask ) => {
                                                             if( idApp && idBoard) {
-                                                                TaskCrud().removeTask(idApp, idBoard, task);
+                                                                TaskCrud().removeTask( idApp, idBoard, task );
                                                             }
                                                         }}
                                                         deleteColumn={( column: IColumn ) => {
