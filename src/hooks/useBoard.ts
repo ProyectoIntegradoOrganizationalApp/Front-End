@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 import { useListState } from "@mantine/hooks";
 
@@ -17,35 +17,47 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
     const [ columnOrder, setColumnOrder ] = useState<string[]>([]);
 
     // Lista con las columnas
-    const [ columnsData, setColumnsData ] = useListState<Column>([]);
+    // const [ columnsData, setColumnsData ] = useListState<Column>([]);
+    const [ columnsData, dispatch ] = useReducer(
+        ( columnsData: any, action: any ) => {
+            return {
+                ...action
+            }
+        },
+        {
+            columns: [],
+        }
+    )
 
     // Efecto para cargar las columnas
     useEffect(() => {
+
+        console.log("xdddd")
 
         // Si hay datos y columnas generamos los estados
         if( data && data.columns ) {
 
             // Creamos copias de las columnas actuales
             const newColOrder = [...columnOrder];
-            const newColList = [...columnsData]
+            const newColList: Column[] = []
 
             // Recorremos las columnas que nos vienen del back para generar nuestra lista
             data.columns.map(( col: Column ) => {
 
-                // Si no existe se añade, si existe no se añade
-                if ( !columnsData.find( value => value.id === col.id) ) {
-                    
-                    col.tasks = col.tasks.sort(( taskA: Task, taskB: Task) => {
-                        return taskA.ordering - taskB.ordering;
-                    });
+                
+                col.tasks = col.tasks.sort(( taskA: Task, taskB: Task) => {
+                    return taskA.ordering - taskB.ordering;
+                });
 
-                    // Añadimos la columna
-                    newColList.push(col);
-                    newColOrder.push(col.id);
-                };
+                let newCol = {...col};
+
+                // Añadimos la columna
+                newColList.push(newCol);
+                newColOrder.push(col.id);
+
             });
 
-            setColumnsData.setState([...newColList])
+            dispatch({ columns: [...newColList] })
             setColumnOrder(newColOrder);
         }
     }, [data?.columns]);
@@ -78,7 +90,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
             if( source.index != destination.index ) {
 
                 // Recogemos la columna a editard
-                let column = columnsData.find( elem => elem.id === draggableId);
+                let column = columnsData.columns.find( elem => elem.id === draggableId);
 
                 // Si la columna existe la modificamos
                 if( column ) {
@@ -97,7 +109,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
         // Comprobamos si se mueve una task
         if ( result.type != "COLUMN") {
             // Copiamos el objeto
-            const columnsCopy = [...columnsData];
+            const columnsCopy = [...columnsData.columns];
 
             // Recojemos la colummna de origen
             const sourceColumn = columnsCopy.find( value => value.id === source.droppableId);
@@ -117,7 +129,8 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
                     editTask(task);
 
                     moveIndex(sourceColumn.tasks, source.index, destination.index);
-                    setColumnsData.setState([...columnsCopy]);
+                    // setColumnsData.setState([...columnsCopy]);
+                    dispatch({ columns: [...columnsCopy] })
                 }
             } 
 
@@ -133,7 +146,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
 
                     changeTaskToColumn(destinationColumn.tasks, destination.index, task);
                     removeTaskFromColumn(sourceColumn.tasks, task);
-                    setColumnsData.setState([...columnsCopy]);
+                    dispatch({ columns: [...columnsCopy] })
                 }
             }
         }
