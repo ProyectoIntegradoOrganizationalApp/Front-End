@@ -156,7 +156,7 @@ export const Board: React.FC = () => {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        { columnsData && columnsData.columns && columnsData.columns.map(( column ) => {
+                                        { columnsData && columnsData.columns && columnsData.columns.map(( column: IColumn ) => {
                                             
                                             let index = columnOrder.indexOf(column.id);
 

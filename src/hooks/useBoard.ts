@@ -86,7 +86,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
             if( source.index != destination.index ) {
 
                 // Recogemos la columna a editard
-                let column = columnsData.columns.find( elem => elem.id === draggableId);
+                let column = columnsData.columns.find( (elem: Column) => elem.id === draggableId);
 
                 // Si la columna existe la modificamos
                 if( column ) {
@@ -114,7 +114,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
             const destinationColumn = columnsCopy.find( value => value.id === destination.droppableId);
 
             // Recogemos la task
-            const task = sourceColumn!.tasks.find( task => task.id === draggableId);
+            const task = sourceColumn!.tasks.find(( task: Task ) => task.id === draggableId);
             
             // Comprobamos si se mueve dentro de la misma columna
             if ( source.droppableId === destination.droppableId && sourceColumn ) {
