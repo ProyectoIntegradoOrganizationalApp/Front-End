@@ -16,8 +16,7 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
     // Lista con las id de las columnas
     const [ columnOrder, setColumnOrder ] = useState<string[]>([]);
 
-    // Lista con las columnas
-    // const [ columnsData, setColumnsData ] = useListState<Column>([]);
+    // Manejo de estado con useReducer
     const [ columnsData, dispatch ] = useReducer(
         ( columnsData: any, action: any ) => {
             return {
@@ -32,8 +31,6 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
     // Efecto para cargar las columnas
     useEffect(() => {
 
-        console.log("xdddd")
-
         // Si hay datos y columnas generamos los estados
         if( data && data.columns ) {
 
@@ -41,18 +38,17 @@ export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
             const newColOrder = [...columnOrder];
             const newColList: Column[] = []
 
-            // Recorremos las columnas que nos vienen del back para generar nuestra lista
+            console.log(data)
+
             data.columns.map(( col: Column ) => {
 
-                
+                // Reordenamos las tasks
                 col.tasks = col.tasks.sort(( taskA: Task, taskB: Task) => {
                     return taskA.ordering - taskB.ordering;
                 });
 
-                let newCol = {...col};
-
                 // Añadimos la columna
-                newColList.push(newCol);
+                newColList.push(col);
                 newColOrder.push(col.id);
 
             });
