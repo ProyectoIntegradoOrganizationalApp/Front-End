@@ -1,7 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
 
-import { useListState } from "@mantine/hooks";
-
 import { DropResult } from "react-beautiful-dnd";
 
 import { Column, Task, TaskAppInfo } from "../adapters/api/useTaskAppApi";
