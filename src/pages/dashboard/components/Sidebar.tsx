@@ -24,7 +24,7 @@ export function Sidebar( props: { children: ReactNode, profile: Profile | undefi
             <div className="drawer-content flex flex-col dark:bg-[#414149] !h-full max-[1086px]:p-0" id="scrollbar">
                 <label htmlFor="my-drawer-2" className="btn btn-primary w-0 !pl-4 !pr-4 !h-32 absolute top-[40%] -left-5 rounded-full swap swap-rotate z-40 !rounded-r-xl !bg-gray-400 dark:!bg-black">
                 </label>
-                {props.children}
+                { props.children }
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

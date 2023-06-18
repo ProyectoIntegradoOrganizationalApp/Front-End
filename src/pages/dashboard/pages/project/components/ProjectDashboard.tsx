@@ -26,7 +26,38 @@ export const ProjectDashboard: React.FC = () => {
     const { pieChartData, pieChartOptions } = pieChart({ completed: 5, uncompleted: 2});
     const { barChartData, barChartOptions } = barChart([12, 19, 3, 5, 2, 13]);
 
-    const logs = [];
+    const logs = [
+        {
+            task: "finished",
+            title: "Maquetar timeline",
+            user: "Pablo Valderas",
+            date: new Date("June 15 2023 18:30"), 
+        },
+        {
+            task: "finished",
+            title: "Arreglar Endpoint users",
+            user: "Christian Josué",
+            date: new Date("June 17 2023 12:30"), 
+        },
+        {
+            task: "workingon",
+            title: "Arreglar estilos tabla",
+            user: "Pablo Valderas",
+            date: new Date("June 13 2023 11:30"), 
+        },
+        {
+            task: "workingon",
+            title: "Maquetar videos",
+            user: "Pablo Valderas",
+            date: new Date("June 12 2023 14:50"), 
+        },
+        {
+            task: "workingon",
+            title: "Arreglar Achievements",
+            user: "Miguel García",
+            date: new Date("June 11 2023 1:30"), 
+        }
+    ];
 
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -112,23 +143,21 @@ export const ProjectDashboard: React.FC = () => {
                     </thead>
                     <tbody>
                         {/* FOREACH LOG */}
-                        <tr>
-                            <TaskLog
-                                task="workingon"
-                                title={"Task 1"}
-                                user="Pablo Valderas"
-                                date={new Date("2022-02-02")}
-                            />
-                        </tr>
-                        {/* ENDFOREACH */}
-                        <tr>
-                            <TaskLog
-                                task="finished"
-                                title={"Task 2"}
-                                user="Sergio Parejo"
-                                date={new Date("2023-01-31")}
-                            />
-                        </tr>
+
+                        { logs && logs.map( log => {
+                            return (
+                                <tr>
+                                    <TaskLog
+                                        task={log.task}
+                                        title={log.title}
+                                        user={log.user}
+                                        date={log.date}
+                                    />
+                                </tr> 
+                            )
+                        })}
+                        
+                        
                     </tbody>
                 </table>
             </div>

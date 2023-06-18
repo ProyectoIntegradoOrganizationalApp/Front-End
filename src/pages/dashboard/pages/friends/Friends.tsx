@@ -43,9 +43,9 @@ export function Friends() {
 
     return (
         <div className="h-full bg-gray-200 dark:bg-[#202124] w-full rounded-xl flex flex-wrap content-start">
-            {/* <div className="h-full flex-1 bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-l-xl p-4 flex flex-col gap-10 max-[835px]:hidden">
+            <div className="h-full flex-1 bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-l-xl p-4 flex flex-col gap-10 max-[835px]:hidden">
                 <DirectMessages />
-            </div> */}
+            </div>
             <div className="h-full flex-[4.65] bg-gray-300 dark:bg-[#28292d] min-w-fit rounded-r-xl flex flex-col">
                 <div className="bg-gray-200 dark:bg-[#202124] w-full py-3 pr-5 min-[1085px]:rounded-tr-xl max-[500px]:px-3 max-[835px]:px-5 flex justify-between items-center gap-2">
                     <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-user-group" title="Friends" links={[

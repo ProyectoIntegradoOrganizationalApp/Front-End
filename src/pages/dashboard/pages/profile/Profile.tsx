@@ -141,10 +141,8 @@ export function Profile() {
                                 content: [],
                                 submitText: "Create Project",
                                 submitAction: handleCreateProject
-                            }
-                            )}>
-
-                        </i>
+                            })}
+                        />
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
                         {data && Array.isArray(data) && data.map((project: Project) => {

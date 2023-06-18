@@ -7,9 +7,11 @@ import { useModal } from "../../../../../../../../../hooks/useModal";
 
 // Init
 const CustomGantt = (props: { column: string }) => {
+
 	const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
 	const [tasks, setTasks] = React.useState<Task[]>(initTasks(props.column));
 	const [isChecked, setIsChecked] = React.useState(true);
+	
 	const { openModal } = useModal();
 
 	let columnWidth = 65;

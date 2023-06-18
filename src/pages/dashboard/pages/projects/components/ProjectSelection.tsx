@@ -59,14 +59,10 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
                             <InfoTooltip 
                                 title={admin.name}
                                 target={
-                                    // <div className={`bg-[url('${admin.photo}')] w-10 aspect-square rounded-full relative`}>
-                                    //     <i className="fa-solid fa-crown absolute -top-2 -right-1.5 text-xl text-yellow-500 rotate-35"></i>
-                                    // </div>
                                     <div>
                                         <i className="fa-solid fa-crown absolute -top-2 -right-1.5 text-xl text-yellow-500 rotate-35"></i>
                                         <img className="w-12 rounded-full" src={admin.photo} />
                                     </div>
-
                                 } 
                             />
                                     
