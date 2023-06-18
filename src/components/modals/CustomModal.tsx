@@ -68,7 +68,9 @@ export function CustomModal(props: { isOpen: boolean, closeModal: () => void, at
                             submit={props.atts.submitAction}
                         />
                     ): props.atts?.type === "notifications" ? (
-                        <NotificationsModal content={props.atts.content}/>
+                        <NotificationsModal 
+                            content={props.atts.content}
+                        />
                     ): props.atts?.type === "crudBoard" ? (
                         <CrudBoardForm
                             title={props?.atts.title}

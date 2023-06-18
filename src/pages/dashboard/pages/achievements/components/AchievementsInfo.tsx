@@ -28,16 +28,14 @@ export const AchievementsInfo: React.FC<{data: Profile}> = ({ data }) => {
     }
 
     return (
-        <>
-            <div className="bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-12 p-4 pt-8 min-w-fit">
-                <div className="absolute top-5 left-4">
-                    <InfoTooltip title="Your last 6 achievements completing" position="right" />
-                </div>
-                <AchievementsLevel level={level} rank={rank}/>
-                <AchievementsList
-                    data={data}
-                />
+        <div className="bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-xl relative flex-1 flex flex-col items-center gap-12 p-4 pt-8 min-w-fit">
+            <div className="absolute top-5 left-4">
+                <InfoTooltip title="Your last 6 achievements completing" position="right" />
             </div>
-        </>
+            <AchievementsLevel level={level} rank={rank}/>
+            <AchievementsList
+                data={data}
+            />
+        </div>
     )
 }

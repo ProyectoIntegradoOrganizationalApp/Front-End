@@ -1,4 +1,4 @@
-export interface Notification {
+export interface  Notification {
     idGuest: string,
     idUser: string,
     title: string,

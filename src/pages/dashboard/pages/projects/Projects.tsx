@@ -145,7 +145,7 @@ export function Projects() {
                     <i className="fa-solid fa-plus"></i>
                 </div>
             </div>
-            {selectedElement && (
+            { selectedElement && (
                 <ProjectSelection
                     selection={selectedElement}
                 />

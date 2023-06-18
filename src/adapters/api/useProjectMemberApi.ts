@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { AxiosHeaders } from 'axios';
 
@@ -8,11 +8,24 @@ import { ApiError } from '../../domain/ApiError.interface';
 import { RequestParams } from "../../domain/RequestParams.interface";
 import { useAxios } from "./useAxios";
 
+interface UserData {
+    email: string,
+    id: string,
+    lastname: string,
+    level: number,
+    name: string,
+    photo: string
+}
+
+interface UserDataWrapper {
+    users: UserData[]
+}
+
 /**
  * Hook de conexión con la Base de datos para la vista de Profile.
  * @returns 
  */
-export const useFriendApi = ( fetch: boolean ) => {
+export const useProjectMemberApi = () => {
 
     /**
      *  Hook de autenticación del que recogemos el usuario.
@@ -22,8 +35,7 @@ export const useFriendApi = ( fetch: boolean ) => {
     /**
      *  Variables reactivas necesarias para el funcionamiento del Hook
      */
-    const [friendData, setFriendData] = useState<any[]>();
-    const [userData, setUserData] = useState<any[]>();
+    const [userData, setUserData] = useState<UserData[]>();
     const [error, setError] = useState<ApiError>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,43 +43,6 @@ export const useFriendApi = ( fetch: boolean ) => {
      *  Variable de entorno con la información de la API
      */
     const API = import.meta.env.VITE_API_URL;
-
-    /**
-     *  Efecto que carga los datos al llamar al hook, y que setea las variables necesarias
-     *  para su funcionamiento.
-     */
-    useEffect(() => {
-        if( fetch ) {
-            fetchFriends();
-        }
-    }, []);
-
-    /**
-     *  Función que fetchea los amigos del usuario.
-     */
-    const fetchFriends = () => {
-        setLoading(true);
-
-        const props: RequestParams = {
-            url: `${API}/friends`,
-            method: "GET",
-            headers: new AxiosHeaders({
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user?._token}`
-            }),
-        }
-
-        useAxios(props)
-            .then( data => {
-                handleData(data.data)
-            })
-            .catch( err => {
-                handleData({error: true, message: err});
-            })
-            .finally(() => {
-                setLoading(false);
-            })
-    }
 
     /**
      *  Función que fetchea los usuario de la app por el nombre
@@ -109,16 +84,19 @@ export const useFriendApi = ( fetch: boolean ) => {
      * 
      *  @param guestId 
      */
-    const addFriend = ( guestId: string ) => {
+    const addUser = ( guestId: string, projectId: string ) => {
+
+        setLoading(true);
+
         const props: RequestParams = {
-            url: `${API}/friend/${guestId}`,
+            url: `${API}/user/${guestId}/project/${projectId}`,
             method: "POST",
             headers: new AxiosHeaders({
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${user?._token}`
             }),
             data: {
-                title: "Be my friend!",
+                title: "Join My project!",
                 message: `Hi there, ${user?.name} here, Wanna be friends?`
             }
         }
@@ -133,10 +111,12 @@ export const useFriendApi = ( fetch: boolean ) => {
             });
     }
 
-    const removeFriend = ( guestId: string ) => {
-        console.log(guestId)
+    const removeUser = ( guestId: string, projectId: string ) => {
+
+        setLoading(true);
+
         const props: RequestParams = {
-            url: `${API}/friend/${guestId}`,
+            url: `${API}/user/${guestId}/project/${projectId}`,
             method: "DELETE",
             headers: new AxiosHeaders({
                 "Content-Type": "application/json",
@@ -159,52 +139,20 @@ export const useFriendApi = ( fetch: boolean ) => {
      * 
      *  @param info 
      */
-    const handleData = ( info: any | ApiError ) => {
+    const handleData = ( info: UserDataWrapper | ApiError ) => {
 
-        /**
-         *  Hay Error
-         */
+        console.log(info)
+
+        if( info && "users" in info ) {
+            setUserData([...info.users])
+        }
+
         if( info && "error" in info ) {
-            setError({error: info.error, message: info.message});
-        }
-        
-        
-        /**
-         *  Si no hay error llamamos a la función que se encarga de manejar los datos
-         *  dependiendo de la respuesta del servidor
-         */
-        if( info && !info.error ) {
-            handleInfo(info);
+            setError({ error: info.error, message: info.message })
         }
 
     }
 
-    /**
-     *  Función que maneja los datos de la API
-     * 
-     *  @param info 
-     */
-    const handleInfo = ( info: any ) => {
 
-        /**
-         *  Petición de AMIGOS
-         */
-        if( "friends" in info ) {
-            setError(undefined);
-            setFriendData(info.friends);
-        }
-
-        /**
-         *  Petición de USUARIOS
-         */
-        if( "users" in info ) {
-            setError(undefined);
-            setUserData(info.users);
-        }
-
-        
-    }
-
-
-    return { friendData, userData, error, loading, addFriend, removeFriend, fetchUsers };
+    return { userData, error, loading, addUser, removeUser, fetchUsers };
 }

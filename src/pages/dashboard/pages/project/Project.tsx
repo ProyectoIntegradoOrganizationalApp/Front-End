@@ -8,31 +8,39 @@ import { Project } from '../../../../domain/projects/Project.interface';
 import { useProjectApi } from '../../../../adapters/api/useProjectApi';
 
 export function Project() {
+
     const [project, setProject] = React.useState<Project>();
     const [tab, setTab] = React.useState<string>("Dashboard");
     
     const { data, error, loading, fetchProject } = useProjectApi();
     const navigate = useNavigate();
     
-    let { name } = useParams();
+    // Recogemos el proyecto
+    let { projectId } = useParams();
+    React.useEffect(() => {
+        if( projectId ) {
+            fetchProject(projectId);
+        }
+    }, [projectId]);
+
     React.useEffect(() => {
         document.title = 'Project - ' + name + ' | Teamer 2023';
 
         if (location.pathname.split('/').length <= 4) {
             navigate("dashboard"); 
             setTab("Dashboard");
-        } else  setTab(location.pathname.split('/')[location.pathname.split('/').length-1]);
+        } else {
+            setTab(location.pathname.split('/')[location.pathname.split('/').length-1]);
+        };
         
-        if (name) {
-            fetchProject(name);
-        }
     }, []);
 
     React.useEffect(() => {
         if (data && "idProject" in data) {
+            console.log(data)
             setProject(data);
         }
-    }, [data])
+    }, [data?.name])
 
     return (
         <div className="w-full flex flex-col">
@@ -41,7 +49,7 @@ export function Project() {
                     {
                         icon: "fa-solid fa-diagram-project",
                         name: "Projects",
-                        link: "/projects"
+                        link: "/projects/dashboard"
                     },
                     {
                         icon: "fa-solid fa-list-check",

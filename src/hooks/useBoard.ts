@@ -10,13 +10,17 @@ interface UseBoardProps {
     editTask: ( task: Task ) => void,
 }
 
+interface ColumnsData {
+    columns: Column[]
+}
+
 export const useBoard = ({ data, editColumn, editTask }: UseBoardProps) => {
     // Lista con las id de las columnas
     const [ columnOrder, setColumnOrder ] = useState<string[]>([]);
 
     // Manejo de estado con useReducer
     const [ columnsData, dispatch ] = useReducer(
-        ( columnsData: any, action: any ) => {
+        ( columnsData: ColumnsData, action: ColumnsData ) => {
             return {
                 ...action
             }

@@ -150,7 +150,7 @@ export function App() {
                                     <Route path="project/:projectId/app/taskman/:idApp" element={ <Boards app="Taskman"/> }/>
                                     <Route path="project/:projectId/app/timeline/:idApp" element={ <Boards app="Timeline"/> }/>
                                     <Route path="project/:projectId/app/:appName/:idApp/:idBoard" element={ <DragDropContext onDragEnd={() => console.log("movido")}> <Board /></DragDropContext> }/>
-                                    <Route path="friends/dashboard" element={ <Friends /> } />
+                                    <Route path="friends" element={ <Friends /> } />
                                     <Route path="friend/:friendName" element={ <Friend />} />
                                 </Route>
                             </Route>
