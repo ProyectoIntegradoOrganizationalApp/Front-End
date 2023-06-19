@@ -34,15 +34,10 @@ export const Board: React.FC = () => {
     // Modal
     const { openModal } = useModal();
 
-    // Hook de utilidad para la app
-    const { onDragEnd, columnOrder, columnsData } = useBoard(data);
-
     // Variable reactiva para configuración de la APP
     const [application, setApplication] = useState<string>('');
     const [projectName, setProjectName] = useState<string>('');
     const [boardName, setBoardName] = useState<string>('');
-
-    const [columns, setColumns] = useState<IColumn[]>();
 
     // Recoger el tipo de aplicación de los parámetros ( Taskman / Timeline )
     const { appName, idApp, projectId, idBoard } = useParams();
@@ -57,12 +52,6 @@ export const Board: React.FC = () => {
         }
     }, [appName]);
 
-    useEffect(() => {
-        if( data && data.columns && data.columns.length >= 0 ) {
-            setColumns(data.columns);
-        }
-    }, [data?.columns])
-
     // Efecto para recoger los datos del proyecto
     useEffect(() => {
         if( ProjectData?.name ) {
@@ -70,6 +59,7 @@ export const Board: React.FC = () => {
         }
     }, [ProjectData?.name]);
 
+    // Para el manejo de errores/mensajes
     useEffect(() => {
 
         // Si hay error
@@ -82,7 +72,22 @@ export const Board: React.FC = () => {
             toast.success(error.message);
         }
 
-    }, [error?.error])
+    }, [error?.error]);
+
+    const editTask = ( task: ITask ) => {
+        if( idBoard && idApp ) {
+            TaskCrud().editTask(idApp, idBoard, task);
+        }
+    }
+
+    const editColumn = ( column: IColumn ) => {
+        if( idBoard && idApp ) {
+            ColumnCrud().editColumn(idApp, idBoard, column);
+        }
+    }
+    
+    // Hook de utilidad para la app
+    const { onDragEnd, columnOrder, columnsData } = useBoard({ data, editColumn, editTask });
 
     useBeforeUnload((e: BeforeUnloadEvent) => {
         e.preventDefault();
@@ -151,14 +156,16 @@ export const Board: React.FC = () => {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        { columns && columns.map(( column, index ) => {
+                                        { columnsData && columnsData.columns && columnsData.columns.map(( column: IColumn ) => {
+                                            
+                                            let index = columnOrder.indexOf(column.id);
+
                                                 return (
                                                     <Column
                                                         key={column.id}
                                                         column={column}
                                                         index={index}
                                                         createTask={( title: string, description: string, column: IColumn ) => {
-                                                            console.log(title, description)
                                                             if( idApp && idBoard ) {
                                                                 TaskCrud().createTask( idApp, idBoard, column.id, title, description );
                                                             }
@@ -166,7 +173,7 @@ export const Board: React.FC = () => {
                                                         }}
                                                         deleteTask={( task: ITask ) => {
                                                             if( idApp && idBoard) {
-                                                                TaskCrud().removeTask(idApp, idBoard, task);
+                                                                TaskCrud().removeTask( idApp, idBoard, task );
                                                             }
                                                         }}
                                                         deleteColumn={( column: IColumn ) => {

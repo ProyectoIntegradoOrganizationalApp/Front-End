@@ -111,6 +111,8 @@ export const useNotificationApi = ( fetch: boolean ) => {
 
             case "project" : {
 
+                console.log("hi")
+
                 const req: RequestParams = {
                     url: `${API}/user/${props.userId}/project/${props.projectId}/${props.action}`,
                     method: "GET",

@@ -1,13 +1,14 @@
 
 // Links para el router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Tipado de las rutas
 import { useAuth } from '../../../hooks/useAuth';
 
 import logo from "../../../assets/svg/logo.svg";
-import { ProfileBadge } from "../../dashboard/components/ProfileBadge";
+
 import { useProfileApi } from "../../../adapters/api/useProfileApi";
+
 
 /**
  *  Componente de Navegador, usa un "Drawer" de DaisyUI en el que se introduce la información
@@ -23,6 +24,8 @@ export function Nav() {
 
     const { data: user, error, loading } = useProfileApi();
 
+    const navigate = useNavigate();
+
     return (
         <div className="navbar !min-h-[unset] !py-0 px-16 max-[768px]:px-5 bg-transparent">
 
@@ -34,13 +37,6 @@ export function Nav() {
             </div>
 
             <div className="navbar-center flex gap-3">
-                {user && (
-                    <Link to="/profile/dashboard">
-                        <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
-                            Profile
-                        </button>
-                    </Link>
-                )}
                 <Link to="/" className={`nav-item ${location.pathname == "/" ? "nav-active" : ""}`}>
                     Home
                 </Link>
@@ -48,28 +44,27 @@ export function Nav() {
                     <Link to="/profile/dashboard" className="nav-item">
                         Profile
                     </Link>
-                )} {!user &&
-                    <Link to="/login" className="nav-item">
-                        Profile
-                    </Link>
-                }
+                )} 
             </div>
 
-            <div className="navbar-end">
+            <div className="navbar-end flex justify-end items-end">
 
-                {user && (
-                    <ProfileBadge
-                        profile={user}
-                        logout={logout}
-                    />
-                )}
-
-                {!user && (
+                {!user ? (
                     <Link to="/login">
                         <button className="btn btn-primary !px-7 min-h-fit h-fit py-3">
                             Log In
                         </button>
                     </Link>
+                ): (
+                    <button
+                        onClick={() => {
+                            logout();
+                            navigate(0);
+                        }}
+                        className="btn btn-primary !px-7 min-h-fit h-fit py-3"
+                    >
+                        Log out
+                    </button>
                 )}
 
             </div>

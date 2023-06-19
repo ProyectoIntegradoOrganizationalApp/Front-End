@@ -5,6 +5,12 @@ import logo from "../../assets/svg/logo.svg";
 // Hero
 import hero from '../../assets/svg/home/hero.svg';
 import logoApps from '../../assets/svg/home/logoApps.svg';
+import apps from '../../assets/images/home/apps.jpg';
+import workManagement from '../../assets/images/home/workManagement.jpg';
+// Installation
+import basic1 from '../../assets/images/home/basic1.jpg';
+import basic2 from '../../assets/images/home/basic2.jpg';
+import basic3 from '../../assets/images/home/basic3.jpg';
 // Mobile
 import mobile from '../../assets/svg/home/mobile.svg';
 import mobiledark from '../../assets/svg/home/mobiledark.svg';
@@ -99,6 +105,37 @@ export function Home() {
         });
     }, []);
 
+    const appsImage = {
+        backgroundImage: `url(${apps})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        minWidth: '300px',
+    };
+    const workManagementImage = {
+        backgroundImage: `url(${workManagement})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        minWidth: '300px',
+    };
+    const basic1Image = {
+        backgroundImage: `url(${basic1})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        minWidth: '300px',
+    }
+    const basic2Image = {
+        backgroundImage: `url(${basic2})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        minWidth: '300px',
+    }
+    const basic3Image = {
+        backgroundImage: `url(${basic3})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        minWidth: '300px',
+    }
+
     return (
         <>
             <div className="text-black dark:text-white overflow-x-hidden bg-white dark:!bg-[#202124]">
@@ -108,7 +145,6 @@ export function Home() {
 
                 {/* Hero Section */}
                 <div className="hero flex flex-col justify-center">
-
                     <div className="flex items-center max-[768px]:flex-col flex-row-reverse w-4/5 mx-auto max-[768px]:mx-5 max-[768px]:w-auto gap-28 max-[1024px]:gap-10">
                         <div className="srr1 flex-1">
                             <img src={hero} className="select-none max-[768px]:w-96" />
@@ -127,7 +163,7 @@ export function Home() {
 
                 {/* Apps */}
                 <div className="flex w-4/5 mx-auto max-[768px]:mx-5 max-[768px]:w-auto gap-10 max-[1024px]:gap-5 flex-col lg:flex-row">
-                    <div className="srb1 flex-1 aspect-video bg-[url()] bg-red-200 bg-no-repeat bg-cover min-w-[300px]"></div>
+                    <div className={`srb1 flex-1 aspect-video`} style={appswork == "Our Apps" ? appsImage : workManagementImage}></div>
                     <div className="srb1 flex-1 flex flex-col gap-6 h-fit min-w-[425px] max-[768px]:min-w-[unset]">
                         <div className="flex-1 flex max-[1024px]:flex-wrap gap-4">
                             <Tabs tab={appswork} setTab={setAppsWork} links={[{ name: "Our Apps" }, { name: "Work Management" }]} />
@@ -171,7 +207,7 @@ export function Home() {
                 <div className="flex flex-col items-center justify-center gap-12 max-[768px]:gap-8 py-[3.2rem] px-14 max-[768px]:px-5 bg-slate-200 dark:bg-[#28292d]">
                     {/* Progress */}
                     <div className="w-2/5 min-w-fit flex flex-col justify-center items-center gap-5 max-[768px]:gap-4 max-[580px]:w-full">
-                        <h1 className="leading-none text-2xl px-10 max-[580px]:px-0">Teamer <span className="max-[500px]:hidden">Software</span> <b>installation</b></h1>
+                        <h1 className="leading-none text-2xl px-10 max-[580px]:px-0">Teamer <span className="max-[500px]:hidden">Software</span> <b>basics</b></h1>
                         <progress className="progressVideo progress w-full h-3 bg-gray-200 dark:bg-[#202124]" value={slideVideo} max="3"></progress>
                     </div>
                     {/* Video Slider */}
@@ -185,13 +221,13 @@ export function Home() {
                             className="mySwiper"
                         >
                             <SwiperSlide className="!cursor-grab active:!cursor-grabbing">
-                                <div className='bg-red-500 w-full aspect-video'></div>
+                                <div className='w-full aspect-video' style={basic1Image}></div>
                             </SwiperSlide>
                             <SwiperSlide className="!cursor-grab active:!cursor-grabbing">
-                                <div className='bg-blue-500 w-full aspect-video'></div>
+                                <div className='w-full aspect-video' style={basic2Image}></div>
                             </SwiperSlide>
                             <SwiperSlide className="!cursor-grab active:!cursor-grabbing">
-                                <div className='bg-green-500 w-full aspect-video'></div>
+                                <div className='w-full aspect-video' style={basic3Image}></div>
                             </SwiperSlide>
                         </Swiper>
                         <div className="swiper-button-next !hidden lg:!flex"></div>

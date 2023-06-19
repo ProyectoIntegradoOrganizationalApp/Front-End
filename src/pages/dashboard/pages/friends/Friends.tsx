@@ -19,9 +19,12 @@ import { useWebsocket } from '../../../../adapters/useWebsocket';
 import { useModal } from '../../../../hooks/useModal';
 
 export function Friends() {
+    
     const { openModal } = useModal();
     const [tab, setTab] = useState<string>("All");
+
     const { send } = useWebsocket("ws://localhost:9001");
+
     const { friendData, userData, error, loading, addFriend, removeFriend, fetchUsers } = useFriendApi(true);
 
     useEffect(() => {
@@ -29,12 +32,12 @@ export function Friends() {
     }, [])
 
     useEffect(() => {
-        if (error?.error) {
+        if ( error && error?.error) {
             toast.error(error?.message)
         }
 
-        if (!error?.error) {
-            toast.info(error?.message);
+        if ( error && !error?.error) {
+            toast.success(error?.message);
         }
     }, [error?.error]);
 
@@ -48,13 +51,7 @@ export function Friends() {
                     <Tabs tab={tab} setTab={setTab} icon="fa-solid fa-user-group" title="Friends" links={[
                         { name: "All" }, { name: "Online" }, { name: "Pending" }
                     ]} />
-                    <i onClick={() => openModal({
-                        isOpen: true,
-                        type: "searchuser",
-                        submitText: "",
-                        submitAction: () => { }
-                    }
-                    )} className="fa-solid fa-plus text-black hover:text-black/50 dark:text-white cursor-pointer dark:hover:text-white/50 transition-all"></i>
+                    
                 </div>
                 <div className="m-4 max-[500px]:m-2 flex flex-col gap-4 max-[500px]:gap-2">
                     <Searcher
@@ -64,33 +61,49 @@ export function Friends() {
                     />
 
                     <div className="flex flex-col gap-3">
-                        {friendData && (
-                            friendData.map((friend, index) => {
-                                return (
-                                    <MainItem
+                        { userData && userData.map((user, index) => {
+                            return (
+                                <MainItem
                                         key={index}
                                         item={{
-                                            name: friend.name,
-                                            icon: friend.photo
+                                            name: user.name,
+                                            icon: user.photo
                                         }}
                                     >
 
-                                        <MessageButton
+                                        <AddButton 
                                             cb={() => {
-                                                // Crear mensaje
-                                                // Redirigir al mensaje
-                                            }}
-                                        />
-
-                                        <RemoveButton
-                                            cb={() => {
-                                                removeFriend(friend.idfriend);
+                                                addFriend(user.id)
                                             }}
                                         />
                                     </MainItem>
-                                )
-                            })
-                        )}
+                            )
+                        })}
+                        { friendData && friendData.map((friend, index) => {
+                            return (
+                                <MainItem
+                                    key={index}
+                                    item={{
+                                        name: friend.name,
+                                        icon: friend.photo
+                                    }}
+                                >
+
+                                    <MessageButton
+                                        cb={() => {
+                                            // Crear mensaje
+                                            // Redirigir al mensaje
+                                        }}
+                                    />
+
+                                    <RemoveButton
+                                        cb={() => {
+                                            removeFriend(friend.idfriend);
+                                        }}
+                                    />
+                                </MainItem>
+                            )
+                        })}
                     </div>
                 </div>
             </div>

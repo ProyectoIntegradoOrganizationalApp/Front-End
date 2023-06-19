@@ -6,6 +6,7 @@ import { Share } from "../../../../../components/Share"
 import { Project } from "../../../../../domain/projects/Project.interface"
 import { ProjectMember } from "../../../../../domain/projects/ProjectMember.interface"
 import { useProjectApi } from "../../../../../adapters/api/useProjectApi"
+import { useEffect, useState } from "react"
 
 export const ProjectSelection = ( props: { selection: Project } ) => {
 
@@ -13,12 +14,19 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
 
     const navigate = useNavigate();
 
-    const admin: ProjectMember | undefined = props.selection.members.find( elem => elem.name === "admin");
+    const [admin, setAdmin] = useState<ProjectMember>();
 
     const handleLeave = () => {
         leaveProject(props.selection.idProject);
         navigate(0);
     }
+
+    useEffect(() => {
+        let admin = props.selection.members.find( elem => elem.idRole = "1");
+        if( admin ) {
+            setAdmin(admin);
+        }
+    }, [props.selection.name]);
 
     return (
         <div className="bg-white dark:bg-[#28292d] flex-1 min-w-fit w-3/12 rounded-xl p-8 flex flex-col justify-between relative">
@@ -51,8 +59,9 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
                             <InfoTooltip 
                                 title={admin.name}
                                 target={
-                                    <div className="bg-blue-500 w-10 aspect-square rounded-full relative">
+                                    <div>
                                         <i className="fa-solid fa-crown absolute -top-2 -right-1.5 text-xl text-yellow-500 rotate-35"></i>
+                                        <img className="w-12 rounded-full" src={admin.photo} />
                                     </div>
                                 } 
                             />
@@ -62,20 +71,35 @@ export const ProjectSelection = ( props: { selection: Project } ) => {
                     </div>
                     {/* Members */}
                     <div className="bg-gray-200 dark:bg-[#202124] w-full flex flex-wrap justify-center items-center p-4 gap-2 rounded-b-xl">
-                        { props.selection.members && (
-                            props.selection.members.map( member => {
+                        { props.selection.members && props.selection.members.map( member => {
+
+                            if( admin ) {
+                                if( admin.id != member.id ) {
+                                    return (
+                                        <InfoTooltip 
+                                            key={member.name}
+                                            title={member.name}
+                                            // Aquí iría la foto
+                                            target={
+                                                <img className="w-12 rounded-full" src={member.photo} />
+                                            } 
+                                        />
+                                    )
+                                }
+                            } else {
                                 return (
                                     <InfoTooltip 
                                         key={member.name}
                                         title={member.name}
                                         // Aquí iría la foto
                                         target={
-                                            <div className="bg-red-700 w-7 aspect-square rounded-full"></div>
+                                            <img className="w-12 rounded-full" src={member.photo} />
                                         } 
                                     />
                                 )
-                            })
-                        )}
+                            }
+                            
+                        })}
                         
                     </div>
                 </div>

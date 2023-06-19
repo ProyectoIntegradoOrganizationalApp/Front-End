@@ -44,14 +44,40 @@ export function Profile() {
 
         // TODO => CAMBIAR INTERFACES CUANDO CHRISTIAN TERMINE
         // LA ACTIVITY
-        profileData.activity = [];
+        profileData.activity = [
+            {
+                idProject: "holi",
+                date: `${new Date("June 17")}`,
+                commits: 100
+            },
+            {
+                idProject: "holi",
+                date: `${new Date("May 17")}`,
+                commits: 30
+            },
+            {
+                idProject: "adie",
+                date: `${new Date()}`,
+                commits: 20
+            },
+            {
+                idProject: "holi",
+                date: `${new Date("April 15")}`,
+                commits: 70
+            },
+            {
+                idProject: "holi",
+                date: `${new Date("August 15")}`,
+                commits: 50
+            }
+        ];
 
         const { getUserWork } = useUtils();
-        const { commitsDaily, commitsWeekly } = getUserWork(profileData?.activity);
+        const { commitsDaily, commitsWeekly } = getUserWork(profileData.activity);
 
         setDaily(commitsDaily);
         setWeekly(commitsWeekly);
-    }, []);
+    }, [profileData.user]);
 
     /**
      *  Función que refresca los datos para que se recargue la IU
@@ -63,9 +89,12 @@ export function Profile() {
 
     return (
         <div className="w-full flex flex-wrap gap-4 max-[500px]:gap-2">
-            <AchievementsInfo
-                data={profileData}
-            />
+            { profileData && (
+                <AchievementsInfo
+                    data={profileData}
+                />
+            )}
+            
 
             <div className="flex-1 basis-[820px] h-full rounded-xl flex flex-col gap-4 max-[500px]:gap-2 w-full">
                 <div className="flex flex-col lg:flex-row flex-wrap gap-4 max-[500px]:gap-2">
@@ -81,7 +110,7 @@ export function Profile() {
                     </div>
                     <div className="flex-[4] flex flex-col sm:flex-row flex-wrap gap-4 max-[500px]:gap-2">
                         <div className="flex-[3] bg-gray-200 dark:bg-[#202124] min-[1085px]:rounded-xl p-4 max-[500px]:p-2">
-                            {profileData?.activity && (
+                            { profileData?.activity && (
                                 <Activity
                                     title="Monthly Activity"
                                     data={profileData}
@@ -112,10 +141,8 @@ export function Profile() {
                                 content: [],
                                 submitText: "Create Project",
                                 submitAction: handleCreateProject
-                            }
-                            )}>
-
-                        </i>
+                            })}
+                        />
                     </div>
                     <div id="scrollbar" className="flex flex-col gap-3 p-4 max-[500px]:p-2 min-h-[4.5rem]">
                         {data && Array.isArray(data) && data.map((project: Project) => {

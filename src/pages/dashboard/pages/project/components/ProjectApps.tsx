@@ -45,7 +45,7 @@ export const ProjectApps: React.FC = () => {
                                 item={{
                                     name: app.name,
                                     description: app.description,
-                                    icon: "fawd"
+                                    icon: app.photo
                                 }}
                                 descriptionBottom={true}
                             >

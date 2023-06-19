@@ -44,17 +44,6 @@ export const Routes: Array<Route> = [
                 name: "Friends",
                 url: "/friends"
             },
-            {
-                name: "Add Friend",
-                url: "",
-                onclick: `() => openModal({
-                    isOpen: true,
-                    type: "searchuser",
-                    submitText: "",
-                    submitAction: () => { }
-                }
-                )`
-            }
         ]
     }
 ]

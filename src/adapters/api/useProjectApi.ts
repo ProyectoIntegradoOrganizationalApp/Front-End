@@ -106,7 +106,7 @@ export const useProjectApi = () => {
          * Props de la petición
          */
         const props: RequestParams = {
-            url: `${API}/project/${id}`,
+            url: `${API}/project/${id}/leave`,
             method: "DELETE",
             headers: new AxiosHeaders({
                 "Content-Type": "application/json",
@@ -171,7 +171,7 @@ export const useProjectApi = () => {
         setLoading(false);
     }
 
-
     return { data, error, loading, refreshData, fetchProject, createProject, leaveProject, editProject };
 
 }
+

@@ -80,8 +80,9 @@ export const Boards: React.FC<{ app: string }> = ({ app }) => {
                             return (
                                 <li 
                                     key={index}
-                                    className={`bg-[url(${board?.photo})] bg-cover bg-no-repeat bg-center box-border board rounded-xl min-[839.50px]:flex-1 basis-[33%] min-w-fit min-[839.50px]:max-w-sm h-1/4 cursor-pointer`}
-                                    >
+                                    style={{backgroundImage: `url('${board.photo}')`}}
+                                    className={`bg-cover bg-no-repeat bg-center box-border board rounded-xl min-[839.50px]:flex-1 basis-[33%] min-w-fit min-[839.50px]:max-w-sm h-1/4 cursor-pointer`}
+                                >
                                     <Link 
                                         to={`${board.id}`} 
                                         className="w-full h-full relative"
